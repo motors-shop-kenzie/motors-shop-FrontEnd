@@ -1,0 +1,22 @@
+@use "../sass/abstracts/variables" as *;
+.button {
+    border: none;
+    border-radius: 4px;
+
+    padding: 12px 20px;
+
+    font-size: $button-medium-text;
+
+    @media (min-width: 769px) {
+        padding: 12px 28px;
+        font-size: $button-big-text;
+    }
+}
+.purpleButton {
+    background-color: $color-brand-brand-2;
+
+    color: $color-colors-fixed-white-fixed;
+}
+.blueButton {
+    background-color: $color-brand-brand-3;
+}
