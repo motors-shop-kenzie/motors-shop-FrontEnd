@@ -1,4 +1,6 @@
 @use "../sass/abstracts/variables" as *;
+@use "../sass/abstracts/mixins" as *;
+
 .button {
     border: none;
     border-radius: 4px;
@@ -13,10 +15,8 @@
     }
 }
 .purpleButton {
-    background-color: $color-brand-brand-2;
-
-    color: $color-colors-fixed-white-fixed;
+    @include button($color-brand-brand-2, $color-colors-fixed-white-fixed)
 }
-.blueButton {
-    background-color: $color-brand-brand-3;
+.pinkButton {
+    @include button($color-random-random-1, $color-colors-fixed-white-fixed)
 }
