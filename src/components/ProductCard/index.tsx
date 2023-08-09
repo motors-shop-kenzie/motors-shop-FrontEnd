@@ -12,7 +12,6 @@ const ProductCard = ({ car }: CardProps) => {
       <div className="img">
         <BiDollar className="dollar" />
         <Image width={300} height={150} src={car.coverImg} alt="Car image" />
-        img nome
         <p className="title">{car.name}</p>
       </div>
       <div className="desc">{car.description}</div>
