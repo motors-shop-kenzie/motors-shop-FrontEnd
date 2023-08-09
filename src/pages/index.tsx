@@ -6,13 +6,12 @@ import { GetServerSideProps, NextPage } from "next";
 import { CarData } from "@/schemas/carSchema";
 import api from "@/services/api";
 
-const inter = Inter({ subsets: ["latin"] });
 
 interface HomeProps {
     cars: CarData[]
 }
 
-export default function Home({cars}:HomeProps): NextPage<HomeProps> {
+const Home = () => {
     return (
         <main className={styles.mainContainer}>
             <Button className={styles.grey0Button} text="Text Button" />
@@ -87,8 +86,6 @@ export default function Home({cars}:HomeProps): NextPage<HomeProps> {
 }
 
 
-
-
 export const getServerSideProps: GetServerSideProps = async () => {
     const response = await api.get<CarData[]>("/cars")
     return {
@@ -97,3 +94,5 @@ export const getServerSideProps: GetServerSideProps = async () => {
         }
     }
 }
+
+export default Home
