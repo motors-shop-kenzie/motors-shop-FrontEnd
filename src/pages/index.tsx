@@ -1,5 +1,4 @@
 import { Button } from "@/components/Button";
-import { Inter } from "next/font/google";
 import styles from "./styles.module.scss";
 import ProductCard from "@/components/ProductCard";
 import { GetServerSideProps, NextPage } from "next";
@@ -11,7 +10,7 @@ interface HomeProps {
     cars: CarData[]
 }
 
-const Home = () => {
+const Home: NextPage<HomeProps> = ({cars}:HomeProps) => {
     return (
         <main className={styles.mainContainer}>
             <Button className={styles.grey0Button} text="Text Button" />
@@ -78,9 +77,9 @@ const Home = () => {
                 className={styles.brand3TextBrand4Button}
                 text="Text Button"
             />
-            {/* {cars.map(car=>{
-                return <ProductCard key={car.id} coverImag={car.coverImg}/>
-            })} */}
+            {cars.map(car=>{
+                return <ProductCard key={car.id} car={car}/>
+            })}
         </main>
     );
 }
