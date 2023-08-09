@@ -1,10 +1,18 @@
 import { Button } from "@/components/Button";
 import { Inter } from "next/font/google";
 import styles from "./styles.module.scss";
+import ProductCard from "@/components/ProductCard";
+import { GetServerSideProps, NextPage } from "next";
+import { CarData } from "@/schemas/carSchema";
+import api from "@/services/api";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+interface HomeProps {
+    cars: CarData[]
+}
+
+export default function Home({cars}:HomeProps): NextPage<HomeProps> {
     return (
         <main className={styles.mainContainer}>
             <Button className={styles.grey0Button} text="Text Button" />
@@ -71,6 +79,21 @@ export default function Home() {
                 className={styles.brand3TextBrand4Button}
                 text="Text Button"
             />
+            {/* {cars.map(car=>{
+                return <ProductCard key={car.id} coverImag={car.coverImg}/>
+            })} */}
         </main>
     );
+}
+
+
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const response = await api.get<CarData[]>("/cars")
+    return {
+        props: {
+            cars: response.data
+        }
+    }
 }

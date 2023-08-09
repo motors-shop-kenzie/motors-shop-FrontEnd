@@ -1,0 +1,11 @@
+@use "../sass/abstracts/variables" as *;
+
+
+.title {
+    font-size: $heading-7-600;
+}
+
+.dollar{
+    background-color: $color-random-random-8;
+    color: $color-colors-fixed-white-fixed;
+}
