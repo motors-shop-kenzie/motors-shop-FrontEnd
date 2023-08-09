@@ -1,4 +1,25 @@
-@mixin button($bg-color, $text-color){
+@mixin buttonColors($bg-color, $text-color) {
     background-color: $bg-color;
     color: $text-color;
+}
+@mixin buttonBasic(
+    $border,
+    $radius,
+    $padding-mobile,
+    $font-size-mobile,
+    $padding-desktop,
+    $font-size-desktop
+) {
+    border: $border;
+    border-radius: $radius;
+
+    padding: $padding-mobile;
+
+    font-size: $font-size-mobile;
+
+    @media (min-width: 769px) {
+        padding: $padding-desktop;
+
+        font-size: $font-size-desktop;
+    }
 }
