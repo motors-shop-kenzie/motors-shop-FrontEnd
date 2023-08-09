@@ -92,7 +92,6 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
             <div className={styles.inputsContainer}>
                 <InputSectionField>
                     <Label htmlFor="Placeholder" name="Label" />
-
                     <InputFocus>
                         <Input
                             type="text"
