@@ -4,10 +4,10 @@ import ProductCard from "@/components/ProductCard";
 import { GetServerSideProps, NextPage } from "next";
 import { CarData } from "@/schemas/carSchema";
 import api from "@/services/api";
-
+import { Footer } from "@/components/Footer";
 
 interface HomeProps {
-    cars: CarData[]
+  cars: CarData[];
 }
 
 const Home: NextPage<HomeProps> = ({cars}:HomeProps) => {
@@ -86,12 +86,12 @@ const Home: NextPage<HomeProps> = ({cars}:HomeProps) => {
 
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    const response = await api.get<CarData[]>("/cars")
-    return {
-        props: {
-            cars: response.data
-        }
-    }
-}
+  const response = await api.get<CarData[]>("/cars");
+  return {
+    props: {
+      cars: response.data,
+    },
+  };
+};
 
-export default Home
+export default Home;
