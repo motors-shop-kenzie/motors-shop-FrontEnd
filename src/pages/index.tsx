@@ -13,7 +13,7 @@ interface HomeProps {
 const Home: NextPage<HomeProps> = ({cars}:HomeProps) => {
     return (
         <main className={styles.mainContainer}>
-            <Button className={styles.grey0Button} text="Text Button" />
+            {/* <Button className={styles.grey0Button} text="Text Button" />
             <Button className={styles.grey1Button} text="Text Button" />
             <Button
                 className={styles.grey2TextLightButton}
@@ -76,7 +76,7 @@ const Home: NextPage<HomeProps> = ({cars}:HomeProps) => {
             <Button
                 className={styles.brand3TextBrand4Button}
                 text="Text Button"
-            />
+            /> */}
             {cars.map(car=>{
                 return <ProductCard key={car.id} car={car}/>
             })}
