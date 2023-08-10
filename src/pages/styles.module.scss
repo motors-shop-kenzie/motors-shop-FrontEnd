@@ -1,6 +1,15 @@
 @use "../sass/abstracts/variables" as *;
 @use "../sass/abstracts/mixins" as *;
 
+.buttonsContainer {
+  margin-top: 20px;
+  min-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+// Buttons
 .grey0Button {
   @include buttonBasic(
     none,
@@ -219,11 +228,43 @@
   );
   @include buttonColors($color-brand-brand-3, $color-brand-brand-4);
 }
-.mainContainer {
-  margin-top: 20px;
-  min-width: 100%;
+
+// Inputs
+.inputsContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+  flex-direction: column;
+  gap: 10px;
+}
+.basicInputWithBorder {
+  @include inputBasic(
+    $color-grey-scale-grey-10,
+    1.5px solid $color-grey-scale-grey-7,
+    $input-radius
+  );
+}
+.DarkerInputWithoutBorder {
+  @include inputBasic($color-grey-scale-grey-8, none, $input-radius);
+}
+
+// Textareas
+.basicTextAreaWithBorder {
+  @include textareaBasic(
+    $color-grey-scale-grey-10,
+    1.5px solid $color-grey-scale-grey-7,
+    $input-radius
+  );
+  min-height: 80px;
+  min-width: 276px;
+  resize: none;
+}
+.darkertextAreaWithBorder {
+  @include textareaBasic(
+    $color-grey-scale-grey-8,
+    1.5px solid $color-grey-scale-grey-7,
+    $input-radius
+  );
+  min-height: 80px;
+  min-width: 274px;
+}
+.basicSelectWithBorder {
 }

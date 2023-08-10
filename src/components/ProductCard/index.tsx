@@ -1,6 +1,8 @@
 import { CarData } from "@/schemas/carSchema";
 import Image from "next/image";
 import { BiDollar } from "react-icons/bi";
+import UserHeader from "../UserHeader";
+import styles from "./styles.module.scss";
 
 interface CardProps {
   car: CarData;
@@ -8,22 +10,23 @@ interface CardProps {
 
 const ProductCard = ({ car }: CardProps) => {
   return (
-    <div>
-      <div className="img">
-        <BiDollar className="dollar" />
+    <div className={styles.card}>
+      <div className={styles.img}>
+        {car.business && (
+          <div className={styles.dollar}>
+            <BiDollar />
+          </div>
+        )}
         <Image width={300} height={150} src={car.coverImg} alt="Car image" />
-        <p className="title">{car.name}</p>
+        <p className={styles.title}>{car.name}</p>
       </div>
-      <div className="desc">{car.description}</div>
-      <div className="userInfo">
-        <div className="circle">PL</div>
-        <div className="userName">Nome</div>
-      </div>
-      <div className="carInfo">
-        <div className="info">
-          <span>{car.km} KM</span> <span>{car.year}</span>
+      <div className={styles.desc}>{car.description}</div>
+      <UserHeader />
+      <div className={styles.carInfo}>
+        <div className={styles.info}>
+          <div>{car.km} KM</div> <div>{car.year}</div>
         </div>
-        <div className="price">preço</div>
+        <div className={styles.price}>R${car.price.toFixed(2)}</div>
       </div>
     </div>
   );
