@@ -1,11 +1,77 @@
-@use "../sass/abstracts/variables" as *;
+@use "../../sass/abstracts/variables" as *;
 
-
-.title {
-    font-size: $heading-7-600;
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
 }
 
-.dollar{
-    background-color: $color-random-random-8;
-    color: $color-colors-fixed-white-fixed;
+.dollar {
+  background-color: $color-random-random-8;
+  color: $color-colors-fixed-white-fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 1px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.img {
+  position: relative;
+}
+.title {
+  margin: 5px 0;
+  font-size: $heading-7-600;
+  color: $color-grey-scale-grey-1;
+  font-weight: 600;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  overflow: auto;
+}
+
+.desc {
+  margin: 5px 0;
+  font-size: $heading-7-600;
+  color: $color-grey-scale-grey-2;
+  font-weight: 400;
+  height: 50px;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+.carInfo {
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+
+  .info {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: $body-2-500;
+      font-weight: 500;
+      background-color: $color-brand-brand-4;
+      color: $color-brand-brand-1;
+    }
+  }
+
+  .price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $heading-7-500;
+    font-weight: 500;
+    color: $color-grey-scale-grey-1;
+  }
 }

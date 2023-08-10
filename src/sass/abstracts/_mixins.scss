@@ -23,3 +23,36 @@
         font-size: $font-size-desktop;
     }
 }
+@mixin inputBasic($bg-color, $border, $radius) {
+    padding: 13px 16px;
+
+    width: 100%;
+    max-width: 277px;
+
+    font-size: 1rem;
+    font-weight: 400;
+
+    background-color: $bg-color;
+
+    border: $border;
+    border-radius: $radius;
+    outline: 0;
+}
+@mixin textareaBasic($bg-color, $border, $radius) {
+    padding: 13px 16px;
+
+    width: 100%;
+    max-width: 277px;
+
+    font-size: 1rem;
+    font-weight: 400;
+
+    background-color: $bg-color;
+
+    border: $border;
+    border-radius: $radius;
+
+    outline: 0;
+    resize: none;
+    overflow-y: scroll;
+}
