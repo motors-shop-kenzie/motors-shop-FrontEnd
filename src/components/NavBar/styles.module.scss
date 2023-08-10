@@ -1,30 +1,138 @@
 @use "../../sass/abstracts/" as *;
 
 .container {
+  font-family: $font-family-1;
+  position: fixed;
+  left: 0;
+  top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0px 60px;
-  height: 80px;
+  z-index: 10;
 
-  ul {
+  height: calc(80rem / 16);
+  width: 100%;
+  background-color: $color-grey-scale-grey-10;
+  border-bottom: solid 2px $color-grey-scale-grey-6;
+
+  .nav_content {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
+    width: 100%;
+    padding: 0 calc(12rem / 16);
+
+    @media (min-width: $layout-medium) {
+      padding: 0 calc(60rem / 16);
+      height: 100%;
+    }
+  }
+
+  .button_hamburger {
+    all: unset;
+    cursor: pointer;
+    padding: calc(12rem) calc(1.5rem);
+    border-radius: 8px;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    @media (min-width: $layout-medium) {
+      display: none;
+    }
+  }
+
+  .options_button__login {
+    @include text-body-1-600;
+  }
+
+  .options_button__register {
+    @include big-button-border-grey-4;
+  }
+
+  .options_mobile__not_logged {
+    box-sizing: border-box;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
     gap: 44px;
-    border-left: 1px solid $color-grey-scale-grey-4;
-    padding: 40px;
+
+    top: calc(72rem / 16);
+    padding: calc(32rem / 16) calc(12rem / 16);
+    width: 100%;
+    max-width: 100%;
+
+    background-color: $color-colors-fixed-white-fixed;
+
+    @media (min-width: $layout-medium) {
+      display: none;
+    }
+
+    @include effect-shadow-1;
+  }
+
+  .options_desktop__not_logged {
+    display: none;
+
+    @media (min-width: $layout-medium) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 44px;
+      height: 100%;
+
+      padding-left: 44px;
+      border-left: solid 2px $color-grey-scale-grey-6;
+    }
+  }
+
+  .options__logged {
+    box-sizing: border-box;
+    position: absolute;
+    right: calc(12rem / 16);
+    top: calc(72rem / 16);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px;
+    width: calc(200rem / 16);
+
+    background-color: $color-grey-scale-grey-9;
+    border-radius: 4px;
+    @include effect-shadow-1;
+    @include text-body-1-400;
+
+    @media (min-width: $layout-medium) {
+      right: calc(44rem / 16);
+    }
 
     li {
-      color: $color-grey-scale-grey-2;
+      cursor: pointer;
     }
-    .register {
+  }
+
+  .profile {
+    display: none;
+
+    @media (min-width: $layout-medium) {
+      cursor: pointer;
       display: flex;
-      color: $color-grey-scale-grey-0;
-      border: 1px solid $color-grey-scale-grey-4;
-      border-radius: 4px;
-      padding: 12px 28px 12px 28px;
+      align-items: center;
+      gap: 8px;
+      height: 100%;
+
+      padding-left: 44px;
+      border-left: solid 2px $color-grey-scale-grey-6;
+
+      .profile__icon {
+        border-radius: 100%;
+      }
+
+      .profile__name {
+        @include text-body-1-400;
+      }
     }
   }
 }

@@ -1,11 +1,11 @@
-import { CarData } from "@/schemas/carSchema";
 import Image from "next/image";
 import { BiDollar } from "react-icons/bi";
 import UserHeader from "../UserHeader";
 import styles from "./styles.module.scss";
+import { TCarProduct } from "@/interfaces/CarProduc";
 
 interface CardProps {
-  car: CarData;
+  car: TCarProduct;
 }
 
 const ProductCard = ({ car }: CardProps) => {

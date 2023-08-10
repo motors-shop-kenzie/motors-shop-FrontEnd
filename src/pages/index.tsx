@@ -2,7 +2,6 @@ import { Button } from "@/components/Button";
 import styles from "./styles.module.scss";
 import ProductCard from "@/components/ProductCard";
 import { GetServerSideProps, NextPage } from "next";
-import { CarData } from "@/schemas/carSchema";
 import api from "@/services/api";
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
@@ -10,10 +9,16 @@ import { TextArea } from "@/components/Textarea";
 import { InputSectionField } from "@/components/InputSectionField";
 import { Label } from "@/components/Label";
 import { Select } from "@/components/Select";
-import Filter from "@/components/FilterAside";
+
+import { TCarProduct } from "@/interfaces/CarProduc";
+import CommentCard from "@/components/CommetCard";
+import ProductBox from "@/components/ProductBox";
+import CommentBox from "@/components/CommentBox";
+import { Footer } from "@/components/Footer";
+// import { Footer } from "@/components/Footer";
 
 interface HomeProps {
-  cars: CarData[];
+  cars: TCarProduct[];
 }
 
 const listBrand = ["Fiat", "BMW", "Mercedes", "Ford", "Honda"];
@@ -25,8 +30,9 @@ const listGasoline = ["Elétrico", "Híbrido", "Flex"];
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
   return (
     <>
-      <div className={styles.buttonsContainer}>
-        {/* <Button className={styles.grey0Button} text="Text Button" />
+
+      {/*<div className={styles.buttonsContainer}>
+        <Button className={styles.grey0Button} text="Text Button" />
                 <Button className={styles.grey1Button} text="Text Button" />
                 <Button
                     className={styles.grey2TextLightButton}
@@ -93,9 +99,10 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
                 <Button
                     className={styles.brand3TextBrand4Button}
                     text="Text Button"
-                /> */}
-      </div>
-      <div className={styles.inputsContainer}>
+
+                /> 
+      </div>*/}
+      {/* <div className={styles.inputsContainer}>
         <InputSectionField>
           <Label htmlFor="Placeholder" name="Label" />
           <InputFocus>
@@ -107,6 +114,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
             />
           </InputFocus>
         </InputSectionField>
+
 
         <InputSectionField>
           <Label htmlFor="Placeholder2" name="Label" />
@@ -145,23 +153,30 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         <InputSectionField>
           <Select />
         </InputSectionField>
-      </div>
-      <aside>
-        <Filter title="Marca" list={listBrand} />
-        <Filter title="Modelo" list={listModel} />
-        <Filter title="Cor" list={listColor} />
-        <Filter title="Ano" list={listYear} />
-        <Filter title="Combustível" list={listGasoline} />
-      </aside>
-      {cars.map((car) => {
-        return <ProductCard key={car.id} car={car} />;
-      })}
+      </div>*/}
+      
+
+      <ProductBox>
+        {cars.map((car) => {
+          return <ProductCard key={car.id} car={car} />;
+        })}
+      </ProductBox>
+
+      <CommentBox>
+        <CommentCard />
+        <CommentCard />
+        <CommentCard />
+        <CommentCard />
+      </CommentBox>
+
+      <Footer/>
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await api.get<CarData[]>("/cars");
+
+  const response = await api.get<TCarProduct[]>("/cars");
   return {
     props: {
       cars: response.data,
