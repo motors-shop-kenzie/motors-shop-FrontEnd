@@ -10,10 +10,17 @@ import { TextArea } from "@/components/Textarea";
 import { InputSectionField } from "@/components/InputSectionField";
 import { Label } from "@/components/Label";
 import { Select } from "@/components/Select";
+import Filter from "@/components/FilterAside";
 
 interface HomeProps {
   cars: CarData[];
 }
+
+const listBrand = ["Fiat", "BMW", "Mercedes", "Ford", "Honda"];
+const listModel = ["Civic", "Corola", "Cruze", "Gol", "Onix"];
+const listColor = ["Azul", "Verde", "Branco", "Amarelo", "Preto"];
+const listYear = ["2000", "1999", "2020", "2023"];
+const listGasoline = ["Elétrico", "Híbrido", "Flex"];
 
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
   return (
@@ -139,7 +146,13 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
           <Select />
         </InputSectionField>
       </div>
-
+      <aside>
+        <Filter title="Marca" list={listBrand} />
+        <Filter title="Modelo" list={listModel} />
+        <Filter title="Cor" list={listColor} />
+        <Filter title="Ano" list={listYear} />
+        <Filter title="Combustível" list={listGasoline} />
+      </aside>
       {cars.map((car) => {
         return <ProductCard key={car.id} car={car} />;
       })}
