@@ -1,0 +1,30 @@
+@use "../../sass/abstracts/" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 60px;
+  height: 80px;
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 44px;
+    border-left: 1px solid $color-grey-scale-grey-4;
+    padding: 40px;
+
+    li {
+      color: $color-grey-scale-grey-2;
+    }
+    .register {
+      display: flex;
+      color: $color-grey-scale-grey-0;
+      border: 1px solid $color-grey-scale-grey-4;
+      border-radius: 4px;
+      padding: 12px 28px 12px 28px;
+    }
+  }
+}

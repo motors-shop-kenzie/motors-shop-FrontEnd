@@ -2,234 +2,228 @@
 @use "../sass/abstracts/mixins" as *;
 
 .grey0Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors(
-        $color-grey-scale-grey-0,
-        $color-colors-fixed-white-fixed
-    );
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors(
+    $color-grey-scale-grey-0,
+    $color-colors-fixed-white-fixed
+  );
 }
 .grey1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors(
-        $color-grey-scale-grey-1,
-        $color-colors-fixed-white-fixed
-    );
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors(
+    $color-grey-scale-grey-1,
+    $color-colors-fixed-white-fixed
+  );
 }
 .grey2TextLightButton {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-grey-scale-grey-2, $color-grey-scale-grey-6);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-2, $color-grey-scale-grey-6);
 }
 .grey2TextDarkerButton {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-grey-scale-grey-2, $color-grey-scale-grey-5);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-2, $color-grey-scale-grey-5);
 }
 .grey5TextWhiteButton {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors(
-        $color-grey-scale-grey-5,
-        $color-colors-fixed-white-fixed
-    );
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors(
+    $color-grey-scale-grey-5,
+    $color-colors-fixed-white-fixed
+  );
 }
 .brand1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors(
-        $color-brand-brand-1,
-        $color-colors-fixed-white-fixed
-    );
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-brand-brand-1, $color-colors-fixed-white-fixed);
 }
 .brand2Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors(
-        $color-brand-brand-2,
-        $color-colors-fixed-white-fixed
-    );
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-brand-brand-2, $color-colors-fixed-white-fixed);
 }
 .brand4TextBrand1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-brand-brand-4, $color-brand-brand-1);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-brand-brand-4, $color-brand-brand-1);
 }
 .grey10TextGrey1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-1);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-1);
 }
 .grey10BorderGrey0Button {
-    @include buttonBasic(
-        1.5px solid $color-grey-scale-grey-0,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-0);
+  @include buttonBasic(
+    1.5px solid $color-grey-scale-grey-0,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-0);
 }
 .grey10BorderGrey4TextGrey0Button {
-    @include buttonBasic(
-        1.5px solid $color-grey-scale-grey-4,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-0);
+  @include buttonBasic(
+    1.5px solid $color-grey-scale-grey-4,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-0);
 }
 .grey10BorderAndTextBrand1Button {
-    @include buttonBasic(
-        1.5px solid $color-brand-brand-1,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-grey-scale-grey-10, $color-brand-brand-1);
+  @include buttonBasic(
+    1.5px solid $color-brand-brand-1,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-10, $color-brand-brand-1);
 }
 .brand4BorderAndTextBrand1Button {
-    @include buttonBasic(
-        1.5px solid $color-brand-brand-1,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-brand-brand-4, $color-brand-brand-1);
+  @include buttonBasic(
+    1.5px solid $color-brand-brand-1,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-brand-brand-4, $color-brand-brand-1);
 }
 .grey8TextGrey0Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-grey-scale-grey-8, $color-grey-scale-grey-0);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-8, $color-grey-scale-grey-0);
 }
 .feedbackAlert3TextFeedbackAlert1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-feedback-alert-3, $color-feedback-alert-1);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-feedback-alert-3, $color-feedback-alert-1);
 }
 .feedbackAlert2TextFeedbackAlert1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-feedback-alert-2, $color-feedback-alert-1);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-feedback-alert-2, $color-feedback-alert-1);
 }
 .feedbackSuccess3TextFeedbackSuccess1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-feedback-sucess-3, $color-feedback-sucess-1);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-feedback-sucess-3, $color-feedback-sucess-1);
 }
 .feedbackSuccess2TextFeedbackSuccess1Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-feedback-sucess-2, $color-feedback-sucess-1);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-feedback-sucess-2, $color-feedback-sucess-1);
 }
 .brand3TextBrand4Button {
-    @include buttonBasic(
-        none,
-        $button-radius,
-        12px 20px,
-        $button-medium-text,
-        12px 28px,
-        $button-big-text
-    );
-    @include buttonColors($color-brand-brand-3, $color-brand-brand-4);
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-brand-brand-3, $color-brand-brand-4);
 }
 .mainContainer {
-    margin-top: 20px;
-    min-width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  margin-top: 20px;
+  min-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
