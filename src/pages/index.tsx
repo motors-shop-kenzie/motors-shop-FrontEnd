@@ -67,45 +67,43 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         <Button className={styles.brand3TextBrand4Button} text="Text Button" />
       </div>
       <div className={styles.inputsContainer}>
-
         <Modal text="Modal Teste">
-        <InputSectionField>
-          <Label htmlFor="Placeholder" name="Label" />
-          <InputFocus>
-            <Input
-              type="text"
-              className={styles.basicInputWithBorder}
-              placeholder="Placeholder"
-              id="Placeholder"
-            />
-          </InputFocus>
-        </InputSectionField>
+          <InputSectionField>
+            <Label htmlFor="Placeholder" name="Label" />
+            <InputFocus>
+              <Input
+                type="text"
+                className={styles.basicInputWithBorder}
+                placeholder="Placeholder"
+                id="Placeholder"
+              />
+            </InputFocus>
+          </InputSectionField>
 
-        <InputSectionField>
-          <Label htmlFor="Placeholder2" name="Label" />
-          <InputFocus>
-            <Input
-              type="text"
-              className={styles.DarkerInputWithoutBorder}
-              placeholder="Placeholder"
-              id="Placeholder2"
-            />
-          </InputFocus>
-        </InputSectionField>
+          <InputSectionField>
+            <Label htmlFor="Placeholder2" name="Label" />
+            <InputFocus>
+              <Input
+                type="text"
+                className={styles.DarkerInputWithoutBorder}
+                placeholder="Placeholder"
+                id="Placeholder2"
+              />
+            </InputFocus>
+          </InputSectionField>
 
-        <InputSectionField>
-          {" "}
-          <Label htmlFor="Placeholder3" name="Label" />
-          <InputFocus>
-            <TextArea
-              className={styles.basicTextAreaWithBorder}
-              placeholder="Placeholder"
-              id="Placeholder3"
-            />
-          </InputFocus>
-        </InputSectionField>
+          <InputSectionField>
+            {" "}
+            <Label htmlFor="Placeholder3" name="Label" />
+            <InputFocus>
+              <TextArea
+                className={styles.basicTextAreaWithBorder}
+                placeholder="Placeholder"
+                id="Placeholder3"
+              />
+            </InputFocus>
+          </InputSectionField>
         </Modal>
-        
 
         <InputSectionField>
           <Label htmlFor="Placeholder4" name="Label" />
@@ -118,7 +116,9 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
           </InputFocus>
         </InputSectionField>
         <InputSectionField>
-          <Select />
+          <InputFocus>
+            <Select />
+          </InputFocus>
         </InputSectionField>
       </div>
 

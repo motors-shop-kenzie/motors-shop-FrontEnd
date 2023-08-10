@@ -1,0 +1,18 @@
+@use "../../sass/abstracts/mixins" as *;
+@use "../../sass/abstracts/variables" as *;
+
+.select {
+    @include inputBasic(
+        $color-grey-scale-grey-10,
+        1.5px solid $color-grey-scale-grey-7,
+        $button-radius
+    );
+
+    max-width: 311px;
+    cursor: pointer;
+
+    > option {
+        background-color: $color-brand-brand-1;
+        color: $color-colors-fixed-white-fixed;
+    }
+}
