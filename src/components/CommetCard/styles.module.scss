@@ -1,0 +1,9 @@
+@use "../../sass/abstracts/variables" as *;
+
+.container {
+  color: $color-grey-scale-grey-2;
+
+    .text{
+      margin: 12px 0;
+    }
+  }
