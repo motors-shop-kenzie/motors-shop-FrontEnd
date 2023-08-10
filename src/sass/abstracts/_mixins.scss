@@ -1,25 +1,22 @@
 @mixin buttonColors($bg-color, $text-color) {
-    background-color: $bg-color;
-    color: $text-color;
+  background-color: $bg-color;
+  color: $text-color;
 }
 @mixin buttonBasic(
-    $border,
-    $radius,
-    $padding-mobile,
-    $font-size-mobile,
-    $padding-desktop,
-    $font-size-desktop
+  $border,
+  $radius,
+  $padding-mobile,
+  $font-size-mobile,
+  $padding-desktop,
+  $font-size-desktop
 ) {
-    border: $border;
-    border-radius: $radius;
+  border: $border;
+  border-radius: $radius;
+  padding: $padding-mobile;
+  font-size: $font-size-mobile;
 
-    padding: $padding-mobile;
-
-    font-size: $font-size-mobile;
-
-    @media (min-width: 769px) {
-        padding: $padding-desktop;
-
-        font-size: $font-size-desktop;
-    }
+  @media (min-width: 769px) {
+    padding: $padding-desktop;
+    font-size: $font-size-desktop;
+  }
 }
