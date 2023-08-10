@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 
-const UserHeader = () => {
+export const UserHeader = () => {
     return(
         <div className={styles.container}>
             <div className={styles.circle}>
@@ -13,4 +13,3 @@ const UserHeader = () => {
     )
 }
 
-export default UserHeader

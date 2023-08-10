@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { BiDollar } from "react-icons/bi";
-import UserHeader from "../UserHeader";
 import styles from "./styles.module.scss";
 import { TCarProduct } from "@/interfaces/CarProduc";
+import { UserHeader } from "../UserHeader";
 
 interface CardProps {
   car: TCarProduct;
 }
 
-const ProductCard = ({ car }: CardProps) => {
+export const ProductCard = ({ car }: CardProps) => {
   return (
     <div className={styles.card}>
       <div className={styles.img}>
@@ -32,4 +32,4 @@ const ProductCard = ({ car }: CardProps) => {
   );
 };
 
-export default ProductCard;
+
