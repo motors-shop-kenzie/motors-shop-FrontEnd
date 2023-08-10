@@ -17,14 +17,14 @@ import { Footer } from "@/components/Footer";
 // import { Footer } from "@/components/Footer";
 
 interface HomeProps {
-  cars: TCarProduct[];
+    cars: TCarProduct[];
 }
 
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
-  return (
-    <>
-      {/*<div className={styles.buttonsContainer}>
-        <Button className={styles.grey0Button} text="Text Button" />
+    return (
+        <>
+            <div className={styles.buttonsContainer}>
+                <Button className={styles.grey0Button} text="Text Button" />
                 <Button className={styles.grey1Button} text="Text Button" />
                 <Button
                     className={styles.grey2TextLightButton}
@@ -91,86 +91,87 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
                 <Button
                     className={styles.brand3TextBrand4Button}
                     text="Text Button"
-                /> 
-      </div>*/}
-      {/* <div className={styles.inputsContainer}>
-        <InputSectionField>
-          <Label htmlFor="Placeholder" name="Label" />
-          <InputFocus>
-            <Input
-              type="text"
-              className={styles.basicInputWithBorder}
-              placeholder="Placeholder"
-              id="Placeholder"
-            />
-          </InputFocus>
-        </InputSectionField>
+                />
+            </div>
+            <div className={styles.inputsContainer}>
+                <InputSectionField>
+                    <Label htmlFor="Placeholder" name="Label" />
+                    <InputFocus>
+                        <Input
+                            type="text"
+                            className={styles.basicInputWithBorder}
+                            placeholder="Placeholder"
+                            id="Placeholder"
+                        />
+                    </InputFocus>
+                </InputSectionField>
 
-        <InputSectionField>
-          <Label htmlFor="Placeholder2" name="Label" />
-          <InputFocus>
-            <Input
-              type="text"
-              className={styles.DarkerInputWithoutBorder}
-              placeholder="Placeholder"
-              id="Placeholder2"
-            />
-          </InputFocus>
-        </InputSectionField>
+                <InputSectionField>
+                    <Label htmlFor="Placeholder2" name="Label" />
+                    <InputFocus>
+                        <Input
+                            type="text"
+                            className={styles.DarkerInputWithoutBorder}
+                            placeholder="Placeholder"
+                            id="Placeholder2"
+                        />
+                    </InputFocus>
+                </InputSectionField>
 
-        <InputSectionField>
-          {" "}
-          <Label htmlFor="Placeholder3" name="Label" />
-          <InputFocus>
-            <TextArea
-              className={styles.basicTextAreaWithBorder}
-              placeholder="Placeholder"
-              id="Placeholder3"
-            />
-          </InputFocus>
-        </InputSectionField>
+                <InputSectionField>
+                    {" "}
+                    <Label htmlFor="Placeholder3" name="Label" />
+                    <InputFocus>
+                        <TextArea
+                            className={styles.basicTextAreaWithBorder}
+                            placeholder="Placeholder"
+                            id="Placeholder3"
+                        />
+                    </InputFocus>
+                </InputSectionField>
 
-        <InputSectionField>
-          <Label htmlFor="Placeholder4" name="Label" />
-          <InputFocus>
-            <TextArea
-              className={styles.darkertextAreaWithBorder}
-              placeholder="Placeholder"
-              id="Placeholder4"
-            />
-          </InputFocus>
-        </InputSectionField>
-        <InputSectionField>
-          <Select />
-        </InputSectionField>
-      </div>*/}
-      
+                <InputSectionField>
+                    <Label htmlFor="Placeholder4" name="Label" />
+                    <InputFocus>
+                        <TextArea
+                            className={styles.darkertextAreaWithBorder}
+                            placeholder="Placeholder"
+                            id="Placeholder4"
+                        />
+                    </InputFocus>
+                </InputSectionField>
+                <InputSectionField>
+                    <InputFocus>
+                        <Select />
+                    </InputFocus>
+                </InputSectionField>
+            </div>
 
-      <ProductBox>
-        {cars.map((car) => {
-          return <ProductCard key={car.id} car={car} />;
-        })}
-      </ProductBox>
+            <ProductBox>
+                {cars.map((car) => {
+                    return <ProductCard key={car.id} car={car} />;
+                })}
+            </ProductBox>
 
-      <CommentBox>
-        <CommentCard />
-        <CommentCard />
-        <CommentCard />
-        <CommentCard />
-      </CommentBox>
+            <CommentBox>
+                <CommentCard />
+                <CommentCard />
+                <CommentCard />
+                <CommentCard />
+            </CommentBox>
 
-      <Footer/>
-    </>
-  );
+            <Footer />
+        </>
+    );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const response = await api.get<TCarProduct[]>("/cars");
-  return {
-    props: {
-      cars: response.data,
-    },
-  };
+    const response = await api.get<TCarProduct[]>("/cars");
+    return {
+        props: {
+            cars: response.data,
+        },
+    };
 };
 
 export default Home;

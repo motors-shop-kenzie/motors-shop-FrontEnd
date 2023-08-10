@@ -19,4 +19,11 @@
             border: 0;
         }
     }
+    &:has(select:focus) {
+        border: 2px solid $color-brand-brand-2;
+        border-radius: 4px;
+        select {
+            border: 0;
+        }
+    }
 }
