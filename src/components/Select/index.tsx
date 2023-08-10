@@ -1,4 +1,4 @@
-const Select = () => {
+export const Select = () => {
     return (
         <select name="Selecione um opção" id="">
             <option value="">Opção 1</option>
@@ -7,4 +7,4 @@ const Select = () => {
     );
 };
 
-export { Select };
+

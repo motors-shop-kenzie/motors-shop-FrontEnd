@@ -5,8 +5,8 @@ interface iButtonProps {
     className: string;
 }
 
-const Button = ({ text, className }: iButtonProps) => {
+export const Button = ({ text, className }: iButtonProps) => {
     return <button className={className}>{text}</button>;
 };
 
-export { Button };
+
