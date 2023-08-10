@@ -1,7 +1,8 @@
-import UserHeader from "../UserHeader";
+
+import { UserHeader } from "../UserHeader";
 import styles from "./styles.module.scss";
 
-const CommentCard = () => {
+export const CommentCard = () => {
     return(
         <div className={styles.container}>
             <UserHeader/>
@@ -12,4 +13,3 @@ const CommentCard = () => {
     )
 }
 
-export default CommentCard
