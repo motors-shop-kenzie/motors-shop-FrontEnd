@@ -210,10 +210,6 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
           return <ProductCard key={car.id} car={car} />;
         })}
       </ProductBox>
-      <Filter title="Marca" list={list} />
-      <Filter title="Marca" list={list} />
-      <Filter title="Marca" list={list} />
-      <Filter title="Marca" list={list} />
 
       <CommentBox>
         <CommentCard />
