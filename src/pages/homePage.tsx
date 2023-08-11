@@ -1,4 +1,6 @@
 import CarFilter from "@/components/CarFilter";
+import { LoginForm } from "@/components/Forms/Login";
+import { Modal } from "@/components/Modal";
 import { ModalCreateCar } from "@/components/Modal/Modal";
 import { ModalContext } from "@/contexts/Modal";
 import { useContext } from "react";
@@ -14,7 +16,12 @@ export default function HomePage() {
     <main>
       <section>
         <h1>Titulo ficticio</h1>
-        {showModal === "palavraChave" && <ModalCreateCar />}
+        {showModal === "createContact" && (
+          <Modal text="Abrindo Modal">
+            <LoginForm />
+          </Modal>
+        )}
+        {/* {showModal === "createContact" && <ModalCreateCar />} */}
         <CarFilter
           // aqui devo passar a lista de carros que vão vir através da api
           cars={[]}
