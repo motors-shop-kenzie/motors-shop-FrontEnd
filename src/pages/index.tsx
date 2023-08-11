@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import styles from "./styles.module.scss";
 
@@ -15,7 +17,9 @@ import { CommentBox } from "@/components/CommentBox";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { CommentCard } from "@/components/CommetCard";
-import { Modal } from "@/components/Modal";
+import { useContext } from "react";
+import { ModalContext } from "@/contexts/Modal";
+import { ModalCreateCar } from "@/components/Modal/Modal";
 
 interface HomeProps {
   cars: TCarProduct[];
@@ -66,7 +70,8 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         />
         <Button className={styles.brand3TextBrand4Button} text="Text Button" />
       </div>
-      <div className={styles.inputsContainer}>
+
+      {/* <div className={styles.inputsContainer}>
         <Modal text="Modal Teste">
           <InputSectionField>
             <Label htmlFor="Placeholder" name="Label" />
@@ -120,7 +125,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
             <Select />
           </InputFocus>
         </InputSectionField>
-      </div>
+      </div> */}
 
       <ProductBox>
         {cars.map((car) => {
