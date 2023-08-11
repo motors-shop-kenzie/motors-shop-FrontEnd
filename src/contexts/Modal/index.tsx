@@ -6,7 +6,7 @@ import { IModalContext, IProviderChildrenProps } from "./interface";
 export const ModalContext = createContext<IModalContext>({} as IModalContext);
 
 export const ModalProvider = ({ children }: IProviderChildrenProps) => {
-  const [showModal, setShowModal] = useState("");
+  const [showModal, setShowModal] = useState<string>("");
 
   const closeModal = () => {
     setShowModal("");
