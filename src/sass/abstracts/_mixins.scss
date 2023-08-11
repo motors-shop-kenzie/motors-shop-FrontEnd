@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 @mixin buttonColors($bg-color, $text-color) {
   background-color: $bg-color;
   color: $text-color;
@@ -12,44 +14,76 @@
 ) {
   border: $border;
   border-radius: $radius;
+
   padding: $padding-mobile;
+
   font-size: $font-size-mobile;
 
   @media (min-width: 769px) {
     padding: $padding-desktop;
+
     font-size: $font-size-desktop;
   }
 }
+
 @mixin inputBasic($bg-color, $border, $radius) {
-    padding: 13px 16px;
+  padding: 13px 16px;
 
-    width: 100%;
-    max-width: 277px;
+  width: 100%;
+  max-width: 277px;
 
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 400;
 
-    background-color: $bg-color;
+  background-color: $bg-color;
 
-    border: $border;
-    border-radius: $radius;
-    outline: 0;
+  border: $border;
+  border-radius: $radius;
+  outline: 0;
 }
+
 @mixin textareaBasic($bg-color, $border, $radius) {
-    padding: 13px 16px;
+  padding: 13px 16px;
 
-    width: 100%;
-    max-width: 277px;
+  width: 100%;
+  max-width: 277px;
 
-    font-size: 1rem;
-    font-weight: 400;
+  font-size: 1rem;
+  font-weight: 400;
 
-    background-color: $bg-color;
+  background-color: $bg-color;
 
-    border: $border;
-    border-radius: $radius;
+  border: $border;
+  border-radius: $radius;
 
-    outline: 0;
-    resize: none;
-    overflow-y: scroll;
+  outline: 0;
+  resize: none;
+  overflow-y: scroll;
+}
+
+@mixin text-body-1-600 {
+  font-size: $body-1-600;
+  font-weight: $semi-bold-weight;
+  color: $color-grey-scale-grey-2;
+}
+
+@mixin text-body-1-400 {
+  font-size: $body-1-400;
+  font-weight: $regular-weigth;
+  color: $color-grey-scale-grey-2;
+}
+
+@mixin big-button-border-grey-4 {
+  color: $color-grey-scale-grey-0;
+  font-size: $button-big-text;
+  font-weight: $semi-bold-weight;
+  text-align: center;
+
+  border-radius: $button-radius;
+  border: 1.5px solid $color-grey-scale-grey-4;
+  padding: calc(12rem / 16) calc(28rem / 16);
+}
+
+@mixin effect-shadow-1 {
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }

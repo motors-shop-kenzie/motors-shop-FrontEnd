@@ -5,7 +5,7 @@ interface DetailProps {
     
 }
 
-const Detail = ({number}:DetailProps) => {
+export const Detail = ({number}:DetailProps) => {
     return(
         <div className={styles.container}>
             {number}
@@ -13,4 +13,3 @@ const Detail = ({number}:DetailProps) => {
     )
 }
 
-export default Detail

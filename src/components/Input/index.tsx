@@ -5,7 +5,7 @@ interface iInputProps {
     id: string;
 }
 
-const Input = ({ type, placeholder, className, id }: iInputProps) => {
+export const Input = ({ type, placeholder, className, id }: iInputProps) => {
     return (
         <>
             <input
@@ -18,4 +18,4 @@ const Input = ({ type, placeholder, className, id }: iInputProps) => {
     );
 };
 
-export { Input };
+

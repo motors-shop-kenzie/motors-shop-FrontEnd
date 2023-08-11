@@ -5,7 +5,7 @@ interface ilabelProps {
     name: string;
 }
 
-const Label = ({ htmlFor, name }: ilabelProps) => {
+export const Label = ({ htmlFor, name }: ilabelProps) => {
     return (
         <label htmlFor={htmlFor} className={styles.labelField}>
             {name}
@@ -13,4 +13,4 @@ const Label = ({ htmlFor, name }: ilabelProps) => {
     );
 };
 
-export { Label };
+

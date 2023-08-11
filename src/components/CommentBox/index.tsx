@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import { iChildrenProps } from "@/interfaces";
 
-const CommentBox = ({ children }: iChildrenProps) => {
+export const CommentBox = ({ children }: iChildrenProps) => {
     return(
         <ul className={styles.container}>
             {children}
@@ -9,4 +9,3 @@ const CommentBox = ({ children }: iChildrenProps) => {
     )
 }
 
-export default CommentBox

@@ -4,7 +4,7 @@ interface iTextAreaProps {
     id: string;
 }
 
-const TextArea = ({ className, placeholder, id }: iTextAreaProps) => {
+export const TextArea = ({ className, placeholder, id }: iTextAreaProps) => {
     return (
         <textarea
             name=""
@@ -15,4 +15,4 @@ const TextArea = ({ className, placeholder, id }: iTextAreaProps) => {
     );
 };
 
-export { TextArea };
+
