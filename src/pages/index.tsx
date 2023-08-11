@@ -28,10 +28,10 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
-const {showModal,setShowModal} = useModal()
-const handleModalOpen = () => {
-  setShowModal("createContact");
-};
+  const { showModal, setShowModal } = useModal();
+  const handleModalOpen = () => {
+    setShowModal("createContact");
+  };
 
   return (
     <>
