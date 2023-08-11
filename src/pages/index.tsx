@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/Button";
 import styles from "./styles.module.scss";
-
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
 import { Input } from "@/components/Input";
@@ -20,12 +19,20 @@ import { CommentCard } from "@/components/CommetCard";
 import { useContext } from "react";
 import { ModalContext } from "@/contexts/Modal";
 import { ModalCreateCar } from "@/components/Modal/Modal";
+import { useModal } from "@/hooks/modalHook";
+import { LoginForm } from "@/components/Forms/Login";
+import { Modal } from "@/components/Modal";
 
 interface HomeProps {
   cars: TCarProduct[];
 }
 
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
+const {showModal,setShowModal} = useModal()
+const handleModalOpen = () => {
+  setShowModal("createContact");
+};
+
   return (
     <>
       <div className={styles.buttonsContainer}>
@@ -126,6 +133,16 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
           </InputFocus>
         </InputSectionField>
       </div> */}
+
+      <button type="button" onClick={() => handleModalOpen()}>
+        Abrir modal
+      </button>
+
+      {showModal === "createContact" && (
+        <Modal text="Abrindo Modal">
+          <LoginForm />
+        </Modal>
+      )}
 
       <ProductBox>
         {cars.map((car) => {

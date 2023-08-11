@@ -7,6 +7,6 @@ export interface IProviderChildrenProps {
 
 export type IModalContext = {
   showModal: string;
-  setShowModal: React.Dispatch<React.SetStateAction<string>>;
+  setShowModal: Dispatch<SetStateAction<string>>;
   closeModal: () => void;
 };
