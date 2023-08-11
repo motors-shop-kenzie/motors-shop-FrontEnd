@@ -40,7 +40,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
 
   return (
     <div className={styles.body}>
-      <NavBar dealer logged/>
+      <NavBar dealer logged />
       <div className={styles.buttonsContainer}>
         <Button
           className={styles.grey0Button}
@@ -140,43 +140,41 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
       </div>
 
       <div className={styles.inputsContainer}>
-        
-          <InputSectionField>
-            <Label htmlFor="Placeholder" name="Label" />
-            <InputFocus>
-              <Input
-                type="text"
-                className={styles.basicInputWithBorder}
-                placeholder="Placeholder"
-                id="Placeholder"
-              />
-            </InputFocus>
-          </InputSectionField>
+        <InputSectionField>
+          <Label htmlFor="Placeholder" name="Label" />
+          <InputFocus>
+            <Input
+              type="text"
+              className={styles.basicInputWithBorder}
+              placeholder="Placeholder"
+              id="Placeholder"
+            />
+          </InputFocus>
+        </InputSectionField>
 
-          <InputSectionField>
-            <Label htmlFor="Placeholder2" name="Label" />
-            <InputFocus>
-              <Input
-                type="text"
-                className={styles.DarkerInputWithoutBorder}
-                placeholder="Placeholder"
-                id="Placeholder2"
-              />
-            </InputFocus>
-          </InputSectionField>
+        <InputSectionField>
+          <Label htmlFor="Placeholder2" name="Label" />
+          <InputFocus>
+            <Input
+              type="text"
+              className={styles.DarkerInputWithoutBorder}
+              placeholder="Placeholder"
+              id="Placeholder2"
+            />
+          </InputFocus>
+        </InputSectionField>
 
-          <InputSectionField>
-            {" "}
-            <Label htmlFor="Placeholder3" name="Label" />
-            <InputFocus>
-              <TextArea
-                className={styles.basicTextAreaWithBorder}
-                placeholder="Placeholder"
-                id="Placeholder3"
-              />
-            </InputFocus>
-          </InputSectionField>
-        
+        <InputSectionField>
+          {" "}
+          <Label htmlFor="Placeholder3" name="Label" />
+          <InputFocus>
+            <TextArea
+              className={styles.basicTextAreaWithBorder}
+              placeholder="Placeholder"
+              id="Placeholder3"
+            />
+          </InputFocus>
+        </InputSectionField>
 
         <InputSectionField>
           <Label htmlFor="Placeholder4" name="Label" />
@@ -195,9 +193,14 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         </InputSectionField>
       </div>
 
-      <button type="button" onClick={() => handleModalOpen()}>
+      {/* <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
-      </button>
+      </button> */}
+      <Button
+        className={styles.grey0Button}
+        text="Abrir modal"
+        onClick={() => handleModalOpen()}
+      />
 
       {showModal === "createContact" && (
         <Modal text="Abrindo Modal">
