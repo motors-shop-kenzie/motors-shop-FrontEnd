@@ -1,12 +1,15 @@
 import styles from "./styles.module.scss";
 
 interface iButtonProps {
-    text: string;
-    className: string;
+  text: string;
+  className: string;
+  onClick?: () => void;
 }
 
-export const Button = ({ text, className }: iButtonProps) => {
-    return <button className={className}>{text}</button>;
+export const Button = ({ text, className, onClick }: iButtonProps) => {
+  return (
+    <button className={className} onClick={onClick}>
+      {text}
+    </button>
+  );
 };
-
-
