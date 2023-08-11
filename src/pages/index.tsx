@@ -22,11 +22,13 @@ import { ModalCreateCar } from "@/components/Modal/Modal";
 import { useModal } from "@/hooks/modalHook";
 import { LoginForm } from "@/components/Forms/Login";
 import { Modal } from "@/components/Modal";
+import Filter from "@/components/FilterAside";
 
 interface HomeProps {
   cars: TCarProduct[];
 }
 
+const list = ["Fiat", "BMW", "Mercedes"];
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
   const { showModal, setShowModal } = useModal();
   const handleModalOpen = () => {
@@ -215,7 +217,6 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         <CommentCard />
         <CommentCard />
       </CommentBox>
-
       <Footer />
     </>
   );

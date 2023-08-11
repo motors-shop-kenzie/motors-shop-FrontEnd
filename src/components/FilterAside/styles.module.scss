@@ -1,0 +1,26 @@
+@use "../../sass/abstracts/" as *;
+
+.container {
+  padding-left: 15px;
+  h2 {
+    font-family: "Lexend";
+    color: $color-grey-scale-grey-0;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 35px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding: 20px 0;
+  }
+  li {
+    //styleName: Heading/Heading-6-500;
+    font-family: Lexend;
+    color: $color-grey-scale-grey-3;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: left;
+    padding-left: 10px;
+  }
+}
