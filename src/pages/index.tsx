@@ -22,6 +22,7 @@ import { ModalCreateCar } from "@/components/Modal/Modal";
 import { useModal } from "@/hooks/modalHook";
 import { LoginForm } from "@/components/Forms/Login";
 import { Modal } from "@/components/Modal";
+import { NavBar } from "@/components/NavBar";
 
 interface HomeProps {
   cars: TCarProduct[];
@@ -34,7 +35,8 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
   };
 
   return (
-    <>
+    <div className={styles.body}>
+      <NavBar dealer logged/>
       <div className={styles.buttonsContainer}>
         <Button className={styles.grey0Button} text="Text Button" />
         <Button className={styles.grey1Button} text="Text Button" />
@@ -78,8 +80,8 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         <Button className={styles.brand3TextBrand4Button} text="Text Button" />
       </div>
 
-      {/* <div className={styles.inputsContainer}>
-        <Modal text="Modal Teste">
+      <div className={styles.inputsContainer}>
+        
           <InputSectionField>
             <Label htmlFor="Placeholder" name="Label" />
             <InputFocus>
@@ -115,7 +117,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
               />
             </InputFocus>
           </InputSectionField>
-        </Modal>
+        
 
         <InputSectionField>
           <Label htmlFor="Placeholder4" name="Label" />
@@ -132,7 +134,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
             <Select />
           </InputFocus>
         </InputSectionField>
-      </div> */}
+      </div>
 
       <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
@@ -158,7 +160,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
       </CommentBox>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

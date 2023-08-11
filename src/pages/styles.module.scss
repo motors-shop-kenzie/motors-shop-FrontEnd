@@ -1,6 +1,10 @@
 @use "../sass/abstracts/variables" as *;
 @use "../sass/abstracts/mixins" as *;
 
+.body{
+    margin-top: 100px;
+}
+
 .buttonsContainer {
     margin-top: 20px;
     min-width: 100%;
