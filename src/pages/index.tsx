@@ -33,49 +33,108 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
     setShowModal("createContact");
   };
 
+  const handleClick = () => {
+    console.log("click funcionando");
+  };
+
   return (
     <>
       <div className={styles.buttonsContainer}>
-        <Button className={styles.grey0Button} text="Text Button" />
-        <Button className={styles.grey1Button} text="Text Button" />
-        <Button className={styles.grey2TextLightButton} text="Text Button" />
-        <Button className={styles.grey2TextDarkerButton} text="Text Button" />
-        <Button className={styles.grey5TextWhiteButton} text="Text Button" />
-        <Button className={styles.brand1Button} text="Text Button" />
-        <Button className={styles.brand2Button} text="Text Button" />
-        <Button className={styles.brand4TextBrand1Button} text="Text Button" />
-        <Button className={styles.grey10TextGrey1Button} text="Text Button" />
-        <Button className={styles.grey10BorderGrey0Button} text="Text Button" />
+        <Button
+          className={styles.grey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey2TextLightButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey2TextDarkerButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey5TextWhiteButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand2Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand4TextBrand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10TextGrey1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10BorderGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
         <Button
           className={styles.grey10BorderGrey4TextGrey0Button}
           text="Text Button"
+          onClick={handleClick}
         />
         <Button
           className={styles.grey10BorderAndTextBrand1Button}
           text="Text Button"
+          onClick={handleClick}
         />
         <Button
           className={styles.brand4BorderAndTextBrand1Button}
           text="Text Button"
+          onClick={handleClick}
         />
-        <Button className={styles.grey8TextGrey0Button} text="Text Button" />
+        <Button
+          className={styles.grey8TextGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
         <Button
           className={styles.feedbackAlert3TextFeedbackAlert1Button}
           text="Text Button"
+          onClick={handleClick}
         />
         <Button
           className={styles.feedbackAlert2TextFeedbackAlert1Button}
           text="Text Button"
+          onClick={handleClick}
         />
         <Button
           className={styles.feedbackSuccess3TextFeedbackSuccess1Button}
           text="Text Button"
+          onClick={handleClick}
         />
         <Button
           className={styles.feedbackSuccess2TextFeedbackSuccess1Button}
           text="Text Button"
+          onClick={handleClick}
         />
-        <Button className={styles.brand3TextBrand4Button} text="Text Button" />
+        <Button
+          className={styles.brand3TextBrand4Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
       </div>
 
       {/* <div className={styles.inputsContainer}>
