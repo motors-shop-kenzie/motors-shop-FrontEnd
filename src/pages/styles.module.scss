@@ -248,14 +248,13 @@
 
 // Textareas
 .basicTextAreaWithBorder {
-  @include textareaBasic(
-    $color-grey-scale-grey-10,
-    1.5px solid $color-grey-scale-grey-7,
-    $input-radius
-  );
-  min-height: 80px;
-  min-width: 276px;
-  resize: none;
+    @include textareaBasic(
+        $color-grey-scale-grey-10,
+        1.5px solid $color-grey-scale-grey-7,
+        $input-radius
+    );
+    min-height: 80px;
+    min-width: 276px;
 }
 .darkertextAreaWithBorder {
   @include textareaBasic(

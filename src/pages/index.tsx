@@ -1,6 +1,7 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import styles from "./styles.module.scss";
-
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
 import { Input } from "@/components/Input";
@@ -16,6 +17,11 @@ import { CommentBox } from "@/components/CommentBox";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { CommentCard } from "@/components/CommetCard";
+import { useContext } from "react";
+import { ModalContext } from "@/contexts/Modal";
+import { ModalCreateCar } from "@/components/Modal/Modal";
+import { useModal } from "@/hooks/modalHook";
+import { LoginForm } from "@/components/Forms/Login";
 import { Modal } from "@/components/Modal";
 
 interface HomeProps {
@@ -29,6 +35,11 @@ const listYear = ["2000", "1999", "2020", "2023"];
 const listGasoline = ["Elétrico", "Híbrido", "Flex"];
 
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
+  const { showModal, setShowModal } = useModal();
+  const handleModalOpen = () => {
+    setShowModal("createContact");
+  };
+
   return (
     <>
       <div className={styles.buttonsContainer}>
@@ -73,47 +84,45 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         />
         <Button className={styles.brand3TextBrand4Button} text="Text Button" />
       </div>
-      <div className={styles.inputsContainer}>
 
+      {/* <div className={styles.inputsContainer}>
         <Modal text="Modal Teste">
-        <InputSectionField>
-          <Label htmlFor="Placeholder" name="Label" />
-          <InputFocus>
-            <Input
-              type="text"
-              className={styles.basicInputWithBorder}
-              placeholder="Placeholder"
-              id="Placeholder"
-            />
-          </InputFocus>
-        </InputSectionField>
+          <InputSectionField>
+            <Label htmlFor="Placeholder" name="Label" />
+            <InputFocus>
+              <Input
+                type="text"
+                className={styles.basicInputWithBorder}
+                placeholder="Placeholder"
+                id="Placeholder"
+              />
+            </InputFocus>
+          </InputSectionField>
 
+          <InputSectionField>
+            <Label htmlFor="Placeholder2" name="Label" />
+            <InputFocus>
+              <Input
+                type="text"
+                className={styles.DarkerInputWithoutBorder}
+                placeholder="Placeholder"
+                id="Placeholder2"
+              />
+            </InputFocus>
+          </InputSectionField>
 
-        <InputSectionField>
-          <Label htmlFor="Placeholder2" name="Label" />
-          <InputFocus>
-            <Input
-              type="text"
-              className={styles.DarkerInputWithoutBorder}
-              placeholder="Placeholder"
-              id="Placeholder2"
-            />
-          </InputFocus>
-        </InputSectionField>
-
-        <InputSectionField>
-          {" "}
-          <Label htmlFor="Placeholder3" name="Label" />
-          <InputFocus>
-            <TextArea
-              className={styles.basicTextAreaWithBorder}
-              placeholder="Placeholder"
-              id="Placeholder3"
-            />
-          </InputFocus>
-        </InputSectionField>
+          <InputSectionField>
+            {" "}
+            <Label htmlFor="Placeholder3" name="Label" />
+            <InputFocus>
+              <TextArea
+                className={styles.basicTextAreaWithBorder}
+                placeholder="Placeholder"
+                id="Placeholder3"
+              />
+            </InputFocus>
+          </InputSectionField>
         </Modal>
-        
 
         <InputSectionField>
           <Label htmlFor="Placeholder4" name="Label" />
@@ -126,9 +135,21 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
           </InputFocus>
         </InputSectionField>
         <InputSectionField>
-          <Select />
+          <InputFocus>
+            <Select />
+          </InputFocus>
         </InputSectionField>
-      </div>
+      </div> */}
+
+      <button type="button" onClick={() => handleModalOpen()}>
+        Abrir modal
+      </button>
+
+      {showModal === "createContact" && (
+        <Modal text="Abrindo Modal">
+          <LoginForm />
+        </Modal>
+      )}
 
       <ProductBox>
         {cars.map((car) => {
