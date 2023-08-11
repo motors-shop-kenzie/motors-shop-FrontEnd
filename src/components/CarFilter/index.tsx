@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import { CarFilterProps, FilterOptions } from "./interface";
 
-export default function ({ cars, onFilterChange }: CarFilterProps) {
+export default function CarFilter({ cars, onFilterChange }: CarFilterProps) {
   const [selectedFilters, setSelectedFilters] = useState<FilterOptions>({
     brand: null,
     model: null,
