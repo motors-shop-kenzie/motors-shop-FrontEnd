@@ -5,11 +5,23 @@ export interface Car {
   color: string;
   year: number;
   gasoline: string;
+  img: {
+    id: string;
+    url_img: string;
+    carProductsId: string;
+  }[];
+  name: string;
+  coverImg: string;
+  price: number;
+  km: number;
+  description: string;
+  tablePife: number;
+  business: boolean;
 }
 
 export interface CarFilterProps {
   cars: Car[];
-  onFilterChange: (filters: FilterOptions) => void;
+  onFilterChange: (filteredCars: Car[]) => void;
 }
 
 export interface FilterOptions {
