@@ -8,13 +8,53 @@
 .bg_img {
   display: flex;
   justify-content: center;
-//   background-image: url("../assets/Photo.svg");
-    background-color: black;
+  //   background-image: url("../assets/Photo.svg");
+  background-color: black;
   background-size: cover;
   width: 100%;
   height: 400px;
 }
 
-.car_shp{
+.car_shp {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  aside {
+    width: 30%;
+  }
+  main {
+    width: 60%;
+  }
+}
+
+.car_container {
+  background-image: url("../assets/Photo.png"),
+    linear-gradient(rgba(0, 0, 0, 0.29), rgba(0, 0, 0, 1));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-grey-scale-grey-10;
+  width: auto;
+  min-height: 500px;
+  div {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    h2 {
+      font-size: 30px;
+      font-weight: 600;
+    }
+    h4 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
 }
