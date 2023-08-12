@@ -12,15 +12,12 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const [cars, setCars] = useState<Car[]>([]);
 
   const getAllCarsRequest = () => {
-    api
-      .get(`/cars`)
-      .then((res) => {
-        const carData = res.data;
-        setCars(carData);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    api.get(`/cars/pagination`).then((res) => {
+      const carData = res.data;
+      console.log(carData);
+
+      setCars(carData);
+    });
   };
 
   return (
