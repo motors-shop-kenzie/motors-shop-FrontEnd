@@ -21,7 +21,6 @@ export interface Car {
 
 export interface CarFilterProps {
   cars: Car[];
-  onFilterChange: (filteredCars: Car[]) => void;
 }
 
 export interface FilterOptions {

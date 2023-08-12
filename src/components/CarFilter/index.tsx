@@ -1,7 +1,9 @@
-import { ChangeEvent, useState } from "react";
-import { Car, CarFilterProps, FilterOptions } from "./interface";
+"use client";
 
-export default function CarFilter({ cars, onFilterChange }: CarFilterProps) {
+import { useState } from "react";
+import { CarFilterProps, FilterOptions } from "./interface";
+
+export default function CarFilter({ cars }: CarFilterProps) {
   const [selectedFilters, setSelectedFilters] = useState<FilterOptions>({
     brand: null,
     model: null,
@@ -14,46 +16,52 @@ export default function CarFilter({ cars, onFilterChange }: CarFilterProps) {
     filterType: keyof FilterOptions,
     value: string | number | null
   ) => {
-    const newFilters = { ...selectedFilters, [filterType]: value };
-    setSelectedFilters(newFilters);
-
-    applyFilters(newFilters);
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterType]: value,
+    }));
   };
 
-  const applyFilters = (filters: FilterOptions) => {
-    const filteredCars = cars.filter((car) =>
-      Object.entries(filters).every(
-        ([filterType, filterValue]) =>
-          filterValue === null || car[filterType as keyof Car] === filterValue
-      )
-    );
+  const filteredCars = cars.filter((car) => {
+    const { brand, model, color, year, gasoline } = selectedFilters;
 
-    onFilterChange(
-      Object.values(filters).some((value) => value !== null)
-        ? filteredCars
-        : cars
+    return (
+      (!brand || car.brand === brand) &&
+      (!model || car.model === model) &&
+      (!color || car.color === color) &&
+      (!year || car.year === year) &&
+      (!gasoline || car.gasoline === gasoline)
     );
-  };
+  });
 
-  const renderSelect = (filterType: keyof FilterOptions, options: string[]) => (
+  const renderFilterList = (
+    filterType: keyof FilterOptions,
+    options: string[] | number[]
+  ) => (
     <div key={filterType}>
       <h3>{filterType}</h3>
-      <select
-        value={selectedFilters[filterType] || ""}
-        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-          handleFilterChange(
-            filterType,
-            e.target.value !== "" ? e.target.value : null
-          )
-        }
-      >
-        <option value="">Todos</option>
+      <ul>
+        <li>
+          <button
+            className={selectedFilters[filterType] === null ? "selected" : ""}
+            onClick={() => handleFilterChange(filterType, null)}
+          >
+            Todos
+          </button>
+        </li>
         {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
+          <li key={option.toString()}>
+            <button
+              className={
+                selectedFilters[filterType] === option ? "selected" : ""
+              }
+              onClick={() => handleFilterChange(filterType, option)}
+            >
+              {option}
+            </button>
+          </li>
         ))}
-      </select>
+      </ul>
     </div>
   );
 
@@ -63,7 +71,7 @@ export default function CarFilter({ cars, onFilterChange }: CarFilterProps) {
     "Ford",
     "Honda",
     "Porsche",
-    "Volswagen",
+    "Volkswagen",
   ];
   const modelOptions = [
     "Civic",
@@ -76,16 +84,16 @@ export default function CarFilter({ cars, onFilterChange }: CarFilterProps) {
     "Porsche 718",
   ];
   const colorOptions = ["Azul", "Branca", "Cinza", "Prata", "Preta", "Verde"];
-  const yearOptions = [2022, 2021, 2018, 2015, 2013, 2012, 2010];
+  const yearOptions = [2022, 2021, 2020, 2018, 2015, 2013, 2012, 2010];
   const gasolineOptions = ["Elétrico", "Flex", "Híbrido"];
 
   return (
     <div>
-      {renderSelect("brand", brandOptions)}
-      {renderSelect("model", modelOptions)}
-      {renderSelect("color", colorOptions)}
-      {renderSelect("year", yearOptions.map(String))}
-      {renderSelect("gasoline", gasolineOptions)}
+      {renderFilterList("brand", brandOptions)}
+      {renderFilterList("model", modelOptions)}
+      {renderFilterList("color", colorOptions)}
+      {renderFilterList("year", yearOptions)}
+      {renderFilterList("gasoline", gasolineOptions)}
     </div>
   );
 }
