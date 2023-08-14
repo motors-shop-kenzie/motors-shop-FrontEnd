@@ -31,5 +31,3 @@ export const ProductCard = ({ car }: CardProps) => {
     </div>
   );
 };
-
-
