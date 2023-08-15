@@ -1,13 +1,11 @@
-"use client";
-
 import { useContext, useState } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { NavBar } from "@/components/NavBar";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
-import { FilterOptions } from "@/components/CarFilter/interface";
 import styles from "./styles.module.scss";
+import { Car, FilterOptions } from "@/interfaces/CarFilter";
 
 export default function HomePage() {
   const { cars, setCars } = useContext(CarsContext);
@@ -20,43 +18,58 @@ export default function HomePage() {
     gasoline: null,
   });
 
-  const [filterActive, setFilterActive] = useState<boolean>(false);
+  const [kmValue, setKmValue] = useState<number>(0);
+  const [priceValue, setPriceValue] = useState<number>(0);
 
   const handleFilterChange = (
     filterType: keyof FilterOptions,
     value: string | number | null
   ) => {
-    if (selectedFilters[filterType] === value) {
-      setSelectedFilters((prevFilters) => ({
-        ...prevFilters,
-        [filterType]: null,
-      }));
-    } else {
-      setSelectedFilters((prevFilters) => ({
-        ...prevFilters,
-        [filterType]: value,
-      }));
-    }
-    setFilterActive(!filterActive);
+    setSelectedFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterType]: prevFilters[filterType] === value ? null : value,
+    }));
   };
 
   const filterCars = cars.filter((car) => {
-    const { brand, model, color, year, gasoline } = selectedFilters;
-
     return (
-      (!brand || car.brand === brand) &&
-      (!model || car.model === model) &&
-      (!color || car.color === color) &&
-      (!year || car.year === year) &&
-      (!gasoline || car.gasoline === gasoline)
+      Object.entries(selectedFilters).every(([filterType, filterValue]) => {
+        if (!filterValue) return true;
+        const carProperty = car[filterType as keyof Car];
+        return carProperty === filterValue;
+      }) &&
+      (!kmValue || car.km <= kmValue) &&
+      (!priceValue || car.price <= priceValue)
     );
   });
 
-  const brandOptions = filterCars.map((data) => data.brand);
-  const modelOptions = filterCars.map((data) => data.model);
-  const colorOptions = filterCars.map((data) => data.color);
-  const yearOptions = filterCars.map((data) => data.year);
-  const gasolineOptions = filterCars.map((data) => data.gasoline);
+  const uniqueFilterOptions = {
+    brand: Array.from(new Set(cars.map((car) => car.brand))),
+    model: Array.from(new Set(filterCars.map((car) => car.model))),
+    color: Array.from(new Set(filterCars.map((car) => car.color))),
+    year: Array.from(new Set(filterCars.map((car) => car.year))),
+    gasoline: Array.from(new Set(filterCars.map((car) => car.gasoline))),
+  };
+
+  const handleClearFilters = () => {
+    setSelectedFilters({
+      brand: null,
+      model: null,
+      color: null,
+      year: null,
+      gasoline: null,
+    });
+    setKmValue(0);
+    setPriceValue(0);
+  };
+
+  const handleKmSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKmValue(parseInt(e.target.value));
+  };
+
+  const handlePriceSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPriceValue(parseInt(e.target.value));
+  };
 
   return (
     <main className={styles.body}>
@@ -65,104 +78,75 @@ export default function HomePage() {
       <section className={styles.car_shop}>
         <div>
           <ul>
-            <li>
-              <h3>Marca</h3>
-              {brandOptions.map((option, index) => (
-                <button
-                  key={index}
-                  className={
-                    selectedFilters.brand === option && filterActive
-                      ? "selected"
-                      : ""
-                  }
-                  onClick={() => handleFilterChange("brand", option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </li>
-            <li>
-              <h3>Modelo</h3>
-              {modelOptions.map((option, index) => (
-                <button
-                  key={index}
-                  className={
-                    selectedFilters.model === option && filterActive
-                      ? "selected"
-                      : ""
-                  }
-                  onClick={() => handleFilterChange("model", option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </li>
-            <li>
-              <h3>Cor</h3>
-              {colorOptions.map((option, index) => (
-                <button
-                  key={index}
-                  className={
-                    selectedFilters.color === option && filterActive
-                      ? "selected"
-                      : ""
-                  }
-                  onClick={() => handleFilterChange("color", option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </li>
-            <li>
-              <h3>Year</h3>
-              {yearOptions.map((option, index) => (
-                <button
-                  key={index}
-                  className={
-                    selectedFilters.year === option && filterActive
-                      ? "selected"
-                      : ""
-                  }
-                  onClick={() => handleFilterChange("year", option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </li>
-            <li>
-              <h3>Gasolina</h3>
-              {gasolineOptions.map((option, index) => (
-                <button
-                  key={index}
-                  className={
-                    selectedFilters.gasoline === option && filterActive
-                      ? "selected"
-                      : ""
-                  }
-                  onClick={() => handleFilterChange("gasoline", option)}
-                >
-                  {option}
-                </button>
-              ))}
-            </li>
+            {Object.entries(uniqueFilterOptions).map(
+              ([filterType, options]) => (
+                <li key={filterType}>
+                  <h3>{filterType}</h3>
+                  {options.map((option, index) => (
+                    <button
+                      key={index}
+                      className={
+                        (
+                          selectedFilters as unknown as Record<
+                            string,
+                            string | number | null
+                          >
+                        )[filterType] === option
+                          ? "selected"
+                          : ""
+                      }
+                      onClick={() =>
+                        handleFilterChange(
+                          filterType as keyof FilterOptions,
+                          option
+                        )
+                      }
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </li>
+              )
+            )}
           </ul>
         </div>
 
-        <ul>
-          {modelOptions.map((model, index) => {
-            return (
-              <li key={index}>
-                <button
-                  onClick={() =>
-                    setCars(filterCars.filter((data) => data.model === model))
-                  }
-                >
-                  {model}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <div className={styles.sliderContainer}>
+          <h3>Kilometragem</h3>
+          <input
+            type="range"
+            min={0}
+            max={650000}
+            step={1000}
+            value={kmValue}
+            onChange={handleKmSliderChange}
+            className={styles.slider}
+          />
+          <div
+            className={styles.sliderCircle}
+            style={{ left: `${(kmValue / 650000) * 100}%` }}
+          ></div>
+        </div>
+
+        <div className={styles.sliderContainer}>
+          <h3>Preço</h3>
+          <input
+            type="range"
+            min={0}
+            max={550000}
+            step={1000}
+            value={priceValue}
+            onChange={handlePriceSliderChange}
+            className={styles.slider}
+          />
+          <div
+            className={styles.sliderCircle}
+            style={{ left: `${(priceValue / 550000) * 100}%` }}
+          ></div>
+        </div>
+
+        <button onClick={handleClearFilters}>Limpar Filtros</button>
+
         <ProductBox>
           {filterCars.length === 0 ? (
             <p>Não há carros disponíveis.</p>
