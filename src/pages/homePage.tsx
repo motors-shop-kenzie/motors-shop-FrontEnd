@@ -4,11 +4,11 @@ import { NavBar } from "@/components/NavBar";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
-import styles from "./styles.module.scss";
 import { Car, FilterOptions } from "@/interfaces/CarFilter";
+import styles from "./styles.module.scss";
 
 export default function HomePage() {
-  const { cars, setCars } = useContext(CarsContext);
+  const { cars } = useContext(CarsContext);
 
   const [selectedFilters, setSelectedFilters] = useState<FilterOptions>({
     brand: null,
