@@ -18,7 +18,7 @@ const list = ["Fiat", "BMW", "Mercedes"];
 const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
   return (
     <div className={styles.body}>
-      <NavBar dealer logged />
+      <NavBar dealer />
       <div className={styles.car_container}>
         <div>
           <h2>Motors Shop</h2>
@@ -35,7 +35,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
           </ProductBox>
         </main>
       </div>
-      <Footer />
+      <Footer path="/" />
     </div>
   );
 };
