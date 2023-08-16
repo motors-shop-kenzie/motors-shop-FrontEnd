@@ -196,10 +196,10 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
           </InputFocus>
         </InputSectionField>
       </div>
-      {/* <button type="button" onClick={() => handleModalOpen()}>
+      <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
-      </button> */}
-      {/* <Button
+      </button> 
+       <Button
         className={styles.grey0Button}
         text="Abrir modal"
         onClick={() => handleModalOpen()}
@@ -207,9 +207,9 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
 
       {showModal === "createContact" && (
         <Modal text="Abrindo Modal">
-          <LoginForm />
+          modal aberto
         </Modal>
-      )} */}
+      )}
 
       <ProductBox>
         {cars.map((car) => {
@@ -243,7 +243,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const carsResponse = await api.get<TCarProduct[]>("/cars");
   const userResponse = await api.get<TUser>(
-    "/users/93a31267-1a06-4aa7-915d-240eccda455e"
+    "/users/76089207-bcdf-4cbb-8a24-8a201976f706"
   );
   return {
     props: {
