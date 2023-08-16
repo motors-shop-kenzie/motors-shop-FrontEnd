@@ -7,11 +7,11 @@ import { TUser } from "@/interfaces/user";
 
 interface CardProps {
   car: TCarProduct;
-  user: TUser
+  user: TUser;
 }
 
 export const ProductCard = ({ car, user }: CardProps) => {
-  console.log(user.name[0])
+  // console.log(user.name[0])
   return (
     <div className={styles.card}>
       <div className={styles.img}>
@@ -24,7 +24,7 @@ export const ProductCard = ({ car, user }: CardProps) => {
         <p className={styles.title}>{car.name}</p>
       </div>
       <div className={styles.desc}>{car.description}</div>
-      <UserHeader user={user.name} index={user.id} letter={user.name[0]}/>
+      <UserHeader user={user.name} index={user.id} letter={user.name[0]} />
       <div className={styles.carInfo}>
         <div className={styles.info}>
           <div>{car.km} KM</div> <div>{car.year}</div>

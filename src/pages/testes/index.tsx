@@ -27,7 +27,7 @@ import { TUser } from "@/interfaces/user";
 
 interface HomeProps {
   cars: TCarProduct[];
-  user:TUser
+  user: TUser;
 }
 
 const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
@@ -44,10 +44,9 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
 
   return (
     <div className={styles.body}>
-      <NavBar dealer logged />
+      {/* <NavBar dealer logged /> */}
 
       <div className={styles.inputsContainer}>
-
         <InputSectionField>
           <Label htmlFor="Placeholder" name="Label" />
           <InputFocus>
@@ -99,7 +98,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
             <Select />
           </InputFocus>
         </InputSectionField>
-      </div> */}
+      </div>
       {/* <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
       </button> */}
@@ -125,7 +124,6 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         <CommentCard />
       </CommentBox>
 
-
       <div>
         <h1>{user.name}</h1>
         <h2>{user.id}</h2>
@@ -139,8 +137,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         <h2>{user.address.city}</h2>
       </div>
 
-      <Footer />
-
+      {/* <Footer /> */}
     </div>
   );
 };
@@ -148,12 +145,12 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   const carsResponse = await api.get<TCarProduct[]>("/cars");
   const userResponse = await api.get<TUser>(
-    "/users/41130ba8-8b9f-437f-be16-ffa4b4717b5c"
+    "/users/93a31267-1a06-4aa7-915d-240eccda455e"
   );
   return {
     props: {
       cars: carsResponse.data,
-      user: userResponse.data
+      user: userResponse.data,
     },
   };
 };
