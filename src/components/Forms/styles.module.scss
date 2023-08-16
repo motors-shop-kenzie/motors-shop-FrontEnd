@@ -1,43 +1,93 @@
 @use "../../sass/abstracts/variables" as *;
 
-.container,
-.loginContainer {
-  margin: 0 auto;
-  margin-top: 120px;
-  margin-bottom: 60px;
-  width: 411px;
-  height: 1600px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  background-color: antiquewhite;
-  border-radius: 4px;
-
-  form {
-    padding-top: 40px;
-    margin: 0 auto;
-    background-color: aliceblue;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-  }
-
+.loginContainer,
+.registerContainer {
   h1 {
     font-size: $heading-5-500;
     font-weight: $semi-bold-weight;
+    margin-bottom: 32px;
+  }
+  .subtitleRegister {
+    font-size: $body-2-500;
+    font-weight: $medium-weight;
+
+    margin: 32px 0;
   }
 
-  p {
-    color: $color-grey-scale-grey-1;
-    font-weight: $semi-bold-weight;
-    font-size: $input-label;
-    margin: 30px 0px 5px;
-  }
+  form {
+    width: 90%;
+    max-width: 343px;
 
-  button {
-    margin-top: 30px;
+    background-color: $color-grey-scale-grey-10;
+
+    margin: 120px auto 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+
+    border-radius: $form-radius;
+
+    > div {
+      padding: 44px 28px;
+
+      .inputsSection {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        > section {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      .inputsSectionRegister {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        > section {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      > p {
+        margin: 10px 10px 0 0;
+
+        color: $color-grey-scale-grey-2;
+
+        text-align: end;
+        font-weight: $medium-weight;
+        font-size: $body-2-500;
+      }
+
+      .buttonsSection {
+        margin-top: 20px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .buttonsSectionRegister {
+        margin-top: 28px;
+
+        display: flex;
+        flex-direction: column;
+        max-width: 280px;
+      }
+
+      .textBetweenButtons {
+        font-size: $body-2-400;
+        font-weight: $regular-weight;
+
+        color: $color-grey-scale-grey-2;
+        text-align: center;
+      }
+    }
   }
 }
 
@@ -45,26 +95,48 @@
   display: flex;
   flex-direction: row;
   gap: 8px;
-  width: 315px;
 
-  div {
+  width: 98%;
+  max-width: 280px;
+
+  > section {
+    width: 140px;
+
     display: flex;
     flex-direction: column;
-    input {
-      width: 150px;
-    }
+    gap: 8px;
   }
 }
 
 .divButtons {
   display: flex;
-  gap: 10px;
-  button {
-    width: 156px;
+  gap: 8px;
+
+  width: 98%;
+  max-width: 280px;
+
+  margin-bottom: 28px;
+
+  > button {
+    width: 152px;
+
+    padding: 0;
+    // padding: 12px 28px;
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
   }
 }
 
 .loginContainer {
-  height: 542px;
-  background-color: aliceblue;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }

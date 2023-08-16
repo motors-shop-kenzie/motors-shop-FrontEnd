@@ -245,6 +245,8 @@
     1.5px solid $color-grey-scale-grey-7,
     $input-radius
   );
+  // width: 100%;
+  // max-width: 350px;
 }
 .DarkerInputWithoutBorder {
   @include inputBasic($color-grey-scale-grey-8, none, $input-radius);
