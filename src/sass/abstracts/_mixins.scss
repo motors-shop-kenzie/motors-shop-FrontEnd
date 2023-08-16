@@ -29,8 +29,8 @@
 @mixin inputBasic($bg-color, $border, $radius) {
   padding: 13px 16px;
 
-  width: 100%;
-  max-width: 277px;
+  // width: 100%;
+  // max-width: 277px;
 
   font-size: 1rem;
   font-weight: 400;
@@ -69,7 +69,7 @@
 
 @mixin text-body-1-400 {
   font-size: $body-1-400;
-  font-weight: $regular-weigth;
+  font-weight: $regular-weight;
   color: $color-grey-scale-grey-2;
 }
 
