@@ -44,11 +44,11 @@ export default function HomePage() {
   });
 
   const uniqueFilterOptions = {
-    brand: Array.from(new Set(cars.map((car) => car.brand))),
-    model: Array.from(new Set(filterCars.map((car) => car.model))),
-    color: Array.from(new Set(filterCars.map((car) => car.color))),
-    year: Array.from(new Set(filterCars.map((car) => car.year))),
-    gasoline: Array.from(new Set(filterCars.map((car) => car.gasoline))),
+    Marca: Array.from(new Set(cars.map((car) => car.brand))),
+    Modelo: Array.from(new Set(filterCars.map((car) => car.model))),
+    Cor: Array.from(new Set(filterCars.map((car) => car.color))),
+    Ano: Array.from(new Set(filterCars.map((car) => car.year))),
+    Combustível: Array.from(new Set(filterCars.map((car) => car.gasoline))),
   };
 
   const handleClearFilters = () => {
@@ -74,78 +74,95 @@ export default function HomePage() {
   return (
     <main className={styles.body}>
       <NavBar dealer logged />
-      <div className={styles.bg_img}></div>
-      <section className={styles.car_shop}>
+      <div className={styles.car_container}>
         <div>
-          <ul>
-            {Object.entries(uniqueFilterOptions).map(
-              ([filterType, options]) => (
-                <li key={filterType}>
-                  <h3>{filterType}</h3>
-                  {options.map((option, index) => (
-                    <button
-                      key={index}
-                      className={
-                        (
-                          selectedFilters as unknown as Record<
-                            string,
-                            string | number | null
-                          >
-                        )[filterType] === option
-                          ? "selected"
-                          : ""
-                      }
-                      onClick={() =>
-                        handleFilterChange(
-                          filterType as keyof FilterOptions,
-                          option
-                        )
-                      }
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </li>
-              )
-            )}
-          </ul>
+          <h2>Motors Shop</h2>
+          <h4>A melhor plataforma de anúncios de carros do país</h4>
         </div>
+      </div>
+      <section className={styles.car_shop}>
+        <aside className={styles.container_filter}>
+          <div>
+            <ul>
+              {Object.entries(uniqueFilterOptions).map(
+                ([filterType, options]) => (
+                  <li key={filterType} className={styles.options_filter}>
+                    <h3 className={styles.header_filter}>{filterType}</h3>
+                    {options.map((option, index) => (
+                      <button
+                        key={index}
+                        className={
+                          (
+                            selectedFilters as unknown as Record<
+                              string,
+                              string | number | null
+                            >
+                          )[filterType] === option
+                            ? "selected"
+                            : ""
+                        }
+                        onClick={() =>
+                          handleFilterChange(
+                            filterType as keyof FilterOptions,
+                            option
+                          )
+                        }
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
 
-        <div className={styles.sliderContainer}>
-          <h3>Kilometragem</h3>
-          <input
-            type="range"
-            min={0}
-            max={650000}
-            step={1000}
-            value={kmValue}
-            onChange={handleKmSliderChange}
-            className={styles.slider}
-          />
-          <div
-            className={styles.sliderCircle}
-            style={{ left: `${(kmValue / 650000) * 100}%` }}
-          ></div>
-        </div>
+          <div className={styles.container_input}>
+            <h3 className={styles.header_filter}>Km</h3>
+            <div className={styles.options_filter}>
+              <p>{kmValue} km</p> <p>650.000km</p>
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={650000}
+              step={1000}
+              value={kmValue}
+              onChange={handleKmSliderChange}
+              className={styles.slider}
+            />
 
-        <div className={styles.sliderContainer}>
-          <h3>Preço</h3>
-          <input
-            type="range"
-            min={0}
-            max={550000}
-            step={1000}
-            value={priceValue}
-            onChange={handlePriceSliderChange}
-            className={styles.slider}
-          />
-          <div
-            className={styles.sliderCircle}
-            style={{ left: `${(priceValue / 550000) * 100}%` }}
-          ></div>
-        </div>
+            <div
+              className={styles.sliderCircle}
+              style={{ left: `${(kmValue / 650000) * 100}%` }}
+            ></div>
+          </div>
 
-        <button onClick={handleClearFilters}>Limpar Filtros</button>
+          <div className={styles.container_input}>
+            <h3 className={styles.header_filter}>Preço</h3>
+            <div className={styles.options_filter}>
+              <p>R$ {priceValue} mil</p> <p>R$ 550 mil</p>
+            </div>
+            <input
+              type="range"
+              min={0}
+              max={550000}
+              step={1000}
+              value={priceValue}
+              onChange={handlePriceSliderChange}
+              className={styles.slider}
+            />
+
+            <div
+              className={styles.sliderCircle}
+              style={{ left: `${(priceValue / 550000) * 100}%` }}
+            ></div>
+          </div>
+
+          <button onClick={handleClearFilters} className={styles.button_filter}>
+            Limpar filtros
+          </button>
+        </aside>
 
         <ProductBox>
           {filterCars.length === 0 ? (
