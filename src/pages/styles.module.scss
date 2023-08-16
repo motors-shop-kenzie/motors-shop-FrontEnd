@@ -1,5 +1,6 @@
 @use "../sass/abstracts/variables" as *;
 @use "../sass/abstracts/mixins" as *;
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@500;600&display=swap");
 
 .body {
   margin-top: 100px;
@@ -15,8 +16,9 @@
   height: 400px;
 }
 
-.car_shp {
+.car_shop {
   display: flex;
+  justify-content: space-between;
 }
 
 .container {
@@ -72,3 +74,80 @@
   overflow-x: hidden;
   background-color: $color-grey-scale-grey-7;
 } */
+
+.container_filter {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 100px 80px 30px;
+  width: 20%;
+}
+
+.container_input {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  input {
+    align-self: center;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80%;
+    height: 2px;
+    background: rgb(151, 71, 255);
+    outline: none;
+    border-radius: 8px;
+  }
+
+  input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgb(151, 71, 255);
+    cursor: pointer;
+  }
+}
+
+.header_filter {
+  font-family: "Lexend";
+  color: $color-grey-scale-grey-0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding: 20px 0;
+}
+
+.options_filter {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Lexend";
+  color: $color-grey-scale-grey-3;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.button_filter {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+  padding: 12px 28px;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;
+  width: 100%;
+  background-color: $color-brand-brand-2;
+
+  border: 2px;
+  border-radius: 4px;
+
+  color: rgba(255, 255, 255, 1);
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 600;
+}
