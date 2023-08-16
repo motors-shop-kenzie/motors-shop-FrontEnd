@@ -52,11 +52,11 @@ export const NavBar = ({ logged = false, dealer = false }: INavBarProps) => {
 
         {!logged && (
           <div className={styles.options_desktop__not_logged}>
-            <Link className={styles.options_button__login} href="">
+            <Link className={styles.options_button__login} href="/login">
               Fazer Login
             </Link>
 
-            <Link className={styles.options_button__register} href="">
+            <Link className={styles.options_button__register} href="/register">
               Cadastrar
             </Link>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import styles from "./styles.module.scss";
+import styles from "../../components/Button/styles.module.scss";
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
 import { Input } from "@/components/Input";
@@ -45,9 +45,9 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
   return (
     <div className={styles.body}>
       <NavBar dealer logged />
-     
 
       <div className={styles.inputsContainer}>
+
         <InputSectionField>
           <Label htmlFor="Placeholder" name="Label" />
           <InputFocus>
@@ -99,8 +99,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
             <Select />
           </InputFocus>
         </InputSectionField>
-      </div>
-
+      </div> */}
       {/* <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
       </button> */}
@@ -109,25 +108,23 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         text="Abrir modal"
         onClick={() => handleModalOpen()}
       />
-
       {showModal === "createContact" && (
         <Modal text="Abrindo Modal">
           <LoginForm />
         </Modal>
       )}
-
       <ProductBox>
         {cars.map((car) => {
           return <ProductCard key={car.id} car={car} user={user} />;
         })}
       </ProductBox>
-
       <CommentBox>
         <CommentCard />
         <CommentCard />
         <CommentCard />
         <CommentCard />
       </CommentBox>
+
 
       <div>
         <h1>{user.name}</h1>
@@ -143,6 +140,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
       </div>
 
       <Footer />
+
     </div>
   );
 };
