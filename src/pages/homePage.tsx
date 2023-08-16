@@ -33,7 +33,7 @@ export default function HomePage() {
           )}
         </ProductBox>
       </section>
-      <Footer />
+      <Footer path="/" />
     </main>
   );
 }

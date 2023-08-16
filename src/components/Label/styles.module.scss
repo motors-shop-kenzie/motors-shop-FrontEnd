@@ -1,9 +1,8 @@
 @use "../../sass/abstracts/variables" as *;
 
 .labelField {
-    font-family: "Inter", sans-serif;
-
-    color: $color-grey-scale-grey-1;
-    font-weight: $medium-weigth;
-    font-size: $input-label;
+  color: $color-grey-scale-grey-1;
+  font-weight: $semi-bold-weight;
+  font-size: $input-label;
+  margin: 20px 0px 10px;
 }
