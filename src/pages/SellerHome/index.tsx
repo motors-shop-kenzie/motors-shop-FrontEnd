@@ -1,4 +1,3 @@
-import { Footer } from "@/components/Footer";
 import { NavBar } from "@/components/NavBar";
 import { RenderCarsSeller } from "@/components/Seller/RenderCarsSeller";
 import { SellerCard } from "@/components/Seller/SellerCard";
@@ -15,7 +14,6 @@ const SellerHome: NextPage = () => {
         </div>
         <RenderCarsSeller />
       </main>
-      <Footer />
     </>
   );
 };
