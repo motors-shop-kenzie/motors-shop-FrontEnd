@@ -1,48 +1,50 @@
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
-import { InputSectionField } from "@/components/InputSectionField";
-import { Label } from "@/components/Label";
-import styles from "./styles.module.scss";
+/* import { InputSectionField } from "@/components/InputSectionField";
+ */ import { Label } from "@/components/Label";
+import styles from "../styles.module.scss";
 import { Button } from "@/components/Button";
-
-interface DetailProps {}
+import InputStyles from "../../Input/styles.module.scss";
+import ButtonStyles from "../../Button/styles.module.scss";
+import Link from "next/link";
 
 export const LoginForm = () => {
   return (
-    <div className={styles.container}>
-      <h1>Login</h1>
+    <div className={styles.loginContainer}>
+      <form>
+        <h1>Login</h1>
 
-      <InputSectionField>
-        <Label htmlFor="email" name="email" />
+        <Label htmlFor="email" name="Email" />
         <InputFocus>
           <Input
             type="email"
-            className={styles.basicInputWithBorder}
-            placeholder="Digite seu email..."
+            className={InputStyles.basicInputWithBorder}
+            placeholder="Digitar email"
             id="email"
           />
         </InputFocus>
-      </InputSectionField>
 
-      <InputSectionField>
-        <Label htmlFor="password" name="password" />
+        <Label htmlFor="password" name="Senha" />
         <InputFocus>
           <Input
             type="password"
-            className={styles.basicInputWithBorder}
-            placeholder="Digite sea senha..."
+            className={InputStyles.basicInputWithBorder}
+            placeholder="Digitar senha"
             id="password"
           />
         </InputFocus>
-      </InputSectionField>
 
-      <p>Esqueci a senha</p>
+        <p>Esqueci minha senha</p>
 
-      <Button className={styles.brand1Button} text="Entrar" />
+        <Button className={ButtonStyles.brand1Button} text="Entrar" />
 
-      <p>ainda não possui conta?</p>
-      
-      <Button className={styles.grey10BorderGrey0Button} text="Cadastrar" />
+        <p>Ainda não possui conta?</p>
+
+        <Button
+          className={ButtonStyles.grey10BorderGrey4TextGrey0Button}
+          text="Cadastrar"
+        />
+      </form>
     </div>
   );
 };

@@ -1,14 +1,14 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import styles from "./styles.module.scss";
+import styles from "../../components/Button/styles.module.scss";
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
 import { TextArea } from "@/components/Textarea";
-import { InputSectionField } from "@/components/InputSectionField";
-import { Label } from "@/components/Label";
+/* import { InputSectionField } from "@/components/InputSectionField";
+ */ import { Label } from "@/components/Label";
 import { Select } from "@/components/Select";
 import { TCarProduct } from "@/interfaces/CarProduc";
 import { Footer } from "@/components/Footer";
@@ -138,8 +138,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
           onClick={handleClick}
         />
       </div>
-
-      <div className={styles.inputsContainer}>
+      {/*  <div className={styles.inputsContainer}>
         <InputSectionField>
           <Label htmlFor="Placeholder" name="Label" />
           <InputFocus>
@@ -191,8 +190,7 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
             <Select />
           </InputFocus>
         </InputSectionField>
-      </div>
-
+      </div> */}
       {/* <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
       </button> */}
@@ -201,27 +199,24 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         text="Abrir modal"
         onClick={() => handleModalOpen()}
       />
-
       {showModal === "createContact" && (
         <Modal text="Abrindo Modal">
           <LoginForm />
         </Modal>
       )}
-
       <ProductBox>
         {cars.map((car) => {
           return <ProductCard key={car.id} car={car} />;
         })}
       </ProductBox>
-
       <CommentBox>
         <CommentCard />
         <CommentCard />
         <CommentCard />
         <CommentCard />
       </CommentBox>
-
-      <Footer />
+      {/*       <Footer />
+       */}{" "}
     </div>
   );
 };

@@ -4,7 +4,11 @@ import styles from "./styles.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 
-export const Footer = () => {
+interface IFooterProps {
+  path: string;
+}
+
+export const Footer = ({ path }: IFooterProps) => {
   return (
     <footer className={styles.container__footer}>
       <div>
@@ -14,7 +18,7 @@ export const Footer = () => {
 
         <p>© 2022 - Todos os direitos reservados.</p>
 
-        <Link href="/">
+        <Link href={path}>
           <button>
             <IoIosArrowUp />
           </button>
