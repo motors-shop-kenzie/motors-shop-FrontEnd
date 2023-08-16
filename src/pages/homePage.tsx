@@ -6,9 +6,11 @@ import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
 import { Car, FilterOptions } from "@/interfaces/CarFilter";
 import styles from "./styles.module.scss";
+import { UserContext } from "@/contexts/User/UserContext";
 
 export default function HomePage() {
   const { cars } = useContext(CarsContext);
+  const { user } = useContext(UserContext);
 
   const [selectedFilters, setSelectedFilters] = useState<FilterOptions>({
     brand: null,
@@ -168,7 +170,9 @@ export default function HomePage() {
           {filterCars.length === 0 ? (
             <p>Não há carros disponíveis.</p>
           ) : (
-            filterCars.map((car) => <ProductCard key={car.id} car={car} />)
+            filterCars.map((car) => (
+              <ProductCard key={car.id} car={car} user={user} />
+            ))
           )}
         </ProductBox>
       </section>
