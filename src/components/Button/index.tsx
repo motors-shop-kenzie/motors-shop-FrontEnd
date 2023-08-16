@@ -1,6 +1,7 @@
 import styles from "./styles.module.scss";
 
 interface iButtonProps {
+  type?: string;
   text: string;
   className: string;
   onClick?: () => void;

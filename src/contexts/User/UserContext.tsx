@@ -3,14 +3,15 @@
 import { iChildrenProps } from "@/interfaces";
 import { createContext, useState } from "react";
 import api from "@/services/api";
-import { IUserContext, User } from "./interface";
+import { IUserContext } from "./interface";
+import { RegisterData } from "@/components/Forms/Register/validator";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildrenProps) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<RegisterData>();
 
-  const registerUser = (data: User) => {
+  const registerUser = (data: RegisterData) => {
     api
       .post(`/users`, data)
       .then((res) => {
@@ -22,7 +23,7 @@ export const UserProvider = ({ children }: iChildrenProps) => {
       });
   };
 
-  const loginUser = (data: User) => {
+  /*   const loginUser = (data: LoginUser) => {
     api
       .post(`/users`, data)
       .then((res) => {
@@ -32,7 +33,7 @@ export const UserProvider = ({ children }: iChildrenProps) => {
       .catch((error) => {
         console.error(error);
       });
-  };
+  }; */
 
   const getUser = () => {
     api
@@ -50,9 +51,9 @@ export const UserProvider = ({ children }: iChildrenProps) => {
     <UserContext.Provider
       value={{
         user,
-        setUser,
-        registerUser,
-        loginUser,
+        /*         setUser,
+         */ registerUser,
+        /*    loginUser, */
         getUser,
       }}
     >
