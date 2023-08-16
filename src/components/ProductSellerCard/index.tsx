@@ -23,7 +23,7 @@ export const ProductSellerCard = ({ car, user }: CardProps) => {
         <p className={styles.title}>{car.name}</p>
       </div>
       <div className={styles.desc}>{car.description}</div>
-      <UserHeader user={user.name} index={user.id} letter={user.name[0]}/>
+      <UserHeader user={user} index={user.id} letter={user.name[0]}/>
       <div className={styles.carInfo}>
         <div className={styles.info}>
           <div>{car.km} KM</div> <div>{car.year}</div>
