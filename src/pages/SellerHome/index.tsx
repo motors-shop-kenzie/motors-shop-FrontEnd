@@ -12,7 +12,7 @@ const SellerHome: NextPage = () => {
         <div>
           <SellerCard />
         </div>
-        <RenderCarsSeller />
+        {/* <RenderCarsSeller /> */}
       </main>
     </>
   );

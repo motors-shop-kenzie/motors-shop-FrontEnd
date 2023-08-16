@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import styles from "../../components/Button/styles.module.scss";
+import styles from "./styles.module.scss";
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
 import { Input } from "@/components/Input";
@@ -36,7 +36,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
     setShowModal("createContact");
   };
 
-  // console.log(user)
+  console.log(user);
 
   const handleClick = () => {
     console.log("click funcionando");
@@ -44,10 +44,107 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
 
   return (
     <div className={styles.body}>
-      {/* <NavBar dealer logged /> */}
+      <NavBar dealer logged />
+      <div className={styles.buttonsContainer}>
+        <Button
+          className={styles.grey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey2TextLightButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey2TextDarkerButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey5TextWhiteButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand2Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand4TextBrand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10TextGrey1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10BorderGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10BorderGrey4TextGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10BorderAndTextBrand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand4BorderAndTextBrand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey8TextGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackAlert3TextFeedbackAlert1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackAlert2TextFeedbackAlert1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackSuccess3TextFeedbackSuccess1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackSuccess2TextFeedbackSuccess1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand3TextBrand4Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+      </div>
 
       <div className={styles.inputsContainer}>
-        <InputSectionField>
+        {/* <InputSectionField>
           <Label htmlFor="Placeholder" name="Label" />
           <InputFocus>
             <Input
@@ -69,7 +166,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
               id="Placeholder2"
             />
           </InputFocus>
-        </InputSectionField>
+        </InputSectionField>  */}
 
         <InputSectionField>
           {" "}
@@ -102,21 +199,24 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
       {/* <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
       </button> */}
-      <Button
+      {/* <Button
         className={styles.grey0Button}
         text="Abrir modal"
         onClick={() => handleModalOpen()}
       />
+
       {showModal === "createContact" && (
         <Modal text="Abrindo Modal">
           <LoginForm />
         </Modal>
-      )}
+      )} */}
+
       <ProductBox>
         {cars.map((car) => {
           return <ProductCard key={car.id} car={car} user={user} />;
         })}
       </ProductBox>
+
       <CommentBox>
         <CommentCard />
         <CommentCard />
@@ -124,7 +224,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         <CommentCard />
       </CommentBox>
 
-      <div>
+      {/* <div>
         <h1>{user.name}</h1>
         <h2>{user.id}</h2>
         <h2>{user.createdAt}</h2>
@@ -135,9 +235,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         <h2>{user.description}</h2>
         <h2>{user.birthdate}</h2>
         <h2>{user.address.city}</h2>
-      </div>
-
-      {/* <Footer /> */}
+      </div> */}
     </div>
   );
 };
