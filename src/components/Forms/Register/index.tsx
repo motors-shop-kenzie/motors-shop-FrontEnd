@@ -10,7 +10,7 @@ import ButtonStyles from "../../Button/styles.module.scss";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserContext } from "@/contexts/User/UserContext";
-import { RegisterData, userSchemaRegister } from "./validator";
+import { RegisterData, userSchemaRegister } from "@/schemas/userSchema";
 
 export const RegisterForm = () => {
   const [accType, setAccType] = useState(Boolean);

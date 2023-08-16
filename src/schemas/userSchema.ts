@@ -20,7 +20,7 @@ export const addressSchemaRegister = z.object({
   complement: z.string().optional(),
 });
 
-export const addressSchemaUpdate = addressSchemaRegister.optional()
+export const addressSchemaUpdate = addressSchemaRegister.optional();
 
 export const userSchema = z.object({
   id: z.string(),
@@ -44,6 +44,9 @@ export const userSchemaRegister = z.object({
   description: z.string().optional(),
   birthdate: z.string(),
   address: addressSchemaRegister.optional(),
+  password: z.string(),
 });
 
-export const userSchemaUpdate = userSchemaRegister.optional()
+export const userSchemaUpdate = userSchemaRegister.optional();
+
+export type RegisterData = z.infer<typeof userSchemaRegister>;
