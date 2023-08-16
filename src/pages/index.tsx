@@ -26,7 +26,9 @@ const Home: NextPage<HomeProps> = ({ cars }: HomeProps) => {
         </div>
       </div>
       <div className={styles.container}>
-        <aside>{/* <CarFilter cars={cars} /> */}</aside>
+        <aside>
+          <CarFilter cars={cars} />
+        </aside>
         <main>
           <ProductBox>
             {cars.map((car) => {
