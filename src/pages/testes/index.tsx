@@ -24,6 +24,7 @@ import { LoginForm } from "@/components/Forms/Login";
 import { Modal } from "@/components/Modal";
 import { NavBar } from "@/components/NavBar";
 import { TUser } from "@/interfaces/user";
+import { ProductSellerCard } from "@/components/ProductSellerCard";
 
 interface HomeProps {
   cars: TCarProduct[];
@@ -198,22 +199,28 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
       </div>
       <button type="button" onClick={() => handleModalOpen()}>
         Abrir modal
-      </button> 
-       <Button
+      </button>
+      <Button
         className={styles.grey0Button}
         text="Abrir modal"
         onClick={() => handleModalOpen()}
       />
 
       {showModal === "createContact" && (
-        <Modal text="Abrindo Modal">
-          modal aberto
-        </Modal>
+        <Modal text="Abrindo Modal">modal aberto</Modal>
       )}
 
+      <h1>ProductCards (HomePage)</h1>
       <ProductBox>
         {cars.map((car) => {
           return <ProductCard key={car.id} car={car} user={user} />;
+        })}
+      </ProductBox>
+
+      <h1>ProductCards (SellerPage)</h1>
+      <ProductBox>
+        {cars.map((car) => {
+          return <ProductSellerCard key={car.id} car={car} user={user} />;
         })}
       </ProductBox>
 

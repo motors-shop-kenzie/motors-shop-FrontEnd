@@ -30,6 +30,7 @@ export const carSchema = z.object({
     tablePife: z.number(),
     business: z.boolean(),
     img: z.array(carImgSchema),
+    active: z.boolean()
 })
 
 export const carSchemaRegister = z.object({
