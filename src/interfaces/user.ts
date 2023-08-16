@@ -1,9 +1,19 @@
-import { addressSchema, addressSchemaRegister, addressSchemaUpdate, userSchema, userSchemaRegister, userSchemaUpdate } from "@/schemas/userSchema";
+import {
+  addressSchema,
+  addressSchemaRegister,
+  addressSchemaUpdate,
+  userSchema,
+  userSchemaLogin,
+  userSchemaRegister,
+  userSchemaUpdate,
+} from "@/schemas/userSchema";
 import { z } from "zod";
 
 export type TUser = z.infer<typeof userSchema>;
 
 export type TUserRegister = z.infer<typeof userSchemaRegister>;
+
+export type TUserLogin = z.infer<typeof userSchemaLogin>;
 
 export type TUserUpdate = z.infer<typeof userSchemaUpdate>;
 
