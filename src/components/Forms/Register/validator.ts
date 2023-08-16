@@ -12,11 +12,11 @@ export const addressSchema = z.object({
 });
 
 export const addressSchemaRegister = z.object({
-  cep: z.string(),
-  estate: z.string(),
+  zip_code: z.string(),
+  state: z.string(),
   city: z.string(),
   street: z.string(),
-  number: z.number(),
+  number: z.string(),
   complement: z.string().optional(),
 });
 
@@ -40,11 +40,11 @@ export const userSchemaRegister = z.object({
   email: z.string().email(),
   cpf: z.string().max(11),
   password: z.string(),
-  /*   isAdmin: z.boolean(),
-   */ phone: z.string(),
+  /*     isAdmin: z.boolean(),
+   */ telephone: z.string(),
   description: z.string().optional(),
   birthdate: z.string(),
-  address: addressSchema.optional(),
+  address: addressSchemaRegister.optional(),
 });
 
 export const userSchemaUpdate = userSchemaRegister.optional();

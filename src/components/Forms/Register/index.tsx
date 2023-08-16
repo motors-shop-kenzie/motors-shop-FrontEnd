@@ -7,7 +7,7 @@ import { Button } from "@/components/Button";
 import { useState, useContext } from "react";
 import InputStyles from "../../Input/styles.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserContext } from "@/contexts/User/UserContext";
 import { RegisterData, userSchemaRegister } from "./validator";
@@ -24,7 +24,9 @@ export const RegisterForm = () => {
     resolver: zodResolver(userSchemaRegister),
   });
 
-  const submit = (formData: RegisterData) => {
+  if (errors) console.log(errors);
+
+  const submit: SubmitHandler<RegisterData> = (formData) => {
     console.log("oi");
     console.log(formData);
     /*     registerUser(data);
@@ -47,10 +49,10 @@ export const RegisterForm = () => {
           />
         </InputFocus>
 
-        {/*  <Label htmlFor="email" name="Email" />
+        <Label htmlFor="email" name="Email" />
         <InputFocus>
           <Input
-            {...register("email")}
+            register={register("email")}
             type="text"
             className={InputStyles.basicInputWithBorder}
             placeholder="Ex: samuel@kenzie.com.br"
@@ -61,7 +63,7 @@ export const RegisterForm = () => {
         <Label htmlFor="cpf" name="CPF" />
         <InputFocus>
           <Input
-            {...register("cpf")}
+            register={register("cpf")}
             type="text"
             className={InputStyles.basicInputWithBorder}
             placeholder="000.000.000-00"
@@ -72,7 +74,7 @@ export const RegisterForm = () => {
         <Label htmlFor="phone" name="Celular" />
         <InputFocus>
           <Input
-            {...register("phone")}
+            register={register("telephone")}
             type="text"
             className={InputStyles.basicInputWithBorder}
             placeholder="(DDD) 90000-0000"
@@ -83,7 +85,7 @@ export const RegisterForm = () => {
         <Label htmlFor="birthdate" name="Data de nascimento" />
         <InputFocus>
           <Input
-            {...register("birthdate")}
+            register={register("birthdate")}
             type="text"
             className={InputStyles.basicInputWithBorder}
             placeholder="00/00/00"
@@ -94,7 +96,7 @@ export const RegisterForm = () => {
         <Label htmlFor="description" name="Descrição" />
         <InputFocus>
           <Input
-            {...register("description")}
+            register={register("description")}
             type="text"
             className={InputStyles.basicInputWithBorder}
             placeholder="Digitar descrição"
@@ -106,7 +108,7 @@ export const RegisterForm = () => {
         <Label htmlFor="cep" name="CEP" />
         <InputFocus>
           <Input
-            {...register("address.zip_code")}
+            register={register("address.zip_code")}
             type="text"
             className={InputStyles.basicInputWithBorder}
             placeholder="000.000-00"
@@ -119,7 +121,7 @@ export const RegisterForm = () => {
             <Label htmlFor="estate" name="Estado" />
             <InputFocus>
               <Input
-                {...register("address.state")}
+                register={register("address.state")}
                 type="text"
                 className={InputStyles.basicInputWithBorder}
                 placeholder="Digitar Estado"
@@ -132,7 +134,7 @@ export const RegisterForm = () => {
             <Label htmlFor="city" name="Cidade" />
             <InputFocus>
               <Input
-                {...register("address.city")}
+                register={register("address.city")}
                 type="text"
                 className={InputStyles.basicInputWithBorder}
                 placeholder="Digitar cidade"
@@ -145,7 +147,7 @@ export const RegisterForm = () => {
         <Label htmlFor="street" name="Rua" />
         <InputFocus>
           <Input
-            {...register("address.street")}
+            register={register("address.street")}
             type="text"
             className={InputStyles.basicInputWithBorder}
             placeholder="Digitar rua"
@@ -158,7 +160,7 @@ export const RegisterForm = () => {
             <Label htmlFor="house_number" name="Número" />
             <InputFocus>
               <Input
-                {...register("address.number")}
+                register={register("address.number")}
                 type="number"
                 className={InputStyles.basicInputWithBorder}
                 placeholder="Digitar número"
@@ -171,7 +173,7 @@ export const RegisterForm = () => {
             <Label htmlFor="complement" name="Complemento" />
             <InputFocus>
               <Input
-                {...register("address.complement")}
+                register={register("address.complement")}
                 type="text"
                 className={InputStyles.basicInputWithBorder}
                 placeholder="Ex: apto 10"
@@ -179,9 +181,9 @@ export const RegisterForm = () => {
               />
             </InputFocus>
           </div>
-        </div> */}
+        </div>
 
-        {/* <p>Tipo de conta</p>
+        <p>Tipo de conta</p>
         <div className={styles.divButtons}>
           <Button
             onClick={() => setAccType(false)}
@@ -195,19 +197,19 @@ export const RegisterForm = () => {
             text="Anunciante"
           />
         </div>
- */}
-        {/*  <Label htmlFor="password" name="Senha" />
+
+        <Label htmlFor="password" name="Senha" />
         <InputFocus>
           <Input
-            {...register("password")}
+            register={register("password")}
             type="password"
             className={InputStyles.basicInputWithBorder}
             placeholder="Digitar senha"
             id="password"
           />
-        </InputFocus> */}
+        </InputFocus>
 
-        {/*  <Label htmlFor="password_confirmation" name="Confirmar senha" />
+        {/* <Label htmlFor="password_confirmation" name="Confirmar senha" />
         <InputFocus>
           <Input
             type="password"

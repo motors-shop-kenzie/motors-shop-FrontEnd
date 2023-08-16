@@ -14,7 +14,7 @@ export const LoginForm = () => {
       <form>
         <h1>Login</h1>
 
-        <Label htmlFor="email" name="Email" />
+        {/*  <Label htmlFor="email" name="Email" />
         <InputFocus>
           <Input
             type="email"
@@ -39,7 +39,7 @@ export const LoginForm = () => {
         <Button className={ButtonStyles.brand1Button} text="Entrar" />
 
         <p>Ainda não possui conta?</p>
-
+ */}
         <Button
           className={ButtonStyles.grey10BorderGrey4TextGrey0Button}
           text="Cadastrar"
