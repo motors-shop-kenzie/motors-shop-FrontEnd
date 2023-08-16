@@ -20,7 +20,7 @@ export const addressSchemaRegister = z.object({
   complement: z.string().optional(),
 });
 
-export const addressSchemaUpdate = addressSchemaRegister.optional()
+export const addressSchemaUpdate = addressSchemaRegister.optional();
 
 export const userSchema = z.object({
   id: z.string(),
@@ -46,4 +46,9 @@ export const userSchemaRegister = z.object({
   address: addressSchemaRegister.optional(),
 });
 
-export const userSchemaUpdate = userSchemaRegister.optional()
+export const userSchemaLogin = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
+export const userSchemaUpdate = userSchemaRegister.optional();
