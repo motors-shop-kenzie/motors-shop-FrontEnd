@@ -113,12 +113,13 @@
     color: $color-grey-scale-grey-1;
     font-family: "Lexend";
     font-weight: 500;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 20px;
   }
   button {
     all: unset;
     color: $color-grey-scale-grey-3;
+    font-size: 20px;
   }
   @media (min-width: $layout-medium) {
     display: none;
@@ -156,7 +157,8 @@
 .container_filter__show {
   display: none;
   flex-direction: column;
-  padding: 80px 50px 80px 50px;
+  padding: 0;
+  padding-top: 20px;
   position: absolute;
   width: 100%;
   background-color: $color-grey-scale-grey-10;

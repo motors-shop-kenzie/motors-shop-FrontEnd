@@ -186,6 +186,9 @@ export default function HomePage() {
             >
               Ver Anúncios
             </button>
+            <button onClick={handleClearFilters} className={styles.button_filter}>
+              Limpar filtros
+            </button>
           </aside>
         ) : null}
 
