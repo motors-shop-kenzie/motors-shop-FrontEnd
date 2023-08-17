@@ -6,4 +6,6 @@ export interface IAuthContext {
   setUser: Dispatch<SetStateAction<TUser | undefined>>;
   registerUser: (data: TUserRegisterResquest) => void;
   loginUser: (data: TUserLogin) => void;
+  autoLogin: () => Promise<void>;
+  loggedUser: () => Promise<void>;
 }

@@ -12,7 +12,7 @@ import { ModalContext } from "@/contexts/Modal";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TCarsRegister, carSchemaRegister } from "@/schemas/carSchema";
+import { TCarsRegister, TFormCar, carSchemaRegister, formRegisterCar } from "@/schemas/carSchema";
 import styles from "../styles.module.scss";
 
 export const CreateAnnounceModalForm = () => {
@@ -23,13 +23,17 @@ export const CreateAnnounceModalForm = () => {
     handleSubmit,
     register,
     formState: { errors },
-  } = useForm<TCarsRegister>({
-    resolver: zodResolver(carSchemaRegister),
+  } = useForm<TFormCar>({
+    resolver: zodResolver(formRegisterCar),
   });
 
-  const submit: SubmitHandler<TCarsRegister> = (formData: TCarsRegister) => {
-    console.log(formData);
-    // createCars(formData);
+  // if(errors){
+  //   console.log(errors)
+  // }
+
+  const submit: SubmitHandler<TFormCar> = (formData: any) => {
+    const obj = {...formData,name:formData.brand,business:true}
+    createCars(obj)
   };
 
   return (
@@ -67,7 +71,7 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="ano" name="Ano" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="2018"
                   id="ano"
@@ -94,7 +98,7 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="quilometragem" name="Quilometragem" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="30.000"
                   id="quilometragem"
@@ -120,7 +124,7 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="preco-tabela" name="Preco tabela FIPE" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="R$48.000,00"
                   id="preco-tabela"
@@ -132,7 +136,7 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="preco" name="Preço" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="R$50.000,00"
                   id="preco"

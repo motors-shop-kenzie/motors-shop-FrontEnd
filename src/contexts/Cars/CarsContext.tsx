@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { iChildrenProps } from "@/interfaces";
@@ -6,6 +7,7 @@ import { ICarsContext } from "./interface";
 import { Car } from "@/interfaces/CarFilter";
 import api from "@/services/api";
 import { parseCookies } from "nookies";
+import { TCarsRegister } from "@/schemas/carSchema";
 
 export const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 
@@ -13,6 +15,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const [cars, setCars] = useState<Car[]>([]);
   const [userCars, setUserCars] = useState<Car[]>([]);
   const [filterData, setFilterData] = useState<Car[]>([]);
+  
 
   const cookies = parseCookies();
 
@@ -22,7 +25,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const token = cookies["ccm.token"];
 
-  const createCars = async (formData: Car) => {
+  const createCars = async (formData: TCarsRegister) => {
     try {
       const response = await api.post("/cars", formData, {
         headers: {
