@@ -2,16 +2,15 @@
 
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
-/* import { InputSectionField } from "@/components/InputSectionField";
- */ import { Label } from "@/components/Label";
+import { Label } from "@/components/Label";
 import styles from "../styles.module.scss";
 import { Button } from "@/components/Button";
 import { useState, useContext } from "react";
 import InputStyles from "../../Input/styles.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userSchemaRegister } from "./validator";
+import { userSchemaRegister } from "@/schemas/userSchema";
 import { InputSectionField } from "@/components/InputSectionField";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { TUserRegister } from "@/interfaces/user";
@@ -28,9 +27,9 @@ export const RegisterForm = () => {
     resolver: zodResolver(userSchemaRegister),
   });
 
-  const submit = (formData: TUserRegister) => {
-    console.log(formData);
-    // registerUser(formData);
+  const submit: SubmitHandler<TUserRegister> = (formData) => {
+    const obj = { ...formData, isAdmin: accType };
+    registerUser(obj);
   };
 
   return (
@@ -174,14 +173,14 @@ export const RegisterForm = () => {
 
             <div className={styles.divAddress}>
               <InputSectionField>
-                <Label htmlFor="house_number" name="Número" />
+                <Label htmlFor="number" name="Número" />
                 <InputFocus>
                   <Input
                     register={register("address.number")}
                     type="number"
                     className={InputStyles.basicInputWithBorder}
                     placeholder="Digitar número"
-                    id="house_number"
+                    id="number"
                   />
                 </InputFocus>
               </InputSectionField>

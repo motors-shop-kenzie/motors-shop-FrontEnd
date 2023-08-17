@@ -3,31 +3,24 @@
 import { iChildrenProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
-import { TUser, TUserLogin, TUserRegister } from "@/interfaces/user";
+import { TUser, TUserLogin, TUserRegisterResquest } from "@/interfaces/user";
 import { IAuthContext } from "./interface";
-import { parseCookies, setCookie } from "nookies";
+import { setCookie } from "nookies";
 import api from "@/services/api";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
-  // const [token, setToken] = useState<string | undefined>("");
+  const [token, setToken] = useState<string | undefined>("");
   const router = useRouter();
 
-  const cookies = parseCookies();
-
-  if (cookies["ccm.token"]) {
-    api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
-  }
-
-  const token = cookies["ccm.token"];
-
-  const registerUser = (data: TUserRegister) => {
+  const registerUser = (data: TUserRegisterResquest) => {
     api
       .post(`/users`, data)
       .then((res) => {
         const userData = res.data;
+        console.log(userData);
         setUser(userData);
         router.push("/login");
       })
@@ -42,7 +35,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
           maxAge: 60 * 40,
           path: "/",
         }),
-          // setToken(response.data.token);
+          setToken(response.data.token);
         router.push("/");
       })
       .catch((error) => console.error(error));
@@ -64,30 +57,13 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     }
   };
 
-  const getLoggedUser = async () => {
-    if (token) {
-      try {
-        const response = await api.get("/users/logged", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        // console.log(response.data);
-        setUser(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
-
   useEffect(() => {
     autoLogin();
-    getLoggedUser();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, registerUser, loginUser}}
+      value={{ user, setUser, registerUser, loginUser, token, setToken }}
     >
       {children}
     </AuthContext.Provider>
