@@ -244,6 +244,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
   );
 };
 
+
 export const getServerSideProps: GetServerSideProps = async () => {
   const carsResponse = await api.get<TCarProduct[]>("/cars");
   const userResponse = await api.get<TUser>(

@@ -10,7 +10,7 @@ export default function Register() {
     <>
       <NavBar dealer />
       <main className={styles.containerRegisterPage}>
-        <RegisterForm></RegisterForm>
+        <RegisterForm />
       </main>
       <Footer path="/register" />
     </>

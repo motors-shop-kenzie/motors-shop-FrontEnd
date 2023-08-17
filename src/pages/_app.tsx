@@ -1,3 +1,4 @@
+import { AuthProvider } from "@/contexts/Auth/authContext";
 import { CarsProvider } from "@/contexts/Cars/CarsContext";
 import { ModalProvider } from "@/contexts/Modal";
 import { UserProvider } from "@/contexts/User/UserContext";
@@ -9,9 +10,11 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ModalProvider>
       <CarsProvider>
-        <UserProvider>
-          <Component {...pageProps} />
-        </UserProvider>
+        <AuthProvider>
+          <UserProvider>
+            <Component {...pageProps} />
+          </UserProvider>
+        </AuthProvider>
       </CarsProvider>
     </ModalProvider>
   );
