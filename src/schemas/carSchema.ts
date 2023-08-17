@@ -51,4 +51,6 @@ export const carSchemaRegister = z.object({
   img: z.array(carImgSchema).optional(),
 });
 
+export type TCarsRegister = z.infer<typeof carSchemaRegister>;
+
 export const carSchemaUpdate = carImgSchemaRegister.optional();

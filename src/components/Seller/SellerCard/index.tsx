@@ -2,6 +2,7 @@ import { TUser } from "@/interfaces/user";
 import styles from "./styles.module.scss";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/Auth/authContext";
+import { ModalContext } from "@/contexts/Modal";
 
 /* interface ISellerCard {
   user: TUser;
@@ -9,6 +10,7 @@ import { AuthContext } from "@/contexts/Auth/authContext";
 
 export const SellerCard = (/* { user }: ISellerCard */) => {
   const { user } = useContext(AuthContext);
+  const { setShowModal } = useContext(ModalContext);
 
   return (
     <section className={styles.container__sellerSection}>
@@ -23,7 +25,9 @@ export const SellerCard = (/* { user }: ISellerCard */) => {
 
       <p>{user?.description}</p>
 
-      {user?.isAdmin ? <button>Criar anúncio</button> : null}
+      {user?.isAdmin ? (
+        <button onClick={() => setShowModal("batata")}>Criar anúncio</button>
+      ) : null}
     </section>
   );
 };

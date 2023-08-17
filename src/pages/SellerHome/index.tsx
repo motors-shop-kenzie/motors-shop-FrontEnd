@@ -7,13 +7,17 @@ import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import styles from "./styles.module.scss";
+import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
+import { ModalContext } from "@/contexts/Modal";
 
 const SellerHome: NextPage = () => {
   const { userCars } = useContext(CarsContext);
+  const { showModal } = useContext(ModalContext);
   const { user } = useContext(AuthContext);
 
   return (
     <>
+      {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain}>
         <div>

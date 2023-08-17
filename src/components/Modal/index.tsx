@@ -1,6 +1,5 @@
 import { useModal } from "@/hooks/modalHook";
 import styles from "./styles.module.scss";
-import { iChildrenProps } from "@/interfaces";
 
 interface ModalProps {
   title: string;

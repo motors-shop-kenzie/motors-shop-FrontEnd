@@ -10,4 +10,5 @@ export type ICarsContext = {
   setFilterData: Dispatch<SetStateAction<Car[]>>;
   getAllCarsRequest: () => void;
   getUserCars: () => void;
+  createCars: (formData: Car) => Promise<void>;
 };

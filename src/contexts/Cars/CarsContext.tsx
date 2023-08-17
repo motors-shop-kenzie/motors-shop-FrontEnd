@@ -22,6 +22,20 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const token = cookies["ccm.token"];
 
+  const createCars = async (formData: Car) => {
+    try {
+      const response = await api.post("/cars", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setCars(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getAllCarsRequest = async () => {
     try {
       const response = await api.get("/cars");
@@ -63,6 +77,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         getUserCars,
         filterData,
         setFilterData,
+        createCars,
       }}
     >
       {children}
