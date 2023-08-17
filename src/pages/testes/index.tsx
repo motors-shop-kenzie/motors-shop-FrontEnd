@@ -18,13 +18,14 @@ import { ProductCard } from "@/components/ProductCard";
 import { CommentCard } from "@/components/CommetCard";
 import { useContext } from "react";
 import { ModalContext } from "@/contexts/Modal";
-import { ModalCreateCar } from "@/components/Modal/Modal";
+
 import { useModal } from "@/hooks/modalHook";
 import { LoginForm } from "@/components/Forms/Login";
 import { Modal } from "@/components/Modal";
 import { NavBar } from "@/components/NavBar";
 import { TUser } from "@/interfaces/user";
 import { ProductSellerCard } from "@/components/ProductSellerCard";
+import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 
 interface HomeProps {
   cars: TCarProduct[];
@@ -144,8 +145,8 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         />
       </div>
 
-      <div className={styles.inputsContainer}>
-        {/* <InputSectionField>
+      {/* <div className={styles.inputsContainer}>
+         <InputSectionField>
           <Label htmlFor="Placeholder" name="Label" />
           <InputFocus>
             <Input
@@ -167,7 +168,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
               id="Placeholder2"
             />
           </InputFocus>
-        </InputSectionField>  */}
+        </InputSectionField>  
 
         <InputSectionField>
           {" "}
@@ -196,21 +197,17 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
             <Select />
           </InputFocus>
         </InputSectionField>
-      </div>
-      <button type="button" onClick={() => handleModalOpen()}>
-        Abrir modal
-      </button>
+      </div> */}
+
       <Button
         className={styles.grey0Button}
         text="Abrir modal"
         onClick={() => handleModalOpen()}
       />
 
-      {showModal === "createContact" && (
-        <Modal text="Abrindo Modal">modal aberto</Modal>
-      )}
+      {showModal === "createContact" && <CreateAnnounceModal />}
 
-      <h1>ProductCards (HomePage)</h1>
+      {/* <h1>ProductCards (HomePage)</h1>
       <ProductBox>
         {cars.map((car) => {
           return <ProductCard key={car.id} car={car} user={user} />;
@@ -229,7 +226,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         <CommentCard />
         <CommentCard />
         <CommentCard />
-      </CommentBox>
+      </CommentBox> */}
 
       {/* <div>
         <h1>{user.name}</h1>
@@ -247,17 +244,18 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const carsResponse = await api.get<TCarProduct[]>("/cars");
-//   const userResponse = await api.get<TUser>(
-//     "/users/76089207-bcdf-4cbb-8a24-8a201976f706"
-//   );
-//   return {
-//     props: {
-//       cars: carsResponse.data,
-//       user: userResponse.data,
-//     },
-//   };
-// };
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const carsResponse = await api.get<TCarProduct[]>("/cars");
+  const userResponse = await api.get<TUser>(
+    "/users/93a31267-1a06-4aa7-915d-240eccda455e"
+  );
+  return {
+    props: {
+      cars: carsResponse.data,
+      user: userResponse.data,
+    },
+  };
+};
 
 export default Home;
