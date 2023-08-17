@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
 /* import { InputSectionField } from "@/components/InputSectionField";
@@ -9,27 +11,26 @@ import InputStyles from "../../Input/styles.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserContext } from "@/contexts/User/UserContext";
-import { RegisterData, userSchemaRegister } from "./validator";
+import { userSchemaRegister } from "./validator";
 import { InputSectionField } from "@/components/InputSectionField";
+import { AuthContext } from "@/contexts/Auth/authContext";
+import { TUserRegister } from "@/interfaces/user";
 
 export const RegisterForm = () => {
   const [accType, setAccType] = useState(Boolean);
-  const { registerUser } = useContext(UserContext);
+  const { registerUser } = useContext(AuthContext);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterData>({
+  } = useForm<TUserRegister>({
     resolver: zodResolver(userSchemaRegister),
   });
 
-  const submit = (formData: RegisterData) => {
-    console.log("oi");
+  const submit = (formData: TUserRegister) => {
     console.log(formData);
-    /*     registerUser(data);
-     */
+    // registerUser(formData);
   };
 
   return (
@@ -57,7 +58,7 @@ export const RegisterForm = () => {
               <Label htmlFor="email" name="Email" />
               <InputFocus>
                 <Input
-                  {...register("email")}
+                  register={register("email")}
                   type="text"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Ex: samuel@kenzie.com.br"
@@ -69,7 +70,7 @@ export const RegisterForm = () => {
               <Label htmlFor="cpf" name="CPF" />
               <InputFocus>
                 <Input
-                  {...register("cpf")}
+                  register={register("cpf")}
                   type="text"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="000.000.000-00"
@@ -81,7 +82,7 @@ export const RegisterForm = () => {
               <Label htmlFor="phone" name="Celular" />
               <InputFocus>
                 <Input
-                  {...register("phone")}
+                  register={register("telephone")}
                   type="text"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="(DDD) 90000-0000"
@@ -93,7 +94,7 @@ export const RegisterForm = () => {
               <Label htmlFor="birthdate" name="Data de nascimento" />
               <InputFocus>
                 <Input
-                  {...register("birthdate")}
+                  register={register("birthdate")}
                   type="text"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="00/00/00"
@@ -105,7 +106,7 @@ export const RegisterForm = () => {
               <Label htmlFor="description" name="Descrição" />
               <InputFocus>
                 <Input
-                  {...register("description")}
+                  register={register("description")}
                   type="text"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Digitar descrição"
@@ -122,7 +123,7 @@ export const RegisterForm = () => {
               <Label htmlFor="cep" name="CEP" />
               <InputFocus>
                 <Input
-                  {...register("address.zip_code")}
+                  register={register("address.zip_code")}
                   type="text"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="000.000-00"
@@ -136,7 +137,7 @@ export const RegisterForm = () => {
                 <Label htmlFor="estate" name="Estado" />
                 <InputFocus>
                   <Input
-                    {...register("address.state")}
+                    register={register("address.state")}
                     type="text"
                     className={InputStyles.basicInputWithBorder}
                     placeholder="Digitar Estado"
@@ -148,7 +149,7 @@ export const RegisterForm = () => {
                 <Label htmlFor="city" name="Cidade" />
                 <InputFocus>
                   <Input
-                    {...register("address.city")}
+                    register={register("address.city")}
                     type="text"
                     className={InputStyles.basicInputWithBorder}
                     placeholder="Digitar cidade"
@@ -162,7 +163,7 @@ export const RegisterForm = () => {
               <Label htmlFor="street" name="Rua" />
               <InputFocus>
                 <Input
-                  {...register("address.street")}
+                  register={register("address.street")}
                   type="text"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Digitar rua"
@@ -176,7 +177,7 @@ export const RegisterForm = () => {
                 <Label htmlFor="house_number" name="Número" />
                 <InputFocus>
                   <Input
-                    {...register("address.number")}
+                    register={register("address.number")}
                     type="number"
                     className={InputStyles.basicInputWithBorder}
                     placeholder="Digitar número"
@@ -188,7 +189,7 @@ export const RegisterForm = () => {
                 <Label htmlFor="complement" name="Complemento" />
                 <InputFocus>
                   <Input
-                    {...register("address.complement")}
+                    register={register("address.complement")}
                     type="text"
                     className={InputStyles.basicInputWithBorder}
                     placeholder="Ex: apto 10"
@@ -220,7 +221,7 @@ export const RegisterForm = () => {
               <Label htmlFor="password" name="Senha" />
               <InputFocus>
                 <Input
-                  {...register("password")}
+                  register={register("password")}
                   type="password"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Digitar senha"
@@ -242,11 +243,13 @@ export const RegisterForm = () => {
           </div>
 
           <div className={styles.buttonsSectionRegister}>
-            <Button
+            <button
               type="submit"
               className={ButtonStyles.brand1Button}
-              text="Finalizar cadastro"
-            />
+              // text="Finalizar cadastro"
+            >
+              Cadastrar
+            </button>
           </div>
         </div>
       </form>

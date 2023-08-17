@@ -38,6 +38,7 @@ export const userSchema = z.object({
 export const userSchemaRegister = z.object({
   name: z.string(),
   email: z.string().email(),
+  password: z.string(),
   cpf: z.string().max(11),
   isAdmin: z.boolean(),
   telephone: z.string(),

@@ -247,17 +247,17 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const carsResponse = await api.get<TCarProduct[]>("/cars");
-  const userResponse = await api.get<TUser>(
-    "/users/76089207-bcdf-4cbb-8a24-8a201976f706"
-  );
-  return {
-    props: {
-      cars: carsResponse.data,
-      user: userResponse.data,
-    },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const carsResponse = await api.get<TCarProduct[]>("/cars");
+//   const userResponse = await api.get<TUser>(
+//     "/users/76089207-bcdf-4cbb-8a24-8a201976f706"
+//   );
+//   return {
+//     props: {
+//       cars: carsResponse.data,
+//       user: userResponse.data,
+//     },
+//   };
+// };
 
 export default Home;

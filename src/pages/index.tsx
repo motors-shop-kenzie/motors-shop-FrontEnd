@@ -5,8 +5,8 @@ import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
 import { Car, FilterOptions } from "@/interfaces/CarFilter";
-import styles from "./styles.module.scss";
 import { UserContext } from "@/contexts/User/UserContext";
+import styles from "./styles.module.scss";
 
 export default function HomePage() {
   const { cars } = useContext(CarsContext);

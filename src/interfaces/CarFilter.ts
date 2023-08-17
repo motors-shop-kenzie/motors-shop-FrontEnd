@@ -17,6 +17,7 @@ export interface Car {
   description: string;
   tablePife: number;
   business: boolean;
+  active: boolean;
 }
 
 export interface CarFilterProps {

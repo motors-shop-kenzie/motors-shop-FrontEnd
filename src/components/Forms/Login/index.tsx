@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
 /* import { InputSectionField } from "@/components/InputSectionField";
@@ -6,13 +8,33 @@ import styles from "../styles.module.scss";
 import { Button } from "@/components/Button";
 import InputStyles from "../../Input/styles.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
-import Link from "next/link";
 import { InputSectionField } from "@/components/InputSectionField";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { userSchemaLogin } from "@/schemas/userSchema";
+import { TUserLogin } from "@/interfaces/user";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/Auth/authContext";
 
 export const LoginForm = () => {
+  const { loginUser } = useContext(AuthContext);
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TUserLogin>({
+    resolver: zodResolver(userSchemaLogin),
+  });
+
+  const submit = (formData: TUserLogin) => {
+    loginUser(formData);
+  };
+
   return (
     <div className={styles.loginContainer}>
-      <form>
+      <form onSubmit={handleSubmit(submit)}>
         <div>
           <h1>Login</h1>
 
@@ -21,10 +43,11 @@ export const LoginForm = () => {
               <Label htmlFor="email" name="Email" />
               <InputFocus>
                 <Input
+                  id="email"
                   type="email"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Digitar email"
-                  id="email"
+                  register={register("email")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -33,10 +56,11 @@ export const LoginForm = () => {
               <Label htmlFor="password" name="Senha" />
               <InputFocus>
                 <Input
+                  id="password"
                   type="password"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Digitar senha"
-                  id="password"
+                  register={register("password")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -52,6 +76,7 @@ export const LoginForm = () => {
             <Button
               className={ButtonStyles.grey10BorderGrey4TextGrey0Button}
               text="Cadastrar"
+              onClick={() => router.push("/register")}
             />
           </div>
         </div>

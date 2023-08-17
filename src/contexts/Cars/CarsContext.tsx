@@ -2,15 +2,25 @@
 
 import { iChildrenProps } from "@/interfaces";
 import { createContext, useEffect, useState } from "react";
-import { Car, FilterOptions } from "@/components/CarFilter/interface";
 import { ICarsContext } from "./interface";
+import { Car } from "@/interfaces/CarFilter";
 import api from "@/services/api";
+import { parseCookies } from "nookies";
 
 export const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 
 export const CarsProvider = ({ children }: iChildrenProps) => {
   const [cars, setCars] = useState<Car[]>([]);
+  const [userCars, setUserCars] = useState<Car[]>([]);
   const [filterData, setFilterData] = useState<Car[]>([]);
+
+  const cookies = parseCookies();
+
+  if (cookies["ccm.token"]) {
+    api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
+  }
+
+  const token = cookies["ccm.token"];
 
   const getAllCarsRequest = async () => {
     try {
@@ -20,6 +30,19 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       setCars(data);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const getUserCars = async () => {
+    if (token) {
+      try {
+        const response = await api.get("/cars");
+        const data = response.data;
+        console.log("DATA DE USERCARS", data);
+        setUserCars(data);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -34,7 +57,10 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       value={{
         cars,
         setCars,
+        userCars,
+        setUserCars,
         getAllCarsRequest,
+        getUserCars,
         filterData,
         setFilterData,
       }}
