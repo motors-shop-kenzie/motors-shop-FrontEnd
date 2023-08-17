@@ -83,10 +83,10 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     loggedUser();
   }, [token]);
 
-  console.log(user);
-
   return (
-    <AuthContext.Provider value={{ user, setUser, registerUser, loginUser }}>
+    <AuthContext.Provider
+      value={{ user, setUser, registerUser, loginUser, autoLogin, loggedUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
