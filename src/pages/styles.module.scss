@@ -80,6 +80,16 @@
   flex-direction: column;
   padding: 80px 100px 80px 30px;
   width: 20%;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    button {
+      all: unset;
+      padding-left: 20px;
+    }
+  }
 }
 
 .container_input {
