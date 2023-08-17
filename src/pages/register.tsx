@@ -8,7 +8,7 @@ import styles from "./styles.module.scss";
 export default function Register() {
   return (
     <>
-      <NavBar dealer />
+      <NavBar />
       <main className={styles.containerRegisterPage}>
         <RegisterForm />
       </main>

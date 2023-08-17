@@ -21,10 +21,7 @@ export default function HomePage() {
   const [kmValue, setKmValue] = useState<number>(0);
   const [priceValue, setPriceValue] = useState<number>(0);
 
-  const handleFilterChange = (
-    filterType: keyof FilterOptions,
-    value: string | number | null
-  ) => {
+  const handleFilterChange = (filterType: keyof FilterOptions, value: string | number | null) => {
     setSelectedFilters((prevFilters) => ({
       ...prevFilters,
       [filterType]: prevFilters[filterType] === value ? null : value,
@@ -73,7 +70,7 @@ export default function HomePage() {
 
   return (
     <main className={styles.body}>
-      <NavBar dealer />
+      <NavBar />
       <div className={styles.car_container}>
         <div>
           <h2>Motors Shop</h2>
@@ -84,36 +81,24 @@ export default function HomePage() {
         <aside className={styles.container_filter}>
           <div>
             <ul>
-              {Object.entries(uniqueFilterOptions).map(
-                ([filterType, options]) => (
-                  <li key={filterType} className={styles.options_filter}>
-                    <h3 className={styles.header_filter}>{filterType}</h3>
-                    {options.map((option, index) => (
-                      <button
-                        key={index}
-                        className={
-                          (
-                            selectedFilters as unknown as Record<
-                              string,
-                              string | number | null
-                            >
-                          )[filterType] === option
-                            ? "selected"
-                            : ""
-                        }
-                        onClick={() =>
-                          handleFilterChange(
-                            filterType as keyof FilterOptions,
-                            option
-                          )
-                        }
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </li>
-                )
-              )}
+              {Object.entries(uniqueFilterOptions).map(([filterType, options]) => (
+                <li key={filterType} className={styles.options_filter}>
+                  <h3 className={styles.header_filter}>{filterType}</h3>
+                  {options.map((option, index) => (
+                    <button
+                      key={index}
+                      className={
+                        (selectedFilters as unknown as Record<string, string | number | null>)[filterType] === option
+                          ? "selected"
+                          : ""
+                      }
+                      onClick={() => handleFilterChange(filterType as keyof FilterOptions, option)}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -132,10 +117,7 @@ export default function HomePage() {
               className={styles.slider}
             />
 
-            <div
-              className={styles.sliderCircle}
-              style={{ left: `${(kmValue / 650000) * 100}%` }}
-            ></div>
+            <div className={styles.sliderCircle} style={{ left: `${(kmValue / 650000) * 100}%` }}></div>
           </div>
 
           <div className={styles.container_input}>
@@ -153,10 +135,7 @@ export default function HomePage() {
               className={styles.slider}
             />
 
-            <div
-              className={styles.sliderCircle}
-              style={{ left: `${(priceValue / 550000) * 100}%` }}
-            ></div>
+            <div className={styles.sliderCircle} style={{ left: `${(priceValue / 550000) * 100}%` }}></div>
           </div>
 
           <button onClick={handleClearFilters} className={styles.button_filter}>
