@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { NavBar } from "@/components/NavBar";
 import { SellerCard } from "@/components/Seller/SellerCard";
 import { NextPage } from "next";
@@ -7,9 +8,12 @@ import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import styles from "./styles.module.scss";
+import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
+import { ModalContext } from "@/contexts/Modal";
 
 const SellerHome: NextPage = () => {
   const { userCars } = useContext(CarsContext);
+  const { showModal } = useContext(ModalContext);
   const { user, autoLogin, loggedUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -19,6 +23,7 @@ const SellerHome: NextPage = () => {
 
   return (
     <>
+      {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain}>
         <div>

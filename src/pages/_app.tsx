@@ -1,7 +1,6 @@
 import { AuthProvider } from "@/contexts/Auth/authContext";
 import { CarsProvider } from "@/contexts/Cars/CarsContext";
 import { ModalProvider } from "@/contexts/Modal";
-
 import "@/sass/global.scss";
 
 
