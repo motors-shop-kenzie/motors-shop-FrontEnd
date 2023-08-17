@@ -12,7 +12,6 @@ const SellerHome: NextPage = () => {
   const { userCars } = useContext(CarsContext);
   const { user } = useContext(AuthContext);
 
-  console.log(user)
   return (
     <>
       <NavBar />

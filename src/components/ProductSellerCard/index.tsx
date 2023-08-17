@@ -12,11 +12,7 @@ interface CardProps {
 }
 
 export const ProductSellerCard = ({ car, user }: CardProps) => {
-
-  const handleClick = () => {
-    console.log("click funcionando");
-  };
-
+  const handleClick = () => {};
 
   return (
     <div className={styles.card}>

@@ -38,11 +38,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
     setShowModal("createContact");
   };
 
-  console.log(user);
-
-  const handleClick = () => {
-    console.log("click funcionando");
-  };
+  const handleClick = () => {};
 
   return (
     <div className={styles.body}>
@@ -243,7 +239,6 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
     </div>
   );
 };
-
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const carsResponse = await api.get<TCarProduct[]>("/cars");

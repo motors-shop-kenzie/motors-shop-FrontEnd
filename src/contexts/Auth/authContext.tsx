@@ -12,7 +12,6 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
-  // const [token, setToken] = useState<string | undefined>("");
   const router = useRouter();
 
   const cookies = parseCookies();
@@ -28,7 +27,6 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       .post(`/users`, data)
       .then((res) => {
         const userData = res.data;
-        console.log(userData);
         setUser(userData);
         router.push("/login");
       })
@@ -43,8 +41,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
           maxAge: 60 * 40,
           path: "/",
         }),
-          
-        router.push("/");
+          router.push("/SellerHome");
       })
       .catch((error) => console.error(error));
   };
@@ -84,12 +81,12 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
   useEffect(() => {
     autoLogin();
     loggedUser();
-  }, []);
+  }, [token]);
+
+  console.log(user);
 
   return (
-    <AuthContext.Provider
-      value={{ user, setUser, registerUser, loginUser }}
-    >
+    <AuthContext.Provider value={{ user, setUser, registerUser, loginUser }}>
       {children}
     </AuthContext.Provider>
   );

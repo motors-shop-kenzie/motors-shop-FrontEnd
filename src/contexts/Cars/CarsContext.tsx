@@ -22,8 +22,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const token = cookies["ccm.token"];
 
-  
-
   const getAllCarsRequest = async () => {
     try {
       const response = await api.get("/cars");
@@ -40,7 +38,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       try {
         const response = await api.get("/cars/logged");
         const data = response.data;
-        // console.log("DATA DE USERCARS", data);
         setUserCars(data);
       } catch (error) {
         console.error(error);
@@ -53,9 +50,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       await getAllCarsRequest();
       await getUserCars();
     })();
-  }, []);
-
- 
+  }, [cars]);
 
   return (
     <CarsContext.Provider

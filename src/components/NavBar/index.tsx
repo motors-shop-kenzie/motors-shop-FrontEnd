@@ -31,7 +31,10 @@ export const NavBar = ({ logged = false, dealer = false }: INavBarProps) => {
   return (
     <nav className={styles.container}>
       <div className={styles.nav_content}>
-        <Image src={darkLogo} alt="Motors Shop dark logo" />
+        <Link href={"/"}>
+          {" "}
+          <Image src={darkLogo} alt="Motors Shop dark logo" />
+        </Link>
 
         <button className={styles.button_hamburger} onClick={toggleMenu}>
           {openMenu ? <IoCloseSharp /> : <GiHamburgerMenu />}
@@ -65,11 +68,11 @@ export const NavBar = ({ logged = false, dealer = false }: INavBarProps) => {
 
       {openMenu && !logged && (
         <div className={styles.options_mobile__not_logged}>
-          <Link className={styles.options_button__login} href="">
+          <Link className={styles.options_button__login} href="/login">
             Fazer Login
           </Link>
 
-          <Link className={styles.options_button__register} href="">
+          <Link className={styles.options_button__register} href="/register">
             Cadastrar
           </Link>
         </div>
