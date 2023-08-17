@@ -8,7 +8,7 @@ import { NavBar } from "@/components/NavBar";
 export default function Register() {
   return (
     <>
-      <NavBar dealer /* className={styles.cover} */ />
+      <NavBar />
       <main className={styles.containerLoginPage}>
         <LoginForm />
       </main>
