@@ -30,6 +30,7 @@ export const RegisterForm = () => {
   const submit: SubmitHandler<TUserRegister> = (formData) => {
     const obj = { ...formData, isAdmin: accType };
     registerUser(obj);
+    console.log(formData);
   };
 
   return (
@@ -206,12 +207,14 @@ export const RegisterForm = () => {
               onClick={() => setAccType(false)}
               className={ButtonStyles.brand1Button}
               text="Comprador"
+              type="button"
             />
 
             <Button
               onClick={() => setAccType(true)}
               className={ButtonStyles.grey10BorderGrey4TextGrey0Button}
               text="Anunciante"
+              type="button"
             />
           </div>
 
