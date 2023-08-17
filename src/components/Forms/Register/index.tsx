@@ -51,6 +51,7 @@ export const RegisterForm = () => {
                   placeholder="Ex: Samuel Leão"
                   id="name"
                 />
+                <p>{errors && errors.name?.message}</p>
               </InputFocus>
             </InputSectionField>
 
@@ -64,6 +65,7 @@ export const RegisterForm = () => {
                   placeholder="Ex: samuel@kenzie.com.br"
                   id="email"
                 />
+                <p>{errors && errors.email?.message}</p>
               </InputFocus>
             </InputSectionField>
             <InputSectionField>
@@ -76,6 +78,7 @@ export const RegisterForm = () => {
                   placeholder="000.000.000-00"
                   id="cpf"
                 />
+                <p>{errors && errors.cpf?.message}</p>
               </InputFocus>
             </InputSectionField>
             <InputSectionField>
@@ -88,6 +91,7 @@ export const RegisterForm = () => {
                   placeholder="(DDD) 90000-0000"
                   id="phone"
                 />
+                <p>{errors && errors.telephone?.message}</p>
               </InputFocus>
             </InputSectionField>
             <InputSectionField>
@@ -100,6 +104,7 @@ export const RegisterForm = () => {
                   placeholder="00/00/00"
                   id="birthdate"
                 />
+                 <p>{errors && errors.birthdate?.message}</p>
               </InputFocus>
             </InputSectionField>
             <InputSectionField>
@@ -112,6 +117,7 @@ export const RegisterForm = () => {
                   placeholder="Digitar descrição"
                   id="description"
                 />
+                 <p>{errors && errors.description?.message}</p>
               </InputFocus>
             </InputSectionField>
           </div>
@@ -129,6 +135,7 @@ export const RegisterForm = () => {
                   placeholder="000.000-00"
                   id="cep"
                 />
+                 <p>{errors && errors.address?.zip_code?.message}</p>
               </InputFocus>
             </InputSectionField>
 
@@ -143,6 +150,7 @@ export const RegisterForm = () => {
                     placeholder="Digitar Estado"
                     id="estate"
                   />
+                  <p>{errors && errors.address?.state?.message}</p>
                 </InputFocus>
               </InputSectionField>
               <InputSectionField>
@@ -155,6 +163,7 @@ export const RegisterForm = () => {
                     placeholder="Digitar cidade"
                     id="city"
                   />
+                  <p>{errors && errors.address?.city?.message}</p>
                 </InputFocus>
               </InputSectionField>
             </div>
@@ -169,6 +178,7 @@ export const RegisterForm = () => {
                   placeholder="Digitar rua"
                   id="street"
                 />
+               <p>{errors && errors.address?.street?.message}</p>
               </InputFocus>
             </InputSectionField>
 
@@ -183,6 +193,7 @@ export const RegisterForm = () => {
                     placeholder="Digitar número"
                     id="number"
                   />
+                  <p>{errors && errors.address?.number?.message}</p>
                 </InputFocus>
               </InputSectionField>
               <InputSectionField>
@@ -195,6 +206,7 @@ export const RegisterForm = () => {
                     placeholder="Ex: apto 10"
                     id="complement"
                   />
+                 <p>{errors && errors.address?.complement?.message}</p>
                 </InputFocus>
               </InputSectionField>
             </div>
@@ -230,6 +242,7 @@ export const RegisterForm = () => {
                   id="password"
                 />
               </InputFocus>
+                <p>{errors && errors.password?.message}</p>
             </InputSectionField>
             <InputSectionField>
               <Label htmlFor="password_confirmation" name="Confirmar senha" />
@@ -241,6 +254,7 @@ export const RegisterForm = () => {
                   id="password_confirmation"
                 />
               </InputFocus>
+                <p>{errors && errors.password?.message}</p>
             </InputSectionField>
           </div>
 
@@ -254,3 +268,4 @@ export const RegisterForm = () => {
     </div>
   );
 };
+
