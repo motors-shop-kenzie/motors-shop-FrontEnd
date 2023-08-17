@@ -1,39 +1,68 @@
 import { InputSectionField } from "@/components/InputSectionField";
-import styles from "../styles.module.scss";
 import { InputFocus } from "@/components/Input/InputFocus";
 import { Input } from "@/components/Input";
-
 import InputStyles from "../../Input/styles.module.scss";
 import TextAreaStyles from "../../Textarea/style.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
-
 import { Label } from "@/components/Label";
-import { Select } from "@/components/Select";
 import { TextArea } from "@/components/Textarea";
 import { Button } from "@/components/Button";
+import { useContext } from "react";
+import { ModalContext } from "@/contexts/Modal";
+import { CarsContext } from "@/contexts/Cars/CarsContext";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TCarsRegister, TFormCar, carSchemaRegister, formRegisterCar } from "@/schemas/carSchema";
+import styles from "../styles.module.scss";
 
 export const CreateAnnounceModalForm = () => {
+  const { setShowModal } = useContext(ModalContext);
+  const { createCars } = useContext(CarsContext);
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<TFormCar>({
+    resolver: zodResolver(formRegisterCar),
+  });
+
+  // if(errors){
+  //   console.log(errors)
+  // }
+
+  const submit: SubmitHandler<TFormCar> = (formData: any) => {
+    const obj = {...formData,name:formData.brand,business:true}
+    createCars(obj)
+  };
+
   return (
     <div className={styles.modalContainer}>
-      <form>
+      <form onSubmit={handleSubmit(submit)}>
         <h2 className={styles.subtitleModal}>Informações do veículo</h2>
         <div className={styles.inputsSectionModal}>
           <InputSectionField>
             <Label htmlFor="marca" name="Marca" />
             <InputFocus>
-              <Select name="Marca selecione" id="marca">
-                <option value="Chevrolet">Chevrolet</option>
-              </Select>
+              <Input
+                type="text"
+                className={InputStyles.basicInputWithBorder}
+                placeholder="Digite a marca do carro"
+                id="marca"
+                register={register("brand")}
+              />
             </InputFocus>
           </InputSectionField>
           <InputSectionField>
             <Label htmlFor="modelo" name="Modelo" />
             <InputFocus>
-              <Select name="Modelo" id="modelo">
-                <option value="camaro ss 6.2 v8 16v">
-                  camaro ss 6.2 v8 16v
-                </option>
-              </Select>
+              <Input
+                type="text"
+                className={InputStyles.basicInputWithBorder}
+                placeholder="Digite o modelo do carro"
+                id="modelo"
+                register={register("model")}
+              />
             </InputFocus>
           </InputSectionField>
 
@@ -42,10 +71,11 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="ano" name="Ano" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="2018"
                   id="ano"
+                  register={register("year")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -57,6 +87,7 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Gasolina / Etanol"
                   id="combustivel"
+                  register={register("gasoline")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -67,10 +98,11 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="quilometragem" name="Quilometragem" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="30.000"
                   id="quilometragem"
+                  register={register("km")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -82,6 +114,7 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Branco"
                   id="cor"
+                  register={register("color")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -91,10 +124,11 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="preco-tabela" name="Preco tabela FIPE" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="R$48.000,00"
                   id="preco-tabela"
+                  register={register("tablePife")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -102,10 +136,11 @@ export const CreateAnnounceModalForm = () => {
               <Label htmlFor="preco" name="Preço" />
               <InputFocus>
                 <Input
-                  type="text"
+                  type="number"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="R$50.000,00"
                   id="preco"
+                  register={register("price")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -118,6 +153,7 @@ export const CreateAnnounceModalForm = () => {
                 className={TextAreaStyles.basicTextAreaWithBorder}
                 placeholder="Descrição"
                 id="descricao"
+                register={register("description")}
               />
             </InputFocus>
           </InputSectionField>
@@ -130,6 +166,7 @@ export const CreateAnnounceModalForm = () => {
                 className={InputStyles.basicInputWithBorder}
                 placeholder="https://image.com"
                 id="imagem-capa"
+                register={register("coverImg")}
               />
             </InputFocus>
           </InputSectionField>
@@ -169,6 +206,7 @@ export const CreateAnnounceModalForm = () => {
               className={ButtonStyles.grey6TextDarkButton}
               text="Cancelar"
               type="button"
+              onClick={() => setShowModal("")}
             />
             <Button
               className={ButtonStyles.brand3TextBrand4Button}
