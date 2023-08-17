@@ -35,15 +35,14 @@
   background-image: url("../assets/Photo.png"),
     linear-gradient(rgba(0, 0, 0, 0.29), rgba(0, 0, 0, 1));
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  padding: 20px;
+  background-blend-mode: darken;
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
   color: $color-grey-scale-grey-10;
-  width: auto;
-  min-height: 500px;
+  height: 400px;
+  background-position: bottom;
   div {
     display: flex;
     flex-direction: column;
@@ -94,7 +93,7 @@
     border: 2px;
     border-radius: 4px;
 
-    color: rgba(255, 255, 255, 1);
+    color: $color-grey-scale-grey-10;
     font-family: "Inter";
     font-size: 16px;
     font-weight: 600;
@@ -129,12 +128,16 @@
 .container_filter {
   display: flex;
   flex-direction: column;
-  padding: 80px 50px 80px 50px;
-  position: absolute;
-  width: 100%;
+  padding: 20px 50px 80px 50px;
+  position: fixed;
+  top: 120px;
+  min-width: 100%;
   background-color: $color-grey-scale-grey-10;
   z-index: 1;
   gap: 20px;
+  div {
+    width: 80%;
+  }
   li {
     display: flex;
     flex-direction: column;
@@ -253,6 +256,9 @@
 }
 
 @media (min-width: $layout-medium) {
+  .car_container {
+    background-size: contain;
+  }
   .container_filter__show {
     display: flex;
     position: relative;
