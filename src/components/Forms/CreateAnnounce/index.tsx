@@ -7,17 +7,63 @@ import ButtonStyles from "../../Button/styles.module.scss";
 import { Label } from "@/components/Label";
 import { TextArea } from "@/components/Textarea";
 import { Button } from "@/components/Button";
-import { useContext } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { ModalContext } from "@/contexts/Modal";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TCarsRegister, TFormCar, carSchemaRegister, formRegisterCar } from "@/schemas/carSchema";
 import styles from "../styles.module.scss";
+import { Select } from "@/components/Select";
+import { GetServerSideProps } from "next";
+import kenzieApi from "@/services/kenzieApi";
+
+
+interface IModel {
+  brand: string
+  fuel: number
+  id: string
+  name: string
+  value: number
+  year: string
+}
 
 export const CreateAnnounceModalForm = () => {
   const { setShowModal } = useContext(ModalContext);
   const { createCars } = useContext(CarsContext);
+  const [brands, setBrands] = useState({})
+  const [models, setModels] = useState<IModel[]>([])
+  const [brand, setBrand] = useState("")
+  const [model, setModel] = useState("")
+
+ 
+   const getBrands = async () => {
+    try{
+      const brandsResponse = await kenzieApi.get("/cars");
+      setBrands(brandsResponse.data)
+    }catch(error){
+      console.error(error)
+    }
+};
+
+
+   const getModels = async () => {
+    try{
+      const modelsResponse = await kenzieApi.get(`/cars?brand=${brand}`);
+      setModels(modelsResponse.data)
+    }catch(error){
+      console.error(error)
+    }
+};
+
+useEffect(() =>{
+ ( async () =>{
+  await getBrands()
+  await getModels()
+})()
+},[brand])
+
+
 
   const {
     handleSubmit,
@@ -26,6 +72,7 @@ export const CreateAnnounceModalForm = () => {
   } = useForm<TFormCar>({
     resolver: zodResolver(formRegisterCar),
   });
+
 
   // if(errors){
   //   console.log(errors)
@@ -44,25 +91,39 @@ export const CreateAnnounceModalForm = () => {
           <InputSectionField>
             <Label htmlFor="marca" name="Marca" />
             <InputFocus>
-              <Input
-                type="text"
-                className={InputStyles.basicInputWithBorder}
-                placeholder="Digite a marca do carro"
+              <Select
+                name="marca"
                 id="marca"
                 register={register("brand")}
-              />
+                setBrand={setBrand}
+              >
+                <option value="">Selecione uma marca</option>
+                {
+                  Object.entries(brands).map(
+                    ([key, value]) => <option value={key} key={key}>{key}</option>
+                  )
+                }
+              </Select>
             </InputFocus>
           </InputSectionField>
           <InputSectionField>
             <Label htmlFor="modelo" name="Modelo" />
             <InputFocus>
-              <Input
-                type="text"
-                className={InputStyles.basicInputWithBorder}
-                placeholder="Digite o modelo do carro"
+              <Select
+                name="modelo"
                 id="modelo"
                 register={register("model")}
-              />
+                setBrand={setModel}
+              >
+                <option value="">Selecione um modelo</option>
+                { models.length > 0 ?
+                models.map((item: IModel) => {
+                  return <option value="" key={item.id}>{item.name}</option>
+                })
+                :
+                null
+                }
+              </Select>
             </InputFocus>
           </InputSectionField>
 
