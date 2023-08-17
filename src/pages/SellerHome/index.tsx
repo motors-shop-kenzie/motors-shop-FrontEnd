@@ -2,7 +2,7 @@ import { NavBar } from "@/components/NavBar";
 import { SellerCard } from "@/components/Seller/SellerCard";
 import { NextPage } from "next";
 import { ProductBox } from "@/components/ProductBox";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { AuthContext } from "@/contexts/Auth/authContext";
@@ -10,7 +10,12 @@ import styles from "./styles.module.scss";
 
 const SellerHome: NextPage = () => {
   const { userCars } = useContext(CarsContext);
-  const { user } = useContext(AuthContext);
+  const { user, autoLogin, loggedUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    autoLogin();
+    loggedUser();
+  }, []);
 
   return (
     <>
