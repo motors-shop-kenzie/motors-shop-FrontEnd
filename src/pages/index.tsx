@@ -5,12 +5,10 @@ import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
 import { Car, FilterOptions } from "@/interfaces/CarFilter";
-import { UserContext } from "@/contexts/User/UserContext";
 import styles from "./styles.module.scss";
 
 export default function HomePage() {
   const { cars } = useContext(CarsContext);
-  const { user } = useContext(UserContext);
 
   const [selectedFilters, setSelectedFilters] = useState<FilterOptions>({
     brand: null,
@@ -75,7 +73,7 @@ export default function HomePage() {
 
   return (
     <main className={styles.body}>
-      <NavBar dealer logged />
+      <NavBar dealer />
       <div className={styles.car_container}>
         <div>
           <h2>Motors Shop</h2>
@@ -170,9 +168,7 @@ export default function HomePage() {
           {filterCars.length === 0 ? (
             <p>Não há carros disponíveis.</p>
           ) : (
-            filterCars.map((car) => (
-              <ProductCard key={car.id} car={car} user={user} />
-            ))
+            filterCars.map((car) => <ProductCard key={car.id} car={car} />)
           )}
         </ProductBox>
       </section>

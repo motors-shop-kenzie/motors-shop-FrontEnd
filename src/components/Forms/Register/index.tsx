@@ -30,7 +30,6 @@ export const RegisterForm = () => {
   const submit: SubmitHandler<TUserRegister> = (formData) => {
     const obj = { ...formData, isAdmin: accType };
     registerUser(obj);
-    console.log(formData);
   };
 
   return (
@@ -245,11 +244,7 @@ export const RegisterForm = () => {
           </div>
 
           <div className={styles.buttonsSectionRegister}>
-            <button
-              type="submit"
-              className={ButtonStyles.brand1Button}
-              // text="Finalizar cadastro"
-            >
+            <button type="submit" className={ButtonStyles.brand1Button}>
               Cadastrar
             </button>
           </div>

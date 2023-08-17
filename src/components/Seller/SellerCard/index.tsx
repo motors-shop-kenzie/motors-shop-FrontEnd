@@ -1,25 +1,29 @@
+import { TUser } from "@/interfaces/user";
 import styles from "./styles.module.scss";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/Auth/authContext";
 
-export const SellerCard = () => {
+/* interface ISellerCard {
+  user: TUser;
+} */
+
+export const SellerCard = (/* { user }: ISellerCard */) => {
+  const { user } = useContext(AuthContext);
+
   return (
     <section className={styles.container__sellerSection}>
       <div className={styles.container__sellerDivName}>
-        <h3>SL</h3>
+        <h3>{user?.name?.charAt(0)}</h3>
       </div>
 
       <div className={styles.container__divSellerType}>
-        <h2>Samuel Leão</h2>
-        <span>Anunciante</span>
+        <h2>{user?.name}</h2>
+        <span>{user?.isAdmin ? "Anunciante" : "Comprador"}</span>
       </div>
 
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
+      <p>{user?.description}</p>
 
-      <button>Criar anuncio</button>
+      {user?.isAdmin ? <button>Criar anúncio</button> : null}
     </section>
   );
 };

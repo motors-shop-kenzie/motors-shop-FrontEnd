@@ -1,3 +1,5 @@
+import { TUser } from "./user";
+
 export interface Car {
   id: string;
   brand: string;
@@ -18,6 +20,7 @@ export interface Car {
   tablePife: number;
   business: boolean;
   active: boolean;
+  user: TUser;
 }
 
 export interface CarFilterProps {
