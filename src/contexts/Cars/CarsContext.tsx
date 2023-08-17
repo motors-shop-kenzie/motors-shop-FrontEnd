@@ -67,7 +67,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       await getAllCarsRequest();
       await getUserCars();
     })();
-  }, [cars]);
+  }, []);
 
   return (
     <CarsContext.Provider
