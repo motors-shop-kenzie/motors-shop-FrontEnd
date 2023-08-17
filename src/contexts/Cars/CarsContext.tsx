@@ -22,6 +22,8 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const token = cookies["ccm.token"];
 
+  
+
   const getAllCarsRequest = async () => {
     try {
       const response = await api.get("/cars");
@@ -36,9 +38,9 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const getUserCars = async () => {
     if (token) {
       try {
-        const response = await api.get("/cars");
+        const response = await api.get("/cars/logged");
         const data = response.data;
-        console.log("DATA DE USERCARS", data);
+        // console.log("DATA DE USERCARS", data);
         setUserCars(data);
       } catch (error) {
         console.error(error);
@@ -49,8 +51,11 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   useEffect(() => {
     (async () => {
       await getAllCarsRequest();
+      await getUserCars();
     })();
   }, []);
+
+ 
 
   return (
     <CarsContext.Provider
