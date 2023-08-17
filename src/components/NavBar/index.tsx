@@ -7,6 +7,7 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 import styles from "./styles.module.scss";
+import { useRouter } from "next/router";
 
 /**
  * Props for the NavBar component.
@@ -22,9 +23,10 @@ interface INavBarProps {}
  * @param {INavBarProps} props - The props for the NavBar component.
  */
 export const NavBar = (props: INavBarProps) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const toggleMenu = () => setOpenMenu(!openMenu);
+  const router = useRouter();
 
   return (
     <nav className={styles.container}>
@@ -74,8 +76,8 @@ export const NavBar = (props: INavBarProps) => {
         <ul className={styles.options__logged}>
           <li onClick={() => alert(`"Editar Perfil" ainda não implementado`)}>Editar Perfil</li>
           <li onClick={() => alert(`"Editar Endereço" ainda não implementado`)}>Editar Endereço</li>
-          {user.isAdmin && <li onClick={() => alert(`"Meus Anúncios" ainda não implementado`)}>Meus Anúncios</li>}
-          <li onClick={() => alert(`"Sair" ainda não implementado`)}>Sair</li>
+          {user.isAdmin && <li onClick={() => router.push("/SellerHome")}>Meus Anúncios</li>}
+          <li onClick={() => logout()}>Sair</li>
         </ul>
       )}
     </nav>

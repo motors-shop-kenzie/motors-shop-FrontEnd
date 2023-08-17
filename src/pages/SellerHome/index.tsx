@@ -11,6 +11,7 @@ import styles from "./styles.module.scss";
 const SellerHome: NextPage = () => {
   const { userCars } = useContext(CarsContext);
   const { user, autoLogin, loggedUser } = useContext(AuthContext);
+  console.log(user)
 
   useEffect(() => {
     autoLogin();
