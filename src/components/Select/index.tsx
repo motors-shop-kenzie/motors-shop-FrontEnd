@@ -1,13 +1,16 @@
+import { iChildrenProps } from "@/interfaces";
 import styles from "./styles.module.scss";
 
-export const Select = () => {
+interface iSelectProps {
+  name: string;
+  id: string;
+  children: React.ReactNode;
+}
+
+export const Select = ({ name, id, children }: iSelectProps) => {
   return (
-    <select name="Selecione um opção" id="" className={styles.select}>
-      <option disabled>Select an option</option>
-      <option value="">Opção 1</option>
-      <option value="">Opção 2</option>
-      <option value="">Opção 3</option>
-      <option value="">Opção 4</option>
+    <select name={name} id={id} className={styles.select}>
+      {children}
     </select>
   );
 };
