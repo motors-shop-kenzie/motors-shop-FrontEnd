@@ -19,6 +19,8 @@
 
   font-size: $font-size-mobile;
 
+  transition: 0.6s;
+
   @media (min-width: 769px) {
     padding: $padding-desktop;
 
@@ -28,9 +30,6 @@
 
 @mixin inputBasic($bg-color, $border, $radius) {
   padding: 13px 16px;
-
-  // width: 100%;
-  // max-width: 277px;
 
   font-size: 1rem;
   font-weight: 400;

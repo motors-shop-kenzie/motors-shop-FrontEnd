@@ -121,7 +121,7 @@
     width: 152px;
 
     padding: 0;
-    // padding: 12px 28px;
+
     height: 48px;
     display: flex;
     flex-direction: column;
@@ -139,4 +139,95 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+.modalContainer {
+  border-radius: $modal-radius;
+  width: 100%;
+  max-height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    width: 100%;
+
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .inputsSectionModal {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      > section {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      > button {
+        width: 100%;
+        max-width: 315px;
+
+        font-size: $button-medium-text;
+
+        padding: 12px 0;
+      }
+
+      .finalButtonsDivModal {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-right: 20px;
+      }
+    }
+
+    input {
+      max-width: 100%;
+    }
+
+    select,
+    textarea {
+      width: 98%;
+      max-width: 490.59px;
+
+      color: $color-grey-scale-grey-3;
+    }
+
+    textarea {
+      padding: 0;
+
+      min-width: 0;
+    }
+  }
+
+  h2 {
+    width: 100%;
+
+    font-size: $body-2-500;
+    font-weight: $medium-weight;
+  }
+  .inputsInRow {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    width: 98%;
+    max-width: 100%;
+
+    > section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      width: 50%;
+    }
+  }
+
+  button {
+    font-weight: $bold-weight;
+  }
 }
