@@ -181,10 +181,10 @@ export default function HomePage() {
             </div>
 
             <button
-              onClick={handleClearFilters}
+              onClick={toggleMenu}
               className={styles.button_filter}
             >
-              Limpar filtros
+              Ver Anúncios
             </button>
           </aside>
         ) : null}
