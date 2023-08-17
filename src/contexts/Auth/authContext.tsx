@@ -5,15 +5,23 @@ import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import { TUser, TUserLogin, TUserRegisterResquest } from "@/interfaces/user";
 import { IAuthContext } from "./interface";
-import { setCookie } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
-  const [token, setToken] = useState<string | undefined>("");
+  // const [token, setToken] = useState<string | undefined>("");
   const router = useRouter();
+
+  const cookies = parseCookies();
+
+  if (cookies["ccm.token"]) {
+    api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
+  }
+
+  const token = cookies["ccm.token"];
 
   const registerUser = (data: TUserRegisterResquest) => {
     api
@@ -35,7 +43,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
           maxAge: 60 * 40,
           path: "/",
         }),
-          setToken(response.data.token);
+          
         router.push("/");
       })
       .catch((error) => console.error(error));
@@ -57,13 +65,30 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     }
   };
 
+  const loggedUser = async () => {
+    if (token) {
+      try {
+        const response = await api.get("/users/logged", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setUser(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
   useEffect(() => {
     autoLogin();
+    loggedUser();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, registerUser, loginUser, token, setToken }}
+      value={{ user, setUser, registerUser, loginUser }}
     >
       {children}
     </AuthContext.Provider>
