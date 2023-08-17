@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import { TUser, TUserLogin, TUserRegisterResquest } from "@/interfaces/user";
 import { IAuthContext } from "./interface";
-import { parseCookies, setCookie } from "nookies";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -41,10 +41,17 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
           maxAge: 60 * 40,
           path: "/",
         }),
-          router.push("/SellerHome");
+          router.push("/");
       })
       .catch((error) => console.error(error));
   };
+
+  const logout = () => {
+    const cookie = 'ccm.token';
+    destroyCookie(null, cookie);
+    router.push("/")
+    window.location.reload();
+  }
 
   const autoLogin = async () => {
     if (token) {
@@ -85,7 +92,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, registerUser, loginUser, autoLogin, loggedUser }}
+      value={{ user, setUser, registerUser, loginUser, autoLogin, loggedUser, logout }}
     >
       {children}
     </AuthContext.Provider>
