@@ -5,7 +5,7 @@ interface IInputProps {
   placeholder: string;
   className: string;
   id: string;
-  register: UseFormRegisterReturn<string>;
+  register?: UseFormRegisterReturn<string>;
 }
 
 export const Input = ({

@@ -7,10 +7,12 @@ import styles from "./styles.module.scss";
 
 export default function Register() {
   return (
-    <main /* className={styles.cover} */>
+    <>
       <NavBar dealer />
-      <RegisterForm></RegisterForm>
+      <main className={styles.containerRegisterPage}>
+        <RegisterForm />
+      </main>
       <Footer path="/register" />
-    </main>
+    </>
   );
 }

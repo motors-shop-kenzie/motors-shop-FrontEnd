@@ -42,21 +42,6 @@
     $color-colors-fixed-white-fixed
   );
 }
-.grey6TextDarkButton {
-  @include buttonBasic(
-    none,
-    $button-radius,
-    12px 20px,
-    $button-medium-text,
-    12px 28px,
-    $button-big-text
-  );
-  @include buttonColors($color-grey-scale-grey-6, $color-grey-scale-grey-2);
-
-  &:hover {
-    @include buttonColors($color-grey-scale-grey-2, $color-grey-scale-grey-6);
-  }
-}
 .grey2TextLightButton {
   @include buttonBasic(
     none,
@@ -125,9 +110,6 @@
     $button-big-text
   );
   @include buttonColors($color-brand-brand-4, $color-brand-brand-1);
-  &:hover {
-    @include buttonColors($color-brand-brand-2, $color-brand-brand-4);
-  }
 }
 .grey10TextGrey1Button {
   @include buttonBasic(
@@ -249,8 +231,43 @@
     $button-big-text
   );
   @include buttonColors($color-brand-brand-3, $color-brand-brand-4);
+}
 
-  &:hover {
-    @include buttonColors($color-brand-brand-1, $color-brand-brand-4);
-  }
+// Inputs
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.basicInputWithBorder {
+  @include inputBasic(
+    $color-grey-scale-grey-10,
+    1.5px solid $color-grey-scale-grey-7,
+    $input-radius
+  );
+}
+.DarkerInputWithoutBorder {
+  @include inputBasic($color-grey-scale-grey-8, none, $input-radius);
+}
+
+// Textareas
+.basicTextAreaWithBorder {
+  @include textareaBasic(
+    $color-grey-scale-grey-10,
+    1.5px solid $color-grey-scale-grey-7,
+    $input-radius
+  );
+  min-height: 80px;
+  min-width: 276px;
+}
+.darkertextAreaWithBorder {
+  @include textareaBasic(
+    $color-grey-scale-grey-8,
+    1.5px solid $color-grey-scale-grey-7,
+    $input-radius
+  );
+  min-height: 80px;
+  min-width: 274px;
+}
+.basicSelectWithBorder {
 }

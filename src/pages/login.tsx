@@ -1,15 +1,18 @@
 "use client";
 
+import styles from "./styles.module.scss";
 import { Footer } from "@/components/Footer";
 import { LoginForm } from "@/components/Forms/Login";
 import { NavBar } from "@/components/NavBar";
 
 export default function Register() {
   return (
-    <main>
+    <>
       <NavBar dealer /* className={styles.cover} */ />
-      <LoginForm></LoginForm>
+      <main className={styles.containerLoginPage}>
+        <LoginForm />
+      </main>
       <Footer path="/register" />
-    </main>
+    </>
   );
 }

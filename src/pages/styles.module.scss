@@ -151,3 +151,18 @@
   font-size: 16px;
   font-weight: 600;
 }
+
+.containerLoginPage {
+  width: 100vw;
+  min-height: 85vh;
+
+  background-color: $color-grey-scale-grey-8;
+}
+.containerRegisterPage {
+  padding: 20px 0 40px 0;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  background-color: $color-grey-scale-grey-8;
+}

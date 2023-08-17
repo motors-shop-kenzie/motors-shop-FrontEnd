@@ -1,39 +1,35 @@
 "use client";
 
 import { iChildrenProps } from "@/interfaces";
-import { createContext, useState } from "react";
-import api from "@/services/api";
+import { createContext, useEffect, useState } from "react";
 import { IUserContext } from "./interface";
-import { RegisterData } from "@/components/Forms/Register/validator";
+import { TUser, TUserLogin, TUserRegister } from "@/interfaces/user";
+import api from "@/services/api";
 
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildrenProps) => {
-  const [user, setUser] = useState<RegisterData>();
+  const [user, setUser] = useState<TUser | undefined>();
 
-  const registerUser = (data: RegisterData) => {
+  const registerUser = (data: TUserRegister) => {
     api
       .post(`/users`, data)
       .then((res) => {
         const userData = res.data;
         setUser(userData);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => console.error(error));
   };
 
-  /*   const loginUser = (data: LoginUser) => {
+  const loginUser = (data: TUserLogin) => {
     api
-      .post(`/users`, data)
+      .post(`/login`, data)
       .then((res) => {
         const userData = res.data;
         setUser(userData);
       })
-      .catch((error) => {
-        console.error(error);
-      });
-  }; */
+      .catch((error) => console.error(error));
+  };
 
   const getUser = () => {
     api
@@ -42,18 +38,20 @@ export const UserProvider = ({ children }: iChildrenProps) => {
         const userData = res.data;
         setUser(userData);
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((error) => console.error(error));
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <UserContext.Provider
       value={{
         user,
-        /*         setUser,
-         */ registerUser,
-        /*    loginUser, */
+        setUser,
+        registerUser,
+        loginUser,
         getUser,
       }}
     >

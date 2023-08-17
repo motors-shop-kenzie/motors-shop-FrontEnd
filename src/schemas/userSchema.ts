@@ -16,7 +16,7 @@ export const addressSchemaRegister = z.object({
   state: z.string(),
   city: z.string(),
   street: z.string(),
-  number: z.number(),
+  number: z.coerce.number(),
   complement: z.string().optional(),
 });
 
@@ -38,15 +38,21 @@ export const userSchema = z.object({
 export const userSchemaRegister = z.object({
   name: z.string(),
   email: z.string().email(),
+  password: z.string(),
   cpf: z.string().max(11),
-  isAdmin: z.boolean(),
   telephone: z.string(),
   description: z.string().optional(),
   birthdate: z.string(),
   address: addressSchemaRegister.optional(),
+});
+
+export const userSchemaRegisterRequest = userSchemaRegister.extend({
+  isAdmin: z.boolean(),
+});
+
+export const userSchemaLogin = z.object({
+  email: z.string(),
   password: z.string(),
 });
 
 export const userSchemaUpdate = userSchemaRegister.optional();
-
-export type RegisterData = z.infer<typeof userSchemaRegister>;

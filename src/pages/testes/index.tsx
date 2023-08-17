@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import styles from "../../components/Button/styles.module.scss";
+import styles from "./styles.module.scss";
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
 import { Input } from "@/components/Input";
@@ -18,16 +18,18 @@ import { ProductCard } from "@/components/ProductCard";
 import { CommentCard } from "@/components/CommetCard";
 import { useContext } from "react";
 import { ModalContext } from "@/contexts/Modal";
-import { ModalCreateCar } from "@/components/Modal/Modal";
+
 import { useModal } from "@/hooks/modalHook";
 import { LoginForm } from "@/components/Forms/Login";
 import { Modal } from "@/components/Modal";
 import { NavBar } from "@/components/NavBar";
 import { TUser } from "@/interfaces/user";
+import { ProductSellerCard } from "@/components/ProductSellerCard";
+import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 
 interface HomeProps {
   cars: TCarProduct[];
-  user:TUser
+  user: TUser;
 }
 
 const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
@@ -36,7 +38,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
     setShowModal("createContact");
   };
 
-  // console.log(user)
+  console.log(user);
 
   const handleClick = () => {
     console.log("click funcionando");
@@ -45,10 +47,106 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
   return (
     <div className={styles.body}>
       <NavBar dealer logged />
+      <div className={styles.buttonsContainer}>
+        <Button
+          className={styles.grey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey2TextLightButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey2TextDarkerButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey5TextWhiteButton}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand2Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand4TextBrand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10TextGrey1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10BorderGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10BorderGrey4TextGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey10BorderAndTextBrand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand4BorderAndTextBrand1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.grey8TextGrey0Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackAlert3TextFeedbackAlert1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackAlert2TextFeedbackAlert1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackSuccess3TextFeedbackSuccess1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.feedbackSuccess2TextFeedbackSuccess1Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+        <Button
+          className={styles.brand3TextBrand4Button}
+          text="Text Button"
+          onClick={handleClick}
+        />
+      </div>
 
-      <div className={styles.inputsContainer}>
-
-        <InputSectionField>
+      {/* <div className={styles.inputsContainer}>
+         <InputSectionField>
           <Label htmlFor="Placeholder" name="Label" />
           <InputFocus>
             <Input
@@ -70,7 +168,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
               id="Placeholder2"
             />
           </InputFocus>
-        </InputSectionField>
+        </InputSectionField>  
 
         <InputSectionField>
           {" "}
@@ -100,33 +198,37 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
           </InputFocus>
         </InputSectionField>
       </div> */}
-      {/* <button type="button" onClick={() => handleModalOpen()}>
-        Abrir modal
-      </button> */}
+
       <Button
         className={styles.grey0Button}
         text="Abrir modal"
         onClick={() => handleModalOpen()}
       />
-      {showModal === "createContact" && (
-        <Modal text="Abrindo Modal">
-          <LoginForm />
-        </Modal>
-      )}
+
+      {showModal === "createContact" && <CreateAnnounceModal />}
+
+      {/* <h1>ProductCards (HomePage)</h1>
       <ProductBox>
         {cars.map((car) => {
           return <ProductCard key={car.id} car={car} user={user} />;
         })}
       </ProductBox>
+
+      <h1>ProductCards (SellerPage)</h1>
+      <ProductBox>
+        {cars.map((car) => {
+          return <ProductSellerCard key={car.id} car={car} user={user} />;
+        })}
+      </ProductBox>
+
       <CommentBox>
         <CommentCard />
         <CommentCard />
         <CommentCard />
         <CommentCard />
-      </CommentBox>
+      </CommentBox> */}
 
-
-      <div>
+      {/* <div>
         <h1>{user.name}</h1>
         <h2>{user.id}</h2>
         <h2>{user.createdAt}</h2>
@@ -137,23 +239,21 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
         <h2>{user.description}</h2>
         <h2>{user.birthdate}</h2>
         <h2>{user.address.city}</h2>
-      </div>
-
-      <Footer />
-
+      </div> */}
     </div>
   );
 };
 
+
 export const getServerSideProps: GetServerSideProps = async () => {
   const carsResponse = await api.get<TCarProduct[]>("/cars");
   const userResponse = await api.get<TUser>(
-    "/users/41130ba8-8b9f-437f-be16-ffa4b4717b5c"
+    "/users/93a31267-1a06-4aa7-915d-240eccda455e"
   );
   return {
     props: {
       cars: carsResponse.data,
-      user: userResponse.data
+      user: userResponse.data,
     },
   };
 };
