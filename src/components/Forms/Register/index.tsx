@@ -17,6 +17,7 @@ import { TUserRegister } from "@/interfaces/user";
 
 export const RegisterForm = () => {
   const [accType, setAccType] = useState(Boolean);
+  const [buttonType, setButtonType] = useState(true)
   const { registerUser } = useContext(AuthContext);
 
   const {
@@ -204,14 +205,14 @@ export const RegisterForm = () => {
           <div className={styles.divButtons}>
             <Button
               onClick={() => setAccType(false)}
-              className={ButtonStyles.brand1Button}
+              className={!accType ? ButtonStyles.brand1Button : ButtonStyles.grey10BorderGrey4TextGrey0Button}
               text="Comprador"
               type="button"
             />
 
             <Button
               onClick={() => setAccType(true)}
-              className={ButtonStyles.grey10BorderGrey4TextGrey0Button}
+              className={accType ? ButtonStyles.brand1Button : ButtonStyles.grey10BorderGrey4TextGrey0Button}
               text="Anunciante"
               type="button"
             />
