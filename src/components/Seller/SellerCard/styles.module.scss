@@ -1,26 +1,21 @@
 @use "../../../sass/abstracts/variables" as *;
 
 .container__sellerSection {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
-  padding: 1rem;
-
-  position: absolute;
-  top: 146px;
-
-  margin: 0 1rem;
-
-  border-radius: 10px;
-
+  height: 300px;
+  width: 60%;
+  max-width: 100%;
+  padding: 2rem;
+  border-radius: 4px;
   background-color: $color-grey-scale-grey-8;
 }
 
 .container__sellerDivName {
   background-color: $color-brand-brand-1;
   color: $color-colors-fixed-white-fixed;
-
   width: 25px;
   height: 23px;
 
@@ -47,6 +42,7 @@
 
 .container__divSellerType {
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -60,7 +56,7 @@
 
   background: $color-grey-scale-grey-5;
   color: $color-brand-brand-1;
-
+  height: 15px;
   padding: 0.3rem;
   border-radius: 3px;
 }
@@ -91,9 +87,9 @@
 }
 
 @media (min-width: 1023px) {
-  .container__sellerSection {
+  /*   .container__sellerSection {
     margin: 0 3rem;
-  }
+  } */
 
   .container__divSellerType {
     gap: 1.5rem;
@@ -106,10 +102,10 @@
 }
 
 @media (min-width: 1439px) {
-  .container__sellerDivName {
+  /*   .container__sellerDivName {
     width: 40px;
     height: 35px;
-  }
+  } */
 
   .container__sellerDivName > h3 {
     font-size: 2rem;

@@ -3,9 +3,13 @@
 .container {
   display: flex;
   overflow: auto;
+  margin: 0 auto;
   padding: 10px;
   gap: 12px;
-  width: 70%;
+
+  width: 80%;
+  margin-top: 200px;
+
 }
 
 @media (min-width: 769px) {
