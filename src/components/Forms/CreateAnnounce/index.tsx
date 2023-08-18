@@ -39,6 +39,25 @@ export const CreateAnnounceModalForm = () => {
   const [inputImage, setInputImage] =useState(2)
 
 
+  const renderComponentes = () => {
+    const componentes = [];
+    console.log(inputImage)
+    for (let i = 1; i <= inputImage; i++) {
+      componentes.push(  <InputSectionField>
+            <Label htmlFor={`${i}-imagem-galeria`} name={`${i}º Imagem da galeria`} />
+            <InputFocus>
+              <Input
+                type="text"
+                className={InputStyles.basicInputWithBorder}
+                placeholder="https://image.com"
+                id="1-imagem-galeria"
+              />
+            </InputFocus>
+          </InputSectionField>);
+    }
+    return componentes;
+  };
+
 
    const getBrands = async () => {
     try{
@@ -102,7 +121,7 @@ useEffect(() =>{
 
     const obj = { ...formData, name: formData.model, business: value, model: formData.model };
     createCars(obj)
-
+    setInputImage(2)
     setShowModal("")
   };
   return (
@@ -281,33 +300,10 @@ useEffect(() =>{
               />
             </InputFocus>
           </InputSectionField>
-
-          <InputSectionField>
-            <Label htmlFor="1-imagem-galeria" name="1º Imagem da galeria" />
-            <InputFocus>
-              <Input
-                type="text"
-                className={InputStyles.basicInputWithBorder}
-                placeholder="https://image.com"
-                id="1-imagem-galeria"
-              />
-            </InputFocus>
-          </InputSectionField>
-
-          <InputSectionField>
-            <Label htmlFor="1-imagem-galeria" name="2º Imagem da galeria" />
-            <InputFocus>
-              <Input
-                type="text"
-                className={InputStyles.basicInputWithBorder}
-                placeholder="https://image.com"
-                id="2-imagem-galeria"
-              />
-            </InputFocus>
-          </InputSectionField>
-
+          {renderComponentes()}
           <Button
             className={ButtonStyles.brand4TextBrand1Button}
+            onClick={() => setInputImage(inputImage +1)}
             text="Adicionar campo para imagem da galeria"
             type="button"
           />
