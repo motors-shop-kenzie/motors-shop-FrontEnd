@@ -36,7 +36,7 @@ export const CreateAnnounceModalForm = () => {
   const [brand, setBrand] = useState("")
   const [model, setModel] = useState("")
 
- 
+
    const getBrands = async () => {
     try{
       const brandsResponse = await kenzieApi.get("/cars");
@@ -74,13 +74,13 @@ useEffect(() =>{
   });
 
 
-  // if(errors){
-  //   console.log(errors)
-  // }
 
   const submit: SubmitHandler<TFormCar> = (formData: any) => {
-    const obj = {...formData,name:formData.brand,business:true}
+    const obj = { ...formData, name: formData.model, business: true, model: formData.model };
     createCars(obj)
+    console.log(obj)
+    console.log(formData)
+    setShowModal("")
   };
 
   return (
@@ -118,7 +118,11 @@ useEffect(() =>{
                 <option value="">Selecione um modelo</option>
                 { models.length > 0 ?
                 models.map((item: IModel) => {
-                  return <option value="" key={item.id}>{item.name}</option>
+                  return (
+                    <option value={item.name} key={item.id}>
+                      {item.name}
+                    </option>
+                  );
                 })
                 :
                 null

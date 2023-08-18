@@ -9,14 +9,15 @@ interface iSelectProps {
   children: React.ReactNode;
   register?: UseFormRegisterReturn<string>;
   value?: string;
-  setBrand?: Dispatch<SetStateAction<string>> | undefined;
+  setBrand?: Dispatch<SetStateAction<string>> | undefined; 
 }
 
-export const Select = ({ name, id, register,  children, setBrand }: iSelectProps) => {
-  const [selectedValue, setSelectedValue] = useState('');
+export const Select = ({ name, id, register, children, setBrand }: iSelectProps) => {
+  const [selectedValue, setSelectedValue] = useState("");
 
-  const handleSelectChange = (event: { target: { value: any; }; }) => {
+  const handleSelectChange = (event: { target: { value: any } }) => {
     const value = event.target.value;
+    console.log(value)
     setBrand(value);
   };
   return (
