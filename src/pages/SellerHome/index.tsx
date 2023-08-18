@@ -15,7 +15,7 @@ const SellerHome: NextPage = () => {
   const { userCars } = useContext(CarsContext);
   const { showModal } = useContext(ModalContext);
   const { user, autoLogin, loggedUser } = useContext(AuthContext);
-  console.log(user)
+ 
 
   useEffect(() => {
     autoLogin();
@@ -27,7 +27,7 @@ const SellerHome: NextPage = () => {
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain}>
-        <div>
+        <div className={styles.box}>
           <SellerCard />
         </div>
         <ProductBox>
