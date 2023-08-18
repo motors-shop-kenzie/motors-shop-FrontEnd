@@ -172,7 +172,7 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="2018"
                   id="ano"
-                  register={register("year", { valueAsNumber: true, disabled: true })}
+                  register={register("year", { valueAsNumber: true })}
                 />
               </InputFocus>
             </InputSectionField>
@@ -185,7 +185,7 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Gasolina / Etanol"
                   id="combustivel"
-                  register={register("gasoline", { disabled: true })}
+                  register={register("gasoline")}
                 />
               </InputFocus>
             </InputSectionField>
@@ -228,7 +228,7 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="R$48.000,00"
                   id="preco-tabela"
-                  register={register("tablePife", { valueAsNumber: true, disabled: true })}
+                  register={register("tablePife", { valueAsNumber: true })}
                 />
               </InputFocus>
             </InputSectionField>
