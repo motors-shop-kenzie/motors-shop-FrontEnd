@@ -48,10 +48,9 @@ export const CreateAnnounceModalForm = () => {
 
   const renderComponentes = () => {
     const componentes = [];
-    console.log(inputImage);
     for (let i = 1; i <= inputImage; i++) {
       componentes.push(
-        <InputSectionField>
+        <InputSectionField key={i}>
           <Label htmlFor={`${i}-imagem-galeria`} name={`${i}º Imagem da galeria`} />
           <InputFocus>
             <Input
@@ -173,6 +172,7 @@ export const CreateAnnounceModalForm = () => {
                   placeholder="2018"
                   id="ano"
                   register={register("year", { valueAsNumber: true })}
+                  disabled
                 />
               </InputFocus>
             </InputSectionField>
@@ -186,6 +186,7 @@ export const CreateAnnounceModalForm = () => {
                   placeholder="Gasolina / Etanol"
                   id="combustivel"
                   register={register("gasoline")}
+                  disabled
                 />
               </InputFocus>
             </InputSectionField>
@@ -229,6 +230,7 @@ export const CreateAnnounceModalForm = () => {
                   placeholder="R$48.000,00"
                   id="preco-tabela"
                   register={register("tablePife", { valueAsNumber: true })}
+                  disabled
                 />
               </InputFocus>
             </InputSectionField>
