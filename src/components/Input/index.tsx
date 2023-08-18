@@ -6,24 +6,19 @@ interface IInputProps {
   className: string;
   id: string;
   register?: UseFormRegisterReturn<string>;
-  value?:any
+  value?: any;
+  disabled?: boolean;
 }
 
-export const Input = ({
-  type,
-  placeholder,
-  className,
-  id,
-  register,
-  value
-}: IInputProps) => {
+export const Input = ({ type, placeholder, className, id, register, value, disabled = false }: IInputProps) => {
   return (
     <input
       {...register}
-      type={type}
-      placeholder={placeholder}
       className={className}
+      disabled={disabled}
       id={id}
+      placeholder={placeholder}
+      type={type}
       value={value}
     />
   );
