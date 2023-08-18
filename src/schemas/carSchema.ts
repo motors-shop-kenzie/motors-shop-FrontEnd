@@ -39,14 +39,14 @@ export const carSchemaRegister = z.object({
   name: z.string().nonempty({message:"*"}),
   coverImg: z.string().nonempty({message:"*"}),
   price: z.coerce.number().min(1,{message:"*"}),
-  year: z.coerce.number().min(1,{message:"*"}),
+  year: z.coerce.number(),
   km: z.coerce.number().min(1,{message:"*"}),
   description: z.string().nonempty({message:"*"}),
   color: z.string().nonempty({message:"*"}),
-  gasoline: z.string().nonempty({message:"*"}),
+  gasoline: z.string(),
   model: z.string().nonempty({message:"*"}),
   brand: z.string().nonempty({message:"*"}),
-  tablePife: z.coerce.number().min(1,{message:"*"}),
+  tablePife: z.coerce.number(),
   img: z.array(carImgSchema).optional(),
 });
 

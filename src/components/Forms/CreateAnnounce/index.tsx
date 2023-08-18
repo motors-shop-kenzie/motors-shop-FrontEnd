@@ -36,6 +36,9 @@ export const CreateAnnounceModalForm = () => {
   const [brand, setBrand] = useState("")
   const [model, setModel] = useState("")
   const [value,setValeu] = useState<boolean>(false)
+  const [inputImage, setInputImage] =useState(2)
+
+
 
    const getBrands = async () => {
     try{
@@ -102,7 +105,6 @@ useEffect(() =>{
 
     setShowModal("")
   };
-
   return (
     <div className={styles.modalContainer}>
       <form onSubmit={handleSubmit(submit)}>
