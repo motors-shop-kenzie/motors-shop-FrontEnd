@@ -1,8 +1,8 @@
 import { IoIosArrowUp } from "react-icons/io";
 import whiteLogo from "../../assets/logo/white-logo.svg";
-import styles from "./styles.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./styles.module.scss";
 
 interface IFooterProps {
   path: string;

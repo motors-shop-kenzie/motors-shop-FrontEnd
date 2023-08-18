@@ -7,18 +7,17 @@ import { useContext, useEffect } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { AuthContext } from "@/contexts/Auth/authContext";
-import styles from "./styles.module.scss";
 import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 import { ModalContext } from "@/contexts/Modal";
+import styles from "./styles.module.scss";
 
 const SellerHome: NextPage = () => {
   const { userCars } = useContext(CarsContext);
   const { showModal } = useContext(ModalContext);
-  const { user, autoLogin, loggedUser } = useContext(AuthContext);
+  const { user, loggedUser } = useContext(AuthContext);
  
 
   useEffect(() => {
-    autoLogin();
     loggedUser();
   }, []);
 

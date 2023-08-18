@@ -1,30 +1,12 @@
 "use client";
-
 import { Button } from "@/components/Button";
 import styles from "./styles.module.scss";
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
-import { Input } from "@/components/Input";
-import { InputFocus } from "@/components/Input/InputFocus";
-import { TextArea } from "@/components/Textarea";
-import { InputSectionField } from "@/components/InputSectionField";
-import { Label } from "@/components/Label";
-import { Select } from "@/components/Select";
 import { TCarProduct } from "@/interfaces/CarProduc";
-import { Footer } from "@/components/Footer";
-import { CommentBox } from "@/components/CommentBox";
-import { ProductBox } from "@/components/ProductBox";
-import { ProductCard } from "@/components/ProductCard";
-import { CommentCard } from "@/components/CommetCard";
-import { useContext } from "react";
-import { ModalContext } from "@/contexts/Modal";
-
 import { useModal } from "@/hooks/modalHook";
-import { LoginForm } from "@/components/Forms/Login";
-import { Modal } from "@/components/Modal";
 import { NavBar } from "@/components/NavBar";
 import { TUser } from "@/interfaces/user";
-import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 
 interface HomeProps {

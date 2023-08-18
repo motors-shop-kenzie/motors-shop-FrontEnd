@@ -1,7 +1,6 @@
-import { iChildrenProps } from "@/interfaces";
-import styles from "./styles.module.scss";
-import { UseFormRegisterReturn, useForm } from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 import {  Dispatch, SetStateAction, useState } from "react";
+import styles from "./styles.module.scss";
 
 interface iSelectProps {
   name: string;
@@ -12,12 +11,12 @@ interface iSelectProps {
   setBrand?: Dispatch<SetStateAction<string>> | undefined; 
 }
 
-export const Select = ({ name, id, register, children, setBrand }: iSelectProps) => {
+export const Select = ({ name, id, register, children, setBrand }: iSelectProps | any) => {
   const [selectedValue, setSelectedValue] = useState("");
 
   const handleSelectChange = (event: { target: { value: any } }) => {
     const value = event.target.value;
-    console.log(value)
+  
     setBrand(value);
   };
   return (

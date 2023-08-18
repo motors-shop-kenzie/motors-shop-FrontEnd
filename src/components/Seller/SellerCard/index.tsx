@@ -1,14 +1,10 @@
-import { TUser } from "@/interfaces/user";
-import styles from "./styles.module.scss";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { ModalContext } from "@/contexts/Modal";
+import styles from "./styles.module.scss";
 
-/* interface ISellerCard {
-  user: TUser;
-} */
 
-export const SellerCard = (/* { user }: ISellerCard */) => {
+export const SellerCard = () => {
   const { user } = useContext(AuthContext);
   const { setShowModal } = useContext(ModalContext);
 

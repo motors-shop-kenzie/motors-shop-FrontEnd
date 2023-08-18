@@ -1,22 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { InputSectionField } from "@/components/InputSectionField";
 import { InputFocus } from "@/components/Input/InputFocus";
 import { Input } from "@/components/Input";
-import InputStyles from "../../Input/styles.module.scss";
-import TextAreaStyles from "../../Textarea/style.module.scss";
-import ButtonStyles from "../../Button/styles.module.scss";
 import { Label } from "@/components/Label";
 import { TextArea } from "@/components/Textarea";
 import { Button } from "@/components/Button";
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ModalContext } from "@/contexts/Modal";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { TCarsRegister, TFormCar, carSchemaRegister, formRegisterCar } from "@/schemas/carSchema";
-import styles from "../styles.module.scss";
+import { TFormCar, formRegisterCar } from "@/schemas/carSchema";
 import { Select } from "@/components/Select";
-import { GetServerSideProps } from "next";
+import InputStyles from "../../Input/styles.module.scss";
+import TextAreaStyles from "../../Textarea/style.module.scss";
+import ButtonStyles from "../../Button/styles.module.scss";
 import kenzieApi from "@/services/kenzieApi";
+import styles from "../styles.module.scss";
 
 
 interface IModel {
@@ -35,12 +35,13 @@ export const CreateAnnounceModalForm = () => {
   const [models, setModels] = useState<IModel[]>([])
   const [brand, setBrand] = useState("")
   const [model, setModel] = useState("")
-
+  const [value,setValeu] = useState<boolean>(false)
 
    const getBrands = async () => {
     try{
       const brandsResponse = await kenzieApi.get("/cars");
       setBrands(brandsResponse.data)
+      
     }catch(error){
       console.error(error)
     }
@@ -51,6 +52,7 @@ export const CreateAnnounceModalForm = () => {
     try{
       const modelsResponse = await kenzieApi.get(`/cars?brand=${brand}`);
       setModels(modelsResponse.data)
+
     }catch(error){
       console.error(error)
     }
@@ -63,8 +65,6 @@ useEffect(() =>{
 })()
 },[brand])
 
-
-
   const {
     handleSubmit,
     register,
@@ -74,12 +74,32 @@ useEffect(() =>{
   });
 
 
+  const gasolineFields = (gasoline:number | undefined) =>{
+ 
+  if(gasoline === 1){
+    return "FLEX"
+  }
+  else if(gasoline === 2){
+   return "HIBRID"
+  }
+  else if(gasoline === 3){
+    return "ELECTRIC"
+  }
+  }
+
 
   const submit: SubmitHandler<TFormCar> = (formData: any) => {
-    const obj = { ...formData, name: formData.model, business: true, model: formData.model };
+
+   if (formData.price < formData.tablePife) {
+     setValeu(true)
+  } else {
+    setValeu(false)
+  }
+
+
+    const obj = { ...formData, name: formData.model, business: value, model: formData.model };
     createCars(obj)
-    console.log(obj)
-    console.log(formData)
+
     setShowModal("")
   };
 
@@ -106,6 +126,7 @@ useEffect(() =>{
               </Select>
             </InputFocus>
           </InputSectionField>
+          {errors.brand?.message && <p>{errors.brand?.message }</p>}
           <InputSectionField>
             <Label htmlFor="modelo" name="Modelo" />
             <InputFocus>
@@ -130,20 +151,27 @@ useEffect(() =>{
               </Select>
             </InputFocus>
           </InputSectionField>
+            {errors.model?.message && <p>{errors.model?.message }</p>}
 
           <div className={styles.inputsInRow}>
             <InputSectionField>
-              <Label htmlFor="ano" name="Ano" />
-              <InputFocus>
-                <Input
-                  type="number"
-                  className={InputStyles.basicInputWithBorder}
-                  placeholder="2018"
-                  id="ano"
-                  register={register("year")}
-                />
-              </InputFocus>
+            <Label htmlFor="ano" name="Ano" />
+          <InputFocus>
+           <Input
+            type="number"
+            className={InputStyles.basicInputWithBorder}
+            placeholder="2018"
+            id="ano"
+            register={register("year")}
+            value={
+            models.length > 0
+            ? models.find((item: IModel) => item.name === model)?.year || ""
+            :""
+            }
+            />
+            </InputFocus>
             </InputSectionField>
+              {errors.year?.message && <p>{errors.year?.message }</p>}
             <InputSectionField>
               <Label htmlFor="combustivel" name="Combustível" />
               <InputFocus>
@@ -153,9 +181,15 @@ useEffect(() =>{
                   placeholder="Gasolina / Etanol"
                   id="combustivel"
                   register={register("gasoline")}
+                  value={
+                  models.length > 0
+                  ? gasolineFields(models.find((item: IModel) => item.name === model)?.fuel) || ""
+                   : ""
+  }
                 />
               </InputFocus>
             </InputSectionField>
+             
           </div>
 
           <div className={styles.inputsInRow}>
@@ -171,6 +205,7 @@ useEffect(() =>{
                 />
               </InputFocus>
             </InputSectionField>
+              {errors.km?.message && <p>{errors.km?.message }</p>}
             <InputSectionField>
               <Label htmlFor="cor" name="Cor" />
               <InputFocus>
@@ -183,6 +218,7 @@ useEffect(() =>{
                 />
               </InputFocus>
             </InputSectionField>
+              {errors.color?.message && <p>{errors.color?.message }</p>}
           </div>
           <div className={styles.inputsInRow}>
             <InputSectionField>
@@ -194,9 +230,15 @@ useEffect(() =>{
                   placeholder="R$48.000,00"
                   id="preco-tabela"
                   register={register("tablePife")}
+                  value={
+                  models.length > 0
+                  ? models.find((item: IModel) => item.name === model)?.value.toFixed(2) || ""
+                  :""
+            }
                 />
               </InputFocus>
             </InputSectionField>
+              {errors.tablePife?.message && <p>{errors.tablePife?.message }</p>}
             <InputSectionField>
               <Label htmlFor="preco" name="Preço" />
               <InputFocus>
@@ -209,6 +251,7 @@ useEffect(() =>{
                 />
               </InputFocus>
             </InputSectionField>
+              {errors.price?.message && <p>{errors.price?.message }</p>}
           </div>
 
           <InputSectionField>
@@ -222,6 +265,7 @@ useEffect(() =>{
               />
             </InputFocus>
           </InputSectionField>
+            {errors.description?.message && <p>{errors.description?.message }</p>}
 
           <InputSectionField>
             <Label htmlFor="imagem-capa" name="Imagem da capa" />

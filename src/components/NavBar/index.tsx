@@ -6,22 +6,11 @@ import Link from "next/link";
 import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
-import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
+import styles from "./styles.module.scss";
 
-/**
- * Props for the NavBar component.
- *
- * @interface INavBarProps
- *
- */
 interface INavBarProps {}
 
-/**
- * Navigation bar component that displays different content based on user's login status and role.
- *
- * @param {INavBarProps} props - The props for the NavBar component.
- */
 export const NavBar = (props: INavBarProps) => {
   const { user, logout } = useAuth();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
