@@ -1,8 +1,8 @@
 import { BiDollar } from "react-icons/bi";
 import Image from "next/image";
-import styles from "./styles.module.scss";
 import { UserHeader } from "../UserHeader";
 import { TCarProduct } from "@/interfaces/CarProduc";
+import styles from "./styles.module.scss";
 
 interface CardProps {
   car: TCarProduct;

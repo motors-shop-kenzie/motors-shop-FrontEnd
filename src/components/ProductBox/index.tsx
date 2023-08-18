@@ -1,6 +1,5 @@
-
-import styles from "./styles.module.scss";
 import { iChildrenProps } from "@/interfaces";
+import styles from "./styles.module.scss";
 
 export  const ProductBox = ({ children }: iChildrenProps) => {
     return(

@@ -7,6 +7,5 @@ export interface IAuthContext {
   registerUser: (data: TUserRegisterResquest) => void;
   loginUser: (data: TUserLogin) => void;
   logout: () => void;
-  autoLogin: () => Promise<void>;
   loggedUser: () => Promise<void>;
 }

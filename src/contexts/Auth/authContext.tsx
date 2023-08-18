@@ -1,17 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { iChildrenProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { TUser, TUserLogin, TUserRegisterResquest } from "@/interfaces/user";
 import { IAuthContext } from "./interface";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
+import { CarsContext } from "../Cars/CarsContext";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
+  const { getAllCarsRequest, getUserCars} = useContext(CarsContext)
   const router = useRouter();
 
   const cookies = parseCookies();
@@ -53,21 +56,6 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     window.location.reload();
   }
 
-  const autoLogin = async () => {
-    if (token) {
-      try {
-        const response = await api.get("/users", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setUser(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  };
 
   const loggedUser = async () => {
     if (token) {
@@ -85,14 +73,15 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     }
   };
 
-  useEffect(() => {
-    autoLogin();
+  useEffect(() =>  {
+    getAllCarsRequest()
+    getUserCars()
     loggedUser();
   }, [token]);
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, registerUser, loginUser, autoLogin, loggedUser, logout }}
+      value={{ user, setUser, registerUser, loginUser,  loggedUser, logout }}
     >
       {children}
     </AuthContext.Provider>

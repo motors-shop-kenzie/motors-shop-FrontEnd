@@ -1,4 +1,3 @@
-import styles from "./styles.module.scss";
 
 interface iButtonProps {
   type?: "button" | "submit" | "reset";

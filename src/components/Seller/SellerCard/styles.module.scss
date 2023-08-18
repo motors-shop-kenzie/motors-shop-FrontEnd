@@ -62,7 +62,7 @@
 }
 
 .container__sellerSection > button {
-  width: 50%;
+  width: 60%;
   height: 40px;
 
   font-size: 1rem;
@@ -75,21 +75,19 @@
 
 @media (min-width: 424px) {
   .container__sellerSection > button {
-    width: 35%;
+    width: 50%;
   }
 }
 
 @media (min-width: 767px) {
   .container__sellerSection > button {
-    width: 19%;
+    width: 25%;
+
     height: 42px;
   }
 }
 
 @media (min-width: 1023px) {
-  /*   .container__sellerSection {
-    margin: 0 3rem;
-  } */
 
   .container__divSellerType {
     gap: 1.5rem;
@@ -97,15 +95,15 @@
 
   .container__sellerSection > button {
     font-size: 1.3rem;
-    width: 19%;
+
+    height: 45px;
+
+    width: 28%;
   }
 }
 
 @media (min-width: 1439px) {
-  /*   .container__sellerDivName {
-    width: 40px;
-    height: 35px;
-  } */
+
 
   .container__sellerDivName > h3 {
     font-size: 2rem;
@@ -133,6 +131,6 @@
 
     font-size: 1.5rem;
 
-    width: 14%;
+    width: 22%;
   }
 }

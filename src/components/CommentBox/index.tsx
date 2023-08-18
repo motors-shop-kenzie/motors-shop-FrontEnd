@@ -1,5 +1,5 @@
-import styles from "./styles.module.scss";
 import { iChildrenProps } from "@/interfaces";
+import styles from "./styles.module.scss";
 
 export const CommentBox = ({ children }: iChildrenProps) => {
     return(

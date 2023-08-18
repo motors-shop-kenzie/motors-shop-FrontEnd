@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-
 import { iChildrenProps } from "@/interfaces";
 import { createContext, useEffect, useState } from "react";
 import { ICarsContext } from "./interface";
@@ -34,6 +33,9 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       });
 
       setCars(response.data);
+
+      await getAllCarsRequest()
+      await getUserCars()
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +66,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   useEffect(() => {
     (async () => {
+      api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
       await getAllCarsRequest();
       await getUserCars();
     })();

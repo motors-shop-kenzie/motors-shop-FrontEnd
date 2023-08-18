@@ -36,13 +36,13 @@ export const userSchema = z.object({
 });
 
 export const userSchemaRegister = z.object({
-  name: z.string(),
-  email: z.string().email(),
-  password: z.string(),
-  cpf: z.string().max(11),
-  telephone: z.string(),
+  name: z.string().nonempty({message:"*"}),
+  email: z.string().email({message:"Email inválido!"}).nonempty({message:"*"}),
+  password: z.string().nonempty({message:"*"}),
+  cpf: z.string().max(11).nonempty({message:"*"}),
+  telephone: z.string().nonempty({message:"*"}),
   description: z.string().optional(),
-  birthdate: z.string(),
+  birthdate: z.string().nonempty({message:"*"}),
   address: addressSchemaRegister.optional(),
 });
 
@@ -51,8 +51,8 @@ export const userSchemaRegisterRequest = userSchemaRegister.extend({
 });
 
 export const userSchemaLogin = z.object({
-  email: z.string(),
-  password: z.string(),
+  email: z.string().nonempty({message:"*"}),
+  password: z.string().nonempty({message:"*"}),
 });
 
 export const userSchemaUpdate = userSchemaRegister.optional();

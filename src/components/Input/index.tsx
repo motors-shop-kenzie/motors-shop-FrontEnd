@@ -6,6 +6,7 @@ interface IInputProps {
   className: string;
   id: string;
   register?: UseFormRegisterReturn<string>;
+  value?:any
 }
 
 export const Input = ({
@@ -14,6 +15,7 @@ export const Input = ({
   className,
   id,
   register,
+  value
 }: IInputProps) => {
   return (
     <input
@@ -22,6 +24,7 @@ export const Input = ({
       placeholder={placeholder}
       className={className}
       id={id}
+      value={value}
     />
   );
 };
