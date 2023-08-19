@@ -23,7 +23,7 @@ export const ProductSellerCard = ({ car, user }: CardProps) => {
           <div className={styles.nonactive}>Inativo</div>
         )}
         <Image width={300} height={150} src={car.coverImg} alt="Car image" />
-        <p className={styles.title}>{car.name}</p>
+        <p className={styles.title}>{car.model}</p>
       </div>
       <div className={styles.desc}>{car.description}</div>
       <UserHeader user={user} index={user?.id} letter={user?.name?.charAt(0)} />
