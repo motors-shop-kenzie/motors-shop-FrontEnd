@@ -16,7 +16,7 @@ import styles from "../styles.module.scss";
 
 export const RegisterForm = () => {
   const [accType, setAccType] = useState(Boolean);
-  const [buttonType, setButtonType] = useState(true)
+  const [buttonType, setButtonType] = useState(true);
   const { registerUser } = useContext(AuthContext);
 
   const {
@@ -52,7 +52,7 @@ export const RegisterForm = () => {
                 />
               </InputFocus>
             </InputSectionField>
-            {errors.name?.message && <p>{errors.name?.message }</p>}
+            {errors.name?.message && <p>{errors.name?.message}</p>}
 
             <InputSectionField>
               <Label htmlFor="email" name="Email" />
@@ -67,7 +67,7 @@ export const RegisterForm = () => {
               </InputFocus>
             </InputSectionField>
             <p>{errors.email?.message && errors.email?.message}</p>
-            
+
             <InputSectionField>
               <Label htmlFor="cpf" name="CPF" />
               <InputFocus>
@@ -104,7 +104,7 @@ export const RegisterForm = () => {
                   placeholder="00/00/00"
                   id="birthdate"
                 />
-                 <p>{errors.birthdate?.message && errors.birthdate?.message}</p>
+                <p>{errors.birthdate?.message && errors.birthdate?.message}</p>
               </InputFocus>
             </InputSectionField>
             <InputSectionField>
@@ -117,7 +117,7 @@ export const RegisterForm = () => {
                   placeholder="Digitar descrição"
                   id="description"
                 />
-                 <p>{errors.description?.message && errors.description?.message}</p>
+                <p>{errors.description?.message && errors.description?.message}</p>
               </InputFocus>
             </InputSectionField>
           </div>
@@ -135,7 +135,7 @@ export const RegisterForm = () => {
                   placeholder="000.000-00"
                   id="cep"
                 />
-                 <p>{errors.address?.zip_code?.message && errors.address?.zip_code?.message}</p>
+                <p>{errors.address?.zip_code?.message && errors.address?.zip_code?.message}</p>
               </InputFocus>
             </InputSectionField>
 
@@ -150,7 +150,6 @@ export const RegisterForm = () => {
                     placeholder="Digitar Estado"
                     id="estate"
                   />
-
                 </InputFocus>
               </InputSectionField>
               <InputSectionField>
@@ -163,7 +162,6 @@ export const RegisterForm = () => {
                     placeholder="Digitar cidade"
                     id="city"
                   />
-                
                 </InputFocus>
               </InputSectionField>
             </div>
@@ -178,7 +176,6 @@ export const RegisterForm = () => {
                   placeholder="Digitar rua"
                   id="street"
                 />
-              
               </InputFocus>
             </InputSectionField>
 
@@ -193,7 +190,6 @@ export const RegisterForm = () => {
                     placeholder="Digitar número"
                     id="number"
                   />
-                
                 </InputFocus>
               </InputSectionField>
               <InputSectionField>
@@ -206,7 +202,6 @@ export const RegisterForm = () => {
                     placeholder="Ex: apto 10"
                     id="complement"
                   />
-                
                 </InputFocus>
               </InputSectionField>
             </div>
@@ -242,7 +237,7 @@ export const RegisterForm = () => {
                   id="password"
                 />
               </InputFocus>
-                <p>{errors && errors.password?.message}</p>
+              <p>{errors && errors.password?.message}</p>
             </InputSectionField>
             <InputSectionField>
               <Label htmlFor="password_confirmation" name="Confirmar senha" />
@@ -254,7 +249,7 @@ export const RegisterForm = () => {
                   id="password_confirmation"
                 />
               </InputFocus>
-                <p>{errors && errors.password?.message}</p>
+              <p>{errors && errors.password?.message}</p>
             </InputSectionField>
           </div>
 
@@ -268,4 +263,3 @@ export const RegisterForm = () => {
     </div>
   );
 };
-

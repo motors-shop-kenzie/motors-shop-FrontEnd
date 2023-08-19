@@ -1,16 +1,15 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
-import { AuthContext } from "@/contexts/Auth/authContext";
 import { SendEmailResetPasswordData } from "@/interfaces/user";
 import { sendEmailResetPasswordSchema } from "@/schemas/userSchema";
+import { useAuth } from "@/hooks/useAuth.hook";
 
 export const SendEmailForm = () => {
   const { register, handleSubmit } = useForm<SendEmailResetPasswordData>({
     resolver: zodResolver(sendEmailResetPasswordSchema),
   });
 
-  const { sendEmail } = useContext(AuthContext);
+  const { sendEmail } = useAuth();
 
   const onFormSubmit = (formData: SendEmailResetPasswordData) => {
     sendEmail(formData);

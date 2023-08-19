@@ -14,7 +14,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const [cars, setCars] = useState<Car[]>([]);
   const [userCars, setUserCars] = useState<Car[]>([]);
   const [filterData, setFilterData] = useState<Car[]>([]);
-  
 
   const cookies = parseCookies();
 
@@ -34,8 +33,8 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
       setCars(response.data);
 
-      await getAllCarsRequest()
-      await getUserCars()
+      await getAllCarsRequest();
+      await getUserCars();
     } catch (error) {
       console.log(error);
     }
