@@ -118,7 +118,7 @@ export const CreateAnnounceModalForm = () => {
     if (formData.price < formData.tablePife) setGoodDeal(true);
     else setGoodDeal(false);
 
-    const obj = { ...formData, name: formData.model, business: goodDeal, model: formData.model };
+    const obj = { ...formData, business: goodDeal };
     createCars(obj);
     setInputImage(2);
     setShowModal("");

@@ -18,7 +18,7 @@ export const ProductCard = ({ car }: CardProps) => {
           </div>
         )}
         <Image width={300} height={150} src={car.coverImg} alt="Car image" />
-        <p className={styles.title}>{car.name}</p>
+        <p className={styles.title}>{car.model}</p>
       </div>
       <div className={styles.desc}>{car.description}</div>
       <UserHeader
