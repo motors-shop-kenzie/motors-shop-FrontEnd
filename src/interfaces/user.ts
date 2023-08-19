@@ -2,6 +2,8 @@ import {
   addressSchema,
   addressSchemaRegister,
   addressSchemaUpdate,
+  resetPasswordSchema,
+  sendEmailResetPasswordSchema,
   userSchema,
   userSchemaLogin,
   userSchemaRegister,
@@ -25,3 +27,7 @@ export type TAddress = z.infer<typeof addressSchema>;
 export type TAddressRegister = z.infer<typeof addressSchemaRegister>;
 
 export type TAddressUpdate = z.infer<typeof addressSchemaUpdate>;
+
+export type ResetPasswordData = z.infer<typeof resetPasswordSchema>;
+
+export type SendEmailResetPasswordData = z.infer<typeof sendEmailResetPasswordSchema>;

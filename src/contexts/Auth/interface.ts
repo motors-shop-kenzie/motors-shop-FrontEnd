@@ -1,4 +1,10 @@
-import { TUser, TUserLogin, TUserRegisterResquest } from "@/interfaces/user";
+import {
+  ResetPasswordData,
+  SendEmailResetPasswordData,
+  TUser,
+  TUserLogin,
+  TUserRegisterResquest,
+} from "@/interfaces/user";
 import { Dispatch, SetStateAction } from "react";
 
 export interface IAuthContext {
@@ -8,4 +14,6 @@ export interface IAuthContext {
   loginUser: (data: TUserLogin) => void;
   logout: () => void;
   loggedUser: () => Promise<void>;
+  sendEmail: (sendEmailResetPasswordData: SendEmailResetPasswordData) => void;
+  resetPassword: (resetPasswordData: ResetPasswordData, token: string) => void;
 }
