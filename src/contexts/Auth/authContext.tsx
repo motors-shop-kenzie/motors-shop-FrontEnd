@@ -93,7 +93,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
         router.push("/");
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" });
       });
   };
@@ -106,7 +106,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
         router.push("/login");
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         Toast({ message: "Erro ao atualizar a senha" });
       });
   };
