@@ -4,17 +4,24 @@
 import { iChildrenProps } from "@/interfaces";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
-import { TUser, TUserLogin, TUserRegisterResquest } from "@/interfaces/user";
+import {
+  ResetPasswordData,
+  SendEmailResetPasswordData,
+  TUser,
+  TUserLogin,
+  TUserRegisterResquest,
+} from "@/interfaces/user";
 import { IAuthContext } from "./interface";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 import { CarsContext } from "../Cars/CarsContext";
+import Toast from "@/components/Toast";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
-  const { getAllCarsRequest, getUserCars} = useContext(CarsContext)
+  const { getAllCarsRequest, getUserCars } = useContext(CarsContext);
   const router = useRouter();
 
   const cookies = parseCookies();
@@ -50,12 +57,11 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
   };
 
   const logout = () => {
-    const cookie = 'ccm.token';
+    const cookie = "ccm.token";
     destroyCookie(null, cookie);
-    router.push("/")
+    router.push("/");
     window.location.reload();
-  }
-
+  };
 
   const loggedUser = async () => {
     if (token) {
@@ -73,15 +79,41 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     }
   };
 
-  useEffect(() =>  {
-    getAllCarsRequest()
-    getUserCars()
+  useEffect(() => {
+    getAllCarsRequest();
+    getUserCars();
     loggedUser();
   }, [token]);
 
+  const sendEmail = (sendEmailResetPasswordData: SendEmailResetPasswordData) => {
+    api
+      .post("/users/resetPassword", sendEmailResetPasswordData)
+      .then(() => {
+        Toast({ message: "E-mail enviado com sucesso !", isSucess: true });
+        router.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" });
+      });
+  };
+
+  const resetPassword = (resetPasswordData: ResetPasswordData, token: string) => {
+    api
+      .patch(`/users/resetPassword/${token}`, { password: resetPasswordData.password })
+      .then(() => {
+        Toast({ message: "Senha atualizada sucesso !", isSucess: true });
+        router.push("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+        Toast({ message: "Erro ao atualizar a senha" });
+      });
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, setUser, registerUser, loginUser,  loggedUser, logout }}
+      value={{ user, setUser, registerUser, loginUser, loggedUser, logout, sendEmail, resetPassword }}
     >
       {children}
     </AuthContext.Provider>
