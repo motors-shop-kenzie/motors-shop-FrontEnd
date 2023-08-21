@@ -36,7 +36,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       await getAllCarsRequest();
       await getUserCars();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
