@@ -15,7 +15,7 @@ export const NavBar = (props: INavBarProps) => {
   const { user, logout } = useAuth();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const toggleMenu = () => setOpenMenu(!openMenu);
-  const router = useRouter();
+  const { push } = useRouter();
 
   return (
     <nav className={styles.container}>
@@ -65,7 +65,7 @@ export const NavBar = (props: INavBarProps) => {
         <ul className={styles.options__logged}>
           <li onClick={() => alert(`"Editar Perfil" ainda não implementado`)}>Editar Perfil</li>
           <li onClick={() => alert(`"Editar Endereço" ainda não implementado`)}>Editar Endereço</li>
-          {user.isAdmin && <li onClick={() => router.push("/SellerHome")}>Meus Anúncios</li>}
+          {user.isAdmin && <li onClick={() => push(`/SellerHome/${user.id}`)}>Meus Anúncios</li>}
           <li onClick={() => logout()}>Sair</li>
         </ul>
       )}
