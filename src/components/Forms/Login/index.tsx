@@ -4,17 +4,18 @@ import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
 import { Label } from "@/components/Label";
 import { Button } from "@/components/Button";
- import InputStyles from "../../Input/styles.module.scss";
- import ButtonStyles from "../../Button/styles.module.scss";
- import { InputSectionField } from "@/components/InputSectionField";
- import { zodResolver } from "@hookform/resolvers/zod";
- import { useForm } from "react-hook-form";
- import { userSchemaLogin } from "@/schemas/userSchema";
- import { TUserLogin } from "@/interfaces/user";
- import { useRouter } from "next/router";
- import { useContext } from "react";
- import { AuthContext } from "@/contexts/Auth/authContext";
- import styles from "../styles.module.scss";
+import InputStyles from "../../Input/styles.module.scss";
+import ButtonStyles from "../../Button/styles.module.scss";
+import { InputSectionField } from "@/components/InputSectionField";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { userSchemaLogin } from "@/schemas/userSchema";
+import { TUserLogin } from "@/interfaces/user";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/Auth/authContext";
+import styles from "../styles.module.scss";
+import Link from "next/link";
 
 export const LoginForm = () => {
   const { loginUser } = useContext(AuthContext);
@@ -30,7 +31,6 @@ export const LoginForm = () => {
   const submit = (formData: TUserLogin) => {
     loginUser(formData);
   };
-
 
   return (
     <div className={styles.loginContainer}>
@@ -51,7 +51,7 @@ export const LoginForm = () => {
                 />
               </InputFocus>
             </InputSectionField>
-            { errors.email?.message && <p>{ errors.email?.message}</p> }
+            {errors.email?.message && <p>{errors.email?.message}</p>}
 
             <InputSectionField>
               <Label htmlFor="password" name="Senha" />
@@ -65,10 +65,10 @@ export const LoginForm = () => {
                 />
               </InputFocus>
             </InputSectionField>
-             { errors.password?.message && <p>{ errors.password?.message}</p> }
+            {errors.password?.message && <p>{errors.password?.message}</p>}
           </div>
 
-          <p>Esqueci minha senha</p>
+          <Link href="/resetPassword">Esqueci minha senha</Link>
 
           <div className={styles.buttonsSection}>
             <Button className={ButtonStyles.brand1Button} text="Entrar" />

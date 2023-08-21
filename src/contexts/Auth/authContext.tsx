@@ -22,7 +22,7 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
   const { getAllCarsRequest, getUserCars } = useContext(CarsContext);
-  const router = useRouter();
+  const { push } = useRouter();
 
   const cookies = parseCookies();
 
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       .then((res) => {
         const userData = res.data;
         setUser(userData);
-        router.push("/login");
+        push("/login");
       })
       .catch((error) => console.error(error));
   };
@@ -48,10 +48,10 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       .post(`/login`, data)
       .then((response) => {
         setCookie(null, "ccm.token", response.data.token, {
-          maxAge: 60 * 40,
+          maxAge: 60 * 240,
           path: "/",
         }),
-          router.push("/");
+          push("/");
       })
       .catch((error) => console.error(error));
   };
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
   const logout = () => {
     const cookie = "ccm.token";
     destroyCookie(null, cookie);
-    router.push("/");
+    push("/");
     window.location.reload();
   };
 
@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       .post("/users/resetPassword", sendEmailResetPasswordData)
       .then(() => {
         Toast({ message: "E-mail enviado com sucesso !", isSucess: true });
-        router.push("/");
+        push("/");
       })
       .catch((err) => {
         console.error(err);
@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       .patch(`/users/resetPassword/${token}`, { password: resetPasswordData.password })
       .then(() => {
         Toast({ message: "Senha atualizada sucesso !", isSucess: true });
-        router.push("/login");
+        push("/login");
       })
       .catch((err) => {
         console.error(err);

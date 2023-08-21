@@ -55,7 +55,7 @@
         }
       }
 
-      > p {
+      > .linkPassword {
         margin: 10px 10px 0 0;
 
         color: $color-grey-scale-grey-2;
@@ -140,6 +140,7 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .modalContainer {
   border-radius: $modal-radius;
   width: 100%;
