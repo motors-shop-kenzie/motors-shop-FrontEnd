@@ -43,7 +43,6 @@ export const CreateAnnounceModalForm = () => {
   const [models, setModels] = useState<IModel[]>([]);
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
-  const [goodDeal, setGoodDeal] = useState<boolean>(false);
   const [inputImage, setInputImage] = useState(2);
 
   const renderComponentes = () => {
@@ -115,10 +114,8 @@ export const CreateAnnounceModalForm = () => {
   }, [brand, model]);
 
   const submit: SubmitHandler<TFormCar> = (formData: any) => {
-    if (formData.price < formData.tablePife) setGoodDeal(true);
-    else setGoodDeal(false);
-
-    const obj = { ...formData, business: goodDeal };
+    
+    const obj = { ...formData, business: formData.price < formData.tablePife };
     createCars(obj);
     setInputImage(2);
     setShowModal("");
