@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SendEmailResetPasswordData } from "@/interfaces/user";
 import { sendEmailResetPasswordSchema } from "@/schemas/userSchema";
 import { useAuth } from "@/hooks/useAuth.hook";
+import styles from "../styles.module.scss";
 
 export const SendEmailForm = () => {
   const { register, handleSubmit } = useForm<SendEmailResetPasswordData>({
@@ -16,16 +17,18 @@ export const SendEmailForm = () => {
   };
 
   return (
-    <div>
+    <div className={styles.resetForm}>
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        <div>
-          <label htmlFor="email">Informe um e-mail para a recuperação de senha</label>
-          <div>
+        <div className={styles.input}>
+          <label htmlFor="email">Informe um e-mail cadastrado para a recuperação de senha</label>
+          
             <input type="email" placeholder="example@.com" {...register("email")} />
-          </div>
+          
         </div>
         <div>
-          <button type="submit">Enviar</button>
+          <button className={styles.brand1Button} type="submit">
+            Enviar
+          </button>
         </div>
       </form>
     </div>

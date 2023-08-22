@@ -68,7 +68,9 @@ export const LoginForm = () => {
             {errors.password?.message && <p>{errors.password?.message}</p>}
           </div>
 
-          <Link href="/resetPassword">Esqueci minha senha</Link>
+          <div className={styles.link}>
+            <Link href="/ResetPassword">Esqueci minha senha</Link>
+          </div>
 
           <div className={styles.buttonsSection}>
             <Button className={ButtonStyles.brand1Button} text="Entrar" />

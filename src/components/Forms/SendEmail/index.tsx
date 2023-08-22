@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { resetPasswordSchema } from "@/schemas/userSchema";
 import { ResetPasswordData } from "@/interfaces/user";
 import { useAuth } from "@/hooks/useAuth.hook";
+import styles from "../styles.module.scss";
 
 interface ResetPasswordFormProps {
   token: string;
@@ -20,23 +21,25 @@ export const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
   };
 
   return (
-    <div>
-      <p>Recuperação de senha</p>
+    <div className={styles.resetForm}>
+      <h2>Recuperação de senha</h2>
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        <div>
+        <div className={styles.input}>
           <label htmlFor="email">Nova senha</label>
-          <div>
+          
             <input type="password" placeholder="Sua nova senha" className="user-form-input" {...register("password")} />
-          </div>
+          
         </div>
-        <div>
+        <div className={styles.input}>
           <label htmlFor="password">Confirmação da senha</label>
-          <div className="mt-2">
+          
             <input type="password" placeholder="Confirmação da senha" {...register("passwordConfirm")} />
-          </div>
+         
         </div>
         <div>
-          <button type="submit">Atualizar senha</button>
+          <button className={styles.brand1Button} type="submit">
+            Atualizar senha
+          </button>
         </div>
       </form>
     </div>

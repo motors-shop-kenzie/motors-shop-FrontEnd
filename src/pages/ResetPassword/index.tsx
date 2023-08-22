@@ -7,8 +7,10 @@ const SendEmailResetPassword: NextPage = () => {
   const { back } = useRouter();
   return (
     <main className={styles.body}>
+      <button className={styles.grey10BorderGrey0Button} onClick={() => back()}>
+        Voltar
+      </button>
       <SendEmailForm />
-      <button onClick={() => back()}>Voltar</button>
     </main>
   );
 };
