@@ -38,9 +38,12 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       .then((res) => {
         const userData = res.data;
         setUser(userData);
+        Toast({ message: "Cadastro efetuado com sucesso !", isSucess: true });
         push("/login");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error), Toast(error);
+      });
   };
 
   const loginUser = (data: TUserLogin) => {
@@ -51,9 +54,12 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
           maxAge: 60 * 240,
           path: "/",
         }),
-          push("/");
+          Toast({ message: "Login efetuado com sucesso !", isSucess: true });
+        push("/");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error), Toast(error);
+      });
   };
 
   const logout = () => {

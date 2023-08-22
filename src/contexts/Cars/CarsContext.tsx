@@ -7,6 +7,7 @@ import { Car } from "@/interfaces/CarFilter";
 import api from "@/services/api";
 import { parseCookies } from "nookies";
 import { TCarsRegister } from "@/schemas/carSchema";
+import Toast from "@/components/Toast";
 
 export const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 
@@ -32,11 +33,12 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       });
 
       setCars(response.data);
-
+      Toast({ message: "Anúncio criado com sucesso !", isSucess: true });
       await getAllCarsRequest();
       await getUserCars();
     } catch (error) {
       console.error(error);
+      Toast({ message: "Tente novamente" });
     }
   };
 
