@@ -7,11 +7,11 @@ interface ModalProps {
 }
 
 export const Modal = ({ title, children }: ModalProps) => {
-  const { setShowModal } = useModal();
+  const { setShowModal, closeModal, showModal } = useModal();
 
   return (
-    <div className={styles.container}>
-      <div className={styles.modal}>
+    <div className={styles.container} onClick={showModal != "" ? closeModal : undefined}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <header className={styles.header}>
           <h4 className={styles.title}>{title}</h4>
           <div className={styles.close} onClick={() => setShowModal("")}>

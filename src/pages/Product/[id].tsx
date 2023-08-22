@@ -17,6 +17,7 @@ const ProductPage: NextPage = () => {
   const { replace, query } = useRouter();
   const { userCars, singleCar, getSingleCar, cars } = useContext(CarsContext);
   const { showModal } = useContext(ModalContext);
+  const { closeNavBar, openNavBar } = useContext(AuthContext);
   const { id } = query;
 
   console.log(id);

@@ -21,6 +21,11 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
+
+  const [openNavBar, setOpenNavBar] = useState<boolean>(false);
+  const toggleNavBar = () => setOpenNavBar(!openNavBar);
+  const closeNavBar = () => setOpenNavBar(false)
+
   const { getAllCarsRequest, getUserCars } = useContext(CarsContext);
   const { push } = useRouter();
 
@@ -95,12 +100,12 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     api
       .post("/users/resetPassword", sendEmailResetPasswordData)
       .then(() => {
-        /*         Toast({ message: "E-mail enviado com sucesso !", isSucess: true });
-        push("/"); */
+        Toast({ message: "E-mail enviado com sucesso !", isSucess: true });
+        push("/");
       })
       .catch((err) => {
         console.error(err);
-        /*   Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" }); */
+        Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" });
       });
   };
 
@@ -108,19 +113,31 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     api
       .patch(`/users/resetPassword/${token}`, { password: resetPasswordData.password })
       .then(() => {
-        /*         Toast({ message: "Senha atualizada sucesso !", isSucess: true });
-        push("/login"); */
+        Toast({ message: "Senha atualizada sucesso !", isSucess: true });
+        push("/login");
       })
       .catch((err) => {
         console.error(err);
-        /*         Toast({ message: "Erro ao atualizar a senha" });
-         */
+        Toast({ message: "Erro ao atualizar a senha" });
       });
   };
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, registerUser, loginUser, loggedUser, logout, sendEmail, resetPassword }}
+      value={{
+        user,
+        setUser,
+        registerUser,
+        loginUser,
+        loggedUser,
+        logout,
+        sendEmail,
+        resetPassword,
+        openNavBar,
+        setOpenNavBar,
+        toggleNavBar,
+        closeNavBar,
+      }}
     >
       {children}
     </AuthContext.Provider>
