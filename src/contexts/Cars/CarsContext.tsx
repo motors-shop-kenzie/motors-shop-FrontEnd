@@ -68,13 +68,14 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   };
 
   const getSingleCar = async (id: string) => {
-      try {
-        const response = await api.get(`/cars/${id}`);
-        const data = response.data;
-        setSingleCar(data);
-      } catch (error) {
-        console.error(error);
-      }
+    try {
+      const response = await api.get(`/cars/${id}`);
+      const data = response.data;
+      console.log(data);
+      setSingleCar(data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {

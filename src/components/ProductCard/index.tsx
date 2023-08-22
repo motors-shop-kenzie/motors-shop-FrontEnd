@@ -3,12 +3,17 @@ import Image from "next/image";
 import { UserHeader } from "../UserHeader";
 import { TCarProduct } from "@/interfaces/CarProduc";
 import styles from "./styles.module.scss";
+import { useRouter } from "next/router";
 
 interface CardProps {
   car: TCarProduct;
 }
 
 export const ProductCard = ({ car }: CardProps) => {
+  const { push } = useRouter();
+  const redirect = () => {
+    push(`/Product/${car.id}`);
+  };
   return (
     <div className={styles.card}>
       <div className={styles.img}>
@@ -17,10 +22,12 @@ export const ProductCard = ({ car }: CardProps) => {
             <BiDollar />
           </div>
         )}
-        <Image width={300} height={150} src={car.coverImg} alt="Car image" />
-        <p className={styles.title}>{car.model}</p>
+        <div onClick={() => redirect()}>
+          <Image width={300} height={150} src={car.coverImg} alt="Car image" />
+          <p className={styles.title}>{car.model}</p>
+          <div className={styles.desc}>{car.description}</div>
+        </div>
       </div>
-      <div className={styles.desc}>{car.description}</div>
 
       <UserHeader user={car.user} letter={car.user.name.charAt(0)} userId={car.userId} />
       <div className={styles.carInfo}>
