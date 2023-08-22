@@ -33,7 +33,7 @@ const SellerHome: NextPage = () => {
 
     destroyCookie(null, cookie);
 
-    replace("/login");
+    replace("/");
     return null;
   }
 
