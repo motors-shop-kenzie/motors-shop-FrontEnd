@@ -1,5 +1,22 @@
 @use "../../sass/abstracts/variables" as *;
+@use "../../sass/abstracts/mixins" as *;
 
+.link {
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: $body-2-400;
+  font-weight: $regular-weight;
+
+  color: $color-random-random-6;
+  text-align: end;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: $color-random-random-6;
+}
+
+.resetForm,
 .loginContainer,
 .registerContainer {
   h1 {
@@ -139,6 +156,8 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
+
 }
 
 .modalContainer {
@@ -232,3 +251,63 @@
     font-weight: $bold-weight;
   }
 }
+
+.brand1Button {
+  width: 100%;
+  @include buttonBasic(
+    none,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-brand-brand-1, $color-colors-fixed-white-fixed);
+}
+
+
+.resetForm {
+  padding-bottom: 60px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  text-align: justify;
+
+  h2{
+    font-size: 1.5rem;
+
+  }
+
+  form{
+    margin-top: 50px;
+    div{
+      padding: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+
+      padding: 20px 28px;
+      div{
+        margin-top: 0px;
+        padding: auto;
+      }
+    }
+  }
+
+  input{
+    width: 97%;
+    margin-top: 10px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+ 
+
+}
+
+
+
+
