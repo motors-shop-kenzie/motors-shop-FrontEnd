@@ -10,6 +10,13 @@ import { NavBar } from "@/components/NavBar";
 import api from "@/services/api";
 import { TUser } from "@/interfaces/user";
 
+import ProductCoverImage from "@/components/ProductImage";
+import ProductInfos from "@/components/ProductInfos";
+
+import styles from "./styles.module.scss";
+import ProductDescription from "@/components/ProductDescription";
+import ProfileUserInfos from "@/components/ProfileUserInfos";
+
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
   const { singleCar, getSingleCar, cars } = useContext(CarsContext);
@@ -33,20 +40,23 @@ const ProductPage: NextPage = () => {
       .catch((error) => console.error(error));
   };
 
-  // tags h3 com informações diversas apenas pra ilustrar que os dados estão chegando corretamente
-
   return (
     <>
-      <NavBar />
-      <Image src={singleCar!.coverImg} alt="Imagem de capa" width={300} height={150} />
-      <h3>{singleCar?.model}</h3>
-      <h3>{singleCar?.brand}</h3>
-      <h3>{singleCar?.description}</h3>
-
-      <br />
-      <h3>{userRelated?.name} </h3>
-      <h3>{userRelated?.description} </h3>
-      <h3>{userRelated?.id} </h3>
+      <header>
+        <NavBar />
+      </header>
+      <main className={styles.mainContainer}>
+        <span className={styles.purpleBg}></span>
+        <section className={styles.carInfoSection}>
+          <ProductCoverImage />
+          <ProductInfos />
+          <ProductDescription />
+        </section>
+        <aside className={styles.asideContainer}>
+          <div></div>
+          <ProfileUserInfos />
+        </aside>
+      </main>
     </>
   );
 };

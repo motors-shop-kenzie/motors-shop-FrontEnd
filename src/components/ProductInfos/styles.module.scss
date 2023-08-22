@@ -1,0 +1,61 @@
+@use "../../sass/abstracts/variables" as *;
+
+.carInfosDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  padding: 28px;
+
+  background-color: $color-grey-scale-grey-10;
+  border-radius: $modal-radius;
+
+  h2 {
+    font-size: $heading-6-600;
+    font-weight: $semi-bold-weight;
+    color: $color-grey-scale-grey-1;
+    font-family: Lexend, sans-serif;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    > div {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+
+      > span {
+        background-color: $color-brand-brand-4;
+        color: $color-brand-brand-1;
+
+        border-radius: $input-radius;
+
+        font-size: $body-2-500;
+        font-weight: $medium-weight;
+        font-family: Inter, sans-serif;
+
+        padding: 4px 8px;
+      }
+    }
+    > p {
+      font-size: $heading-7-500;
+      font-weight: $medium-weight;
+      font-family: Lexend, sans-serif;
+
+      color: $color-grey-scale-grey-1;
+    }
+
+    @media (min-width: 769px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  > button {
+    max-width: 100px;
+    padding: 12px 0;
+  }
+}

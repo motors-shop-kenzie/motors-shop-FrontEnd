@@ -1,0 +1,27 @@
+@use "../../sass/abstracts/variables" as *;
+
+.carDescriptionDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  padding: 36px 28px;
+
+  background-color: $color-grey-scale-grey-10;
+
+  border-radius: $modal-radius;
+
+  > h2 {
+    font-family: Lexend, sans-serif;
+    font-size: $heading-6-600;
+    font-weight: $semi-bold-weight;
+  }
+
+  > p {
+    font-family: Inter, sans-serif;
+    font-size: $body-1-600;
+    font-weight: $regular-weight;
+  }
+
+  color: $color-grey-scale-grey-1;
+}
