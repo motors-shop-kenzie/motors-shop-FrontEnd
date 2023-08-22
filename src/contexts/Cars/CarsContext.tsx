@@ -15,6 +15,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const [cars, setCars] = useState<Car[]>([]);
   const [userCars, setUserCars] = useState<Car[]>([]);
   const [filterData, setFilterData] = useState<Car[]>([]);
+  const [singleCar, setSingleCar] = useState<Car | undefined>({} as Car);
 
   const cookies = parseCookies();
 
@@ -65,6 +66,16 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     }
   };
 
+  const getSingleCar = async (id: string) => {
+      try {
+        const response = await api.get(`/cars/${id}`);
+        const data = response.data;
+        setSingleCar(data);
+      } catch (error) {
+        console.error(error);
+      }
+  };
+
   useEffect(() => {
     (async () => {
       api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
@@ -85,6 +96,9 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         filterData,
         setFilterData,
         createCars,
+        getSingleCar,
+        singleCar,
+        setSingleCar,
       }}
     >
       {children}
