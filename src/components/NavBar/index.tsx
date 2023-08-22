@@ -7,34 +7,35 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 import { useRouter } from "next/router";
-import styles from "./styles.module.scss";
 import { useModal } from "@/hooks/modalHook";
+import { ProfileSettingsModal } from "../Modal/ProfileSettings";
+import styles from "./styles.module.scss";
 
 interface INavBarProps {}
 
 export const NavBar = (props: INavBarProps) => {
-
-  const { user, logout,toggleNavBar, openNavBar } = useAuth();
+  const { user, logout, openNavBar } = useAuth();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const { setShowModal } = useModal();
+  const { setShowModal, showModal } = useModal();
   const toggleMenu = () => setOpenMenu(!openMenu);
 
   const { push } = useRouter();
 
   return (
     <nav className={styles.container}>
+      {showModal === "settings" ? <ProfileSettingsModal /> : null}
       <div className={styles.nav_content}>
         <Link href={"/"}>
           {" "}
           <Image src={darkLogo} alt="Motors Shop dark logo" />
         </Link>
 
-        <button className={styles.button_hamburger} onClick={toggleNavBar}>
+        <button className={styles.button_hamburger} onClick={toggleMenu}>
           {openNavBar ? <IoCloseSharp /> : <GiHamburgerMenu />}
         </button>
 
         {user?.id && (
-          <div className={styles.profile} onClick={toggleNavBar}>
+          <div className={styles.profile} onClick={toggleMenu}>
             <Image className={styles.profile__icon} src={profileDefault} alt="Profile Picture" width={32} height={32} />
             <p className={styles.profile__name}>{user?.name}</p>
           </div>
@@ -64,7 +65,6 @@ export const NavBar = (props: INavBarProps) => {
           </Link>
         </div>
       )}
-
 
       {openMenu && user?.id && (
         <ul className={styles.options__logged}>

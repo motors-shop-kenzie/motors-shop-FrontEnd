@@ -6,18 +6,13 @@ import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
 import { Car, FilterOptions } from "@/interfaces/CarFilter";
 import styles from "./styles.module.scss";
-
-import { ProfileSettingsModal } from "@/components/Modal/ProfileSettings";
-import { useModal } from "@/hooks/modalHook";
 import { AuthContext } from "@/contexts/Auth/authContext";
-
 
 export default function HomePage() {
   const { cars } = useContext(CarsContext);
   const { closeNavBar, openNavBar } = useContext(AuthContext);
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const toggleMenu = () => setOpenFilter(!openFilter);
-  const { showModal } = useModal();
 
   const [selectedFilters, setSelectedFilters] = useState<FilterOptions>({
     brand: null,
@@ -78,9 +73,9 @@ export default function HomePage() {
   };
 
   return (
-    <main className={styles.body} onClick={openNavBar ? closeNavBar: undefined}>
+    <main className={styles.body} onClick={openNavBar ? closeNavBar : undefined}>
       <NavBar />
-      {showModal === "settings" ? <ProfileSettingsModal /> : null}
+
       <div className={styles.car_container}>
         <div>
           <h2>Motors Shop</h2>

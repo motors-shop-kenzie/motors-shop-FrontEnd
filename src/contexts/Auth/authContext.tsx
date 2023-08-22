@@ -10,6 +10,7 @@ import {
   TUser,
   TUserLogin,
   TUserRegisterResquest,
+  TUserUpdate,
 } from "@/interfaces/user";
 import { IAuthContext } from "./interface";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
 
   const [openNavBar, setOpenNavBar] = useState<boolean>(false);
   const toggleNavBar = () => setOpenNavBar(!openNavBar);
-  const closeNavBar = () => setOpenNavBar(false)
+  const closeNavBar = () => setOpenNavBar(false);
 
   const { getAllCarsRequest, getUserCars } = useContext(CarsContext);
   const { push } = useRouter();
@@ -122,6 +123,34 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       });
   };
 
+  const patchUser = async (data: TUserUpdate) => {
+    await api
+      .patch(`users/${user?.id}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const destroyUser = async () => {
+    await api
+      .delete(`users/${user!.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        logout();
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -137,6 +166,8 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
         setOpenNavBar,
         toggleNavBar,
         closeNavBar,
+        patchUser,
+        destroyUser,
       }}
     >
       {children}
