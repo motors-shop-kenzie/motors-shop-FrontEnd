@@ -19,7 +19,7 @@ export const Input = ({ type, placeholder, className, id, register, value, disab
       id={id}
       placeholder={placeholder}
       type={type}
-      value={value}
+      defaultValue={value}
     />
   );
 };
