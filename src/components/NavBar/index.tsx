@@ -8,12 +8,14 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 import { useRouter } from "next/router";
 import styles from "./styles.module.scss";
+import { useModal } from "@/hooks/modalHook";
 
 interface INavBarProps {}
 
 export const NavBar = (props: INavBarProps) => {
   const { user, logout } = useAuth();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const { setShowModal } = useModal();
   const toggleMenu = () => setOpenMenu(!openMenu);
   const { push } = useRouter();
 
@@ -63,7 +65,7 @@ export const NavBar = (props: INavBarProps) => {
 
       {openMenu && user?.id && (
         <ul className={styles.options__logged}>
-          <li onClick={() => alert(`"Editar Perfil" ainda não implementado`)}>Editar Perfil</li>
+          <li onClick={() => setShowModal("settings")}>Editar Perfil</li>
           <li onClick={() => alert(`"Editar Endereço" ainda não implementado`)}>Editar Endereço</li>
           {user.isAdmin && <li onClick={() => push(`/SellerHome/${user.id}`)}>Meus Anúncios</li>}
           <li onClick={() => logout()}>Sair</li>
