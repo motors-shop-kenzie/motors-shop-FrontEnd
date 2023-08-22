@@ -114,7 +114,6 @@ export const CreateAnnounceModalForm = () => {
   }, [brand, model]);
 
   const submit: SubmitHandler<TFormCar> = (formData: any) => {
-    
     const obj = { ...formData, business: formData.price < formData.tablePife };
     createCars(obj);
     setInputImage(2);

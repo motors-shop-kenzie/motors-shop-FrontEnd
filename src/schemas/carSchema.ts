@@ -3,7 +3,7 @@ import { userSchema } from "./userSchema";
 
 export const carImgSchema = z.object({
   id: z.string(),
-  url_img: z.string(),
+  url_img: z.string().url(),
   carProductsId: z.string(),
 });
 
@@ -33,26 +33,27 @@ export const carSchema = z.object({
   img: z.array(carImgSchema),
   active: z.boolean(),
   user: userSchema,
+  userId: z.string().optional(),
 });
 
 export const carSchemaRegister = z.object({
-  name: z.string().nonempty({message:"*"}),
-  coverImg: z.string().nonempty({message:"*"}),
-  price: z.coerce.number().min(1,{message:"*"}),
+  name: z.string().nonempty({ message: "*" }),
+  coverImg: z.string().nonempty({ message: "*" }),
+  price: z.coerce.number().min(1, { message: "*" }),
   year: z.coerce.number(),
-  km: z.coerce.number().min(1,{message:"*"}),
-  description: z.string().nonempty({message:"*"}),
-  color: z.string().nonempty({message:"*"}),
+  km: z.coerce.number().min(1, { message: "*" }),
+  description: z.string().nonempty({ message: "*" }),
+  color: z.string().nonempty({ message: "*" }),
   gasoline: z.string(),
-  model: z.string().nonempty({message:"*"}),
-  brand: z.string().nonempty({message:"*"}),
+  model: z.string().nonempty({ message: "*" }),
+  brand: z.string().nonempty({ message: "*" }),
   tablePife: z.coerce.number(),
   img: z.array(carImgSchema).optional(),
 });
 
-export const formRegisterCar = carSchemaRegister.omit({name:true})
+export const formRegisterCar = carSchemaRegister.omit({ name: true });
 
-export type TFormCar = z.infer<typeof formRegisterCar>
+export type TFormCar = z.infer<typeof formRegisterCar>;
 
 export type TCarsRegister = z.infer<typeof carSchemaRegister>;
 
