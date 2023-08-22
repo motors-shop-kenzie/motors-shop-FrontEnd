@@ -11,4 +11,7 @@ export type ICarsContext = {
   getAllCarsRequest: () => void;
   getUserCars: () => void;
   createCars: (formData: Car) => Promise<void>;
+  getSingleCar: (id: string) => Promise<void>;
+  singleCar: Car | undefined;
+  setSingleCar: Dispatch<SetStateAction<Car | undefined>>;
 };
