@@ -18,7 +18,7 @@ const SellerHome: NextPage = () => {
   const { replace, query } = useRouter();
   const { userCars } = useContext(CarsContext);
   const { showModal } = useContext(ModalContext);
-  const { user, loggedUser, logout } = useContext(AuthContext);
+  const { user, loggedUser, closeNavBar, openNavBar } = useContext(AuthContext);
   const { id } = query;
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const SellerHome: NextPage = () => {
     <>
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
-      <main className={styles.container__sellerMain}>
+      <main className={styles.container__sellerMain} onClick={openNavBar ? closeNavBar : undefined}>
         <div className={styles.box}>
           <SellerCard />
         </div>

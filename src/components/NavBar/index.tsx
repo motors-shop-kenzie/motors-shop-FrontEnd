@@ -13,10 +13,12 @@ import { useModal } from "@/hooks/modalHook";
 interface INavBarProps {}
 
 export const NavBar = (props: INavBarProps) => {
-  const { user, logout } = useAuth();
+
+  const { user, logout,toggleNavBar, openNavBar } = useAuth();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const { setShowModal } = useModal();
   const toggleMenu = () => setOpenMenu(!openMenu);
+
   const { push } = useRouter();
 
   return (
@@ -27,12 +29,12 @@ export const NavBar = (props: INavBarProps) => {
           <Image src={darkLogo} alt="Motors Shop dark logo" />
         </Link>
 
-        <button className={styles.button_hamburger} onClick={toggleMenu}>
-          {openMenu ? <IoCloseSharp /> : <GiHamburgerMenu />}
+        <button className={styles.button_hamburger} onClick={toggleNavBar}>
+          {openNavBar ? <IoCloseSharp /> : <GiHamburgerMenu />}
         </button>
 
         {user?.id && (
-          <div className={styles.profile} onClick={toggleMenu}>
+          <div className={styles.profile} onClick={toggleNavBar}>
             <Image className={styles.profile__icon} src={profileDefault} alt="Profile Picture" width={32} height={32} />
             <p className={styles.profile__name}>{user?.name}</p>
           </div>
@@ -51,7 +53,7 @@ export const NavBar = (props: INavBarProps) => {
         )}
       </div>
 
-      {openMenu && !user?.id && (
+      {openNavBar && !user?.id && (
         <div className={styles.options_mobile__not_logged}>
           <Link className={styles.options_button__login} href="/login">
             Fazer Login
@@ -62,6 +64,7 @@ export const NavBar = (props: INavBarProps) => {
           </Link>
         </div>
       )}
+
 
       {openMenu && user?.id && (
         <ul className={styles.options__logged}>
