@@ -2,26 +2,38 @@ import { useContext } from "react";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { ModalContext } from "@/contexts/Modal";
 import styles from "./styles.module.scss";
+import { TUser } from "@/interfaces/user";
 
+interface ISellerCardProps {
+  clickedUser?: TUser;
+}
 
-export const SellerCard = () => {
+export const SellerCard = ({ clickedUser }: ISellerCardProps) => {
   const { user } = useContext(AuthContext);
   const { setShowModal } = useContext(ModalContext);
 
   return (
     <section className={styles.container__sellerSection}>
       <div className={styles.container__sellerDivName}>
-        <h3>{user?.name?.charAt(0)}</h3>
+        <h3>{clickedUser ? clickedUser.name?.charAt(0) : user?.name?.charAt(0)}</h3>
       </div>
 
       <div className={styles.container__divSellerType}>
-        <h2>{user?.name}</h2>
-        <span>{user?.isAdmin ? "Anunciante" : "Comprador"}</span>
+        <h2>{clickedUser ? clickedUser.name : user?.name}</h2>
+        <span>
+          {clickedUser
+            ? clickedUser.isAdmin
+              ? "Anunciante"
+              : "Comprador"
+            : user?.isAdmin
+            ? "Anunciante"
+            : "Comprador"}
+        </span>
       </div>
 
-      <p>{user?.description}</p>
+      <p>{clickedUser ? clickedUser.description : user?.description}</p>
 
-      {user?.isAdmin ? (
+      {clickedUser ? null : user?.isAdmin ? (
         <button onClick={() => setShowModal("batata")}>Criar anúncio</button>
       ) : null}
     </section>

@@ -1,10 +1,10 @@
-import { toast } from "react-toastify";
-
+/* import { toast } from "react-toastify";
+ */
 interface ToastProps {
   message: string;
   isSucess?: boolean;
 }
-
+/* 
 export const Toast = ({ message, isSucess = false }: ToastProps) => {
   return isSucess
     ? toast.success(message, {
@@ -29,4 +29,4 @@ export const Toast = ({ message, isSucess = false }: ToastProps) => {
       });
 };
 
-export default Toast;
+export default Toast; */

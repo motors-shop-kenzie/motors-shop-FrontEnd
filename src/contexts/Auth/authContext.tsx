@@ -15,8 +15,8 @@ import { IAuthContext } from "./interface";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 import { CarsContext } from "../Cars/CarsContext";
-import Toast from "@/components/Toast";
-
+/* import Toast from "@/components/Toast";
+ */
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
@@ -89,12 +89,12 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     api
       .post("/users/resetPassword", sendEmailResetPasswordData)
       .then(() => {
-        Toast({ message: "E-mail enviado com sucesso !", isSucess: true });
-        push("/");
+        /*         Toast({ message: "E-mail enviado com sucesso !", isSucess: true });
+        push("/"); */
       })
       .catch((err) => {
         console.error(err);
-        Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" });
+        /*   Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" }); */
       });
   };
 
@@ -102,12 +102,13 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     api
       .patch(`/users/resetPassword/${token}`, { password: resetPasswordData.password })
       .then(() => {
-        Toast({ message: "Senha atualizada sucesso !", isSucess: true });
-        push("/login");
+        /*         Toast({ message: "Senha atualizada sucesso !", isSucess: true });
+        push("/login"); */
       })
       .catch((err) => {
         console.error(err);
-        Toast({ message: "Erro ao atualizar a senha" });
+        /*         Toast({ message: "Erro ao atualizar a senha" });
+         */
       });
   };
 

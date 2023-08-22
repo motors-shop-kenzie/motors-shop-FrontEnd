@@ -44,6 +44,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     try {
       const response = await api.get("/cars");
       const data = response.data;
+      console.log(data);
 
       setCars(data);
     } catch (error) {

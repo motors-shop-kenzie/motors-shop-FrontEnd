@@ -21,6 +21,7 @@ export interface Car {
   business: boolean;
   active: boolean;
   user: TUser;
+  userId: string;
 }
 
 export interface CarFilterProps {
