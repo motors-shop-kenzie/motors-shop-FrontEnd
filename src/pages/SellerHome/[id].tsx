@@ -1,5 +1,4 @@
 "use client";
-
 /* eslint-disable react-hooks/exhaustive-deps */
 import { NavBar } from "@/components/NavBar";
 import { SellerCard } from "@/components/Seller/SellerCard";
@@ -11,15 +10,15 @@ import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 import { ModalContext } from "@/contexts/Modal";
-import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import { destroyCookie, setCookie } from "nookies";
+import styles from "./styles.module.scss";
 
 const SellerHome: NextPage = () => {
   const { replace, query } = useRouter();
   const { userCars } = useContext(CarsContext);
   const { showModal } = useContext(ModalContext);
-  const { user, loggedUser, logout } = useContext(AuthContext);
+  const { user, loggedUser, closeNavBar, openNavBar } = useContext(AuthContext);
   const { id } = query;
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const SellerHome: NextPage = () => {
     <>
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
-      <main className={styles.container__sellerMain}>
+      <main className={styles.container__sellerMain} onClick={openNavBar ? closeNavBar : undefined}>
         <div className={styles.box}>
           <SellerCard />
         </div>

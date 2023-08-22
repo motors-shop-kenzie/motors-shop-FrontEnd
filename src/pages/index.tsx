@@ -6,9 +6,11 @@ import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
 import { Car, FilterOptions } from "@/interfaces/CarFilter";
 import styles from "./styles.module.scss";
+import { AuthContext } from "@/contexts/Auth/authContext";
 
 export default function HomePage() {
   const { cars } = useContext(CarsContext);
+  const { closeNavBar, openNavBar } = useContext(AuthContext);
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const toggleMenu = () => setOpenFilter(!openFilter);
 
@@ -71,8 +73,9 @@ export default function HomePage() {
   };
 
   return (
-    <main className={styles.body}>
+    <main className={styles.body} onClick={openNavBar ? closeNavBar : undefined}>
       <NavBar />
+
       <div className={styles.car_container}>
         <div>
           <h2>Motors Shop</h2>
@@ -88,119 +91,7 @@ export default function HomePage() {
             </div>
             <div>
               <ul>
-                {Object.entries(uniqueFilterOptions).map(
-                  ([filterType, options]) => (
-                    <li key={filterType} className={styles.options_filter}>
-                      <h3 className={styles.header_filter}>
-                        {(() => {
-                          switch (filterType) {
-                            case "brand":
-                              return "Marca";
-                            case "model":
-                              return "Modelo";
-                            case "color":
-                              return "Cor";
-                            case "year":
-                              return "Ano";
-                            case "gasoline":
-                              return "Combustível";
-                            default:
-                              return filterType;
-                          }
-                        })()}
-                      </h3>
-                      {options.map((option, index) => (
-                        <button
-                          key={index}
-                          className={
-                            (
-                              selectedFilters as unknown as Record<
-                                string,
-                                string | number | null
-                              >
-                            )[filterType] === option
-                              ? "selected"
-                              : ""
-                          }
-                          onClick={() =>
-                            handleFilterChange(
-                              filterType as keyof FilterOptions,
-                              option
-                            )
-                          }
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </li>
-                  )
-                )}
-              </ul>
-            </div>
-
-            <div className={styles.container_input}>
-              <h3 className={styles.header_filter}>Km</h3>
-              <div className={styles.options_filter}>
-                <p>{kmValue} km</p> <p>650.000km</p>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={650000}
-                step={1000}
-                value={kmValue}
-                onChange={handleKmSliderChange}
-                className={styles.slider}
-              />
-
-              <div
-                className={styles.sliderCircle}
-                style={{ left: `${(kmValue / 650000) * 100}%` }}
-              ></div>
-            </div>
-
-            <div className={styles.container_input}>
-              <h3 className={styles.header_filter}>Preço</h3>
-              <div className={styles.options_filter}>
-                <p>R$ {priceValue} mil</p> <p>R$ 550 mil</p>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={550000}
-                step={1000}
-                value={priceValue}
-                onChange={handlePriceSliderChange}
-                className={styles.slider}
-              />
-
-              <div
-                className={styles.sliderCircle}
-                style={{ left: `${(priceValue / 550000) * 100}%` }}
-              ></div>
-            </div>
-
-            <button
-              onClick={toggleMenu}
-              className={styles.button_filter}
-            >
-              Ver Anúncios
-            </button>
-            <button onClick={handleClearFilters} className={styles.button_filter}>
-              Limpar filtros
-            </button>
-          </aside>
-        ) : null}
-
-        <aside className={styles.container_filter__show}>
-          <div className={styles.container_close_fitler}>
-            <p>Filtro</p>
-            <button onClick={toggleMenu}>X</button>
-          </div>
-          <div>
-            <ul>
-              {Object.entries(uniqueFilterOptions).map(
-                ([filterType, options]) => (
+                {Object.entries(uniqueFilterOptions).map(([filterType, options]) => (
                   <li key={filterType} className={styles.options_filter}>
                     <h3 className={styles.header_filter}>
                       {(() => {
@@ -224,28 +115,107 @@ export default function HomePage() {
                       <button
                         key={index}
                         className={
-                          (
-                            selectedFilters as unknown as Record<
-                              string,
-                              string | number | null
-                            >
-                          )[filterType] === option
+                          (selectedFilters as unknown as Record<string, string | number | null>)[filterType] === option
                             ? "selected"
                             : ""
                         }
-                        onClick={() =>
-                          handleFilterChange(
-                            filterType as keyof FilterOptions,
-                            option
-                          )
-                        }
+                        onClick={() => handleFilterChange(filterType as keyof FilterOptions, option)}
                       >
                         {option}
                       </button>
                     ))}
                   </li>
-                )
-              )}
+                ))}
+              </ul>
+            </div>
+
+            <div className={styles.container_input}>
+              <h3 className={styles.header_filter}>Km</h3>
+              <div className={styles.options_filter}>
+                <p>{kmValue} km</p> <p>650.000km</p>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={650000}
+                step={1000}
+                value={kmValue}
+                onChange={handleKmSliderChange}
+                className={styles.slider}
+              />
+
+              <div className={styles.sliderCircle} style={{ left: `${(kmValue / 650000) * 100}%` }}></div>
+            </div>
+
+            <div className={styles.container_input}>
+              <h3 className={styles.header_filter}>Preço</h3>
+              <div className={styles.options_filter}>
+                <p>R$ {priceValue} mil</p> <p>R$ 550 mil</p>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={550000}
+                step={1000}
+                value={priceValue}
+                onChange={handlePriceSliderChange}
+                className={styles.slider}
+              />
+
+              <div className={styles.sliderCircle} style={{ left: `${(priceValue / 550000) * 100}%` }}></div>
+            </div>
+
+            <button onClick={toggleMenu} className={styles.button_filter}>
+              Ver Anúncios
+            </button>
+            <button onClick={handleClearFilters} className={styles.button_filter}>
+              Limpar filtros
+            </button>
+          </aside>
+        ) : null}
+
+        <aside className={styles.container_filter__show}>
+          <div className={styles.container_close_fitler}>
+            <p>Filtro</p>
+            <button onClick={toggleMenu}>X</button>
+          </div>
+          <div>
+            <ul>
+              {Object.entries(uniqueFilterOptions).map(([filterType, options]) => (
+                <li key={filterType} className={styles.options_filter}>
+                  <h3 className={styles.header_filter}>
+                    {(() => {
+                      switch (filterType) {
+                        case "brand":
+                          return "Marca";
+                        case "model":
+                          return "Modelo";
+                        case "color":
+                          return "Cor";
+                        case "year":
+                          return "Ano";
+                        case "gasoline":
+                          return "Combustível";
+                        default:
+                          return filterType;
+                      }
+                    })()}
+                  </h3>
+                  {options.map((option, index) => (
+                    <button
+                      key={index}
+                      className={
+                        (selectedFilters as unknown as Record<string, string | number | null>)[filterType] === option
+                          ? "selected"
+                          : ""
+                      }
+                      onClick={() => handleFilterChange(filterType as keyof FilterOptions, option)}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </li>
+              ))}
             </ul>
           </div>
 

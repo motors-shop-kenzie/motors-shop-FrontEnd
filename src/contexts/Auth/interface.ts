@@ -16,4 +16,10 @@ export interface IAuthContext {
   loggedUser: () => Promise<void>;
   sendEmail: (sendEmailResetPasswordData: SendEmailResetPasswordData) => void;
   resetPassword: (resetPasswordData: ResetPasswordData, token: string) => void;
+  openNavBar: boolean;
+  setOpenNavBar: Dispatch<SetStateAction<boolean>>;
+  toggleNavBar: () => void;
+  closeNavBar: () => void;
+  patchUser: (data: TUserRegisterResquest) => Promise<void>;
+  destroyUser: () => Promise<void>;
 }

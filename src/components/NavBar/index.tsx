@@ -7,18 +7,23 @@ import { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 import { useRouter } from "next/router";
+import { useModal } from "@/hooks/modalHook";
+import { ProfileSettingsModal } from "../Modal/ProfileSettings";
 import styles from "./styles.module.scss";
 
 interface INavBarProps {}
 
 export const NavBar = (props: INavBarProps) => {
-  const { user, logout } = useAuth();
+  const { user, logout, openNavBar } = useAuth();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const { setShowModal, showModal } = useModal();
   const toggleMenu = () => setOpenMenu(!openMenu);
+
   const { push } = useRouter();
 
   return (
     <nav className={styles.container}>
+      {showModal === "settings" ? <ProfileSettingsModal /> : null}
       <div className={styles.nav_content}>
         <Link href={"/"}>
           {" "}
@@ -26,7 +31,7 @@ export const NavBar = (props: INavBarProps) => {
         </Link>
 
         <button className={styles.button_hamburger} onClick={toggleMenu}>
-          {openMenu ? <IoCloseSharp /> : <GiHamburgerMenu />}
+          {openNavBar ? <IoCloseSharp /> : <GiHamburgerMenu />}
         </button>
 
         {user?.id && (
@@ -49,7 +54,7 @@ export const NavBar = (props: INavBarProps) => {
         )}
       </div>
 
-      {openMenu && !user?.id && (
+      {openNavBar && !user?.id && (
         <div className={styles.options_mobile__not_logged}>
           <Link className={styles.options_button__login} href="/login">
             Fazer Login
@@ -63,7 +68,7 @@ export const NavBar = (props: INavBarProps) => {
 
       {openMenu && user?.id && (
         <ul className={styles.options__logged}>
-          <li onClick={() => alert(`"Editar Perfil" ainda não implementado`)}>Editar Perfil</li>
+          <li onClick={() => setShowModal("settings")}>Editar Perfil</li>
           <li onClick={() => alert(`"Editar Endereço" ainda não implementado`)}>Editar Endereço</li>
           {user.isAdmin && <li onClick={() => push(`/SellerHome/${user.id}`)}>Meus Anúncios</li>}
           <li onClick={() => logout()}>Sair</li>
