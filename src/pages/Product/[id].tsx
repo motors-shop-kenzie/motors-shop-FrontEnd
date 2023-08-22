@@ -44,7 +44,8 @@ const ProductPage: NextPage = () => {
       {/* <NavBar /> */}
       <Image src={singleCar!.coverImg} alt="Imagem de capa" width={300} height={150} />
       <h2>{singleCar?.model}</h2>
-      <h2>{singleCar?.user.name}</h2>
+      <h3>{singleCar?.brand}</h3>
+      {/* <h2>{singleCar?.user.name}</h2> */}
     </>
   );
 };

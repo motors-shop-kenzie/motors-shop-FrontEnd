@@ -15,8 +15,8 @@ import { IAuthContext } from "./interface";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 import { CarsContext } from "../Cars/CarsContext";
-/* import Toast from "@/components/Toast";
- */
+import Toast from "@/components/Toast";
+
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
