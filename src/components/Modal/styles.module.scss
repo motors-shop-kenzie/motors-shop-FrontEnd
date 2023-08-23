@@ -14,8 +14,8 @@
   border-bottom: none;
 
   .modal {
-    width: 100%;
-    max-width: 520px;
+    width: 80%;
+    max-width: fit-content;
     background-color: $color-grey-scale-grey-10;
     padding: 1.5rem;
     border-radius: 8px;

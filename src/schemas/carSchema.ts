@@ -4,7 +4,7 @@ import { userSchema } from "./userSchema";
 export const carImgSchema = z.object({
   id: z.string(),
   url_img: z.string().url(),
-  carProductsId: z.string(),
+  carProductsId: z.string().optional(),
 });
 
 export const carImgSchemaRegister = z.object({
