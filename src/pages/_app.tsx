@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
+import { LoadingProvider } from "@/contexts/Loading";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -22,13 +23,15 @@ const App = ({ Component, pageProps }: AppProps) => {
         pauseOnHover
         theme="light"
       />
-      <ModalProvider>
-        <CarsProvider>
-          <AuthProvider>
-            <Component {...pageProps} />
-          </AuthProvider>
-        </CarsProvider>
-      </ModalProvider>
+      <LoadingProvider>
+        <ModalProvider>
+          <CarsProvider>
+            <AuthProvider>
+              <Component {...pageProps} />
+            </AuthProvider>
+          </CarsProvider>
+        </ModalProvider>
+      </LoadingProvider>
     </>
   );
 };

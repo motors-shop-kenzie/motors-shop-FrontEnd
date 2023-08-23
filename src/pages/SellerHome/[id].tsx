@@ -12,6 +12,7 @@ import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 import { ModalContext } from "@/contexts/Modal";
 import { useRouter } from "next/router";
 import { destroyCookie, setCookie } from "nookies";
+import PageLoading from "@/components/PageLoading";
 import styles from "./styles.module.scss";
 
 const SellerHome: NextPage = () => {
@@ -32,12 +33,12 @@ const SellerHome: NextPage = () => {
 
     destroyCookie(null, cookie);
 
-    replace("/login");
+    replace("/");
     return null;
   }
 
   return (
-    <>
+    <PageLoading>
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain} onClick={openNavBar ? closeNavBar : undefined}>
@@ -52,7 +53,7 @@ const SellerHome: NextPage = () => {
           )}
         </ProductBox>
       </main>
-    </>
+    </PageLoading>
   );
 };
 export default SellerHome;
