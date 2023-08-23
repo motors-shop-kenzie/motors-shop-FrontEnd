@@ -23,7 +23,9 @@ export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
     <div className={styles.card}>
       <div className={styles.img}>
         {car.active ? <div className={styles.active}>Ativo</div> : <div className={styles.nonactive}>Inativo</div>}
-        <Image width={300} height={150} src={car.coverImg} alt="Car image" />
+        <div className={styles.divImg} onClick={handleViewDetailsClick}>
+          <Image width={300} height={150} src={car.coverImg} alt="Car image" />
+        </div>
         <p className={styles.title}>{car.model}</p>
       </div>
       <div className={styles.desc}>{car.description}</div>

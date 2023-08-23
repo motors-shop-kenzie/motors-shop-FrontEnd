@@ -16,6 +16,7 @@ import ProductInfos from "@/components/ProductInfos";
 import styles from "./styles.module.scss";
 import ProductDescription from "@/components/ProductDescription";
 import ProfileUserInfos from "@/components/ProfileUserInfos";
+import { Footer } from "@/components/Footer";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
@@ -54,9 +55,12 @@ const ProductPage: NextPage = () => {
         </section>
         <aside className={styles.asideContainer}>
           <div></div>
-          {userRelated && <ProfileUserInfos name={userRelated.name} description={userRelated?.description} />}
+          {userRelated && (
+            <ProfileUserInfos userId={userRelated.id} name={userRelated.name} description={userRelated?.description} />
+          )}
         </aside>
       </main>
+      <Footer path={`/Product/${id}`} />
     </>
   );
 };

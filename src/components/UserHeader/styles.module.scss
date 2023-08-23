@@ -1,27 +1,30 @@
 @use "../../sass/abstracts/variables" as *;
 
-.container{
-    margin: 5px 0;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    gap: 8px
-    
+.container {
+  margin: 5px 0;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  :hover {
+    color: $color-random-random-11;
+    transform: scale(1.1);
+  }
 }
-.circle{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    background-color: $color-random-random-9;
-    color:$color-colors-fixed-white-fixed;
-
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  background-color: $color-random-random-9;
+  color: $color-colors-fixed-white-fixed;
 }
 
-.name{
-    font-size: $heading-7-600;
-    font-weight: 500;
-    color: $color-grey-scale-grey-1;
+.name {
+  font-size: $heading-7-600;
+  font-weight: 500;
+  color: $color-grey-scale-grey-1;
 }
