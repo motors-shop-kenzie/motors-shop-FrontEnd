@@ -37,7 +37,7 @@
 
 .carInfoSection {
   position: relative;
-  z-index: 100;
+  z-index: 5;
 
   margin-top: 125px;
 
@@ -50,7 +50,7 @@
 }
 
 .asideContainer {
-  z-index: 50;
+  z-index: 5;
   display: flex;
   flex-direction: column;
   align-items: center;
