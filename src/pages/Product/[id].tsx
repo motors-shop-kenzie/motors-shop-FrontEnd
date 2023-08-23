@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { destroyCookie, setCookie } from "nookies";
 import Image from "next/image";
 import { Car } from "@/interfaces/CarFilter";
+import PageLoading from "@/components/PageLoading";
 
 const ProductPage: NextPage = () => {
   const { replace, query } = useRouter();
@@ -41,12 +42,14 @@ const ProductPage: NextPage = () => {
   // }
 
   return (
-    <>
-      {/* <NavBar /> */}
+    <PageLoading>
+      <NavBar />
       <Image src={singleCar!.coverImg} alt="Imagem de capa" width={300} height={150} />
       <h2>{singleCar?.model}</h2>
-      <h2>{singleCar?.user.name}</h2>
-    </>
+      {/* <h2>{singleCar?.user.name}</h2> */}
+    </PageLoading>
   );
 };
 export default ProductPage;
+
+// Discutir sobre colocar o staticSidegeneration pois é mias performatico e economiza ciclo de vida das renderizações

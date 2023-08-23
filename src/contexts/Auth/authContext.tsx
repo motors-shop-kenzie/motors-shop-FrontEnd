@@ -16,6 +16,7 @@ import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 import { CarsContext } from "../Cars/CarsContext";
 import Toast from "@/components/Toast";
+import { useRequest } from "@/hooks/useRequest";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
 
   const [openNavBar, setOpenNavBar] = useState<boolean>(false);
   const toggleNavBar = () => setOpenNavBar(!openNavBar);
-  const closeNavBar = () => setOpenNavBar(false)
+  const closeNavBar = () => setOpenNavBar(false);
 
   const { getAllCarsRequest, getUserCars } = useContext(CarsContext);
   const { push } = useRouter();
@@ -37,34 +38,35 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
 
   const token = cookies["ccm.token"];
 
-  const registerUser = (data: TUserRegisterResquest) => {
-    api
-      .post(`/users`, data)
-      .then((res) => {
+  const request = useRequest();
+
+  const registerUser = async (data: TUserRegisterResquest) => {
+    await request({
+      tryFn: async () => {
+        const res = await api.post(`/users`, data);
         const userData = res.data;
         setUser(userData);
-        Toast({ message: "Cadastro efetuado com sucesso !", isSucess: true });
+
+        Toast({ message: "Cadastro efetuado com sucesso!", isSucess: true });
         push("/login");
-      })
-      .catch((error) => {
-        console.error(error), Toast(error);
-      });
+      },
+      onErrorFn: () => Toast({ message: "Cadastro não pode ser efetuado" }),
+    });
   };
 
-  const loginUser = (data: TUserLogin) => {
-    api
-      .post(`/login`, data)
-      .then((response) => {
+  const loginUser = async (data: TUserLogin) => {
+    await request({
+      tryFn: async () => {
+        const response = await api.post(`/login`, data);
+
         setCookie(null, "ccm.token", response.data.token, {
           maxAge: 60 * 240,
           path: "/",
-        }),
-          Toast({ message: "Login efetuado com sucesso !", isSucess: true });
+        });
         push("/");
-      })
-      .catch((error) => {
-        console.error(error), Toast(error);
-      });
+      },
+      onErrorFn: () => Toast({ message: "Login não pode ser efetuado" }),
+    });
   };
 
   const logout = () => {
@@ -85,7 +87,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
 
         setUser(response.data);
       } catch (error) {
-        console.error(error);
+        console.error(error), Toast({ message: "Erro inesperado" });
       }
     }
   };
@@ -96,30 +98,28 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     loggedUser();
   }, [token]);
 
-  const sendEmail = (sendEmailResetPasswordData: SendEmailResetPasswordData) => {
-    api
-      .post("/users/resetPassword", sendEmailResetPasswordData)
-      .then(() => {
-        Toast({ message: "E-mail enviado com sucesso !", isSucess: true });
+  const sendEmail = async (sendEmailResetPasswordData: SendEmailResetPasswordData) => {
+    await request({
+      tryFn: async () => {
+        await api.post("/users/resetPassword", sendEmailResetPasswordData);
+
+        Toast({ message: "E-mail enviado com sucesso!", isSucess: true });
         push("/");
-      })
-      .catch((err) => {
-        console.error(err);
-        Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" });
-      });
+      },
+      onErrorFn: () => Toast({ message: "Erro ao enviar o e-mail, tente novamente mais tarde" }),
+    });
   };
 
-  const resetPassword = (resetPasswordData: ResetPasswordData, token: string) => {
-    api
-      .patch(`/users/resetPassword/${token}`, { password: resetPasswordData.password })
-      .then(() => {
-        Toast({ message: "Senha atualizada sucesso !", isSucess: true });
+  const resetPassword = async (resetPasswordData: ResetPasswordData, token: string) => {
+    await request({
+      tryFn: async () => {
+        await api.patch(`/users/resetPassword/${token}`, { password: resetPasswordData.password });
+
+        Toast({ message: "Senha atualizada com sucesso!", isSucess: true });
         push("/login");
-      })
-      .catch((err) => {
-        console.error(err);
-        Toast({ message: "Erro ao atualizar a senha" });
-      });
+      },
+      onErrorFn: () => Toast({ message: "Erro ao atualizar a senha" }),
+    });
   };
 
   return (

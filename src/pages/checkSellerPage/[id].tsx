@@ -10,6 +10,7 @@ import styles from "../SellerHome/styles.module.scss";
 
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import PageLoading from "@/components/PageLoading";
 
 export default function CheckSellerPage() {
   const [clickedUser, setClickedUser] = useState<TUser>();
@@ -33,7 +34,7 @@ export default function CheckSellerPage() {
   const filteredCars = cars.filter((element) => element.userId == id);
 
   return (
-    <div>
+    <PageLoading>
       <NavBar />
       <h1>{clickedUser?.name} </h1>
       <main className={styles.container__sellerMain}>
@@ -52,6 +53,6 @@ export default function CheckSellerPage() {
         </ProductBox>
         <Footer path="/checkSellerPage/" />
       </main>
-    </div>
+    </PageLoading>
   );
 }

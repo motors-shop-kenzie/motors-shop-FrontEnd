@@ -14,6 +14,7 @@ import { ModalContext } from "@/contexts/Modal";
 import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import { destroyCookie, setCookie } from "nookies";
+import PageLoading from "@/components/PageLoading";
 
 const SellerHome: NextPage = () => {
   const { replace, query } = useRouter();
@@ -38,7 +39,7 @@ const SellerHome: NextPage = () => {
   }
 
   return (
-    <>
+    <PageLoading>
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain} onClick={openNavBar ? closeNavBar : undefined}>
@@ -53,7 +54,7 @@ const SellerHome: NextPage = () => {
           )}
         </ProductBox>
       </main>
-    </>
+    </PageLoading>
   );
 };
 export default SellerHome;
