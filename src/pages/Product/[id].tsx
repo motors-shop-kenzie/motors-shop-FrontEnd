@@ -5,14 +5,11 @@ import { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import { NavBar } from "@/components/NavBar";
 import api from "@/services/api";
 import { TUser } from "@/interfaces/user";
-
 import ProductCoverImage from "@/components/ProductImage";
 import ProductInfos from "@/components/ProductInfos";
-
 import styles from "./styles.module.scss";
 import ProductDescription from "@/components/ProductDescription";
 import ProfileUserInfos from "@/components/ProfileUserInfos";

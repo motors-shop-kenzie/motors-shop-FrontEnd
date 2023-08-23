@@ -35,12 +35,11 @@ export default function CheckSellerPage() {
   return (
     <div>
       <NavBar />
-      <h1>{clickedUser?.name} </h1>
       <main className={styles.container__sellerMain}>
         <div className={styles.box}>
           <SellerCard clickedUser={clickedUser} />
         </div>
-        <h3>Anúncios</h3>
+        <h3 className={styles.title}>Anúncios</h3>
         <ProductBox>
           {filteredCars.length === 0 ? (
             <p>Não há carros cadastrados.</p>
