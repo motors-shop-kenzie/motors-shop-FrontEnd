@@ -15,6 +15,7 @@ import ProductDescription from "@/components/ProductDescription";
 import ProfileUserInfos from "@/components/ProfileUserInfos";
 import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
+import ImgsProduct from "@/components/ImgsProduct";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
@@ -53,7 +54,9 @@ const ProductPage: NextPage = () => {
           <ProductDescription />
         </section>
         <aside className={styles.asideContainer}>
-          <div></div>
+          <div>
+            {singleCar && <ImgsProduct/>}
+          </div>
           {userRelated && (
             <ProfileUserInfos userId={userRelated.id} name={userRelated.name} description={userRelated?.description} />
           )}
