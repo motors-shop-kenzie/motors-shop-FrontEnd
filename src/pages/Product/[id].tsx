@@ -54,7 +54,7 @@ const ProductPage: NextPage = () => {
         </section>
         <aside className={styles.asideContainer}>
           <div></div>
-          {/* <ProfileUserInfos /> */}
+          {userRelated && <ProfileUserInfos name={userRelated.name} description={userRelated?.description} />}
         </aside>
       </main>
     </>
