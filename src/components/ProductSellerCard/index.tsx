@@ -4,6 +4,7 @@ import { TUser } from "@/interfaces/user";
 import { TCarProduct } from "@/interfaces/CarProduc";
 import { Button } from "../Button";
 import styles from "./styles.module.scss";
+import { useRouter } from "next/router";
 
 interface CardProps {
   car: TCarProduct;
@@ -12,7 +13,11 @@ interface CardProps {
 }
 
 export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
+  const { push } = useRouter();
   const handleClick = () => {};
+  const handleViewDetailsClick = () => {
+    push(`/Product/${car.id}`);
+  };
 
   return (
     <div className={styles.card}>
@@ -32,7 +37,7 @@ export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
       {isClickedUser ? null : (
         <div className={styles.btns}>
           <Button className={styles.grey10BorderGrey0Button} text="Editar" onClick={handleClick} />
-          <Button className={styles.grey10BorderGrey0Button} text="Ver detalhes" onClick={handleClick} />
+          <Button className={styles.grey10BorderGrey0Button} text="Ver detalhes" onClick={handleViewDetailsClick} />
         </div>
       )}
     </div>

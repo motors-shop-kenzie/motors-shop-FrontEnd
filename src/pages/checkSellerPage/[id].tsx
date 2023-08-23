@@ -19,7 +19,7 @@ export default function CheckSellerPage() {
 
   useEffect(() => {
     getClickedUser(id);
-  }, []);
+  }, [id]);
 
   const getClickedUser = (id: string) => {
     api

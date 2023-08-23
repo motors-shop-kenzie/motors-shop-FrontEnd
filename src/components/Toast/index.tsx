@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
- 
+
 interface ToastProps {
   message: string;
   isSucess?: boolean;

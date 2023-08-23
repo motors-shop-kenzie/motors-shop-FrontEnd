@@ -1,0 +1,20 @@
+@use "../../sass/abstracts/variables" as *;
+
+.coverFigure {
+  background-color: $color-grey-scale-grey-10;
+
+  border-radius: $modal-radius;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 50px 0;
+
+  > img {
+    border-radius: $modal-radius;
+
+    width: 80%;
+    max-width: 440px;
+  }
+}
