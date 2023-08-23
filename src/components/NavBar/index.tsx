@@ -14,10 +14,9 @@ import styles from "./styles.module.scss";
 interface INavBarProps {}
 
 export const NavBar = (props: INavBarProps) => {
-  const { user, logout, openNavBar } = useAuth();
-  const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const { user, logout, openNavBar, setOpenNavBar } = useAuth();
   const { setShowModal, showModal } = useModal();
-  const toggleMenu = () => setOpenMenu(!openMenu);
+  const toggleMenu = () => setOpenNavBar(!openNavBar);
 
   const { push } = useRouter();
 
@@ -66,8 +65,8 @@ export const NavBar = (props: INavBarProps) => {
         </div>
       )}
 
-      {openMenu && user?.id && (
-        <ul className={styles.options__logged}>
+      {openNavBar && user?.id && (
+        <ul className={styles.options__logged} onClick={(e) => e.stopPropagation()}>
           <li onClick={() => setShowModal("settings")}>Editar Perfil</li>
           <li onClick={() => alert(`"Editar Endereço" ainda não implementado`)}>Editar Endereço</li>
           {user.isAdmin && <li onClick={() => push(`/SellerHome/${user.id}`)}>Meus Anúncios</li>}
