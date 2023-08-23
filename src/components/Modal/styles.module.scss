@@ -25,6 +25,8 @@
   }
 
   .header {
+    width: 98%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,6 +40,9 @@
 
   .close {
     cursor: pointer;
+    color: $color-grey-scale-grey-4;
+    font-size: $heading-5-600;
+    font-weight: 500;
   }
 
   .content {

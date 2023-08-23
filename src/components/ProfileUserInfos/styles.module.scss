@@ -37,4 +37,11 @@
 
     color: $color-grey-scale-grey-2;
   }
+  > button {
+    &:hover {
+      background-color: $color-grey-scale-grey-10;
+      border: 1.5px solid $color-grey-scale-grey-0;
+      color: $color-grey-scale-grey-0;
+    }
+  }
 }

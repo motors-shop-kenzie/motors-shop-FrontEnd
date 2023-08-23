@@ -57,5 +57,11 @@
   > button {
     max-width: 100px;
     padding: 12px 0;
+
+    &:hover {
+      color: $color-brand-brand-2;
+      background-color: $color-brand-brand-4;
+      transition: 0.6s;
+    }
   }
 }
