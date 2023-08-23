@@ -1,0 +1,13 @@
+@use "../../sass/abstracts/variables" as *;
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 36px 28px;
+
+  background-color: $color-grey-scale-grey-10;
+
+  border-radius: $modal-radius;
+  color: $color-grey-scale-grey-1;
+}

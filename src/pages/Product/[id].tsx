@@ -15,6 +15,8 @@ import ProductDescription from "@/components/ProductDescription";
 import ProfileUserInfos from "@/components/ProfileUserInfos";
 import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
+import CreateComment from "@/components/Forms/CreateComment";
+import Comments from "@/components/Comments";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
@@ -59,6 +61,13 @@ const ProductPage: NextPage = () => {
           )}
         </aside>
       </main>
+      <section className={styles.secondSection}>
+        <div className={styles.commentsSection}>
+          <Comments user={userRelated} />
+          <CreateComment />
+        </div>
+        <div className={styles.asideContainer}></div>
+      </section>
       <Footer path={`/Product/${id}`} />
     </>
   );

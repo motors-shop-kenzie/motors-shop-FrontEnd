@@ -305,3 +305,16 @@
     font-size: 1.2rem;
   }
 }
+
+.createCommentDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 36px 28px;
+
+  background-color: $color-grey-scale-grey-10;
+  color: $color-grey-scale-grey-1;
+
+  border-radius: $form-radius;
+}
