@@ -50,7 +50,7 @@ export default function CheckSellerPage() {
             ))
           )}
         </ProductBox>
-        <Footer path="/checkSellerPage/" />
+        <Footer path={`/checkSellerPage/${id}`} />
       </main>
     </div>
   );

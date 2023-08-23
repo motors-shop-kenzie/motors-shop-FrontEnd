@@ -7,15 +7,19 @@ import { Button } from "../Button";
 
 import ButtonStyled from "../Button/styles.module.scss";
 import styles from "./styles.module.scss";
-import { TUser } from "@/interfaces/user";
+import { useRouter } from "next/router";
 
 interface iUserInfosProps {
+  userId: string;
   name: string;
   description?: string;
 }
 
-export default function ProfileUserInfos({ name, description }: iUserInfosProps) {
-  // const { singleCar } = useContext(CarsContext);
+export default function ProfileUserInfos({ userId, name, description }: iUserInfosProps) {
+  const { push } = useRouter();
+  const redirect = () => {
+    push(`/checkSellerPage/${userId}`);
+  };
 
   return (
     <div className={styles.profileUserInfosDiv}>
@@ -24,7 +28,12 @@ export default function ProfileUserInfos({ name, description }: iUserInfosProps)
       </figure>
       <h2>{name}</h2>
       <p>{description}</p>
-      <Button className={ButtonStyled.grey1Button} text="Ver todos os anuncios" type="button" />
+      <Button
+        className={ButtonStyled.grey1Button}
+        onClick={() => redirect()}
+        text="Ver todos os anúncios"
+        type="button"
+      />
     </div>
   );
 }

@@ -23,7 +23,7 @@ export const ProductCard = ({ car }: CardProps) => {
           </div>
         )}
         <div onClick={() => redirect()}>
-          <Image width={300} height={150} src={car.coverImg} alt="Car image" />
+          <Image width={300} height={150} src={car.coverImg} style={{ cursor: "pointer" }} alt="Car image" />
           <p className={styles.title}>{car.model}</p>
           <div className={styles.desc}>{car.description}</div>
         </div>
