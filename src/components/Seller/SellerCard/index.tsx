@@ -4,6 +4,8 @@ import { ModalContext } from "@/contexts/Modal";
 import styles from "./styles.module.scss";
 import { TUser } from "@/interfaces/user";
 
+import ButtonStyled from "../../Button/styles.module.scss";
+
 interface ISellerCardProps {
   clickedUser?: TUser;
 }
@@ -34,7 +36,9 @@ export const SellerCard = ({ clickedUser }: ISellerCardProps) => {
       <p>{clickedUser ? clickedUser.description : user?.description}</p>
 
       {clickedUser ? null : user?.isAdmin ? (
-        <button onClick={() => setShowModal("batata")}>Criar anúncio</button>
+        <button onClick={() => setShowModal("batata")} className={ButtonStyled.brand4TextBrand1Button}>
+          Criar anúncio
+        </button>
       ) : null}
     </section>
   );
