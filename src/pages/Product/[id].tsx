@@ -17,10 +17,12 @@ import styles from "./styles.module.scss";
 import ProductDescription from "@/components/ProductDescription";
 import ProfileUserInfos from "@/components/ProfileUserInfos";
 import { Footer } from "@/components/Footer";
+import { AuthContext } from "@/contexts/Auth/authContext";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
   const { singleCar, getSingleCar, cars } = useContext(CarsContext);
+  const { closeNavBar, openNavBar } = useContext(AuthContext);
   const { id }: any = query;
   const [userRelated, setUserRelated] = useState<TUser>();
 
@@ -46,7 +48,7 @@ const ProductPage: NextPage = () => {
       <header>
         <NavBar />
       </header>
-      <main className={styles.mainContainer}>
+      <main className={styles.mainContainer} onClick={openNavBar ? closeNavBar : undefined}>
         <span className={styles.purpleBg}></span>
         <section className={styles.carInfoSection}>
           <ProductCoverImage />
