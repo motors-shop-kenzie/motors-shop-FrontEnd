@@ -4,13 +4,18 @@
   margin-top: 5rem;
   height: 125vh;
 }
-
+.title {
+  position: absolute;
+  font-family: $font-family-2;
+  font-size: $heading-6-600;
+  margin: -50px 50px 50px;
+}
 .container__sellerMain > div {
   background-color: $color-brand-brand-1;
   padding-top: 80px;
   height: 200px;
 }
 
-.box{
-  margin-bottom: 200px;
+.box {
+  margin-bottom: 140px;
 }

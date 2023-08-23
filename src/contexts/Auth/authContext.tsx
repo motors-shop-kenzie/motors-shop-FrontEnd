@@ -10,12 +10,14 @@ import {
   TUser,
   TUserLogin,
   TUserRegisterResquest,
+  TUserUpdate,
 } from "@/interfaces/user";
 import { IAuthContext } from "./interface";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 import { CarsContext } from "../Cars/CarsContext";
 import Toast from "@/components/Toast";
+import { TAddressUpdate } from "@/interfaces/address";
 import { useRequest } from "@/hooks/useRequest";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -96,7 +98,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     getAllCarsRequest();
     getUserCars();
     loggedUser();
-  }, [token]);
+  }, [token, user]);
 
   const sendEmail = async (sendEmailResetPasswordData: SendEmailResetPasswordData) => {
     await request({
@@ -122,6 +124,51 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     });
   };
 
+  const patchUser = async (data: TUserUpdate) => {
+    await api
+      .patch(`users/${user?.id}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+        Toast({ message: "Usuário atualizada com sucesso!", isSucess: true });
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const destroyUser = async () => {
+    await api
+      .delete(`users/${user!.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        Toast({ message: "Usuário deletado com sucesso!", isSucess: true });
+        logout();
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const editUserAddress = async (data: TAddressUpdate) => {
+    await api
+      .patch(`addresses/${user?.address.id}`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data);
+        Toast({ message: "Endereço atualizada com sucesso!", isSucess: true });
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -137,6 +184,9 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
         setOpenNavBar,
         toggleNavBar,
         closeNavBar,
+        patchUser,
+        destroyUser,
+        editUserAddress,
       }}
     >
       {children}

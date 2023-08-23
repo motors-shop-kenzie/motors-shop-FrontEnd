@@ -20,7 +20,7 @@ export default function CheckSellerPage() {
 
   useEffect(() => {
     getClickedUser(id);
-  }, []);
+  }, [id]);
 
   const getClickedUser = (id: string) => {
     api
@@ -36,12 +36,11 @@ export default function CheckSellerPage() {
   return (
     <PageLoading>
       <NavBar />
-      <h1>{clickedUser?.name} </h1>
       <main className={styles.container__sellerMain}>
         <div className={styles.box}>
           <SellerCard clickedUser={clickedUser} />
         </div>
-        <h3>Anúncios</h3>
+        <h3 className={styles.title}>Anúncios</h3>
         <ProductBox>
           {filteredCars.length === 0 ? (
             <p>Não há carros cadastrados.</p>
@@ -51,7 +50,7 @@ export default function CheckSellerPage() {
             ))
           )}
         </ProductBox>
-        <Footer path="/checkSellerPage/" />
+        <Footer path={`/checkSellerPage/${id}`} />
       </main>
     </PageLoading>
   );

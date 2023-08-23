@@ -10,12 +10,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 11;
   border-bottom: none;
 
   .modal {
-    width: 100%;
-    max-width: 520px;
+    width: 80%;
+    max-width: fit-content;
     background-color: $color-grey-scale-grey-10;
     padding: 1.5rem;
     border-radius: 8px;
@@ -25,6 +25,8 @@
   }
 
   .header {
+    width: 98%;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,6 +40,9 @@
 
   .close {
     cursor: pointer;
+    color: $color-grey-scale-grey-4;
+    font-size: $heading-5-600;
+    font-weight: 500;
   }
 
   .content {

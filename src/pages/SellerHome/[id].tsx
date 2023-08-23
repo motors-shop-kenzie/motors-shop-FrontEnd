@@ -1,5 +1,4 @@
 "use client";
-
 /* eslint-disable react-hooks/exhaustive-deps */
 import { NavBar } from "@/components/NavBar";
 import { SellerCard } from "@/components/Seller/SellerCard";
@@ -11,10 +10,10 @@ import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 import { ModalContext } from "@/contexts/Modal";
-import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import { destroyCookie, setCookie } from "nookies";
 import PageLoading from "@/components/PageLoading";
+import styles from "./styles.module.scss";
 
 const SellerHome: NextPage = () => {
   const { replace, query } = useRouter();

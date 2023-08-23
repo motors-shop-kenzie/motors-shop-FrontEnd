@@ -74,6 +74,7 @@ export default function HomePage() {
   };
 
   return (
+<<<<<<< HEAD
     <PageLoading>
       <main className={styles.body} onClick={openNavBar ? closeNavBar : undefined}>
         <NavBar />
@@ -82,6 +83,15 @@ export default function HomePage() {
             <h2>Motors Shop</h2>
             <h4>A melhor plataforma de anúncios de carros do país</h4>
           </div>
+=======
+    <main className={styles.body} onClick={openNavBar ? closeNavBar : undefined}>
+      <NavBar />
+
+      <div className={styles.car_container}>
+        <div>
+          <h2>Motors Shop</h2>
+          <h4>A melhor plataforma de anúncios de carros do país</h4>
+>>>>>>> develop
         </div>
         <section className={styles.car_shop}>
           {openFilter ? (

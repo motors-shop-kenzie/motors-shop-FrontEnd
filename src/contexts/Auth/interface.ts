@@ -1,3 +1,4 @@
+import { TAddressUpdate } from "@/interfaces/address";
 import {
   ResetPasswordData,
   SendEmailResetPasswordData,
@@ -20,4 +21,7 @@ export interface IAuthContext {
   setOpenNavBar: Dispatch<SetStateAction<boolean>>;
   toggleNavBar: () => void;
   closeNavBar: () => void;
+  patchUser: (data: TUserRegisterResquest) => Promise<void>;
+  destroyUser: () => Promise<void>;
+  editUserAddress: (data: TAddressUpdate) => Promise<void>;
 }

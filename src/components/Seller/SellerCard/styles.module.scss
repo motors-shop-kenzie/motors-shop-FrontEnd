@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  height: 300px;
   width: 60%;
   max-width: 100%;
   padding: 2rem;
@@ -62,49 +61,18 @@
 }
 
 .container__sellerSection > button {
-  width: 60%;
-  height: 40px;
+  max-width: 160px;
 
-  font-size: 1rem;
-
-  color: $color-brand-brand-1;
-
-  border: 1px solid $color-brand-brand-1;
-  border-radius: 4px;
-}
-
-@media (min-width: 424px) {
-  .container__sellerSection > button {
-    width: 50%;
-  }
-}
-
-@media (min-width: 767px) {
-  .container__sellerSection > button {
-    width: 25%;
-
-    height: 42px;
-  }
+  border: 1.5px solid $color-brand-brand-1;
 }
 
 @media (min-width: 1023px) {
-
   .container__divSellerType {
     gap: 1.5rem;
-  }
-
-  .container__sellerSection > button {
-    font-size: 1.3rem;
-
-    height: 45px;
-
-    width: 28%;
   }
 }
 
 @media (min-width: 1439px) {
-
-
   .container__sellerDivName > h3 {
     font-size: 2rem;
     font-weight: 600;
@@ -124,13 +92,5 @@
 
   .container__sellerSection > p {
     font-size: 1.3rem;
-  }
-
-  .container__sellerSection > button {
-    height: 50px;
-
-    font-size: 1.5rem;
-
-    width: 22%;
   }
 }

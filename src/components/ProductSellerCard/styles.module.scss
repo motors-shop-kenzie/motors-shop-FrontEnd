@@ -7,6 +7,13 @@
   width: 300px;
 }
 
+.divImg {
+  cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+  }
+}
+
 .active {
   background-color: $color-brand-brand-1;
   color: $color-colors-fixed-white-fixed;
@@ -33,7 +40,6 @@
 
 .img {
   position: relative;
-  
 }
 .title {
   margin: 5px 0;
@@ -90,7 +96,7 @@
   }
 }
 
-.btns{
+.btns {
   margin: 10px 0;
   display: flex;
   gap: 16px;
@@ -98,12 +104,12 @@
 
 .grey10BorderGrey0Button {
   @include buttonBasic(
-      1.5px solid $color-grey-scale-grey-0,
-      $button-radius,
-      12px 20px,
-      $button-medium-text,
-      12px 28px,
-      $button-big-text
+    1.5px solid $color-grey-scale-grey-0,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
   );
   @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-0);
 }
