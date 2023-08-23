@@ -2,7 +2,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 interface IInputProps {
   type: string;
-  placeholder: string;
+  placeholder: string | any;
   className: string;
   id: string;
   register?: UseFormRegisterReturn<string>;

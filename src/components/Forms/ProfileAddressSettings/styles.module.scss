@@ -1,0 +1,17 @@
+.container__addressSettingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  overflow-y: auto;
+
+  height: 70vh;
+  width: 95%;
+}
+
+.container__divAddressSettings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}

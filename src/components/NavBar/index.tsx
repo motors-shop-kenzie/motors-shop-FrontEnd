@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { useModal } from "@/hooks/modalHook";
 import { ProfileSettingsModal } from "../Modal/ProfileSettings";
 import styles from "./styles.module.scss";
+import { ProfileAddressModal } from "../Modal/ProfileAddress";
 
 interface INavBarProps {}
 
@@ -22,6 +23,7 @@ export const NavBar = (props: INavBarProps) => {
 
   return (
     <nav className={styles.container}>
+      {showModal === "address" ? <ProfileAddressModal /> : null}
       {showModal === "settings" ? <ProfileSettingsModal /> : null}
       <div className={styles.nav_content}>
         <Link href={"/"}>
@@ -68,7 +70,7 @@ export const NavBar = (props: INavBarProps) => {
       {openNavBar && user?.id && (
         <ul className={styles.options__logged} onClick={(e) => e.stopPropagation()}>
           <li onClick={() => setShowModal("settings")}>Editar Perfil</li>
-          <li onClick={() => alert(`"Editar Endereço" ainda não implementado`)}>Editar Endereço</li>
+          <li onClick={() => setShowModal("address")}>Editar Endereço</li>
           {user.isAdmin && <li onClick={() => push(`/SellerHome/${user.id}`)}>Meus Anúncios</li>}
           <li onClick={() => logout()}>Sair</li>
         </ul>
