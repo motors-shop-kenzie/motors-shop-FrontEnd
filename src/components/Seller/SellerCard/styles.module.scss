@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  height: 300px;
   width: 60%;
   max-width: 100%;
   padding: 2rem;
@@ -88,7 +87,6 @@
 }
 
 @media (min-width: 1023px) {
-
   .container__divSellerType {
     gap: 1.5rem;
   }
@@ -103,8 +101,6 @@
 }
 
 @media (min-width: 1439px) {
-
-
   .container__sellerDivName > h3 {
     font-size: 2rem;
     font-weight: 600;
