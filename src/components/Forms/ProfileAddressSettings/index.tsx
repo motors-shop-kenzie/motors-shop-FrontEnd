@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import ButtonStyles from "../../Button/styles.module.scss";
 import InputStyles from "../../Input/styles.module.scss";
 import styles from "../styles.module.scss";
-import { useEffect } from "react";
 
 export const ProfileAddressSettings = () => {
   const { user, editUserAddress } = useAuth();

@@ -1,4 +1,5 @@
 "use client";
+
 import { createContext, useState } from "react";
 import { IModalContext } from "./interface";
 import { iChildrenProps } from "@/interfaces";

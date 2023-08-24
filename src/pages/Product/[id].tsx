@@ -18,6 +18,7 @@ import { AuthContext } from "@/contexts/Auth/authContext";
 import CreateComment from "@/components/Forms/CreateComment";
 import Comments from "@/components/Comments";
 import ImgsProduct from "@/components/ImgsProduct";
+import PageLoading from "@/components/PageLoading";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
@@ -44,6 +45,7 @@ const ProductPage: NextPage = () => {
   };
 
   return (
+    // <PageLoading>
     <>
       <header>
         <NavBar />
@@ -76,6 +78,9 @@ const ProductPage: NextPage = () => {
       </section>
       <Footer path={`/Product/${id}`} />
     </>
+    // </PageLoading>
   );
 };
 export default ProductPage;
+
+// Discutir sobre colocar o staticSidegeneration pois é mias performatico e economiza ciclo de vida das renderizações

@@ -4,10 +4,10 @@ import styles from "./styles.module.scss";
 import { GetServerSideProps, NextPage } from "next";
 import api from "@/services/api";
 import { TCarProduct } from "@/interfaces/CarProduc";
-import { useModal } from "@/hooks/modalHook";
 import { NavBar } from "@/components/NavBar";
 import { TUser } from "@/interfaces/user";
 import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
+import { useModal } from "@/hooks/modalHook";
 
 interface HomeProps {
   cars: TCarProduct[];

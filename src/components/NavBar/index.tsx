@@ -1,6 +1,5 @@
 import profileDefault from "@/assets/defaults/profile.svg";
 import darkLogo from "@/assets/logo/dark-logo.svg";
-import { useAuth } from "@/hooks/useAuth.hook";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,6 +9,7 @@ import { useRouter } from "next/router";
 import { useModal } from "@/hooks/modalHook";
 import { ProfileSettingsModal } from "../Modal/ProfileSettings";
 import styles from "./styles.module.scss";
+import { useAuth } from "@/hooks/useAuth.hook";
 import { ProfileAddressModal } from "../Modal/ProfileAddress";
 
 interface INavBarProps {}

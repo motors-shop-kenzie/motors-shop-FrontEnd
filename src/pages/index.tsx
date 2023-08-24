@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Car, FilterOptions } from "@/interfaces/CarFilter";
 import styles from "./styles.module.scss";
 import { AuthContext } from "@/contexts/Auth/authContext";
+import PageLoading from "@/components/PageLoading";
 
 export default function HomePage() {
   const { cars } = useContext(CarsContext);
@@ -271,6 +272,7 @@ export default function HomePage() {
       <div className={styles.show_filter}>
         <button onClick={toggleMenu}>Filtros</button>
       </div>
+
       <Footer path="/" />
     </main>
   );
