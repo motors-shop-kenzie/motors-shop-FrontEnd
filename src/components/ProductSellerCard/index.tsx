@@ -35,7 +35,7 @@ export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
         <div className={styles.info}>
           <div>{car.km} KM</div> <div>{car.year}</div>
         </div>
-        <div className={styles.price}>{car.price.toFixed(2)}</div>
+        <div className={styles.price}>{car.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</div>
       </div>
       {isClickedUser ? null : (
         <div className={styles.btns}>

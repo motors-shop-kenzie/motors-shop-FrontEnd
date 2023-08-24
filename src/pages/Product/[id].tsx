@@ -1,6 +1,5 @@
 "use client";
 
-/* eslint-disable react-hooks/exhaustive-deps */
 import { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
@@ -19,28 +18,48 @@ import CreateComment from "@/components/Forms/CreateComment";
 import Comments from "@/components/Comments";
 import ImgsProduct from "@/components/ImgsProduct";
 import PageLoading from "@/components/PageLoading";
+import { useRequest } from "@/hooks/useRequest";
+import { Loading } from "@/components/PageLoading/Loading";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
-  const { singleCar, getSingleCar, cars } = useContext(CarsContext);
+  const { singleCar, getSingleCar } = useContext(CarsContext);
   const { closeNavBar, openNavBar } = useContext(AuthContext);
   const { id }: any = query;
-  const [userRelated, setUserRelated] = useState<TUser>();
+  const [userRelated, setUserRelated] = useState<TUser | null>(null);
+
+  const request = useRequest();
 
   useEffect(() => {
-    getSingleCar(id);
+    const fetchData = async () => {
+      await getSingleCar(id);
+    };
+
+    fetchData();
   }, [id]);
 
-  useEffect(() => getUserRelated(), []);
+  useEffect(() => {
+    const getUserRelated = async () => {
+      if (singleCar) {
+        await request({
+          tryFn: async () => {
+            const response = await api.get(`/users/${singleCar.userId}`);
+            setUserRelated(response.data);
+          },
+        });
+      }
+    };
 
-  const getUserRelated = () => {
-    api
-      .get(`/users/${singleCar?.userId}`)
-      .then((response) => {
-        setUserRelated(response.data);
-      })
-      .catch((error) => console.error(error));
-  };
+    getUserRelated();
+  }, [singleCar]);
+
+  if (!singleCar) {
+    return (
+      <PageLoading>
+        <Loading />
+      </PageLoading>
+    );
+  }
 
   return (
     <PageLoading>
@@ -60,7 +79,7 @@ const ProductPage: NextPage = () => {
             <ProfileUserInfos
               userId={userRelated.id}
               name={userRelated.name}
-              description={userRelated?.description}
+              description={userRelated.description}
               user={userRelated}
             />
           )}
@@ -68,8 +87,8 @@ const ProductPage: NextPage = () => {
       </main>
       <section className={styles.secondSection}>
         <div className={styles.commentsSection}>
-          <Comments user={userRelated} />
-          <CreateComment user={userRelated} />
+          <Comments user={userRelated!} />
+          <CreateComment user={userRelated!} />
         </div>
         <div className={styles.asideContainer}></div>
       </section>
@@ -77,6 +96,5 @@ const ProductPage: NextPage = () => {
     </PageLoading>
   );
 };
-export default ProductPage;
 
-// Discutir sobre colocar o staticSidegeneration pois é mias performatico e economiza ciclo de vida das renderizações
+export default ProductPage;
