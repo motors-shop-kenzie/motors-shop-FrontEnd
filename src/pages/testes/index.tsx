@@ -8,6 +8,7 @@ import { NavBar } from "@/components/NavBar";
 import { TUser } from "@/interfaces/user";
 import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 import { useModal } from "@/hooks/modalHook";
+import ConfirmDeleteAccountModal from "@/components/Modal/ConfirmDeleteAccountModal";
 
 interface HomeProps {
   cars: TCarProduct[];
@@ -25,7 +26,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
   return (
     <div className={styles.body}>
       <NavBar />
-      <div className={styles.buttonsContainer}>
+      {/* <div className={styles.buttonsContainer}>
         <Button className={styles.grey0Button} text="Text Button" onClick={handleClick} />
         <Button className={styles.grey1Button} text="Text Button" onClick={handleClick} />
         <Button className={styles.grey2TextLightButton} text="Text Button" onClick={handleClick} />
@@ -53,7 +54,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
           onClick={handleClick}
         />
         <Button className={styles.brand3TextBrand4Button} text="Text Button" onClick={handleClick} />
-      </div>
+      </div> */}
 
       {/* <div className={styles.inputsContainer}>
          <InputSectionField>
@@ -111,7 +112,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
 
       <Button className={styles.grey0Button} text="Abrir modal" onClick={() => handleModalOpen()} />
 
-      {showModal === "createContact" && <CreateAnnounceModal />}
+      {showModal === "createContact" && <ConfirmDeleteAccountModal />}
 
       {/* <h1>ProductCards (HomePage)</h1>
       <ProductBox>
