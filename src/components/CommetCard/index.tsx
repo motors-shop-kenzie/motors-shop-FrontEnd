@@ -8,7 +8,7 @@ interface CardProps {
 
 export const CommentCard = ({ user }: CardProps) => {
   return (
-    <div className={styles.container}>
+    <li className={styles.container}>
       <UserHeader user={user} userId={user?.id} letter={user?.name?.charAt(0)} />
       <div className={styles.text}>
         Lorem ipsum venenatis scelerisque malesuada netus hac, senectus vivamus porta neque imperdiet, leo ornare purus
@@ -16,6 +16,6 @@ export const CommentCard = ({ user }: CardProps) => {
         dapibus auctor et velit fusce porta. scelerisque convallis fermentum et elit aenean cursus euismod maecenas,
         odio porttitor sociosqu dictum eros egestas commodo molestie lorem, ut est mauris potenti felis risus posuere.
       </div>
-    </div>
+    </li>
   );
 };

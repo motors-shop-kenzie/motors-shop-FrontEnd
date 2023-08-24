@@ -305,3 +305,59 @@
     font-size: 1.2rem;
   }
 }
+
+.createCommentDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 36px 28px;
+
+  background-color: $color-grey-scale-grey-10;
+  color: $color-grey-scale-grey-1;
+
+  border-radius: $form-radius;
+
+  > form {
+    position: relative;
+    > section {
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        > textarea {
+          padding: 13px 0;
+          min-width: 100%;
+
+          // @media (min-width: 769px) {
+          //   padding: 13px 16px;
+          // }
+        }
+      }
+    }
+    > button {
+      margin-top: 24px;
+      @media (min-width: 769px) {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+    }
+  }
+}
+.commentIdeasDiv {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  > span {
+    background-color: $color-grey-scale-grey-7;
+    color: $color-grey-scale-grey-3;
+    padding: 7px 12px;
+
+    border-radius: 24px;
+
+    font-size: 12px;
+    font-weight: $medium-weight;
+  }
+}

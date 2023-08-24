@@ -15,6 +15,8 @@ import ProductDescription from "@/components/ProductDescription";
 import ProfileUserInfos from "@/components/ProfileUserInfos";
 import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
+import CreateComment from "@/components/Forms/CreateComment";
+import Comments from "@/components/Comments";
 import ImgsProduct from "@/components/ImgsProduct";
 import PageLoading from "@/components/PageLoading";
 
@@ -56,12 +58,24 @@ const ProductPage: NextPage = () => {
           <ProductDescription />
         </section>
         <aside className={styles.asideContainer}>
-          <div>{singleCar && <ImgsProduct />}</div>
+          <div className={styles.imgsDiv}>{singleCar && <ImgsProduct />}</div>
           {userRelated && (
-            <ProfileUserInfos userId={userRelated.id} name={userRelated.name} description={userRelated?.description} />
+            <ProfileUserInfos
+              userId={userRelated.id}
+              name={userRelated.name}
+              description={userRelated?.description}
+              user={userRelated}
+            />
           )}
         </aside>
       </main>
+      <section className={styles.secondSection}>
+        <div className={styles.commentsSection}>
+          <Comments user={userRelated} />
+          <CreateComment user={userRelated} />
+        </div>
+        <div className={styles.asideContainer}></div>
+      </section>
       <Footer path={`/Product/${id}`} />
     </>
     // </PageLoading>

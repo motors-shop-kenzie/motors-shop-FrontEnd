@@ -8,14 +8,17 @@ import { Button } from "../Button";
 import ButtonStyled from "../Button/styles.module.scss";
 import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
+import { UserHeader } from "../UserHeader";
+import { TUser } from "@/interfaces/user";
 
 interface iUserInfosProps {
   userId: string;
   name: string;
   description?: string;
+  user: TUser | undefined;
 }
 
-export default function ProfileUserInfos({ userId, name, description }: iUserInfosProps) {
+export default function ProfileUserInfos({ userId, name, description, user }: iUserInfosProps) {
   const { push } = useRouter();
   const redirect = () => {
     push(`/checkSellerPage/${userId}`);
