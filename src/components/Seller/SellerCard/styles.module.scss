@@ -10,6 +10,16 @@
   padding: 2rem;
   border-radius: 4px;
   background-color: $color-grey-scale-grey-8;
+
+  > p {
+    max-height: 70px;
+    max-width: 100%;
+    overflow-y: scroll;
+
+    @media (min-width: 769px) {
+      max-height: 100px;
+    }
+  }
 }
 
 .container__sellerDivName {
