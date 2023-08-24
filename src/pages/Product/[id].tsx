@@ -31,9 +31,7 @@ const ProductPage: NextPage = () => {
     getSingleCar(id);
   }, [id]);
 
-  useEffect(() => {
-    getUserRelated();
-  });
+  useEffect(() => getUserRelated(), []);
 
   const getUserRelated = () => {
     api
@@ -45,8 +43,7 @@ const ProductPage: NextPage = () => {
   };
 
   return (
-    // <PageLoading>
-    <>
+    <PageLoading>
       <header>
         <NavBar />
       </header>
@@ -77,8 +74,7 @@ const ProductPage: NextPage = () => {
         <div className={styles.asideContainer}></div>
       </section>
       <Footer path={`/Product/${id}`} />
-    </>
-    // </PageLoading>
+    </PageLoading>
   );
 };
 export default ProductPage;

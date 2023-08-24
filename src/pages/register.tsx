@@ -8,14 +8,12 @@ import PageLoading from "@/components/PageLoading";
 
 export default function Register() {
   return (
-    // <PageLoading>
-    <>
+    <PageLoading>
       <main className={styles.containerRegisterPage}>
         <RegisterForm />
       </main>
       <Footer path="/register" />
       <NavBar />
-    </>
-    // </PageLoading>
+    </PageLoading>
   );
 }

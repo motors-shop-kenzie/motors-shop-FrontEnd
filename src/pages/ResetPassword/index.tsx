@@ -7,14 +7,14 @@ import PageLoading from "@/components/PageLoading";
 const SendEmailResetPassword: NextPage = () => {
   const { back } = useRouter();
   return (
-    // <PageLoading>
-    <main className={styles.body}>
-      <button className={styles.grey10BorderGrey0Button} onClick={() => back()}>
-        Voltar
-      </button>
-      <SendEmailForm />
-    </main>
-    // </PageLoading>
+    <PageLoading>
+      <main className={styles.body}>
+        <button className={styles.grey10BorderGrey0Button} onClick={() => back()}>
+          Voltar
+        </button>
+        <SendEmailForm />
+      </main>
+    </PageLoading>
   );
 };
 

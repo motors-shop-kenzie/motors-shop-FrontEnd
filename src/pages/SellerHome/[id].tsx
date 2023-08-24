@@ -4,7 +4,7 @@ import { NavBar } from "@/components/NavBar";
 import { SellerCard } from "@/components/Seller/SellerCard";
 import { NextPage } from "next";
 import { ProductBox } from "@/components/ProductBox";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ProductSellerCard } from "@/components/ProductSellerCard";
 import { AuthContext } from "@/contexts/Auth/authContext";
@@ -19,12 +19,8 @@ const SellerHome: NextPage = () => {
   const { replace, query } = useRouter();
   const { userCars } = useContext(CarsContext);
   const { showModal } = useContext(ModalContext);
-  const { user, loggedUser, closeNavBar, openNavBar } = useContext(AuthContext);
+  const { user, closeNavBar, openNavBar } = useContext(AuthContext);
   const { id } = query;
-
-  useEffect(() => {
-    loggedUser();
-  }, []);
 
   if (id !== user?.id) {
     const cookie = "ccm.token";
@@ -38,8 +34,7 @@ const SellerHome: NextPage = () => {
   }
 
   return (
-    // <PageLoading>
-    <>
+    <PageLoading>
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain} onClick={openNavBar ? closeNavBar : undefined}>
@@ -54,8 +49,7 @@ const SellerHome: NextPage = () => {
           )}
         </ProductBox>
       </main>
-    </>
-    // </PageLoading>
+    </PageLoading>
   );
 };
 export default SellerHome;
