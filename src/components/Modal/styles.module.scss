@@ -52,4 +52,16 @@
     align-items: center;
     gap: 15px;
   }
+  .textModalDelete {
+    margin: 20px 0;
+    font-size: $heading-6-600;
+    font-weight: $semi-bold-weight;
+  }
+}
+.deleteButtonsSection {
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
 }
