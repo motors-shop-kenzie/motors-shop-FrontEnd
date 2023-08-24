@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { iChildrenProps } from "@/interfaces";
-import { createContext, useEffect, useState } from "react";
-import { ICarsContext } from "./interface";
-import { Car } from "@/interfaces/CarFilter";
-import api from "@/services/api";
-import { parseCookies } from "nookies";
-import { TCarsRegister } from "@/schemas/carSchema";
 import Toast from "@/components/Toast";
 import { useRequest } from "@/hooks/useRequest";
+import { iChildrenProps } from "@/interfaces";
+import { Car } from "@/interfaces/CarFilter";
+import { TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import api from "@/services/api";
+import { parseCookies } from "nookies";
+import { createContext, useEffect, useState } from "react";
+import { ICarsContext } from "./interface";
 
 export const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 
@@ -29,15 +29,15 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const request = useRequest();
 
-  const createCars = async (formData: TCarsRegister) => {
+  const createCars = async (formData: TCarsPayloadRequest) => {
     await request({
       tryFn: async () => {
-        const response = await api.post("/cars", formData, {
+        const response = await api.post<Car>("/cars", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setCars(response.data);
+        setCars((prev) => [...prev, response.data]);
         Toast({ message: "Anúncio criado com sucesso !", isSucess: true });
         await getAllCarsRequest();
         await getUserCars();
