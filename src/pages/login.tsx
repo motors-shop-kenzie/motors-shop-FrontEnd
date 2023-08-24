@@ -8,12 +8,15 @@ import PageLoading from "@/components/PageLoading";
 
 export default function Login() {
   return (
-    <PageLoading>
+    // <PageLoading>
+    <>
       <main className={styles.containerLoginPage}>
         <LoginForm />
       </main>
       <Footer path="/register" />
       <NavBar />
-    </PageLoading>
+    </>
+
+    //  </PageLoading>
   );
 }

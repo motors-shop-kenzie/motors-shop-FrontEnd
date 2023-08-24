@@ -9,11 +9,11 @@ const ResetPassword: NextPage = () => {
   const { token } = router.query;
 
   return (
-    <PageLoading>
-      <main className={styles.body}>
-        <ResetPasswordForm token={token as string} />
-      </main>
-    </PageLoading>
+    // <PageLoading>
+    <main className={styles.body}>
+      <ResetPasswordForm token={token as string} />
+    </main>
+    // </PageLoading>
   );
 };
 
