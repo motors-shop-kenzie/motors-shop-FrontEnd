@@ -1,4 +1,5 @@
 import { Car } from "@/interfaces/CarFilter";
+import { TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import { Dispatch, SetStateAction } from "react";
 
 export type ICarsContext = {
@@ -8,9 +9,9 @@ export type ICarsContext = {
   setUserCars: Dispatch<SetStateAction<Car[]>>;
   filterData: Car[];
   setFilterData: Dispatch<SetStateAction<Car[]>>;
-  getAllCarsRequest: () => void;
-  getUserCars: () => void;
-  createCars: (formData: Car) => Promise<void>;
+  getAllCarsRequest: () => Promise<void>;
+  getUserCars: () => Promise<void>;
+  createCars: (formData: TCarsPayloadRequest) => Promise<void>;
   getSingleCar: (id: string) => Promise<void>;
   singleCar: Car | undefined;
   setSingleCar: Dispatch<SetStateAction<Car | undefined>>;

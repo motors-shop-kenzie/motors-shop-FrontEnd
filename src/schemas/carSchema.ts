@@ -1,24 +1,20 @@
 import { z } from "zod";
 import { userSchema } from "./userSchema";
 
+const urlSchema = z.string().url("Insira uma URL válida ou deixe em branco");
+
 export const carImgSchema = z.object({
   id: z.string(),
   url_img: z.string().url(),
   carProductsId: z.string().optional(),
 });
 
-export const carImgSchemaRegister = z.object({
-  url_img: z.string(),
-  carProductsId: z.string(),
-});
-
-export const carImgSchemaUpdate = z.object({
-  url_img: z.string(),
+export const carImgRegisterSchema = z.object({
+  url_img: urlSchema.optional(),
 });
 
 export const carSchema = z.object({
   id: z.string(),
-  name: z.string(),
   coverImg: z.string(),
   price: z.number(),
   year: z.number().max(4),
@@ -36,8 +32,7 @@ export const carSchema = z.object({
   userId: z.string().optional(),
 });
 
-export const carSchemaRegister = z.object({
-  name: z.string().nonempty({ message: "*" }),
+export const carRegisterSchema = z.object({
   coverImg: z.string().nonempty({ message: "*" }),
   price: z.coerce.number().min(1, { message: "*" }),
   year: z.coerce.number(),
@@ -48,13 +43,7 @@ export const carSchemaRegister = z.object({
   model: z.string().nonempty({ message: "*" }),
   brand: z.string().nonempty({ message: "*" }),
   tablePife: z.coerce.number(),
-  img: z.array(carImgSchema).optional(),
+  img: z.array(carImgRegisterSchema).optional(),
 });
 
-export const formRegisterCar = carSchemaRegister.omit({ name: true });
-
-export type TFormCar = z.infer<typeof formRegisterCar>;
-
-export type TCarsRegister = z.infer<typeof carSchemaRegister>;
-
-export const carSchemaUpdate = carImgSchemaRegister.optional();
+export const payloadRequestSchema = carRegisterSchema.extend({ business: z.boolean() });

@@ -8,10 +8,12 @@ import { Select } from "@/components/Select";
 import { TextArea } from "@/components/Textarea";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ModalContext } from "@/contexts/Modal";
-import { TFormCar, formRegisterCar } from "@/schemas/carSchema";
+import { TCarImgRegister, TCarsFormRequest, TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { carImgRegisterSchema, carRegisterSchema } from "@/schemas/carSchema";
 import kenzieApi from "@/services/kenzieApi";
+import { schemaValidation } from "@/utils/validationUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ButtonStyles from "../../Button/styles.module.scss";
 import InputStyles from "../../Input/styles.module.scss";
@@ -33,8 +35,10 @@ export const CreateAnnounceModalForm = () => {
     handleSubmit,
     register,
     setValue,
-  } = useForm<TFormCar>({
-    resolver: zodResolver(formRegisterCar),
+    setError,
+    clearErrors,
+  } = useForm<TCarsFormRequest>({
+    resolver: zodResolver(carRegisterSchema),
   });
 
   const { setShowModal } = useContext(ModalContext);
@@ -44,11 +48,32 @@ export const CreateAnnounceModalForm = () => {
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [inputImage, setInputImage] = useState(2);
+  const [imageValues, setImageValues] = useState<TCarImgRegister[]>([]);
 
-  const renderComponentes = () => {
-    const componentes = [];
+  const handleInputImg = (index: number, value: string | undefined): void => {
+    setImageValues((prev) => {
+      if (value && value.length) {
+        const values = [...prev];
+        values[index] = { url_img: value };
+
+        const { message } = schemaValidation(carImgRegisterSchema, values[index]);
+        if (message) setError(`img.${index}.url_img`, { type: "manual", message });
+        else clearErrors(`img.${index}.url_img`);
+
+        return values;
+      }
+      prev.splice(index);
+      clearErrors(`img.${index}.url_img`);
+
+      return prev;
+    });
+  };
+
+  const renderInputImage = () => {
+    const inputs: React.JSX.Element[] = [];
+
     for (let i = 1; i <= inputImage; i++) {
-      componentes.push(
+      inputs.push(
         <InputSectionField key={i}>
           <Label htmlFor={`${i}-imagem-galeria`} name={`${i}º Imagem da galeria`} />
           <InputFocus>
@@ -57,12 +82,17 @@ export const CreateAnnounceModalForm = () => {
               className={InputStyles.basicInputWithBorder}
               placeholder="https://image.com"
               id="1-imagem-galeria"
+              onChangeFn={(e) => handleInputImg(i, e.target.value)}
             />
           </InputFocus>
+          {errors.img && errors.img[i] && (
+            <small style={{ color: "red" }}>{`* ${errors.img[i]?.url_img?.message}`}</small>
+          )}
         </InputSectionField>,
       );
     }
-    return componentes;
+
+    return inputs;
   };
 
   const getBrands = async () => {
@@ -83,12 +113,22 @@ export const CreateAnnounceModalForm = () => {
     }
   };
 
+  /**
+   * Takes a fuel type parameter and returns a string representing the type of fuel.
+   * @param fuelType - A number or undefined representing the type of fuel.
+   * @returns A string representing the type of fuel, or undefined if the input is not a valid fuel type.
+   */
   const fuelStringType = (fuelType: number | undefined): string | undefined => {
-    if (fuelType === 1) return "FLEX";
-    else if (fuelType === 2) return "HIBRID";
-    else if (fuelType === 3) return "ELECTRIC";
-
-    return undefined;
+    switch (fuelType) {
+      case 1:
+        return "FLEX";
+      case 2:
+        return "HIBRID";
+      case 3:
+        return "ELECTRIC";
+      default:
+        return undefined;
+    }
   };
 
   useEffect(() => {
@@ -113,9 +153,15 @@ export const CreateAnnounceModalForm = () => {
     })();
   }, [brand, model]);
 
-  const submit: SubmitHandler<TFormCar> = (formData: any) => {
-    const obj = { ...formData, business: formData.price < formData.tablePife };
-    createCars(obj);
+  const submit: SubmitHandler<TCarsFormRequest> = (formData) => {
+    imageValues.forEach((image, idx) => handleInputImg(idx, image?.url_img));
+    if (Object.keys(errors).length) return;
+
+    const images: TCarImgRegister[] = imageValues.filter((img) => img !== undefined && img.url_img);
+
+    const car: TCarsPayloadRequest = { ...formData, business: formData.price < formData.tablePife, img: [...images] };
+
+    createCars(car);
     setInputImage(2);
     setShowModal("");
   };
@@ -124,13 +170,14 @@ export const CreateAnnounceModalForm = () => {
     <div className={styles.modalContainer}>
       <form onSubmit={handleSubmit(submit)}>
         <h2 className={styles.subtitleModal}>Informações do veículo</h2>
+
         <div className={styles.inputsSectionModal}>
           <InputSectionField>
             <Label htmlFor="marca" name="Marca" />
             <InputFocus>
               <Select name="marca" id="marca" register={register("brand")} setBrand={setBrand}>
                 <option value="">Selecione uma marca</option>
-                {Object.entries(brands).map(([key, value]) => (
+                {Object.entries(brands).map(([key, _]) => (
                   <option value={key} key={key}>
                     {key}
                   </option>
@@ -139,6 +186,7 @@ export const CreateAnnounceModalForm = () => {
             </InputFocus>
           </InputSectionField>
           {errors.brand?.message && <p>{errors.brand?.message}</p>}
+
           <InputSectionField>
             <Label htmlFor="modelo" name="Modelo" />
             <InputFocus>
@@ -173,6 +221,7 @@ export const CreateAnnounceModalForm = () => {
               </InputFocus>
             </InputSectionField>
             {errors.year?.message && <p>{errors.year?.message}</p>}
+
             <InputSectionField>
               <Label htmlFor="combustivel" name="Combustível" />
               <InputFocus>
@@ -202,6 +251,7 @@ export const CreateAnnounceModalForm = () => {
               </InputFocus>
             </InputSectionField>
             {errors.km?.message && <p>{errors.km?.message}</p>}
+
             <InputSectionField>
               <Label htmlFor="cor" name="Cor" />
               <InputFocus>
@@ -216,6 +266,7 @@ export const CreateAnnounceModalForm = () => {
             </InputSectionField>
             {errors.color?.message && <p>{errors.color?.message}</p>}
           </div>
+
           <div className={styles.inputsInRow}>
             <InputSectionField>
               <Label htmlFor="preco-tabela" name="Preço tabela FIPE" />
@@ -231,6 +282,7 @@ export const CreateAnnounceModalForm = () => {
               </InputFocus>
             </InputSectionField>
             {errors.tablePife?.message && <p>{errors.tablePife?.message}</p>}
+
             <InputSectionField>
               <Label htmlFor="preco" name="Preço" />
               <InputFocus>
@@ -271,7 +323,9 @@ export const CreateAnnounceModalForm = () => {
               />
             </InputFocus>
           </InputSectionField>
-          {renderComponentes()}
+
+          {renderInputImage()}
+
           <Button
             className={ButtonStyles.brand4TextBrand1Button}
             onClick={() => setInputImage(inputImage + 1)}
