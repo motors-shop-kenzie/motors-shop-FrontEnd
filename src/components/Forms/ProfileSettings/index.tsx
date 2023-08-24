@@ -5,16 +5,16 @@ import { Label } from "@/components/Label";
 import { TextArea } from "@/components/Textarea";
 import { Button } from "@/components/Button";
 import { useModal } from "@/hooks/modalHook";
+import { useAuth } from "@/hooks/useAuth.hook";
+import { useForm } from "react-hook-form";
 import InputStyles from "../../Input/styles.module.scss";
 import TextAreaStyles from "../../Textarea/style.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
-import { useAuth } from "@/hooks/useAuth.hook";
-import { useForm } from "react-hook-form";
 import styles from "../styles.module.scss";
 
 export const ProfileSettings = () => {
   const { user, patchUser, destroyUser } = useAuth();
-  const { closeModal } = useModal();
+  const { closeModal, setShowModal } = useModal();
 
   const { register, handleSubmit } = useForm();
 
@@ -114,7 +114,7 @@ export const ProfileSettings = () => {
           <div className={styles.editProfileModalButtonsDiv}>
             <Button onClick={() => closeModal()} className={ButtonStyles.grey6TextDarkButton} text="Cancelar" />
             <Button
-              onClick={() => destroyUser()}
+              onClick={() => setShowModal("delete")}
               className={ButtonStyles.feedbackAlert3TextFeedbackAlert1Button}
               text="Excluir Perfil"
             />

@@ -11,6 +11,7 @@ import { ProfileSettingsModal } from "../Modal/ProfileSettings";
 import styles from "./styles.module.scss";
 import { useAuth } from "@/hooks/useAuth.hook";
 import { ProfileAddressModal } from "../Modal/ProfileAddress";
+import ConfirmDeleteAccountModal from "../Modal/ConfirmDeleteAccountModal";
 
 interface INavBarProps {}
 
@@ -23,6 +24,7 @@ export const NavBar = (props: INavBarProps) => {
 
   return (
     <nav className={styles.container}>
+      {showModal === "delete" ? <ConfirmDeleteAccountModal /> : null}
       {showModal === "address" ? <ProfileAddressModal /> : null}
       {showModal === "settings" ? <ProfileSettingsModal /> : null}
       <div className={styles.nav_content}>
