@@ -38,7 +38,8 @@ const SellerHome: NextPage = () => {
   }
 
   return (
-    <PageLoading>
+    // <PageLoading>
+    <>
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain} onClick={openNavBar ? closeNavBar : undefined}>
@@ -53,7 +54,8 @@ const SellerHome: NextPage = () => {
           )}
         </ProductBox>
       </main>
-    </PageLoading>
+    </>
+    // </PageLoading>
   );
 };
 export default SellerHome;

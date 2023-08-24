@@ -5,12 +5,6 @@ import { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { useRouter } from "next/router";
-<<<<<<< HEAD
-import { destroyCookie, setCookie } from "nookies";
-import Image from "next/image";
-import { Car } from "@/interfaces/CarFilter";
-import PageLoading from "@/components/PageLoading";
-=======
 import { NavBar } from "@/components/NavBar";
 import api from "@/services/api";
 import { TUser } from "@/interfaces/user";
@@ -22,7 +16,7 @@ import ProfileUserInfos from "@/components/ProfileUserInfos";
 import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import ImgsProduct from "@/components/ImgsProduct";
->>>>>>> develop
+import PageLoading from "@/components/PageLoading";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
@@ -49,14 +43,7 @@ const ProductPage: NextPage = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <PageLoading>
-      <NavBar />
-      <Image src={singleCar!.coverImg} alt="Imagem de capa" width={300} height={150} />
-      <h2>{singleCar?.model}</h2>
-      {/* <h2>{singleCar?.user.name}</h2> */}
-    </PageLoading>
-=======
+    // <PageLoading>
     <>
       <header>
         <NavBar />
@@ -69,9 +56,7 @@ const ProductPage: NextPage = () => {
           <ProductDescription />
         </section>
         <aside className={styles.asideContainer}>
-          <div>
-            {singleCar && <ImgsProduct/>}
-          </div>
+          <div>{singleCar && <ImgsProduct />}</div>
           {userRelated && (
             <ProfileUserInfos userId={userRelated.id} name={userRelated.name} description={userRelated?.description} />
           )}
@@ -79,7 +64,7 @@ const ProductPage: NextPage = () => {
       </main>
       <Footer path={`/Product/${id}`} />
     </>
->>>>>>> develop
+    // </PageLoading>
   );
 };
 export default ProductPage;

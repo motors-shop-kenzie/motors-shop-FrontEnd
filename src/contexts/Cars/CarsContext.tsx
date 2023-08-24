@@ -47,7 +47,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   };
 
   const getAllCarsRequest = async () => {
-<<<<<<< HEAD
     await request({
       tryFn: async () => {
         const response = await api.get("/cars");
@@ -56,16 +55,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       },
       onErrorFn: () => Toast({ message: "Não foi possível carregar todos os carros" }),
     });
-=======
-    try {
-      const response = await api.get("/cars");
-      const data = response.data;
-
-      setCars(data);
-    } catch (error) {
-      console.error(error);
-    }
->>>>>>> develop
   };
 
   const getUserCars = async () => {
@@ -82,7 +71,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   };
 
   const getSingleCar = async (id: string) => {
-<<<<<<< HEAD
     await request({
       tryFn: async () => {
         const response = await api.get(`/cars/${id}`);
@@ -91,16 +79,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       },
       onErrorFn: () => Toast({ message: "Não foi possível carregar as informações deste carro" }),
     });
-=======
-    try {
-      const response = await api.get(`/cars/${id}`);
-      const data = response.data;
-      console.log(data);
-      setSingleCar(data);
-    } catch (error) {
-      console.error(error);
-    }
->>>>>>> develop
   };
 
   useEffect(() => {

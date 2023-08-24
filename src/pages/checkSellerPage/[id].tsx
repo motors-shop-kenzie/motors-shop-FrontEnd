@@ -34,7 +34,8 @@ export default function CheckSellerPage() {
   const filteredCars = cars.filter((element) => element.userId == id);
 
   return (
-    <PageLoading>
+    // <PageLoading>
+    <>
       <NavBar />
       <main className={styles.container__sellerMain}>
         <div className={styles.box}>
@@ -52,6 +53,7 @@ export default function CheckSellerPage() {
         </ProductBox>
         <Footer path={`/checkSellerPage/${id}`} />
       </main>
-    </PageLoading>
+    </>
+    // </PageLoading>
   );
 }
