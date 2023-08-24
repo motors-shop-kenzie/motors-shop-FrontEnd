@@ -80,17 +80,15 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
 
   const loggedUser = async () => {
     if (token) {
-      try {
-        const response = await api.get("/users/logged", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setUser(response.data);
-      } catch (error) {
-        console.error(error), Toast({ message: "Erro inesperado" });
-      }
+      await request({
+        tryFn: async () => {
+          const response = await api.get("/users/logged", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUser(response.data);
+        },
+        onErrorFn: () => Toast({ message: "Erro inesperado" }),
+      });
     }
   };
 
@@ -98,7 +96,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     getAllCarsRequest();
     getUserCars();
     loggedUser();
-  }, [token, user]);
+  }, [token]);
 
   const sendEmail = async (sendEmailResetPasswordData: SendEmailResetPasswordData) => {
     await request({
@@ -123,50 +121,43 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       onErrorFn: () => Toast({ message: "Erro ao atualizar a senha" }),
     });
   };
-
   const patchUser = async (data: TUserUpdate) => {
-    await api
-      .patch(`users/${user?.id}`, data, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-        Toast({ message: "Usuário atualizada com sucesso!", isSucess: true });
-      })
-      .catch((error) => console.error(error));
+    await request({
+      tryFn: async () => {
+        const response = await api.patch(`users/${user?.id}`, data, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(response.data);
+        Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível atualizar suas informações" }),
+    });
   };
 
   const destroyUser = async () => {
-    await api
-      .delete(`users/${user!.id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
+    await request({
+      tryFn: async () => {
+        await api.delete(`users/${user!.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         Toast({ message: "Usuário deletado com sucesso!", isSucess: true });
         logout();
-      })
-      .catch((error) => console.error(error));
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível deletar suas informações" }),
+    });
   };
 
   const editUserAddress = async (data: TAddressUpdate) => {
-    await api
-      .patch(`addresses/${user?.address.id}`, data, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setUser(res.data);
-        Toast({ message: "Endereço atualizada com sucesso!", isSucess: true });
-      })
-      .catch((error) => console.log(error));
+    await request({
+      tryFn: async () => {
+        const response = await api.patch(`addresses/${user?.address.id}`, data, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUser(response.data);
+        Toast({ message: "Endereço atualizado com sucesso!", isSucess: true });
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível atualizar o endereço" }),
+    });
   };
 
   return (

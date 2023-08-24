@@ -18,9 +18,7 @@ export default function CheckSellerPage() {
   const { id }: any = query;
   const { cars } = useContext(CarsContext);
 
-  useEffect(() => {
-    getClickedUser(id);
-  }, [id]);
+  useEffect(() => getClickedUser(id), [id]);
 
   const getClickedUser = (id: string) => {
     api
@@ -34,8 +32,7 @@ export default function CheckSellerPage() {
   const filteredCars = cars.filter((element) => element.userId == id);
 
   return (
-    // <PageLoading>
-    <>
+    <PageLoading>
       <NavBar />
       <main className={styles.container__sellerMain}>
         <div className={styles.box}>
@@ -53,7 +50,6 @@ export default function CheckSellerPage() {
         </ProductBox>
         <Footer path={`/checkSellerPage/${id}`} />
       </main>
-    </>
-    // </PageLoading>
+    </PageLoading>
   );
 }
