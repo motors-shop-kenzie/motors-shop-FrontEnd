@@ -1,0 +1,49 @@
+@use "../../sass/abstracts/variables" as *;
+
+.box {
+  padding: 36px 44px;
+  background-color: $color-grey-scale-grey-10;
+  border-radius: $modal-radius;
+
+  h2 {
+    font-size: $heading-6-600;
+    color: $color-grey-scale-grey-1;
+    font-weight: $semi-bold-weight;
+  }
+}
+
+.imgBox {
+  padding-top: 30px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  background-color: $color-grey-scale-grey-10;
+
+  border-radius: $modal-radius;
+
+  li {
+    border-radius: $modal-radius;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 769px) {
+  .box {
+    padding: 44px 36px;
+    background-color: $color-grey-scale-grey-10;
+    border-radius: $modal-radius;
+    min-width: 370px;
+
+    h2 {
+      font-size: $heading-6-600;
+      color: $color-grey-scale-grey-1;
+      font-weight: 600;
+    }
+  }
+}

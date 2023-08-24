@@ -17,6 +17,7 @@
   @media (min-width: 769px) {
     flex-direction: row;
     justify-content: center;
+    align-items: flex-start;
     gap: 45px;
   }
 }
@@ -57,18 +58,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   gap: 35px;
 
   width: 90%;
   max-width: 440px;
 
-  padding: 40px 28px;
+  padding: 40px 0;
 
   // background-color: $color-grey-scale-grey-8;
 
   @media (min-width: 769px) {
+    margin-top: 85px;
+
     width: 100%;
   }
+}
+.imgsDiv {
+  width: 100%;
 }
 .secondSection {
   display: flex;

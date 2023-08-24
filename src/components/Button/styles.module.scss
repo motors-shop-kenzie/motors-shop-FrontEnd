@@ -45,6 +45,9 @@
 .brand1Button {
   @include buttonBasic(none, $button-radius, 12px 20px, $button-medium-text, 12px 28px, $button-big-text);
   @include buttonColors($color-brand-brand-1, $color-colors-fixed-white-fixed);
+  &:hover {
+    @include buttonColors($color-brand-brand-2, $color-colors-fixed-white-fixed);
+  }
 }
 .brand2Button {
   @include buttonBasic(none, $button-radius, 12px 20px, $button-medium-text, 12px 28px, $button-big-text);

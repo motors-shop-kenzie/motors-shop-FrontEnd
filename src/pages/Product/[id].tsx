@@ -17,6 +17,7 @@ import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import CreateComment from "@/components/Forms/CreateComment";
 import Comments from "@/components/Comments";
+import ImgsProduct from "@/components/ImgsProduct";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
@@ -55,16 +56,21 @@ const ProductPage: NextPage = () => {
           <ProductDescription />
         </section>
         <aside className={styles.asideContainer}>
-          <div></div>
+          <div className={styles.imgsDiv}>{singleCar && <ImgsProduct />}</div>
           {userRelated && (
-            <ProfileUserInfos userId={userRelated.id} name={userRelated.name} description={userRelated?.description} />
+            <ProfileUserInfos
+              userId={userRelated.id}
+              name={userRelated.name}
+              description={userRelated?.description}
+              user={userRelated}
+            />
           )}
         </aside>
       </main>
       <section className={styles.secondSection}>
         <div className={styles.commentsSection}>
           <Comments user={userRelated} />
-          <CreateComment />
+          <CreateComment user={userRelated} />
         </div>
         <div className={styles.asideContainer}></div>
       </section>

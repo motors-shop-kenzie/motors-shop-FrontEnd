@@ -13,6 +13,9 @@ export default function Comments({ user }: iCommentProps) {
       <h2>Comentários</h2>
       <CommentBox>
         <CommentCard user={user} />
+        <CommentCard user={user} />
+        <CommentCard user={user} />
+        <CommentCard user={user} />
       </CommentBox>
     </div>
   );
