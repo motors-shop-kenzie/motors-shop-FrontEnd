@@ -92,12 +92,11 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     }
   };
 
-  
   const sendEmail = async (sendEmailResetPasswordData: SendEmailResetPasswordData) => {
     await request({
       tryFn: async () => {
         await api.post("/users/resetPassword", sendEmailResetPasswordData);
-        
+
         Toast({ message: "E-mail enviado com sucesso!", isSucess: true });
         push("/");
       },
@@ -116,6 +115,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       onErrorFn: () => Toast({ message: "Erro ao atualizar a senha" }),
     });
   };
+
   const patchUser = async (data: TUserUpdate) => {
     await request({
       tryFn: async () => {
@@ -145,22 +145,25 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
   const editUserAddress = async (data: TAddressUpdate) => {
     await request({
       tryFn: async () => {
-        const response = await api.patch(`addresses/${user?.address.id}`, data, {
+        await api.patch(`addresses/${user?.address.id}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data);
         Toast({ message: "Endereço atualizado com sucesso!", isSucess: true });
+
+        loggedUser();
       },
       onErrorFn: () => Toast({ message: "Não foi possível atualizar o endereço" }),
     });
   };
-  
+
+  console.log(user);
+
   useEffect(() => {
     getAllCarsRequest();
     getUserCars();
     loggedUser();
   }, [token]);
-  
+
   return (
     <AuthContext.Provider
       value={{
