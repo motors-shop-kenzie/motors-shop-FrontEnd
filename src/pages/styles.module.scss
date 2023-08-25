@@ -3,7 +3,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@500;600&display=swap");
 
 .body {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .loading {
@@ -39,8 +39,7 @@
 }
 
 .car_container {
-  background-image: url("../assets/Photo.png"),
-    linear-gradient(rgba(0, 0, 0, 0.29), rgba(0, 0, 0, 1));
+  background-image: url("../assets/Photo.png"), linear-gradient(rgba(0, 0, 0, 0.29), rgba(0, 0, 0, 1));
   background-repeat: no-repeat;
   background-blend-mode: darken;
   background-size: cover;
