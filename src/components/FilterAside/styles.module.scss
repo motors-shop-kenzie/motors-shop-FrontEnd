@@ -3,7 +3,7 @@
 .container {
   padding-left: 15px;
   h3 {
-    font-family: "Lexend";
+    font-family: $font-2;
     color: $color-grey-scale-grey-0;
     font-size: 28px;
     font-weight: 600;
@@ -13,8 +13,8 @@
     padding: 20px 0;
   }
   li {
-    //styleName: Heading/Heading-6-500;
-    font-family: Lexend;
+    font-family: $font-2;
+    font-size: $heading-4-600;
     color: $color-grey-scale-grey-3;
     font-size: 20px;
     font-weight: 500;
