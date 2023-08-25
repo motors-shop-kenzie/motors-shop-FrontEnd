@@ -19,7 +19,7 @@ export default function ProductInfos() {
           <span>{singleCar?.year}</span>
           <span>{singleCar?.km} KM</span>
         </div>
-        <p>R$ {singleCar?.price?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
+        <p>{singleCar?.price?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
       </div>
       <Button className={ButtonStyled.brand1Button} text="Comprar" type="button" />
     </div>
