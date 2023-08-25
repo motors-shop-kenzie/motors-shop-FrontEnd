@@ -92,17 +92,12 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     }
   };
 
-  useEffect(() => {
-    getAllCarsRequest();
-    getUserCars();
-    loggedUser();
-  }, [token]);
-
+  
   const sendEmail = async (sendEmailResetPasswordData: SendEmailResetPasswordData) => {
     await request({
       tryFn: async () => {
         await api.post("/users/resetPassword", sendEmailResetPasswordData);
-
+        
         Toast({ message: "E-mail enviado com sucesso!", isSucess: true });
         push("/");
       },
@@ -159,7 +154,13 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       onErrorFn: () => Toast({ message: "Não foi possível atualizar o endereço" }),
     });
   };
-
+  
+  useEffect(() => {
+    getAllCarsRequest();
+    getUserCars();
+    loggedUser();
+  }, [token]);
+  
   return (
     <AuthContext.Provider
       value={{
