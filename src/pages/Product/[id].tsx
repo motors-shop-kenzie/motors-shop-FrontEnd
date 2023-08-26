@@ -15,7 +15,6 @@ import ProfileUserInfos from "@/components/ProfileUserInfos";
 import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import CreateComment from "@/components/Forms/CreateComment";
-import Comments from "@/components/Comments";
 import ImgsProduct from "@/components/ImgsProduct";
 import PageLoading from "@/components/PageLoading";
 import { useRequest } from "@/hooks/useRequest";
@@ -23,7 +22,7 @@ import { Loading } from "@/components/PageLoading/Loading";
 
 const ProductPage: NextPage = () => {
   const { query } = useRouter();
-  const { singleCar, getSingleCar } = useContext(CarsContext);
+  const { singleCar, getSingleCar, getComment } = useContext(CarsContext);
   const { closeNavBar, openNavBar } = useContext(AuthContext);
   const { id }: any = query;
   const [userRelated, setUserRelated] = useState<TUser | null>(null);
@@ -51,6 +50,7 @@ const ProductPage: NextPage = () => {
     };
 
     getUserRelated();
+    getComment(id);
   }, [singleCar]);
 
   if (!singleCar) {
@@ -87,8 +87,9 @@ const ProductPage: NextPage = () => {
       </main>
       <section className={styles.secondSection}>
         <div className={styles.commentsSection}>
-          <Comments user={userRelated!} />
-          <CreateComment user={userRelated!} />
+          {/*           <Comments user={userRelated!} car={singleCar!} />
+           */}{" "}
+          <CreateComment user={userRelated!} car={singleCar!} />
         </div>
         <div className={styles.asideContainer}></div>
       </section>

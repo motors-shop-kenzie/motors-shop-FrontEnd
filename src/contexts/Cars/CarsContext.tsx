@@ -10,6 +10,7 @@ import api from "@/services/api";
 import { parseCookies } from "nookies";
 import { createContext, useEffect, useState } from "react";
 import { ICarsContext } from "./interface";
+import { iComment } from "@/components/Forms/CreateComment";
 
 export const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 
@@ -18,6 +19,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const [userCars, setUserCars] = useState<Car[]>([]);
   const [filterData, setFilterData] = useState<Car[]>([]);
   const [singleCar, setSingleCar] = useState<Car | undefined>({} as Car);
+  const [comment, setComment] = useState<iComment[]>([]);
 
   const cookies = parseCookies();
 
@@ -81,6 +83,17 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     });
   };
 
+  const getComment = async (carId: string) => {
+    await request({
+      tryFn: async () => {
+        const res = await api.get(`/comments/${carId}`);
+        const commentData = res.data;
+        setComment(commentData);
+        console.log(comment);
+      },
+    });
+  };
+
   useEffect(() => {
     (async () => {
       api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
@@ -104,6 +117,9 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         getSingleCar,
         singleCar,
         setSingleCar,
+        getComment,
+        comment,
+        setComment,
       }}
     >
       {children}

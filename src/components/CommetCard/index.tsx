@@ -1,21 +1,21 @@
-import { TUser } from "@/interfaces/user";
 import { UserHeader } from "../UserHeader";
 import styles from "./styles.module.scss";
 
 interface CardProps {
-  user: TUser | undefined;
+  user: { name: string };
+  comment: string;
+  userId: string;
+  createdAt: string;
 }
 
-export const CommentCard = ({ user }: CardProps) => {
+export const CommentCard = ({ user, comment, userId, createdAt }: CardProps) => {
   return (
     <li className={styles.container}>
-      <UserHeader user={user} userId={user?.id} letter={user?.name?.charAt(0)} />
-      <div className={styles.text}>
-        Lorem ipsum venenatis scelerisque malesuada netus hac, senectus vivamus porta neque imperdiet, leo ornare purus
-        metus egestas. aenean nullam fames vulputate netus in tortor rutrum amet mi habitant, varius nisi bibendum
-        dapibus auctor et velit fusce porta. scelerisque convallis fermentum et elit aenean cursus euismod maecenas,
-        odio porttitor sociosqu dictum eros egestas commodo molestie lorem, ut est mauris potenti felis risus posuere.
+      <div>
+        <UserHeader user={user} userId={userId} letter={user?.name?.charAt(0)} />
+        <p>{createdAt}</p>
       </div>
+      <div className={styles.text}>{comment}</div>
     </li>
   );
 };
