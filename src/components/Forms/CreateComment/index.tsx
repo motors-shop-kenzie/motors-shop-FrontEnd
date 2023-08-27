@@ -11,16 +11,17 @@ import comentStyles from "./styles.module.scss";
 import { useRequest } from "@/hooks/useRequest";
 import api from "@/services/api";
 import Toast from "@/components/Toast";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Car } from "@/interfaces/CarFilter";
 import { parseCookies } from "nookies";
 import { CommentCard } from "@/components/CommetCard";
 import { CommentBox } from "@/components/CommentBox";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
+import { AuthContext } from "@/contexts/Auth/authContext";
 
 interface iCommentProps {
-  user: TUser | undefined;
+  userComment: TUser | undefined;
   car: Car | undefined;
 }
 
@@ -31,12 +32,12 @@ export interface iComment {
   userId: string;
   createdAt: string;
 }
-export default function CreateComment({ user, car }: iCommentProps) {
+export default function CreateComment({ userComment, car }: iCommentProps) {
   const request = useRequest();
   const cookies = parseCookies();
   const { comment, setComment } = useContext(CarsContext);
-  /*   const { loggedUser } = useContext(AuthContext);
-   */
+  const { user } = useContext(AuthContext);
+
   if (cookies["ccm.token"]) {
     api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
   }
@@ -49,7 +50,8 @@ export default function CreateComment({ user, car }: iCommentProps) {
       tryFn: async () => {
         const res = await api.post(`/comments/${car?.id}`, data);
         const commentData = res.data;
-        setComment(commentData);
+        const objComment = { ...commentData, user: { name: user?.name } };
+        setComment([...comment, objComment]);
 
         Toast({ message: "Comentário enviado!", isSucess: true });
       },
@@ -66,7 +68,7 @@ export default function CreateComment({ user, car }: iCommentProps) {
       <div className={comentStyles.commentsContainer}>
         <h2>Comentários</h2>
         <CommentBox>
-          {comment.length === 0 ? (
+          {comment!.length === 0 ? (
             <p>Não há comentários.</p>
           ) : (
             comment.map((com) => (
@@ -82,7 +84,7 @@ export default function CreateComment({ user, car }: iCommentProps) {
         </CommentBox>
       </div>
       <div className={styles.createCommentDiv}>
-        <UserHeader user={user} userId={user?.id} letter={user?.name?.charAt(0)} />
+        {token ? <UserHeader user={user} userId={user?.id} letter={user?.name?.charAt(0)} /> : null}
         <form onSubmit={handleSubmit(submit)}>
           <InputSectionField>
             <InputFocus>

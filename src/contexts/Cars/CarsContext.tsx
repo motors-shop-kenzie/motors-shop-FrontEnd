@@ -89,7 +89,6 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         const res = await api.get(`/comments/${carId}`);
         const commentData = res.data;
         setComment(commentData);
-        console.log(comment);
       },
     });
   };

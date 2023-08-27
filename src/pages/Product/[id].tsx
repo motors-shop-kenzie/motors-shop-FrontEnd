@@ -21,37 +21,41 @@ import { useRequest } from "@/hooks/useRequest";
 import { Loading } from "@/components/PageLoading/Loading";
 
 const ProductPage: NextPage = () => {
-  const { query } = useRouter();
   const { singleCar, getSingleCar, getComment } = useContext(CarsContext);
   const { closeNavBar, openNavBar } = useContext(AuthContext);
-  const { id }: any = query;
   const [userRelated, setUserRelated] = useState<TUser | null>(null);
+  const router = useRouter();
+  const [queryParam, setQueryParam] = useState("");
 
   const request = useRequest();
 
+  const getUserRelated = async (id: string) => {
+    await request({
+      tryFn: async () => {
+        const response = await api.get(`/users/${id}`);
+        setUserRelated(response.data);
+      },
+    });
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      await getSingleCar(id);
-    };
-
-    fetchData();
-  }, [id]);
+    const id: any = router.query.id;
+    if (id) {
+      setQueryParam(id);
+    }
+  }, [router.query.id]);
 
   useEffect(() => {
-    const getUserRelated = async () => {
-      if (singleCar) {
-        await request({
-          tryFn: async () => {
-            const response = await api.get(`/users/${singleCar.userId}`);
-            setUserRelated(response.data);
-          },
-        });
-      }
-    };
+    getSingleCar(queryParam);
+  }, [queryParam]);
 
-    getUserRelated();
-    getComment(id);
-  }, [singleCar]);
+  useEffect(() => {
+    getUserRelated(singleCar!.userId);
+  }, []);
+
+  /*   useEffect(() => {
+    getComment(queryParam);
+  }, [singleCar]); */
 
   if (!singleCar) {
     return (
@@ -87,13 +91,12 @@ const ProductPage: NextPage = () => {
       </main>
       <section className={styles.secondSection}>
         <div className={styles.commentsSection}>
-          {/*           <Comments user={userRelated!} car={singleCar!} />
-           */}{" "}
-          <CreateComment user={userRelated!} car={singleCar!} />
+          <CreateComment userComment={userRelated!} car={singleCar!} />
         </div>
         <div className={styles.asideContainer}></div>
       </section>
-      <Footer path={`/Product/${id}`} />
+      {/*       <Footer path={`/Product/${id}`} />
+       */}{" "}
     </PageLoading>
   );
 };
