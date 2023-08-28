@@ -1,5 +1,4 @@
-"use client";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
@@ -26,17 +25,8 @@ const ProductPage: NextPage = () => {
   const [userRelated, setUserRelated] = useState<TUser | null>(null);
   const router = useRouter();
   const [queryParam, setQueryParam] = useState("");
-
+  const [isLoading, setIsLoading] = useState(true);
   const request = useRequest();
-
-  const getUserRelated = async (id: string) => {
-    await request({
-      tryFn: async () => {
-        const response = await api.get(`/users/${id}`);
-        setUserRelated(response.data);
-      },
-    });
-  };
 
   useEffect(() => {
     const id: any = router.query.id;
@@ -46,24 +36,29 @@ const ProductPage: NextPage = () => {
   }, [router.query.id]);
 
   useEffect(() => {
-    getSingleCar(queryParam);
+    if (queryParam) {
+      setIsLoading(true);
+      getSingleCar(queryParam)
+        .then(() => setIsLoading(false))
+        .catch(() => setIsLoading(false));
+    }
   }, [queryParam]);
 
   useEffect(() => {
-    getUserRelated(singleCar!.userId);
-  }, []);
+    if (singleCar && singleCar.userId) {
+      getUserRelated(singleCar.userId);
+      getComment(singleCar.id);
+    }
+  }, [singleCar]);
 
-  /*   useEffect(() => {
-    getComment(queryParam);
-  }, [singleCar]); */
-
-  if (!singleCar) {
-    return (
-      <PageLoading>
-        <Loading />
-      </PageLoading>
-    );
-  }
+  const getUserRelated = async (id: string) => {
+    await request({
+      tryFn: async () => {
+        const response = await api.get(`/users/${id}`);
+        setUserRelated(response.data);
+      },
+    });
+  };
 
   return (
     <PageLoading>
@@ -95,8 +90,6 @@ const ProductPage: NextPage = () => {
         </div>
         <div className={styles.asideContainer}></div>
       </section>
-      {/*       <Footer path={`/Product/${id}`} />
-       */}{" "}
     </PageLoading>
   );
 };

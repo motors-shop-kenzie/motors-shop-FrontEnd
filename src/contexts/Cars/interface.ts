@@ -17,6 +17,10 @@ export type ICarsContext = {
   singleCar: Car | undefined;
   setSingleCar: Dispatch<SetStateAction<Car | undefined>>;
   getComment: (carId: string) => Promise<void>;
-  setComment: Dispatch<SetStateAction<iComment[]>>;
   comment: iComment[];
+  setComment: Dispatch<SetStateAction<iComment[]>>;
+  patchComment: (data: string, commentId: string) => Promise<void>;
+  editingCommentId: string | null;
+  setEditingCommentId: Dispatch<SetStateAction<string | null>>;
+  deleteComment: (commentId: string) => Promise<void>;
 };

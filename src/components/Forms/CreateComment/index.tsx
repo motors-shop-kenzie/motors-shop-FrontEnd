@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { TUser } from "@/interfaces/user";
 import { UserHeader } from "@/components/UserHeader";
 import { InputSectionField } from "@/components/InputSectionField";
@@ -19,6 +20,7 @@ import { CommentCard } from "@/components/CommetCard";
 import { CommentBox } from "@/components/CommentBox";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { AuthContext } from "@/contexts/Auth/authContext";
+import { useModal } from "@/hooks/modalHook";
 
 interface iCommentProps {
   userComment: TUser | undefined;
@@ -31,12 +33,19 @@ export interface iComment {
   user: { name: string };
   userId: string;
   createdAt: string;
+  commentId: string;
 }
 export default function CreateComment({ userComment, car }: iCommentProps) {
   const request = useRequest();
   const cookies = parseCookies();
-  const { comment, setComment } = useContext(CarsContext);
+  const { comment, setComment, getComment } = useContext(CarsContext);
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (car && car.id) {
+      getComment(car!.id);
+    }
+  }, [car]);
 
   if (cookies["ccm.token"]) {
     api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
@@ -51,7 +60,8 @@ export default function CreateComment({ userComment, car }: iCommentProps) {
         const res = await api.post(`/comments/${car?.id}`, data);
         const commentData = res.data;
         const objComment = { ...commentData, user: { name: user?.name } };
-        setComment([...comment, objComment]);
+
+        setComment((prevComments) => [...prevComments, objComment]);
 
         Toast({ message: "Comentário enviado!", isSucess: true });
       },
@@ -59,8 +69,11 @@ export default function CreateComment({ userComment, car }: iCommentProps) {
     });
   };
 
-  const submit: SubmitHandler<iComment> = (formData) => {
-    registerComment(formData);
+  const submit: SubmitHandler<iComment> = async (formData) => {
+    if (car && car.id) {
+      await registerComment(formData);
+      await getComment(car!.id);
+    }
   };
 
   return (
@@ -71,9 +84,10 @@ export default function CreateComment({ userComment, car }: iCommentProps) {
           {comment!.length === 0 ? (
             <p>Não há comentários.</p>
           ) : (
-            comment.map((com) => (
+            comment!.map((com) => (
               <CommentCard
                 key={com.id}
+                commentId={com.id}
                 userId={com.userId}
                 user={com.user}
                 comment={com.comment}
