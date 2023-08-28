@@ -1,5 +1,4 @@
-"use client";
-
+/* eslint-disable react-hooks/exhaustive-deps */
 import { NextPage } from "next";
 import { useContext, useEffect, useState } from "react";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
@@ -15,51 +14,51 @@ import ProfileUserInfos from "@/components/ProfileUserInfos";
 import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import CreateComment from "@/components/Forms/CreateComment";
-import Comments from "@/components/Comments";
 import ImgsProduct from "@/components/ImgsProduct";
 import PageLoading from "@/components/PageLoading";
 import { useRequest } from "@/hooks/useRequest";
 import { Loading } from "@/components/PageLoading/Loading";
 
 const ProductPage: NextPage = () => {
-  const { query } = useRouter();
-  const { singleCar, getSingleCar } = useContext(CarsContext);
+  const { singleCar, getSingleCar, getComment } = useContext(CarsContext);
   const { closeNavBar, openNavBar } = useContext(AuthContext);
-  const { id }: any = query;
   const [userRelated, setUserRelated] = useState<TUser | null>(null);
-
+  const router = useRouter();
+  const [queryParam, setQueryParam] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const request = useRequest();
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getSingleCar(id);
-    };
-
-    fetchData();
-  }, [id]);
+    const id: any = router.query.id;
+    if (id) {
+      setQueryParam(id);
+    }
+  }, [router.query.id]);
 
   useEffect(() => {
-    const getUserRelated = async () => {
-      if (singleCar) {
-        await request({
-          tryFn: async () => {
-            const response = await api.get(`/users/${singleCar.userId}`);
-            setUserRelated(response.data);
-          },
-        });
-      }
-    };
+    if (queryParam) {
+      setIsLoading(true);
+      getSingleCar(queryParam)
+        .then(() => setIsLoading(false))
+        .catch(() => setIsLoading(false));
+    }
+  }, [queryParam]);
 
-    getUserRelated();
+  useEffect(() => {
+    if (singleCar && singleCar.userId) {
+      getUserRelated(singleCar.userId);
+      getComment(singleCar.id);
+    }
   }, [singleCar]);
 
-  if (!singleCar) {
-    return (
-      <PageLoading>
-        <Loading />
-      </PageLoading>
-    );
-  }
+  const getUserRelated = async (id: string) => {
+    await request({
+      tryFn: async () => {
+        const response = await api.get(`/users/${id}`);
+        setUserRelated(response.data);
+      },
+    });
+  };
 
   return (
     <PageLoading>
@@ -87,12 +86,10 @@ const ProductPage: NextPage = () => {
       </main>
       <section className={styles.secondSection}>
         <div className={styles.commentsSection}>
-          <Comments user={userRelated!} />
-          <CreateComment user={userRelated!} />
+          <CreateComment userComment={userRelated!} car={singleCar!} />
         </div>
         <div className={styles.asideContainer}></div>
       </section>
-      <Footer path={`/Product/${id}`} />
     </PageLoading>
   );
 };

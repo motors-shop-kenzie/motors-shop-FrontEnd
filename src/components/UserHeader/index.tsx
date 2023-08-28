@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 
 interface CardProps {
-  user: TUser | undefined;
+  user: TUser | undefined | { name: string };
   letter: string | undefined;
   userId: string | undefined;
 }
