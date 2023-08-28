@@ -9,6 +9,7 @@ import { TUser } from "@/interfaces/user";
 import { CreateAnnounceModal } from "@/components/Modal/CreateAnnounceModal";
 import { useModal } from "@/hooks/modalHook";
 import ConfirmDeleteAccountModal from "@/components/Modal/ConfirmDeleteAccountModal";
+import { EditAnnounceModal } from "@/components/Modal/EditAnnounceModal";
 
 interface HomeProps {
   cars: TCarProduct[];
@@ -112,7 +113,7 @@ const Home: NextPage<HomeProps> = ({ cars, user }: HomeProps) => {
 
       <Button className={styles.grey0Button} text="Abrir modal" onClick={() => handleModalOpen()} />
 
-      {showModal === "createContact" && <ConfirmDeleteAccountModal />}
+      {showModal === "createContact" && <EditAnnounceModal />}
 
       {/* <h1>ProductCards (HomePage)</h1>
       <ProductBox>
