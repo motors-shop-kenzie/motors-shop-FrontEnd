@@ -8,9 +8,10 @@ import { Car, FilterOptions } from "@/interfaces/CarFilter";
 import styles from "./styles.module.scss";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import PageLoading from "@/components/PageLoading";
+import Pagination from "@/components/FilterAside";
 
 export default function HomePage() {
-  const { cars } = useContext(CarsContext);
+  const { cars, pageValues, setPage, page } = useContext(CarsContext);
   const { closeNavBar, openNavBar } = useContext(AuthContext);
   const [openFilter, setOpenFilter] = useState<boolean>(false);
   const toggleMenu = () => setOpenFilter(!openFilter);
@@ -274,6 +275,7 @@ export default function HomePage() {
         <div className={styles.show_filter}>
           <button onClick={toggleMenu}>Filtros</button>
         </div>
+        <Pagination pageValues={pageValues} page={page} setPage={setPage} />
 
         <Footer path="/" />
       </main>

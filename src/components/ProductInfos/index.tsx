@@ -9,8 +9,6 @@ import styles from "./styles.module.scss";
 export default function ProductInfos() {
   const { singleCar } = useContext(CarsContext);
 
- console.log(singleCar)
-
   return (
     <div className={styles.carInfosDiv}>
       <h2>{singleCar?.model}</h2>

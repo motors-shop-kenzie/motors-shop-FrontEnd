@@ -1,21 +1,23 @@
+import { TPaginationValue } from "@/contexts/Cars/interface";
 import styles from "./styles.module.scss";
+import { SetStateAction } from "react";
 
-interface IFilterProps {
-  title: string;
-  list: string[];
+interface IPaginationProps {
+  pageValues: TPaginationValue;
+  setPage: (value: SetStateAction<number>) => void;
+  page: number;
 }
 
-const Filter = ({ title, list }: IFilterProps) => {
+const Pagination = ({ pageValues, setPage, page }: IPaginationProps) => {
   return (
     <div className={styles.container}>
-      <h2>{title}</h2>
-      <ul>
-        {list.map((item) => {
-          return <li key={item}>{item}</li>;
-        })}
-      </ul>
+      {pageValues.prev && <button onClick={() => setPage(page - 1)}> &lt; Anterior</button>}
+      <p>
+        {pageValues.currentPage}&nbsp; <span>de {pageValues.lastPage}</span>
+      </p>
+      {pageValues.next && <button onClick={() => setPage(page + 1)}>Seguinte &gt;</button>}
     </div>
   );
 };
 
-export default Filter;
+export default Pagination;

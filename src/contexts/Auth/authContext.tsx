@@ -156,8 +156,6 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     });
   };
 
-  console.log(user);
-
   useEffect(() => {
     getAllCarsRequest();
     getUserCars();
