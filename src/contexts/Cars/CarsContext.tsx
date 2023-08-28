@@ -3,7 +3,7 @@ import Toast from "@/components/Toast";
 import { useRequest } from "@/hooks/useRequest";
 import { iChildrenProps } from "@/interfaces";
 import { Car } from "@/interfaces/CarFilter";
-import { TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import api from "@/services/api";
 import { parseCookies } from "nookies";
 import { createContext, useEffect, useState } from "react";
@@ -28,6 +28,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const { closeModal } = useModal();
   const [pageValues, setPageValues] = useState<TPaginationValue>({} as TPaginationValue);
   const [page, setPage] = useState<number>(1);
+  const [selectedCar, setSelectedCar] = useState("");
   const cookies = parseCookies();
 
   if (cookies["ccm.token"]) {
@@ -135,6 +136,38 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     }
   };
 
+  const patchCar = async (data: TCarUpdate) => {
+    await request({
+      tryFn: async () => {
+        const response = await api.patch(`cars/${singleCar?.id}`, data, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setSingleCar(response.data);
+        Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível atualizar as informações do anúncio", isSucess: true }),
+    });
+  };
+
+  const destroyCar = async () => {
+    await request({
+      tryFn: async () => {
+        await api.delete(`cars/${selectedCar}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const data = cars.filter((car) => car.id !== selectedCar);
+
+        setUserCars(data);
+        setCars(data);
+        closeModal();
+
+        Toast({ message: "Anúncio deletado com sucesso!", isSucess: true });
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível deletar o anúncio" }),
+    });
+  };
+
   useEffect(() => {
     (async () => {
       api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
@@ -168,6 +201,10 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         pageValues,
         setPage,
         page,
+        patchCar,
+        destroyCar,
+        selectedCar,
+        setSelectedCar,
       }}
     >
       {children}

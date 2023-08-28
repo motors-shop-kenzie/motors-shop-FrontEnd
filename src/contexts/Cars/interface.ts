@@ -1,6 +1,6 @@
 import { iComment } from "@/components/Forms/CreateComment";
 import { Car } from "@/interfaces/CarFilter";
-import { TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { TCarProductRegister, TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import { Dispatch, SetStateAction } from "react";
 
 export type ICarsContext = {
@@ -26,6 +26,10 @@ export type ICarsContext = {
   pageValues: TPaginationValue;
   setPage: Dispatch<SetStateAction<number>>;
   page: number;
+  patchCar: (data: TCarProductRegister) => Promise<void>;
+  destroyCar: () => Promise<void>;
+  selectedCar: string;
+  setSelectedCar: Dispatch<SetStateAction<string>>;
 };
 
 export type TPaginationValue = {

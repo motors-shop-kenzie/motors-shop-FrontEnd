@@ -47,3 +47,5 @@ export const carRegisterSchema = z.object({
 });
 
 export const payloadRequestSchema = carRegisterSchema.extend({ business: z.boolean() });
+
+export const carSchemaUpdate = carRegisterSchema.optional();
