@@ -10,7 +10,6 @@ interface CardProps {
 export const UserHeader = ({ user, userId, letter }: CardProps) => {
   const { push } = useRouter();
   const redirect = () => {
-    console.log(userId);
     push(`/checkSellerPage/${userId}`);
   };
   return (

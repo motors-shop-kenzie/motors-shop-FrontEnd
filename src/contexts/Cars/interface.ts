@@ -15,4 +15,17 @@ export type ICarsContext = {
   getSingleCar: (id: string) => Promise<void>;
   singleCar: Car | undefined;
   setSingleCar: Dispatch<SetStateAction<Car | undefined>>;
+  pageValues: TPaginationValue;
+  setPage: Dispatch<SetStateAction<number>>;
+  page: number;
+};
+
+export type TPaginationValue = {
+  total: number;
+  lastPage: number;
+  currentPage: number;
+  perPage: number;
+  prev: number | null;
+  next: number | null;
+  data: Car[];
 };
