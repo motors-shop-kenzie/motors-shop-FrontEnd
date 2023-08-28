@@ -8,7 +8,7 @@ import { Car, FilterOptions } from "@/interfaces/CarFilter";
 import styles from "./styles.module.scss";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import PageLoading from "@/components/PageLoading";
-import Pagination from "@/components/FilterAside";
+import Pagination from "@/components/Pagination";
 
 export default function HomePage() {
   const { cars, pageValues, setPage, page } = useContext(CarsContext);
