@@ -138,11 +138,14 @@ export default function EditAnnounceModalForm() {
           </InputSectionField>
           {/* {errors.description?.message && <p>{errors.description?.message}</p>} */}
 
-          <p>Publicado</p>
-          <div className={styles.publishedButtonsDiv}>
-            <Button className={ButtonStyles.grey10TextGrey1Button} text="Sim" type="button" />
-            <Button className={ButtonStyles.brand1Button} text="Não" type="button" />
-          </div>
+          <InputSectionField>
+            <Label htmlFor="published" name="Publicado" />
+
+            <div className={styles.publishedButtonsDiv}>
+              <Button className={ButtonStyles.grey10TextGrey1Button} text="Sim" type="button" />
+              <Button className={ButtonStyles.brand1Button} text="Não" type="button" />
+            </div>
+          </InputSectionField>
 
           <InputSectionField>
             <Label htmlFor="imagem-capa" name="Imagem da capa" />
