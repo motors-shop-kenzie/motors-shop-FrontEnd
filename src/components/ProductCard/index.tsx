@@ -14,6 +14,7 @@ export const ProductCard = ({ car }: CardProps) => {
   const redirect = () => {
     push(`/Product/${car.id}`);
   };
+
   return (
     <div className={styles.card}>
       <div className={styles.img}>

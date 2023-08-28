@@ -7,7 +7,7 @@ import { TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import api from "@/services/api";
 import { parseCookies } from "nookies";
 import { createContext, useEffect, useState } from "react";
-import { ICarsContext } from "./interface";
+import { ICarsContext, TPaginationValue } from "./interface";
 import { iComment } from "@/components/Forms/CreateComment";
 import { useModal } from "@/hooks/modalHook";
 
@@ -26,7 +26,8 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const [comment, setComment] = useState<iComment[]>([]);
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const { closeModal } = useModal();
-
+  const [pageValues, setPageValues] = useState<TPaginationValue>({} as TPaginationValue);
+  const [page, setPage] = useState<number>(1);
   const cookies = parseCookies();
 
   if (cookies["ccm.token"]) {
@@ -57,9 +58,10 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const getAllCarsRequest = async () => {
     await request({
       tryFn: async () => {
-        const response = await api.get("/cars");
+        const response = await api.get(`/cars/pagination?page=${page}`);
         const data = response.data;
-        setCars(data);
+        setPageValues(data);
+        setCars(data.data);
       },
       onErrorFn: () => Toast({ message: "Não foi possível carregar todos os carros" }),
     });
@@ -113,7 +115,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         return updateComment;
       });
     } catch {
-      Toast({ message: "Não foi possível editar seu comentário" });
+      Toast({ message: "Não foi possível editar seu comentário,confira se esse campo não está vazio." });
     }
   };
 
@@ -139,7 +141,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
       await getAllCarsRequest();
       await getUserCars();
     })();
-  }, []);
+  }, [page]);
 
   return (
     <CarsContext.Provider
@@ -163,6 +165,9 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         editingCommentId,
         setEditingCommentId,
         deleteComment,
+        pageValues,
+        setPage,
+        page,
       }}
     >
       {children}

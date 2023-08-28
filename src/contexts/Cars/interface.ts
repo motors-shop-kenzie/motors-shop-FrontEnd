@@ -23,4 +23,17 @@ export type ICarsContext = {
   editingCommentId: string | null;
   setEditingCommentId: Dispatch<SetStateAction<string | null>>;
   deleteComment: (commentId: string) => Promise<void>;
+  pageValues: TPaginationValue;
+  setPage: Dispatch<SetStateAction<number>>;
+  page: number;
+};
+
+export type TPaginationValue = {
+  total: number;
+  lastPage: number;
+  currentPage: number;
+  perPage: number;
+  prev: number | null;
+  next: number | null;
+  data: Car[];
 };

@@ -1,0 +1,35 @@
+@use "../../sass/abstracts/" as *;
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 25px;
+  margin: 60px 0;
+  padding: 20px;
+  align-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: $font-family-2;
+  button {
+    all: unset;
+    cursor: pointer;
+    color: $color-brand-brand-1;
+  }
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-grey-scale-grey-3;
+    span {
+      color: $color-grey-scale-grey-4;
+    }
+  }
+}
+
+@media (min-width: $layout-medium) {
+  .container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
