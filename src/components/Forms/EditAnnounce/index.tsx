@@ -13,12 +13,24 @@ import ButtonStyles from "../../Button/styles.module.scss";
 import InputStyles from "../../Input/styles.module.scss";
 import TextAreaStyles from "../../Textarea/style.module.scss";
 import styles from "../styles.module.scss";
+import { CarsContext } from "@/contexts/Cars/CarsContext";
+import { useForm } from "react-hook-form";
 
 export default function EditAnnounceModalForm() {
-  const { setShowModal } = useContext(ModalContext);
+  const { setShowModal, closeModal } = useContext(ModalContext);
+  const { destroyCar, patchCar } = useContext(CarsContext);
+  const { handleSubmit } = useForm();
+
+  const handleDelete = () => {
+    destroyCar();
+  };
+  const submit = (data: any) => {
+    patchCar(data);
+    closeModal();
+  };
   return (
     <div className={styles.modalContainer}>
-      <form>
+      <form onSubmit={handleSubmit(submit)}>
         <h2 className={styles.subtitleModal}>Informações do veículo</h2>
         <div className={styles.inputsSectionModal}>
           <InputSectionField>
@@ -164,10 +176,10 @@ export default function EditAnnounceModalForm() {
 
           <section className={styles.finalButtonsDivModal}>
             <Button
-              className={ButtonStyles.grey6TextDarkButton}
+              className={ButtonStyles.feedbackAlert3TextFeedbackAlert1Button}
               text="Excluir anúncio"
+              onClick={handleDelete}
               type="button"
-              onClick={() => setShowModal("")}
             />
             <Button className={ButtonStyles.brand3TextBrand4Button} text="Salvar alterações" type="submit" />
           </section>

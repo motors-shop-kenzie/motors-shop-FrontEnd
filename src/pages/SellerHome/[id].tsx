@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { destroyCookie, setCookie } from "nookies";
 import PageLoading from "@/components/PageLoading";
 import styles from "./styles.module.scss";
+import { EditAnnounceModal } from "@/components/Modal/EditAnnounceModal";
 
 const SellerHome: NextPage = () => {
   const { replace, query } = useRouter();
@@ -36,6 +37,7 @@ const SellerHome: NextPage = () => {
   return (
     <PageLoading>
       {showModal === "batata" ? <CreateAnnounceModal /> : null}
+      {showModal === "editCar" ? <EditAnnounceModal /> : null}
       <NavBar />
       <main className={styles.container__sellerMain} onClick={openNavBar ? closeNavBar : undefined}>
         <div className={styles.box}>

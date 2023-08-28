@@ -6,6 +6,11 @@ import { Button } from "../Button";
 import styles from "./styles.module.scss";
 import { useRouter } from "next/router";
 import ButtonStyled from "../Button/styles.module.scss";
+import { useContext, useState } from "react";
+import { ModalContext } from "@/contexts/Modal";
+import { useModal } from "@/hooks/modalHook";
+import { EditAnnounceModal } from "../Modal/EditAnnounceModal";
+import { CarsContext } from "@/contexts/Cars/CarsContext";
 
 interface CardProps {
   car: TCarProduct;
@@ -14,14 +19,23 @@ interface CardProps {
 }
 
 export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
+  const { selectedCar, setSelectedCar } = useContext(CarsContext);
   const { push } = useRouter();
-  const handleClick = () => {};
+  const { showModal, setShowModal } = useModal();
+  const { singleCar } = useContext(CarsContext);
+
+  const handleClick = () => {
+    setSelectedCar(car.id);
+
+    setShowModal("editCar");
+  };
+
   const handleViewDetailsClick = () => {
     push(`/Product/${car.id}`);
   };
 
   return (
-    <div className={styles.card} onClick={handleViewDetailsClick}>
+    <div className={styles.card}>
       <div className={styles.img}>
         {car.active ? <div className={styles.active}>Ativo</div> : <div className={styles.nonactive}>Inativo</div>}
         <div>
