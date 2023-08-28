@@ -21,12 +21,6 @@ export default function EditAnnounceModalForm() {
       <form>
         <h2 className={styles.subtitleModal}>Informações do veículo</h2>
         <div className={styles.inputsSectionModal}>
-          {/* <InputSectionField>
-            <Label htmlFor="" name="" />
-            <InputFocus>
-              <Input />
-            </InputFocus>
-          </InputSectionField> */}
           <InputSectionField>
             <Label htmlFor="marca" name="Marca" />
             <InputFocus>
