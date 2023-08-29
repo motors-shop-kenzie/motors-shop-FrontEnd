@@ -67,7 +67,7 @@ export const CommentCard = ({ user, comment, userId, createdAt, commentId }: Car
       <div className={styles.text}>{comment}</div>
 
       {loggedInUser?.id === userId && (
-        <div>
+        <div className={styles.container__divButtonPatch}>
           <button onClick={() => handleEditClick()}>
             <CiEdit size={20} />
           </button>

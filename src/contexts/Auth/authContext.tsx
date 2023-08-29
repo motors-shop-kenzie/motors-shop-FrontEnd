@@ -10,14 +10,12 @@ import {
   TUser,
   TUserLogin,
   TUserRegisterResquest,
-  TUserUpdate,
 } from "@/interfaces/user";
 import { IAuthContext } from "./interface";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import api from "@/services/api";
 import { CarsContext } from "../Cars/CarsContext";
 import Toast from "@/components/Toast";
-import { TAddressUpdate } from "@/interfaces/address";
 import { useRequest } from "@/hooks/useRequest";
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -116,46 +114,6 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
     });
   };
 
-  const patchUser = async (data: TUserUpdate) => {
-    await request({
-      tryFn: async () => {
-        const response = await api.patch(`users/${user?.id}`, data, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        // setUser(response.data);
-        Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
-      },
-      onErrorFn: () => Toast({ message: "Não foi possível atualizar suas informações" }),
-    });
-  };
-
-  const destroyUser = async () => {
-    await request({
-      tryFn: async () => {
-        await api.delete(`users/${user!.id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        Toast({ message: "Usuário deletado com sucesso!", isSucess: true });
-        logout();
-      },
-      onErrorFn: () => Toast({ message: "Não foi possível deletar suas informações" }),
-    });
-  };
-
-  const editUserAddress = async (data: TAddressUpdate) => {
-    await request({
-      tryFn: async () => {
-        await api.patch(`addresses/${user?.address.id}`, data, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        Toast({ message: "Endereço atualizado com sucesso!", isSucess: true });
-
-        loggedUser();
-      },
-      onErrorFn: () => Toast({ message: "Não foi possível atualizar o endereço" }),
-    });
-  };
-
   useEffect(() => {
     getAllCarsRequest();
     getUserCars();
@@ -177,9 +135,6 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
         setOpenNavBar,
         toggleNavBar,
         closeNavBar,
-        patchUser,
-        destroyUser,
-        editUserAddress,
       }}
     >
       {children}
