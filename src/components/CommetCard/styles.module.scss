@@ -3,7 +3,12 @@
 .container {
   color: $color-grey-scale-grey-2;
 
-    .text{
-      margin: 12px 0;
-    }
+  .text {
+    margin: 12px 0;
   }
+}
+
+.container__divButtonPatch {
+  background: transparent;
+  border: none;
+}
