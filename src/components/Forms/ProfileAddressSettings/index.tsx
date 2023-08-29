@@ -10,9 +10,11 @@ import ButtonStyles from "../../Button/styles.module.scss";
 import InputStyles from "../../Input/styles.module.scss";
 import styles from "../styles.module.scss";
 import { useEffect } from "react";
+import { useUser } from "@/hooks/useUser.hook";
 
 export const ProfileAddressSettings = () => {
-  const { user, editUserAddress } = useAuth();
+  const { user } = useAuth();
+  const { editUserAddress } = useUser();
   const { closeModal } = useModal();
 
   const { register, handleSubmit } = useForm();

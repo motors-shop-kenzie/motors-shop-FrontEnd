@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
 import { LoadingProvider } from "@/contexts/Loading";
+import { UserProvider } from "@/contexts/Users/userContext";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -27,7 +28,9 @@ const App = ({ Component, pageProps }: AppProps) => {
         <ModalProvider>
           <CarsProvider>
             <AuthProvider>
-              <Component {...pageProps} />
+              <UserProvider>
+                <Component {...pageProps} />
+              </UserProvider>
             </AuthProvider>
           </CarsProvider>
         </ModalProvider>
