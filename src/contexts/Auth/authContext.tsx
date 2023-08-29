@@ -122,7 +122,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
         const response = await api.patch(`users/${user?.id}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setUser(response.data);
+        // setUser(response.data);
         Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
       },
       onErrorFn: () => Toast({ message: "Não foi possível atualizar suas informações" }),
