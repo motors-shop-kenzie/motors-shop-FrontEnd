@@ -11,9 +11,11 @@ import InputStyles from "../../Input/styles.module.scss";
 import TextAreaStyles from "../../Textarea/style.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
 import styles from "../styles.module.scss";
+import { useUser } from "@/hooks/useUser.hook";
 
 export const ProfileSettings = () => {
-  const { user, patchUser, destroyUser } = useAuth();
+  const { user } = useAuth();
+  const { patchUser } = useUser();
   const { closeModal, setShowModal } = useModal();
 
   const { register, handleSubmit } = useForm();
