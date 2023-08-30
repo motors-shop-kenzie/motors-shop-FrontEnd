@@ -11,13 +11,11 @@ import ProductInfos from "@/components/ProductInfos";
 import styles from "./styles.module.scss";
 import ProductDescription from "@/components/ProductDescription";
 import ProfileUserInfos from "@/components/ProfileUserInfos";
-import { Footer } from "@/components/Footer";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import CreateComment from "@/components/Forms/CreateComment";
 import ImgsProduct from "@/components/ImgsProduct";
 import PageLoading from "@/components/PageLoading";
 import { useRequest } from "@/hooks/useRequest";
-import { Loading } from "@/components/PageLoading/Loading";
 
 const ProductPage: NextPage = () => {
   const { singleCar, getSingleCar, getComment } = useContext(CarsContext);
