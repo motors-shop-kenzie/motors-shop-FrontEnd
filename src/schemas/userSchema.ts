@@ -1,12 +1,16 @@
 import { z } from "zod";
 import { addressSchema, addressSchemaRegister } from "./address";
 
+function removeNonDigits(value: string): string {
+  return value.replace(/\D/g, "");
+}
+
 export const userSchema = z.object({
   id: z.string(),
   createdAt: z.string(),
   name: z.string(),
   email: z.string().email(),
-  cpf: z.string().max(11),
+  cpf: z.string(),
   isAdmin: z.boolean(),
   telephone: z.string(),
   description: z.string().optional(),
@@ -15,13 +19,18 @@ export const userSchema = z.object({
 });
 
 export const userSchemaRegister = z.object({
-  name: z.string().nonempty({ message: "*" }),
-  email: z.string().email({ message: "Email inválido!" }).nonempty({ message: "*" }),
-  password: z.string().nonempty({ message: "*" }),
-  cpf: z.string().max(11).nonempty({ message: "*" }),
-  telephone: z.string().nonempty({ message: "*" }),
+  name: z.string().nonempty({ message: "Campo obrigatório" }),
+  email: z.string().email({ message: "Email inválido" }),
+  password: z.string().nonempty({ message: "Campo obrigatório" }),
+  cpf: z
+    .string()
+    .transform(removeNonDigits)
+    .refine((value) => value.length === 11, {
+      message: "CPF inválido",
+    }),
+  telephone: z.string().nonempty({ message: "Campo obrigatório" }),
   description: z.string().optional(),
-  birthdate: z.string().nonempty({ message: "*" }),
+  birthdate: z.string().nonempty({ message: "Campo obrigatório" }),
   address: addressSchemaRegister.optional(),
 });
 
@@ -30,8 +39,8 @@ export const userSchemaRegisterRequest = userSchemaRegister.extend({
 });
 
 export const userSchemaLogin = z.object({
-  email: z.string().nonempty({ message: "*" }),
-  password: z.string().nonempty({ message: "*" }),
+  email: z.string(),
+  password: z.string(),
 });
 
 export const userSchemaUpdate = userSchemaRegister.optional();
@@ -49,6 +58,6 @@ export const resetPasswordSchema = userResetPassword
     passwordConfirm: z.string().min(1, "A confirmação de senha é obrigatória"),
   })
   .refine(({ password, passwordConfirm }) => password === passwordConfirm, {
-    message: "As senhas precisam corresponderem",
+    message: "As senhas precisam corresponder",
     path: ["passwordConfirm"],
   });
