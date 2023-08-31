@@ -1,21 +1,20 @@
 import { iComment } from "@/components/Forms/CreateComment";
-import { Car } from "@/interfaces/CarFilter";
-import { TCarProductRegister, TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { TCarProduct, TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import { Dispatch, SetStateAction } from "react";
 
 export type ICarsContext = {
-  cars: Car[];
-  setCars: Dispatch<SetStateAction<Car[]>>;
-  userCars: Car[];
-  setUserCars: Dispatch<SetStateAction<Car[]>>;
-  filterData: Car[];
-  setFilterData: Dispatch<SetStateAction<Car[]>>;
+  cars: TCarProduct[];
+  setCars: Dispatch<SetStateAction<TCarProduct[]>>;
+  userCars: TCarProduct[];
+  setUserCars: Dispatch<SetStateAction<TCarProduct[]>>;
+  filterData: TCarProduct[];
+  setFilterData: Dispatch<SetStateAction<TCarProduct[]>>;
   getAllCarsRequest: () => Promise<void>;
   getUserCars: () => Promise<void>;
   createCars: (formData: TCarsPayloadRequest) => Promise<void>;
   getSingleCar: (id: string) => Promise<void>;
-  singleCar: Car | undefined;
-  setSingleCar: Dispatch<SetStateAction<Car | undefined>>;
+  singleCar: TCarProduct | undefined;
+  setSingleCar: Dispatch<SetStateAction<TCarProduct | undefined>>;
   getComment: (carId: string) => Promise<void>;
   comment: iComment[];
   setComment: Dispatch<SetStateAction<iComment[]>>;
@@ -26,7 +25,7 @@ export type ICarsContext = {
   pageValues: TPaginationValue;
   setPage: Dispatch<SetStateAction<number>>;
   page: number;
-  patchCar: (data: TCarProductRegister) => Promise<void>;
+  patchCar: (data: TCarUpdate) => Promise<void>;
   destroyCar: () => Promise<void>;
   selectedCar: string;
   setSelectedCar: Dispatch<SetStateAction<string>>;
@@ -39,5 +38,5 @@ export type TPaginationValue = {
   perPage: number;
   prev: number | null;
   next: number | null;
-  data: Car[];
+  data: TCarProduct[];
 };

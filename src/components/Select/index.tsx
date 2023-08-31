@@ -1,27 +1,25 @@
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import {  Dispatch, SetStateAction, useState } from "react";
 import styles from "./styles.module.scss";
 
-interface iSelectProps {
+interface ISelectProps {
   name: string;
   id: string;
   children: React.ReactNode;
   register?: UseFormRegisterReturn<string>;
-  value?: string;
-  setBrand?: Dispatch<SetStateAction<string>> | undefined; 
+  value?: string | number | readonly string[];
+  setBrand?: Dispatch<SetStateAction<string>>;
 }
 
-export const Select = ({ name, id, register, children, setBrand }: iSelectProps | any) => {
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const handleSelectChange = (event: { target: { value: any } }) => {
+export const Select = ({ name, id, register, children, setBrand, value }: ISelectProps) => {
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-  
-    setBrand(value);
+
+    if (setBrand) setBrand(value);
   };
   return (
-    <select name={name} id={id} className={styles.select} {...register} onChange={handleSelectChange}>
-      {children}s
+    <select value={value} name={name} id={id} className={styles.select} {...register} onChange={handleSelectChange}>
+      {children}
     </select>
   );
 };
