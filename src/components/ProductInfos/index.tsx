@@ -5,6 +5,7 @@ import { Button } from "../Button";
 import ButtonStyled from "../Button/styles.module.scss";
 import styles from "./styles.module.scss";
 import { ICreateWhatsAppMessageProps, IOpenWhatsApp } from "./interfaces";
+import { AuthContext } from "@/contexts/Auth/authContext";
 
 function createWhatsAppMessage({ userName, vehicleInfo }: ICreateWhatsAppMessageProps) {
   const message = `Olá, me chamo: ${userName}. Vi pelo seu anúncio no site Motors Shop e gostaria de comprar o veículo: ${vehicleInfo.brand}, ano: ${vehicleInfo.year}, modelo: ${vehicleInfo.model}, cor: ${vehicleInfo.color}.`;
@@ -17,18 +18,23 @@ function openWhatsApp({ singleCar, message }: IOpenWhatsApp) {
 
 export default function ProductInfos() {
   const { singleCar } = useContext(CarsContext);
+  const { user } = useContext(AuthContext);
+
+  const isUserLoggedIn = user && Object.keys(user).length > 0;
 
   const handleBuyClick = () => {
-    const userName = singleCar!.user.name;
-    const vehicleInfo = {
-      brand: singleCar!.brand,
-      year: singleCar!.year,
-      model: singleCar!.model,
-      color: singleCar!.color,
-    };
+    if (isUserLoggedIn) {
+      const userName = singleCar!.user.name;
+      const vehicleInfo = {
+        brand: singleCar!.brand,
+        year: singleCar!.year,
+        model: singleCar!.model,
+        color: singleCar!.color,
+      };
 
-    const message = createWhatsAppMessage({ userName, vehicleInfo });
-    openWhatsApp({ singleCar: singleCar, message: message });
+      const message = createWhatsAppMessage({ userName, vehicleInfo });
+      openWhatsApp({ singleCar: singleCar, message: message });
+    }
   };
 
   return (
@@ -41,7 +47,13 @@ export default function ProductInfos() {
         </div>
         <p>{singleCar?.price?.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</p>
       </div>
-      <Button className={ButtonStyled.brand1Button} text="Comprar" type="button" onClick={handleBuyClick} />
+      <Button
+        className={isUserLoggedIn ? ButtonStyled.brand1Button : ButtonStyled.grey8TextGrey0Button}
+        text={isUserLoggedIn ? "Comprar" : "Faça login para comprar"}
+        type="button"
+        onClick={handleBuyClick}
+        disable={!isUserLoggedIn}
+      />
     </div>
   );
 }
