@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { iComment } from "@/components/Forms/CreateComment";
 import Toast from "@/components/Toast";
+import { useModal } from "@/hooks/modalHook";
 import { useRequest } from "@/hooks/useRequest";
 import { iChildrenProps } from "@/interfaces";
-import { Car } from "@/interfaces/CarFilter";
-import { TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { TCarProduct, TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import api from "@/services/api";
+import { HttpStatusCode } from "axios";
 import { parseCookies } from "nookies";
 import { createContext, useEffect, useState } from "react";
 import { ICarsContext, TPaginationValue } from "./interface";
-import { iComment } from "@/components/Forms/CreateComment";
-import { useModal } from "@/hooks/modalHook";
 
 export const CarsContext = createContext<ICarsContext>({} as ICarsContext);
 
@@ -19,10 +19,10 @@ interface iCommentInfos {
 }
 
 export const CarsProvider = ({ children }: iChildrenProps) => {
-  const [cars, setCars] = useState<Car[]>([]);
-  const [userCars, setUserCars] = useState<Car[]>([]);
-  const [filterData, setFilterData] = useState<Car[]>([]);
-  const [singleCar, setSingleCar] = useState<Car | undefined>({} as Car);
+  const [cars, setCars] = useState<TCarProduct[]>([]);
+  const [userCars, setUserCars] = useState<TCarProduct[]>([]);
+  const [filterData, setFilterData] = useState<TCarProduct[]>([]);
+  const [singleCar, setSingleCar] = useState<TCarProduct | undefined>({} as TCarProduct);
   const [comment, setComment] = useState<iComment[]>([]);
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
   const { closeModal } = useModal();
@@ -42,7 +42,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const createCars = async (formData: TCarsPayloadRequest) => {
     await request({
       tryFn: async () => {
-        const response = await api.post<Car>("/cars", formData, {
+        const response = await api.post<TCarProduct>("/cars", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -83,8 +83,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
 
   const getSingleCar = async (id: string) => {
     try {
-      const response = await api.get(`/cars/${id}`);
-      const data = response.data;
+      const { data } = await api.get<TCarProduct>(`/cars/${id}`);
       setSingleCar(data);
     } catch (error) {
       Toast({ message: "Não foi possível carregar as informações deste carro" });
@@ -136,16 +135,19 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     }
   };
 
-  const patchCar = async (data: TCarUpdate) => {
+  const patchCar = async (updatePayload: TCarUpdate) => {
     await request({
       tryFn: async () => {
-        const response = await api.patch(`cars/${singleCar?.id}`, data, {
+        const { data, status } = await api.patch<TCarProduct>(`cars/${singleCar?.id}`, updatePayload, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setSingleCar(response.data);
-        Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
+        setSingleCar(data);
+        if (status === HttpStatusCode.Ok) Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
+
+        await getAllCarsRequest();
+        await getUserCars();
       },
-      onErrorFn: () => Toast({ message: "Não foi possível atualizar as informações do anúncio", isSucess: true }),
+      onErrorFn: () => Toast({ message: "Não foi possível atualizar as informações do anúncio", isSucess: false }),
     });
   };
 

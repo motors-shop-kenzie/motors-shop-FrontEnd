@@ -4,11 +4,12 @@ import { NavBar } from "@/components/NavBar";
 import { ProductBox } from "@/components/ProductBox";
 import { ProductCard } from "@/components/ProductCard";
 import { Footer } from "@/components/Footer";
-import { Car, FilterOptions } from "@/interfaces/CarFilter";
+import { FilterOptions } from "@/interfaces/CarFilter";
 import styles from "./styles.module.scss";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import PageLoading from "@/components/PageLoading";
 import Pagination from "@/components/Pagination";
+import { TCarProduct } from "@/interfaces/CarProduc";
 
 export default function HomePage() {
   const { cars, pageValues, setPage, page } = useContext(CarsContext);
@@ -38,7 +39,7 @@ export default function HomePage() {
     return (
       Object.entries(selectedFilters).every(([filterType, filterValue]) => {
         if (!filterValue) return true;
-        const carProperty = car[filterType as keyof Car];
+        const carProperty = car[filterType as keyof TCarProduct];
         return carProperty === filterValue;
       }) &&
       (!kmValue || car.km <= kmValue) &&
