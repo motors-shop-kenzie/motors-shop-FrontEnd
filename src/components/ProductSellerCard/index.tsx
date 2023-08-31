@@ -1,16 +1,14 @@
-import Image from "next/image";
-import { UserHeader } from "../UserHeader";
-import { TUser } from "@/interfaces/user";
-import { TCarProduct } from "@/interfaces/CarProduc";
-import { Button } from "../Button";
-import styles from "./styles.module.scss";
-import { useRouter } from "next/router";
-import ButtonStyled from "../Button/styles.module.scss";
-import { useContext, useState } from "react";
-import { ModalContext } from "@/contexts/Modal";
-import { useModal } from "@/hooks/modalHook";
-import { EditAnnounceModal } from "../Modal/EditAnnounceModal";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
+import { useModal } from "@/hooks/modalHook";
+import { TCarProduct } from "@/interfaces/CarProduc";
+import { TUser } from "@/interfaces/user";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useContext, useMemo } from "react";
+import { Button } from "../Button";
+import ButtonStyled from "../Button/styles.module.scss";
+import { UserHeader } from "../UserHeader";
+import styles from "./styles.module.scss";
 
 interface CardProps {
   car: TCarProduct;
@@ -19,13 +17,15 @@ interface CardProps {
 }
 
 export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
-  const { selectedCar, setSelectedCar } = useContext(CarsContext);
+  const { setSelectedCar, singleCar, setSingleCar } = useContext(CarsContext);
   const { push } = useRouter();
-  const { showModal, setShowModal } = useModal();
-  const { singleCar } = useContext(CarsContext);
+  const { setShowModal } = useModal();
+
+  const viewedCar = useMemo(() => (car === singleCar ? singleCar : car), [singleCar, car]);
 
   const handleClick = () => {
     setSelectedCar(car.id);
+    setSingleCar(viewedCar);
 
     setShowModal("editCar");
   };

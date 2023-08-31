@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
@@ -8,17 +7,25 @@ import { Select } from "@/components/Select";
 import { TextArea } from "@/components/Textarea";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ModalContext } from "@/contexts/Modal";
-import { TCarImgRegister, TCarsFormRequest, TCarsPayloadRequest } from "@/interfaces/CarProduc";
-import { carImgRegisterSchema, payloadRequestSchema } from "@/schemas/carSchema";
+import { TCarUpdate } from "@/interfaces/CarProduc";
+import { carSchemaUpdate } from "@/schemas/carSchema";
 import kenzieApi from "@/services/kenzieApi";
-import { schemaValidation } from "@/utils/validationUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useContext, useEffect, useState } from "react";
+import { HttpStatusCode } from "axios";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import ButtonStyles from "../../Button/styles.module.scss";
 import InputStyles from "../../Input/styles.module.scss";
 import TextAreaStyles from "../../Textarea/style.module.scss";
 import styles from "../styles.module.scss";
+
+interface ICar {
+  name: string;
+}
+
+interface ICarBrand {
+  [brand: string]: ICar[];
+}
 
 interface IModel {
   brand: string;
@@ -29,89 +36,21 @@ interface IModel {
   year: string;
 }
 
-export const CreateAnnounceModalForm = () => {
+export default function EditAnnouncementForm() {
   const {
     formState: { errors },
     handleSubmit,
     register,
     setValue,
-    setError,
-    clearErrors,
-  } = useForm<TCarsFormRequest>({
-    resolver: zodResolver(payloadRequestSchema),
-  });
+  } = useForm<TCarUpdate>({ resolver: zodResolver(carSchemaUpdate) });
 
-  const { setShowModal } = useContext(ModalContext);
-  const { createCars } = useContext(CarsContext);
-  const [brands, setBrands] = useState({});
+  const { closeModal } = useContext(ModalContext);
+  const { destroyCar, patchCar, singleCar } = useContext(CarsContext);
+  const [brands, setBrands] = useState<string[]>([]);
+  const [currentBrand, setCurrentBrand] = useState(singleCar?.brand ?? "");
   const [models, setModels] = useState<IModel[]>([]);
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [inputImage, setInputImage] = useState(2);
-  const [imageValues, setImageValues] = useState<TCarImgRegister[]>([]);
-
-  const handleInputImg = (index: number, value: string | undefined): void => {
-    setImageValues((prev) => {
-      if (value?.length) {
-        const values = [...prev];
-        values[index] = { url_img: value };
-
-        const { message } = schemaValidation(carImgRegisterSchema, values[index]);
-        if (message) setError(`img.${index}.url_img`, { type: "manual", message });
-        else clearErrors(`img.${index}.url_img`);
-
-        return values;
-      }
-      prev.splice(index);
-      clearErrors(`img.${index}.url_img`);
-
-      return prev;
-    });
-  };
-
-  const renderInputImage = () => {
-    const inputs: React.JSX.Element[] = [];
-
-    for (let i = 1; i <= inputImage; i++) {
-      inputs.push(
-        <InputSectionField key={i}>
-          <Label htmlFor={`${i}-imagem-galeria`} name={`${i}º Imagem da galeria`} />
-          <InputFocus>
-            <Input
-              type="text"
-              className={InputStyles.basicInputWithBorder}
-              placeholder="https://image.com"
-              id="1-imagem-galeria"
-              onChangeFn={(e) => handleInputImg(i, e.target.value)}
-            />
-          </InputFocus>
-          {errors.img && errors.img[i] && (
-            <small style={{ color: "red" }}>{`* ${errors.img[i]?.url_img?.message}`}</small>
-          )}
-        </InputSectionField>,
-      );
-    }
-
-    return inputs;
-  };
-
-  const getBrands = async () => {
-    try {
-      const brandsResponse = await kenzieApi.get("/cars");
-      setBrands(brandsResponse.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const getModels = async () => {
-    try {
-      const modelsResponse = await kenzieApi.get(`/cars?brand=${brand}`);
-      setModels(modelsResponse.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [selectModel, setSelectModel] = useState(singleCar?.model ?? "");
+  const [active, setActive] = useState<boolean>(singleCar?.active ?? false);
 
   /**
    * Takes a fuel type parameter and returns a string representing the type of fuel.
@@ -130,81 +69,106 @@ export const CreateAnnounceModalForm = () => {
         return undefined;
     }
   };
-  const FIPEValues = (FIPEInfo: IModel | undefined = undefined) => {
-    if (models.length) FIPEInfo = models.find((mod) => mod.name === model);
+  const FIPEValues = useCallback(
+    (FIPEInfo: IModel | undefined = undefined) => {
+      if (models.length) FIPEInfo = models.find((mod) => mod.name === selectModel);
+      if (FIPEInfo) {
+        let { fuel, value, year } = { ...FIPEInfo };
+        value = Number(value).toFixed(2).toString();
 
-    if (FIPEInfo) {
-      let { fuel, value, year } = { ...FIPEInfo };
-      value = Number(value).toFixed(2).toString();
-
-      const fuelString: string | undefined = fuelStringType(fuel);
-      setValue("gasoline", fuelString!);
-      setValue("tablePife", +value);
-      setValue("year", +year);
-    }
-  };
+        const fuelString: string | undefined = fuelStringType(fuel);
+        setValue("gasoline", fuelString);
+        setValue("tablePife", +value);
+        setValue("year", +year);
+      } else {
+        setValue("gasoline", singleCar?.gasoline);
+        setValue("tablePife", singleCar?.tablePife);
+        setValue("year", singleCar?.year);
+      }
+    },
+    [models, selectModel, setValue, singleCar],
+  );
 
   useEffect(() => {
+    console.clear();
     (async () => {
-      await getBrands();
-      await getModels();
+      try {
+        const { data, status } = await kenzieApi.get<ICarBrand>("/cars");
+        if (status === HttpStatusCode.Ok) setBrands(Object.keys(data));
+      } catch (error) {
+        console.error("error:", error);
+      }
     })();
 
-    FIPEValues();
-  }, [brand, model]);
+    (async () => {
+      try {
+        const { data, status } = await kenzieApi.get<IModel[]>(`/cars?brand=${currentBrand}`);
+        if (status === HttpStatusCode.Ok) setModels((prev) => (prev !== data ? data : prev));
+      } catch (error) {
+        console.error("error:", error);
+      }
+    })();
+  }, [currentBrand]);
 
-  const submit: SubmitHandler<TCarsFormRequest> = (formData) => {
-    imageValues.forEach((image, idx) => handleInputImg(idx, image?.url_img));
-    if (Object.keys(errors).length) return;
+  useEffect(() => FIPEValues(), [FIPEValues]);
 
-    const images: TCarImgRegister[] = imageValues.filter((img) => img?.url_img);
+  const handleDelete = () => {
+    destroyCar();
+  };
 
-    const car: TCarsPayloadRequest = { ...formData, business: formData.price < formData.tablePife, img: [...images] };
+  const submit: SubmitHandler<TCarUpdate> = (data) => {
+    const car: TCarUpdate = { ...data, active, business: data.price! < data.tablePife! };
 
-    createCars(car);
-    setInputImage(2);
-    setShowModal("");
+    patchCar(car);
+
+    closeModal();
   };
 
   return (
     <div className={styles.modalContainer}>
       <form onSubmit={handleSubmit(submit)}>
         <h2 className={styles.subtitleModal}>Informações do veículo</h2>
-
         <div className={styles.inputsSectionModal}>
           <InputSectionField>
             <Label htmlFor="marca" name="Marca" />
             <InputFocus>
-              <Select name="marca" id="marca" register={register("brand")} setBrand={setBrand}>
-                <option value="">Selecione uma marca</option>
-                {Object.entries(brands).map(([key, _]) => (
-                  <option value={key} key={key}>
-                    {key}
+              <Select
+                value={currentBrand}
+                name="marca"
+                id="marca"
+                register={register("brand", { value: currentBrand })}
+                setBrand={setCurrentBrand}
+              >
+                {brands.map((databaseBrand) => (
+                  <option key={databaseBrand} value={databaseBrand}>
+                    {databaseBrand}
                   </option>
                 ))}
               </Select>
             </InputFocus>
           </InputSectionField>
-          {errors.brand?.message && <p>{errors.brand?.message}</p>}
+          {errors.brand?.message && <p>{errors.brand.message}</p>}
 
           <InputSectionField>
             <Label htmlFor="modelo" name="Modelo" />
             <InputFocus>
-              <Select name="modelo" id="modelo" register={register("model")} setBrand={setModel}>
+              <Select
+                value={selectModel ?? ""}
+                name="modelo"
+                id="modelo"
+                register={register("model", { value: selectModel })}
+                setBrand={setSelectModel}
+              >
                 <option value="">Selecione um modelo</option>
-                {models.length > 0
-                  ? models.map((item: IModel) => {
-                      return (
-                        <option value={item.name} key={item.id}>
-                          {item.name}
-                        </option>
-                      );
-                    })
-                  : null}
+                {models.map((model) => (
+                  <option key={model.id} value={model.name}>
+                    {model.name}
+                  </option>
+                ))}
               </Select>
             </InputFocus>
           </InputSectionField>
-          {errors.model?.message && <p>{errors.model?.message}</p>}
+          {errors.model?.message && <p>{errors.model.message}</p>}
 
           <div className={styles.inputsInRow}>
             <InputSectionField>
@@ -246,11 +210,11 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="30.000"
                   id="quilometragem"
-                  register={register("km")}
+                  register={register("km", { value: singleCar?.km })}
                 />
               </InputFocus>
             </InputSectionField>
-            {errors.km?.message && <p>{errors.km?.message}</p>}
+            {errors.km?.message && <p>{errors.km.message}</p>}
 
             <InputSectionField>
               <Label htmlFor="cor" name="Cor" />
@@ -260,11 +224,11 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Branco"
                   id="cor"
-                  register={register("color")}
+                  register={register("color", { value: singleCar?.color })}
                 />
               </InputFocus>
             </InputSectionField>
-            {errors.color?.message && <p>{errors.color?.message}</p>}
+            {errors.color?.message && <p>{errors.color.message}</p>}
           </div>
 
           <div className={styles.inputsInRow}>
@@ -281,7 +245,7 @@ export const CreateAnnounceModalForm = () => {
                 />
               </InputFocus>
             </InputSectionField>
-            {errors.tablePife?.message && <p>{errors.tablePife?.message}</p>}
+            {errors.tablePife?.message && <p>{errors.tablePife.message}</p>}
 
             <InputSectionField>
               <Label htmlFor="preco" name="Preço" />
@@ -291,11 +255,11 @@ export const CreateAnnounceModalForm = () => {
                   className={InputStyles.basicInputWithBorder}
                   placeholder="R$50.000,00"
                   id="preco"
-                  register={register("price")}
+                  register={register("price", { value: singleCar?.price })}
                 />
               </InputFocus>
             </InputSectionField>
-            {errors.price?.message && <p>{errors.price?.message}</p>}
+            {errors.price?.message && <p>{errors.price.message}</p>}
           </div>
 
           <InputSectionField>
@@ -305,11 +269,30 @@ export const CreateAnnounceModalForm = () => {
                 className={TextAreaStyles.basicTextAreaWithBorder}
                 placeholder="Descrição"
                 id="descricao"
-                register={register("description")}
+                register={register("description", { value: singleCar?.description })}
               />
             </InputFocus>
           </InputSectionField>
-          {errors.description?.message && <p>{errors.description?.message}</p>}
+          {errors.description?.message && <p>{errors.description.message}</p>}
+
+          <InputSectionField>
+            <Label htmlFor="published" name="Publicado" />
+
+            <div className={styles.publishedButtonsDiv}>
+              <Button
+                className={active ? ButtonStyles.brand1Button : ButtonStyles.grey10TextGrey1Button}
+                text="Sim"
+                type="button"
+                onClick={() => setActive(true)}
+              />
+              <Button
+                className={!active ? ButtonStyles.brand1Button : ButtonStyles.grey10TextGrey1Button}
+                text="Não"
+                type="button"
+                onClick={() => setActive(false)}
+              />
+            </div>
+          </InputSectionField>
 
           <InputSectionField>
             <Label htmlFor="imagem-capa" name="Imagem da capa" />
@@ -319,31 +302,31 @@ export const CreateAnnounceModalForm = () => {
                 className={InputStyles.basicInputWithBorder}
                 placeholder="https://image.com"
                 id="imagem-capa"
-                register={register("coverImg")}
+                register={register("coverImg", { value: singleCar?.coverImg })}
               />
             </InputFocus>
           </InputSectionField>
 
-          {renderInputImage()}
+          {/* {renderInputImage()} */}
 
           <Button
             className={ButtonStyles.brand4TextBrand1Button}
-            onClick={() => setInputImage(inputImage + 1)}
+            // onClick={() => setInputImage(inputImage + 1)}
             text="Adicionar campo para imagem da galeria"
             type="button"
           />
 
           <section className={styles.finalButtonsDivModal}>
             <Button
-              className={ButtonStyles.grey6TextDarkButton}
-              text="Cancelar"
+              className={ButtonStyles.feedbackAlert3TextFeedbackAlert1Button}
+              text="Excluir anúncio"
+              onClick={handleDelete}
               type="button"
-              onClick={() => setShowModal("")}
             />
-            <Button className={ButtonStyles.brand3TextBrand4Button} text="Criar anúncio" type="submit" />
+            <Button className={ButtonStyles.brand3TextBrand4Button} text="Salvar alterações" type="submit" />
           </section>
         </div>
       </form>
     </div>
   );
-};
+}

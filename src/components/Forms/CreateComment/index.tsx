@@ -14,17 +14,17 @@ import api from "@/services/api";
 import Toast from "@/components/Toast";
 import { useContext, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Car } from "@/interfaces/CarFilter";
 import { parseCookies } from "nookies";
 import { CommentCard } from "@/components/CommetCard";
 import { CommentBox } from "@/components/CommentBox";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { useModal } from "@/hooks/modalHook";
+import { TCarProduct } from "@/interfaces/CarProduc";
 
 interface iCommentProps {
   userComment: TUser | undefined;
-  car: Car | undefined;
+  car: TCarProduct | undefined;
 }
 
 export interface iComment {

@@ -46,6 +46,6 @@ export const carRegisterSchema = z.object({
   img: z.array(carImgRegisterSchema).optional(),
 });
 
-export const payloadRequestSchema = carRegisterSchema.extend({ business: z.boolean() });
+export const payloadRequestSchema = carRegisterSchema.extend({ business: z.boolean().optional() });
 
-export const carSchemaUpdate = carRegisterSchema.optional();
+export const carSchemaUpdate = payloadRequestSchema.extend({ active: z.boolean().optional() });
