@@ -1,27 +1,30 @@
 "use client";
-import { Input } from "@/components/Input";
-import { InputFocus } from "@/components/Input/InputFocus";
-import { Label } from "@/components/Label";
-import { Button } from "@/components/Button";
-import { useState, useContext } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+
+import React, { useState, useContext } from "react";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { parseISO, differenceInYears } from "date-fns";
 import { userSchemaRegister } from "@/schemas/userSchema";
-import { InputSectionField } from "@/components/InputSectionField";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { TUserRegister } from "@/interfaces/user";
 import InputStyles from "../../Input/styles.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
 import styles from "../styles.module.scss";
+import { Input } from "@/components/Input";
+import { InputFocus } from "@/components/Input/InputFocus";
+import { InputSectionField } from "@/components/InputSectionField";
+import InputMask from "react-input-mask";
+import { Label } from "@/components/Label";
+import { Button } from "@/components/Button";
 
 export const RegisterForm = () => {
   const [accType, setAccType] = useState(Boolean);
-  const [buttonType, setButtonType] = useState(true);
   const { registerUser } = useContext(AuthContext);
 
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<TUserRegister>({
     resolver: zodResolver(userSchemaRegister),
@@ -30,6 +33,55 @@ export const RegisterForm = () => {
   const submit: SubmitHandler<TUserRegister> = (formData) => {
     const obj = { ...formData, isAdmin: accType };
     registerUser(obj);
+  };
+
+  const isBirthdateValid = (value: string) => {
+    const parsedDate = parseISO(value);
+    const age = differenceInYears(new Date(), parsedDate);
+
+    if (age < 18 || age > 130) {
+      return false;
+    }
+
+    const [yearStr, monthStr, dayStr] = value.split("-");
+    const year = parseInt(yearStr, 10);
+    const month = parseInt(monthStr, 10);
+    const day = parseInt(dayStr, 10);
+
+    if (isNaN(year) || isNaN(month) || isNaN(day)) {
+      return false;
+    }
+
+    if (month < 1 || month > 12 || day < 1 || day > 31) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const isCPFValid = (value: string) => {
+    const cleanedCPF = value.replace(/\D/g, "");
+
+    if (cleanedCPF.length !== 11 || /^(\d)\1+$/.test(cleanedCPF)) {
+      return false;
+    }
+
+    const calculateDigit = (digits: number[]) => {
+      const sum = digits.reduce((acc, digit, index) => {
+        return acc + parseInt(String(digit)) * (digits.length + 1 - index);
+      }, 0);
+      let remainder = (sum * 10) % 11;
+      if (remainder === 10 || remainder === 11) {
+        remainder = 0;
+      }
+      return remainder;
+    };
+
+    const cpfDigits = Array.from(cleanedCPF).map(Number);
+    const firstDigit = calculateDigit(cpfDigits.slice(0, 9));
+    const secondDigit = calculateDigit(cpfDigits.slice(0, 9).concat(firstDigit));
+
+    return cleanedCPF.charAt(9) === String(firstDigit) && cleanedCPF.charAt(10) === String(secondDigit);
   };
 
   return (
@@ -71,42 +123,59 @@ export const RegisterForm = () => {
             <InputSectionField>
               <Label htmlFor="cpf" name="CPF" />
               <InputFocus>
-                <Input
-                  register={register("cpf")}
-                  type="text"
-                  className={InputStyles.basicInputWithBorder}
+                <InputMask
+                  mask="999.999.999-99"
                   placeholder="000.000.000-00"
+                  {...register("cpf", {
+                    validate: (value) => isCPFValid(value) || "CPF inválido",
+                  })}
+                  className={InputStyles.basicInputWithBorder}
                   id="cpf"
                 />
-                <p>{errors.cpf?.message && errors.cpf?.message}</p>
               </InputFocus>
             </InputSectionField>
+            {errors.cpf && <p>{errors.cpf?.message}</p>}
+
             <InputSectionField>
-              <Label htmlFor="phone" name="Celular" />
+              <Label htmlFor="telephone" name="Celular" />
               <InputFocus>
-                <Input
-                  register={register("telephone")}
-                  type="text"
-                  className={InputStyles.basicInputWithBorder}
+                <InputMask
+                  mask="(99) 99999-9999"
                   placeholder="(DDD) 90000-0000"
+                  {...register("telephone")}
+                  type="tel"
+                  className={InputStyles.basicInputWithBorder}
                   id="phone"
                 />
-                <p>{errors.telephone?.message && errors.telephone?.message}</p>
               </InputFocus>
             </InputSectionField>
+            {errors.telephone && <p>{errors.telephone?.message}</p>}
+
             <InputSectionField>
               <Label htmlFor="birthdate" name="Data de nascimento" />
               <InputFocus>
-                <Input
-                  register={register("birthdate")}
-                  type="text"
-                  className={InputStyles.basicInputWithBorder}
-                  placeholder="00/00/00"
-                  id="birthdate"
+                <Controller
+                  name="birthdate"
+                  control={control}
+                  rules={{
+                    validate: (value) => {
+                      return isBirthdateValid(value) || "Data de nascimento inválida";
+                    },
+                  }}
+                  render={({ field }) => (
+                    <InputMask
+                      mask="99/99/9999"
+                      placeholder="DD/MM/AAAA"
+                      {...field}
+                      className={InputStyles.basicInputWithBorder}
+                      id="birthdate"
+                    />
+                  )}
                 />
-                <p>{errors.birthdate?.message && errors.birthdate?.message}</p>
               </InputFocus>
             </InputSectionField>
+            {errors.birthdate && <p>{errors.birthdate?.message}</p>}
+
             <InputSectionField>
               <Label htmlFor="description" name="Descrição" />
               <InputFocus>
