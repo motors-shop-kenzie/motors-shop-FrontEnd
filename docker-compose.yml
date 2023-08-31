@@ -2,13 +2,11 @@ version: "3.9"
 
 services:
   front:
-    container_name: node_front_motors
+    container_name: motors_shop__client
     build:
-      context: ./motors-shop-FrontEnd/
+      context: .
     ports:
       - 3000:3000
-    depends_on:
-      - back
     command: sh -c "yarn dev"
     volumes:
-      - ./front/:/app
+      - .:/app
