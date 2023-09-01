@@ -2,7 +2,7 @@
 "use client";
 
 import { iChildrenProps } from "@/interfaces";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { TUserUpdate } from "@/interfaces/user";
 import { IUserContext } from "./interface";
 import { parseCookies } from "nookies";
@@ -15,7 +15,7 @@ import { AuthContext } from "../Auth/authContext";
 export const UserContext = createContext<IUserContext>({} as IUserContext);
 
 export const UserProvider = ({ children }: iChildrenProps) => {
-  const { loggedUser, logout, user } = useContext(AuthContext);
+  const { loggedUser, logout, user, setUser } = useContext(AuthContext);
 
   const cookies = parseCookies();
 
@@ -30,9 +30,10 @@ export const UserProvider = ({ children }: iChildrenProps) => {
   const patchUser = async (data: TUserUpdate) => {
     await request({
       tryFn: async () => {
-        const response = await api.patch(`users/${user?.id}`, data, {
+        await api.patch(`users/${user?.id}`, data, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
       },
       onErrorFn: () => Toast({ message: "Não foi possível atualizar suas informações" }),

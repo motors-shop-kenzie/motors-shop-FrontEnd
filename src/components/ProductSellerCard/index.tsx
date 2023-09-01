@@ -26,7 +26,6 @@ export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
   const handleClick = () => {
     setSelectedCar(car.id);
     setSingleCar(viewedCar);
-
     setShowModal("editCar");
   };
 
