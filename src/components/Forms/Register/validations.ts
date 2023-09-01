@@ -1,13 +1,4 @@
-import { differenceInYears, parseISO } from "date-fns";
-
 export const isBirthdateValid = (value: string) => {
-  const parsedDate = parseISO(value);
-  const age = differenceInYears(new Date(), parsedDate);
-
-  if (age < 18 || age > 130) {
-    return false;
-  }
-
   const [yearStr, monthStr, dayStr] = value.split("-");
   const year = parseInt(yearStr, 10);
   const month = parseInt(monthStr, 10);

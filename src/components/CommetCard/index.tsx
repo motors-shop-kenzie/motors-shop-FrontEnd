@@ -74,7 +74,7 @@ export const CommentCard = ({ user, comment, userId, createdAt, commentId }: Car
           </div>
         )}
       </div>
-      <div className={styles.text}>{comment}</div>
+      <p className={styles.text}>{comment}</p>
     </li>
   );
 };

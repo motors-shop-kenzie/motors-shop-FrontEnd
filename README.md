@@ -3,6 +3,7 @@
 ## Instalação e Execução
 
 É necessário ter instalado em sua máquina o gerenciador de pacotes `yarn`. Para executar a aplicação localmente, siga estas etapas:
+
 1.  Clone este repositório;
 2.  Abra o repositório no `vscode`. Abra um terminal para as instalações;
 3.  Rode os comandos:
