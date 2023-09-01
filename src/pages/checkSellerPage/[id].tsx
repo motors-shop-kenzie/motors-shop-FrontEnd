@@ -7,12 +7,9 @@ import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { TUser } from "@/interfaces/user";
 import api from "@/services/api";
 import styles from "../SellerHome/styles.module.scss";
-
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import PageLoading from "@/components/PageLoading";
-import { EditAnnounceModal } from "@/components/Modal/EditAnnounceModal";
-import { useModal } from "@/hooks/modalHook";
 
 export default function CheckSellerPage() {
   const [clickedUser, setClickedUser] = useState<TUser>();
