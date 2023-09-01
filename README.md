@@ -1,4 +1,4 @@
-# FrontEnd - Motors grupo 17
+# Motors Shop
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/motors-shop-kenzie/motors-shop-FrontEnd?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/motors-shop-kenzie/motors-shop-FrontEnd?style=for-the-badge)
@@ -157,4 +157,4 @@ No Front End utilizamos:
 
 Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir. -->
 
-[⬆ Voltar ao topo](#nome-do-projeto)<br>
+[⬆ Voltar ao topo](#motors-shop)<br>
