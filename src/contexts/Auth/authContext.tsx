@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       tryFn: async () => {
         const res = await api.post(`/users`, data);
         const userData = res.data;
-        setUser(userData);
 
         Toast({ message: "Cadastro efetuado com sucesso!", isSucess: true });
         push("/login");
