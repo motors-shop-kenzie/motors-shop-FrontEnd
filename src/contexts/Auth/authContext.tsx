@@ -24,7 +24,6 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: iChildrenProps) => {
   const [user, setUser] = useState<TUser | undefined>({} as TUser);
-
   const [openNavBar, setOpenNavBar] = useState<boolean>(false);
   const toggleNavBar = () => setOpenNavBar(!openNavBar);
   const closeNavBar = () => setOpenNavBar(false);
@@ -121,6 +120,7 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
       onErrorFn: () => Toast({ message: "Erro ao atualizar a senha" }),
     });
   };
+
   const patchUser = async (data: TUserUpdate) => {
     await request({
       tryFn: async () => {
