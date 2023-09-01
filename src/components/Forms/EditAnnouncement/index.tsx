@@ -7,13 +7,15 @@ import { Select } from "@/components/Select";
 import { TextArea } from "@/components/Textarea";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ModalContext } from "@/contexts/Modal";
-import { TCarUpdate } from "@/interfaces/CarProduc";
-import { carSchemaUpdate } from "@/schemas/carSchema";
+import { ICreateCarImg, TCarImg, TCarUpdate } from "@/interfaces/CarProduc";
+import { carImgRegisterSchema, carSchemaUpdate } from "@/schemas/carSchema";
 import kenzieApi from "@/services/kenzieApi";
+import { schemaValidation } from "@/utils/validationUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { HttpStatusCode } from "axios";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { IoCloseSharp } from "react-icons/io5";
 import ButtonStyles from "../../Button/styles.module.scss";
 import InputStyles from "../../Input/styles.module.scss";
 import TextAreaStyles from "../../Textarea/style.module.scss";
@@ -36,21 +38,106 @@ interface IModel {
   year: string;
 }
 
+interface IImages {
+  toCreate: ICreateCarImg[];
+  toUpdate: TCarImg[];
+  toDelete: TCarImg[];
+}
+
 export default function EditAnnouncementForm() {
   const {
     formState: { errors },
     handleSubmit,
     register,
+    setError,
+    clearErrors,
     setValue,
   } = useForm<TCarUpdate>({ resolver: zodResolver(carSchemaUpdate) });
 
   const { closeModal } = useContext(ModalContext);
-  const { destroyCar, patchCar, singleCar } = useContext(CarsContext);
+  const { createImg, destroyCar, destroyImg, patchCar, patchImg, singleCar } = useContext(CarsContext);
   const [brands, setBrands] = useState<string[]>([]);
   const [currentBrand, setCurrentBrand] = useState(singleCar?.brand ?? "");
   const [models, setModels] = useState<IModel[]>([]);
   const [selectModel, setSelectModel] = useState(singleCar?.model ?? "");
   const [active, setActive] = useState<boolean>(singleCar?.active ?? false);
+  const [imageValues, setImageValues] = useState<(TCarImg | ICreateCarImg)[]>(singleCar?.img ?? []);
+  const [imagesForDestroy, setImagesForDestroy] = useState<TCarImg[]>([]);
+
+  const images: IImages = useMemo(() => {
+    const create = imageValues.filter((image) => !("id" in image) && image.url_img) as ICreateCarImg[];
+    const update = imageValues.filter((image) => "id" in image) as TCarImg[];
+
+    return { toCreate: create, toUpdate: update, toDelete: imagesForDestroy };
+  }, [imageValues, imagesForDestroy]);
+
+  const handleInputImg = useCallback(
+    (index: number, value: string | undefined): void => {
+      setImageValues((prev) => {
+        if (value?.length) {
+          const values = [...prev];
+          values[index].url_img = value;
+
+          const { message } = schemaValidation(carImgRegisterSchema, values[index]);
+          if (message) setError(`img.${index}.url_img`, { type: "manual", message });
+          else clearErrors(`img.${index}.url_img`);
+
+          return values;
+        }
+        prev.splice(index);
+        clearErrors(`img.${index}.url_img`);
+
+        return prev;
+      });
+    },
+    [clearErrors, setError],
+  );
+
+  const handleDeleteImg = useCallback((index: number, img: TCarImg) => {
+    setImageValues((prev) => {
+      const images = [...prev];
+      images.splice(index, 1);
+
+      return images;
+    });
+
+    if (img.id) setImagesForDestroy((prev) => [...prev, img]);
+  }, []);
+
+  const InputImage = useMemo(
+    () =>
+      imageValues.map(
+        (img, idx) =>
+          img && (
+            <InputSectionField key={JSON.stringify(img)}>
+              <button
+                type="button"
+                className={styles.button__delete_image}
+                onClick={() => handleDeleteImg(idx, img as TCarImg)}
+              >
+                <IoCloseSharp />
+              </button>
+              <Label htmlFor={`${idx}-imagem-galeria`} name={`${idx + 1}º Imagem da galeria`} />
+              <InputFocus>
+                <Input
+                  type="text"
+                  className={InputStyles.basicInputWithBorder}
+                  placeholder="https://image.com"
+                  id="1-imagem-galeria"
+                  onChangeFn={(e) => handleInputImg(idx, e.target.value)}
+                  value={imageValues[idx].url_img}
+                />
+              </InputFocus>
+              {errors?.img?.[idx] && <small style={{ color: "red" }}>{`* ${errors.img[idx]?.url_img?.message}`}</small>}
+            </InputSectionField>
+          ),
+      ),
+    [imageValues, errors.img, handleInputImg, handleDeleteImg],
+  );
+
+  const handleNewInputImage = () => {
+    setImageValues((prev) => [...prev, { carProduct: singleCar?.id, url_img: "" } as ICreateCarImg]);
+  };
 
   /**
    * Takes a fuel type parameter and returns a string representing the type of fuel.
@@ -88,9 +175,9 @@ export default function EditAnnouncementForm() {
     },
     [models, selectModel, setValue, singleCar],
   );
+  useEffect(() => FIPEValues(), [FIPEValues]);
 
   useEffect(() => {
-    console.clear();
     (async () => {
       try {
         const { data, status } = await kenzieApi.get<ICarBrand>("/cars");
@@ -110,8 +197,6 @@ export default function EditAnnouncementForm() {
     })();
   }, [currentBrand]);
 
-  useEffect(() => FIPEValues(), [FIPEValues]);
-
   const handleDelete = () => {
     destroyCar();
   };
@@ -120,6 +205,15 @@ export default function EditAnnouncementForm() {
     const car: TCarUpdate = { ...data, active, business: data.price! < data.tablePife! };
 
     patchCar(car);
+    images.toCreate.forEach((img) => {
+      createImg(img);
+    });
+    images.toUpdate.forEach((img) => {
+      patchImg(img);
+    });
+    images.toDelete.forEach((img) => {
+      destroyImg(img);
+    });
 
     closeModal();
   };
@@ -307,11 +401,11 @@ export default function EditAnnouncementForm() {
             </InputFocus>
           </InputSectionField>
 
-          {/* {renderInputImage()} */}
+          {InputImage}
 
           <Button
             className={ButtonStyles.brand4TextBrand1Button}
-            // onClick={() => setInputImage(inputImage + 1)}
+            onClick={handleNewInputImage}
             text="Adicionar campo para imagem da galeria"
             type="button"
           />

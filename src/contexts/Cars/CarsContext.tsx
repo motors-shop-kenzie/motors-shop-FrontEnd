@@ -4,7 +4,7 @@ import Toast from "@/components/Toast";
 import { useModal } from "@/hooks/modalHook";
 import { useRequest } from "@/hooks/useRequest";
 import { iChildrenProps } from "@/interfaces";
-import { TCarProduct, TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { ICreateCarImg, TCarImg, TCarProduct, TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import api from "@/services/api";
 import { HttpStatusCode } from "axios";
 import { parseCookies } from "nookies";
@@ -171,6 +171,31 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
     });
   };
 
+  const createImg = async (payload: ICreateCarImg) =>
+    await request({
+      tryFn: async () => {
+        await api.post<TCarProduct>(`imgs/`, payload);
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível atualizar as informações do anúncio", isSucess: false }),
+    });
+
+  const patchImg = async (payload: TCarImg) =>
+    await request({
+      tryFn: async () => {
+        const { id, ...patchData } = payload;
+        await api.patch<TCarProduct>(`imgs/${id}`, patchData);
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível atualizar as informações do anúncio", isSucess: false }),
+    });
+
+  const destroyImg = async ({ id }: TCarImg) =>
+    await request({
+      tryFn: async () => {
+        await api.delete<TCarProduct>(`imgs/${id}`);
+      },
+      onErrorFn: () => Toast({ message: "Não foi possível atualizar as informações do anúncio", isSucess: false }),
+    });
+
   useEffect(() => {
     (async () => {
       api.defaults.headers.common.authorization = `Bearer ${cookies["ccm.token"]}`;
@@ -206,6 +231,9 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         page,
         patchCar,
         destroyCar,
+        createImg,
+        patchImg,
+        destroyImg,
         selectedCar,
         setSelectedCar,
         retrieveComment,

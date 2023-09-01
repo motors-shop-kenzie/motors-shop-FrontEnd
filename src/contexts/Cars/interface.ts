@@ -1,5 +1,5 @@
 import { iComment } from "@/components/Forms/CreateComment";
-import { TCarProduct, TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { ICreateCarImg, TCarImg, TCarProduct, TCarUpdate, TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import { Dispatch, SetStateAction } from "react";
 
 export type ICarsContext = {
@@ -27,6 +27,9 @@ export type ICarsContext = {
   page: number;
   patchCar: (data: TCarUpdate) => Promise<void>;
   destroyCar: () => Promise<void>;
+  createImg: (payload: ICreateCarImg) => Promise<void>;
+  patchImg: (payload: TCarImg) => Promise<void>;
+  destroyImg: ({ id }: TCarImg) => Promise<void>;
   selectedCar: string;
   setSelectedCar: Dispatch<SetStateAction<string>>;
   retrieveComment: string | null;
