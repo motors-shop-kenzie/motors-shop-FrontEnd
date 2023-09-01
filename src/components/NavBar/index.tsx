@@ -1,24 +1,43 @@
 import profileDefault from "@/assets/defaults/profile.svg";
 import darkLogo from "@/assets/logo/dark-logo.svg";
+import { useModal } from "@/hooks/modalHook";
+import { useAuth } from "@/hooks/useAuth.hook";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
-import { useRouter } from "next/router";
-import { useModal } from "@/hooks/modalHook";
+import ConfirmDeleteAccountModal from "../Modal/ConfirmDeleteAccountModal";
+import { ProfileAddressModal } from "../Modal/ProfileAddress";
 import { ProfileSettingsModal } from "../Modal/ProfileSettings";
 import styles from "./styles.module.scss";
-import { useAuth } from "@/hooks/useAuth.hook";
-import { ProfileAddressModal } from "../Modal/ProfileAddress";
-import ConfirmDeleteAccountModal from "../Modal/ConfirmDeleteAccountModal";
 
 interface INavBarProps {}
 
-export const NavBar = (props: INavBarProps) => {
+export const NavBar = (_: INavBarProps) => {
   const { user, logout, openNavBar, setOpenNavBar } = useAuth();
   const { setShowModal, showModal } = useModal();
   const toggleMenu = () => setOpenNavBar(!openNavBar);
+
+  const handleProfile = () => {
+    setShowModal("settings");
+    toggleMenu();
+  };
+
+  const handleAddress = () => {
+    setShowModal("address");
+    toggleMenu();
+  };
+
+  const handleAnnouncements = () => {
+    push(`/SellerHome/${user?.id}`);
+    toggleMenu();
+  };
+
+  const handleLogout = () => {
+    logout();
+    toggleMenu();
+  };
 
   const { push } = useRouter();
 
@@ -71,10 +90,10 @@ export const NavBar = (props: INavBarProps) => {
 
       {openNavBar && user?.id && (
         <ul className={styles.options__logged} onClick={(e) => e.stopPropagation()}>
-          <li onClick={() => setShowModal("settings")}>Editar Perfil</li>
-          <li onClick={() => setShowModal("address")}>Editar Endereço</li>
-          {user.isAdmin && <li onClick={() => push(`/SellerHome/${user.id}`)}>Meus Anúncios</li>}
-          <li onClick={() => logout()}>Sair</li>
+          <li onClick={handleProfile}>Editar Perfil</li>
+          <li onClick={handleAddress}>Editar Endereço</li>
+          {user.isAdmin && <li onClick={handleAnnouncements}>Meus Anúncios</li>}
+          <li onClick={handleLogout}>Sair</li>
         </ul>
       )}
     </nav>
