@@ -1,8 +1,7 @@
 import { UserHeader } from "../UserHeader";
 import styles from "./styles.module.scss";
 import { CiEdit } from "react-icons/ci";
-import { BsTrash } from "react-icons/bs";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "@/contexts/Auth/authContext";
 import { useModal } from "@/hooks/modalHook";
 import { CommentPatchModal } from "../Modal/CommentPatchModal";
@@ -50,11 +49,12 @@ export const CommentCard = ({ user, comment, userId, createdAt, commentId }: Car
   };
   const { setShowModal } = useModal();
   const { user: loggedInUser } = useContext(AuthContext);
-  const { editingCommentId, setEditingCommentId } = useContext(CarsContext);
+  const { setEditingCommentId, setRetrieveComment } = useContext(CarsContext);
   const { showModal } = useModal();
 
   const handleEditClick = () => {
     setShowModal("commentUpdate");
+    setRetrieveComment(comment);
     setEditingCommentId(commentId);
   };
 

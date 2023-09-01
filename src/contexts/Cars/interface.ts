@@ -29,6 +29,8 @@ export type ICarsContext = {
   destroyCar: () => Promise<void>;
   selectedCar: string;
   setSelectedCar: Dispatch<SetStateAction<string>>;
+  retrieveComment: string | null;
+  setRetrieveComment: Dispatch<SetStateAction<string | null>>;
 };
 
 export type TPaginationValue = {

@@ -25,6 +25,7 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
   const [singleCar, setSingleCar] = useState<TCarProduct | undefined>({} as TCarProduct);
   const [comment, setComment] = useState<iComment[]>([]);
   const [editingCommentId, setEditingCommentId] = useState<string | null>(null);
+  const [retrieveComment, setRetrieveComment] = useState<string | null>(null);
   const { closeModal } = useModal();
   const [pageValues, setPageValues] = useState<TPaginationValue>({} as TPaginationValue);
   const [page, setPage] = useState<number>(1);
@@ -207,6 +208,8 @@ export const CarsProvider = ({ children }: iChildrenProps) => {
         destroyCar,
         selectedCar,
         setSelectedCar,
+        retrieveComment,
+        setRetrieveComment,
       }}
     >
       {children}

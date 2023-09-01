@@ -5,19 +5,19 @@ import { useForm } from "react-hook-form";
 import InputStyles from "../../Input/styles.module.scss";
 import TextAreaStyles from "../../Textarea/style.module.scss";
 import ButtonStyles from "../../Button/styles.module.scss";
-import styles from "../styles.module.scss";
 import { useModal } from "@/hooks/modalHook";
 import { InputSectionField } from "@/components/InputSectionField";
 import { Label } from "@/components/Label";
 import { InputFocus } from "@/components/Input/InputFocus";
 import { TextArea } from "@/components/Textarea";
 import { Button } from "@/components/Button";
+import styles from "../styles.module.scss";
 
 export const PatchComments = () => {
   const { patchComment } = useContext(CarsContext);
   const { register, handleSubmit } = useForm();
   const { closeModal } = useModal();
-  const { editingCommentId, deleteComment } = useContext(CarsContext);
+  const { editingCommentId, deleteComment, retrieveComment } = useContext(CarsContext);
 
   const submit = (data: any) => {
     patchComment(data, editingCommentId!);
@@ -33,6 +33,7 @@ export const PatchComments = () => {
             <TextArea
               className={TextAreaStyles.basicTextAreaWithBorder}
               placeholder={"comentário"}
+              value={retrieveComment}
               register={register("comment")}
               id="updateComment"
             />
