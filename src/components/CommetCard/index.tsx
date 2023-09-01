@@ -60,20 +60,21 @@ export const CommentCard = ({ user, comment, userId, createdAt, commentId }: Car
 
   return (
     <li className={styles.container}>
-      <div>
+      <div className={styles.userDiv}>
         <UserHeader user={user} userId={userId} letter={user?.name?.charAt(0)} />
-        <p>{retrieveCurrentDate(new Date(createdAt))}</p>
+        <p>
+          <span>•</span> {retrieveCurrentDate(new Date(createdAt))}
+        </p>
+        {loggedInUser?.id === userId && (
+          <div className={styles.container__divButtonPatch}>
+            <button onClick={() => handleEditClick()}>
+              <CiEdit size={20} />
+            </button>
+            {showModal === "commentUpdate" ? <CommentPatchModal /> : null}
+          </div>
+        )}
       </div>
       <div className={styles.text}>{comment}</div>
-
-      {loggedInUser?.id === userId && (
-        <div className={styles.container__divButtonPatch}>
-          <button onClick={() => handleEditClick()}>
-            <CiEdit size={20} />
-          </button>
-          {showModal === "commentUpdate" ? <CommentPatchModal /> : null}
-        </div>
-      )}
     </li>
   );
 };

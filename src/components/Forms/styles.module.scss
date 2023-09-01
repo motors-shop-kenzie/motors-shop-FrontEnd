@@ -225,6 +225,11 @@
           width: 100%;
         }
       }
+      .editCommentButtonDiv {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
     }
 
     input {

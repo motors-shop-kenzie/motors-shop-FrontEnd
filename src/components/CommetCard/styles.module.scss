@@ -3,12 +3,37 @@
 .container {
   color: $color-grey-scale-grey-2;
 
-  .text {
-    margin: 12px 0;
+  .userDiv {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+    > p {
+      display: flex;
+      gap: 8px;
+
+      color: $color-grey-scale-grey-3;
+    }
   }
 }
 
-.container__divButtonPatch > button {
-  background: transparent;
-  border: none;
+.text {
+  margin: 12px 0;
+
+  font-size: $body-2-600;
+  font-weight: $regular-weight;
+
+  color: $color-grey-scale-grey-2;
+}
+
+.container__divButtonPatch {
+  position: absolute;
+  right: 0;
+
+  > button {
+    background: transparent;
+    border: none;
+  }
 }
