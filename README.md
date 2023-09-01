@@ -21,40 +21,48 @@ Motors Shop é um E-commerce de carros desenvolvido para facilitar a vida dos co
 ## 💻 Funcionalidades
 
 - Cadastro de usuário (comprador ou anunciante);
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/cadastro-1.png?raw=true" alt="cadastro-img"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/cadastro-2.png?raw=true" alt="cadastro-img"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/cadastro-3.png?raw=true" alt="cadastro-img"/>
 
 - Login;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/login.png?raw=true" alt="login-img"/>
 
 - Página inicial com Filtros;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-home-logado-1.png?raw=true" alt="home-img"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-home-logado-2.png?raw=true" alt="home-img"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-home-logado-3.png?raw=true" alt="home-img"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-home-logado-4.png?raw=true" alt="home-img"/>
 
 - Acessar página do Anunciante do carro;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-de-anuncios-de-um-vendedor.png?raw=true" alt="seller-page-img"/>
 
 - Acessar página do Carro, com botão de comprar (redirecionamento para o WhatsApp do anunciante) e criar comentário sobre o carro;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-produto-1.png?raw=true" alt="product-page-img"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-produto-2.png?raw=true" alt="product-page-img"/>
 
 - Editar/Excluir comentário em página do Carro;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/editar-comentarop.png?raw=true" alt="edit-comment-modal"/>
 
 - Editar Perfil;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/editar-perfil.png?raw=true" alt="edit-profile-modal"/>
 
 - Excluir Perfil;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/excluir-perfil.png?raw=true" alt="delete-profile-modal"/>
 
 - Editar Endereço;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/editar-endereco.png?raw=true" alt="edit-address-modal"/>
 
 - Ver anúncios postados por você (Perfil Anunciante apenas);
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/pagina-meus-anuncios.png?raw=true" alt="my-announces-page-img"/>
 
 - Criar novo anúncio;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/criar-anuncio-1.png?raw=true" alt="create-announce-modal"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/criar-anuncio-2.png?raw=true" alt="create-announce-modal"/>
 
 - Editar/Excluir anúncio;
-  <img src="" alt=""/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/editar-anuncio-1.png?raw=true" alt="edit-announce-modal"/>
+  <img src="https://github.com/motors-shop-kenzie/motors-shop-FrontEnd/blob/feat/readme/src/assets/readme/editar-anuncio-2.png?raw=true" alt="edit-announce-modal"/>
 
 ## 🔨 Técnicas e Tecnologias
 
