@@ -12,7 +12,6 @@ import styles from "../styles.module.scss";
 import { Input } from "@/components/Input";
 import { InputFocus } from "@/components/Input/InputFocus";
 import { InputSectionField } from "@/components/InputSectionField";
-import InputMask from "react-input-mask";
 import { Label } from "@/components/Label";
 import { Button } from "@/components/Button";
 import { isBirthdateValid, isCPFValid } from "./validations";
@@ -74,10 +73,10 @@ export const RegisterForm = () => {
             <InputSectionField>
               <Label htmlFor="cpf" name="CPF" />
               <InputFocus>
-                <InputMask
-                  mask="999.999.999-99"
+                <Input
+                  type="cpf"
                   placeholder="000.000.000-00"
-                  {...register("cpf", {
+                  register={register("cpf", {
                     validate: (value) => isCPFValid(value) || "CPF inválido",
                   })}
                   className={InputStyles.basicInputWithBorder}
@@ -90,10 +89,9 @@ export const RegisterForm = () => {
             <InputSectionField>
               <Label htmlFor="telephone" name="Celular" />
               <InputFocus>
-                <InputMask
-                  mask="(99) 99999-9999"
+                <Input
                   placeholder="(DDD) 90000-0000"
-                  {...register("telephone")}
+                  register={register("telephone")}
                   type="tel"
                   className={InputStyles.basicInputWithBorder}
                   id="phone"
@@ -114,10 +112,10 @@ export const RegisterForm = () => {
                     },
                   }}
                   render={({ field }) => (
-                    <InputMask
-                      mask="99/99/9999"
+                    <Input
+                      type={""}
                       placeholder="DD/MM/AAAA"
-                      {...field}
+                      register={register("birthdate")}
                       className={InputStyles.basicInputWithBorder}
                       id="birthdate"
                     />
