@@ -8,9 +8,8 @@ import { useAuth } from "@/hooks/useAuth.hook";
 import { useForm } from "react-hook-form";
 import ButtonStyles from "../../Button/styles.module.scss";
 import InputStyles from "../../Input/styles.module.scss";
-import styles from "../styles.module.scss";
-import { useEffect } from "react";
 import { useUser } from "@/hooks/useUser.hook";
+import styles from "../styles.module.scss";
 
 export const ProfileAddressSettings = () => {
   const { user } = useAuth();

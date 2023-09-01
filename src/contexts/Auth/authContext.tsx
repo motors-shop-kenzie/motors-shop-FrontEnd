@@ -70,8 +70,8 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
   };
 
   const logout = () => {
-    const cookie = "ccm.token";
-    destroyCookie(null, cookie);
+    destroyCookie(null, "ccm.token");
+    destroyCookie(null, "ccm.isAdmin");
     push("/");
     window.location.reload();
   };
@@ -83,7 +83,10 @@ export const AuthProvider = ({ children }: iChildrenProps) => {
           const response = await api.get("/users/logged", {
             headers: { Authorization: `Bearer ${token}` },
           });
+
           setUser(response.data);
+
+          setCookie(null, "ccm.isAdmin", response.data.isAdmin);
         },
         onErrorFn: () => Toast({ message: "Erro inesperado" }),
       });
