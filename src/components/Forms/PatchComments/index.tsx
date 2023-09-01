@@ -27,25 +27,30 @@ export const PatchComments = () => {
   return (
     <div className={styles.modalContainer}>
       <form onSubmit={handleSubmit(submit)}>
-        <InputSectionField>
-          <Label htmlFor="updateComment" name="Comentário" />
-          <InputFocus>
-            <TextArea
-              className={TextAreaStyles.basicTextAreaWithBorder}
-              placeholder={"comentário"}
-              value={retrieveComment}
-              register={register("comment")}
-              id="updateComment"
+        <div className={styles.inputsSectionModal}>
+          <InputSectionField>
+            <Label htmlFor="updateComment" name="Comentário" />
+            <InputFocus>
+              <TextArea
+                className={TextAreaStyles.basicTextAreaWithBorder}
+                placeholder={"comentário"}
+                value={retrieveComment}
+                register={register("comment")}
+                id="updateComment"
+              />
+            </InputFocus>
+          </InputSectionField>
+
+          <section className={styles.editCommentButtonDiv}>
+            <Button
+              onClick={() => deleteComment(editingCommentId!)}
+              className={ButtonStyles.feedbackAlert3TextFeedbackAlert1Button}
+              text="Apagar"
             />
-          </InputFocus>
-        </InputSectionField>
-        <Button className={ButtonStyles.brand3TextBrand4Button} text="Salvar alterações" type="submit" />
+            <Button className={ButtonStyles.brand3TextBrand4Button} text="Salvar alterações" type="submit" />
+          </section>
+        </div>
       </form>
-      <Button
-        onClick={() => deleteComment(editingCommentId!)}
-        className={ButtonStyles.feedbackAlert3TextFeedbackAlert1Button}
-        text="Apagar"
-      />
     </div>
   );
 };
