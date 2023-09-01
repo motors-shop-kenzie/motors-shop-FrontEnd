@@ -35,7 +35,7 @@ export const ProductSellerCard = ({ car, user, isClickedUser }: CardProps) => {
   };
 
   return (
-    <div className={styles.card}>
+    <div onClick={handleViewDetailsClick} className={styles.card}>
       <div className={styles.img}>
         {car.active ? <div className={styles.active}>Ativo</div> : <div className={styles.nonactive}>Inativo</div>}
         <div>
