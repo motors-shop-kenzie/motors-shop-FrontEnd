@@ -8,7 +8,7 @@ import { Select } from "@/components/Select";
 import { TextArea } from "@/components/Textarea";
 import { CarsContext } from "@/contexts/Cars/CarsContext";
 import { ModalContext } from "@/contexts/Modal";
-import { TCarImgRegister, TCarsFormRequest, TCarsPayloadRequest } from "@/interfaces/CarProduc";
+import { TCarImgRegister, TCarsPayloadRequest } from "@/interfaces/CarProduc";
 import { carImgRegisterSchema, payloadRequestSchema } from "@/schemas/carSchema";
 import kenzieApi from "@/services/kenzieApi";
 import { schemaValidation } from "@/utils/validationUtils";
@@ -37,7 +37,7 @@ export const CreateAnnounceModalForm = () => {
     setValue,
     setError,
     clearErrors,
-  } = useForm<TCarsFormRequest>({
+  } = useForm<TCarsPayloadRequest>({
     resolver: zodResolver(payloadRequestSchema),
   });
 
@@ -85,9 +85,7 @@ export const CreateAnnounceModalForm = () => {
               onChangeFn={(e) => handleInputImg(i, e.target.value)}
             />
           </InputFocus>
-          {errors.img && errors.img[i] && (
-            <small style={{ color: "red" }}>{`* ${errors.img[i]?.url_img?.message}`}</small>
-          )}
+          {errors?.img?.[i] && <small style={{ color: "red" }}>{`* ${errors.img[i]?.url_img?.message}`}</small>}
         </InputSectionField>,
       );
     }
@@ -153,7 +151,7 @@ export const CreateAnnounceModalForm = () => {
     FIPEValues();
   }, [brand, model]);
 
-  const submit: SubmitHandler<TCarsFormRequest> = (formData) => {
+  const submit: SubmitHandler<TCarsPayloadRequest> = (formData) => {
     imageValues.forEach((image, idx) => handleInputImg(idx, image?.url_img));
     if (Object.keys(errors).length) return;
 

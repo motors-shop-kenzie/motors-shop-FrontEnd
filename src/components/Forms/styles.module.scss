@@ -1,6 +1,15 @@
 @use "../../sass/abstracts/variables" as *;
 @use "../../sass/abstracts/mixins" as *;
 
+.button__delete_image {
+  all: unset;
+  position: absolute;
+  cursor: pointer;
+  right: 2.5%;
+
+  color: $color-feedback-alert-1;
+}
+
 .link {
   margin-top: 10px;
   cursor: pointer;
