@@ -10,8 +10,12 @@ export const middleware = (request: NextRequest) => {
   if (url.includes("/SellerHome") && (!token || !isAdmin)) {
     return NextResponse.redirect(new URL("/", url));
   }
+
+  if ((url.includes("/register") && token) || (url.includes("/login") && token)) {
+    return NextResponse.redirect(new URL("/", url));
+  }
 };
 
 export const confi = {
-  matcher: ["/", "SellerHome"],
+  matcher: ["/", "SellerHome", "/register", "/login"],
 };

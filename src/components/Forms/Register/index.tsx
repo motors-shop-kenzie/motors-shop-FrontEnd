@@ -31,8 +31,13 @@ export const RegisterForm = () => {
 
   const submit: SubmitHandler<TUserRegister> = (formData) => {
     const obj = { ...formData, isAdmin: accType };
+
     registerUser(obj);
   };
+
+  if (errors) {
+    console.log(errors);
+  }
 
   return (
     <div className={styles.registerContainer}>
@@ -255,7 +260,7 @@ export const RegisterForm = () => {
                   id="password"
                 />
               </InputFocus>
-              <p>{errors && errors.password?.message}</p>
+              {errors.password?.message && <p>{errors.password?.message}</p>}
             </InputSectionField>
             <InputSectionField>
               <Label htmlFor="password_confirmation" name="Confirmar senha" />
@@ -264,11 +269,12 @@ export const RegisterForm = () => {
                   type="password"
                   className={InputStyles.basicInputWithBorder}
                   placeholder="Confirmar senha"
+                  register={register("password_confirmation")}
                   id="password_confirmation"
                 />
               </InputFocus>
-              <p>{errors && errors.password?.message}</p>
             </InputSectionField>
+            {errors.password_confirmation?.message && <p>{errors.password_confirmation?.message}</p>}
           </div>
 
           <div className={styles.buttonsSectionRegister}>
