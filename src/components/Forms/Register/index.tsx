@@ -35,10 +35,6 @@ export const RegisterForm = () => {
     registerUser(obj);
   };
 
-  if (errors) {
-    console.log(errors);
-  }
-
   return (
     <div className={styles.registerContainer}>
       <form onSubmit={handleSubmit(submit)}>
