@@ -139,11 +139,6 @@ export default function EditAnnouncementForm() {
     setImageValues((prev) => [...prev, { carProduct: singleCar?.id, url_img: "" } as ICreateCarImg]);
   };
 
-  /**
-   * Takes a fuel type parameter and returns a string representing the type of fuel.
-   * @param fuelType - A number or undefined representing the type of fuel.
-   * @returns A string representing the type of fuel, or undefined if the input is not a valid fuel type.
-   */
   const fuelStringType = (fuelType: number | undefined): string | undefined => {
     switch (fuelType) {
       case 1:
@@ -202,7 +197,7 @@ export default function EditAnnouncementForm() {
   };
 
   const submit: SubmitHandler<TCarUpdate> = (data) => {
-    const car: TCarUpdate = { ...data, active, business: data.price! < data.tablePife! };
+    const car: TCarUpdate = { ...data, color: data.color!.toUpperCase(), active, business: data.price! < data.tablePife! };
 
     patchCar(car);
     images.toCreate.forEach((img) => {

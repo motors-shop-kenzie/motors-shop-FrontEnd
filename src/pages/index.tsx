@@ -155,7 +155,7 @@ export default function HomePage() {
               <div className={styles.container_input}>
                 <h3 className={styles.header_filter}>Preço</h3>
                 <div className={styles.options_filter}>
-                  <p>R$ {priceValue} mil</p> <p>R$ 550 mil</p>
+                  <p>R$ {priceValue}</p> <p>R$ 550 mil</p>
                 </div>
                 <input
                   type="range"

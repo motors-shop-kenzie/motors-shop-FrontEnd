@@ -111,11 +111,7 @@ export const CreateAnnounceModalForm = () => {
     }
   };
 
-  /**
-   * Takes a fuel type parameter and returns a string representing the type of fuel.
-   * @param fuelType - A number or undefined representing the type of fuel.
-   * @returns A string representing the type of fuel, or undefined if the input is not a valid fuel type.
-   */
+
   const fuelStringType = (fuelType: number | undefined): string | undefined => {
     switch (fuelType) {
       case 1:
@@ -157,7 +153,7 @@ export const CreateAnnounceModalForm = () => {
 
     const images: TCarImgRegister[] = imageValues.filter((img) => img?.url_img);
 
-    const car: TCarsPayloadRequest = { ...formData, business: formData.price < formData.tablePife, img: [...images] };
+    const car: TCarsPayloadRequest = { ...formData, color:formData.color.toUpperCase(), business: formData.price < formData.tablePife, img: [...images] };
 
     createCars(car);
     setInputImage(2);
