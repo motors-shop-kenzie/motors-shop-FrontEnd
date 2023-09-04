@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-"use client";
 
 import { iChildrenProps } from "@/interfaces";
 import { createContext, useContext, useEffect } from "react";
@@ -35,6 +34,7 @@ export const UserProvider = ({ children }: iChildrenProps) => {
         });
 
         Toast({ message: "Informações atualizadas com sucesso!", isSucess: true });
+        window.location.reload();
       },
       onErrorFn: () => Toast({ message: "Não foi possível atualizar suas informações" }),
     });

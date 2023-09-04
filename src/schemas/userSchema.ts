@@ -18,25 +18,30 @@ export const userSchema = z.object({
   address: addressSchema,
 });
 
-export const userSchemaRegister = z.object({
-  name: z.string().nonempty({ message: "Campo obrigatório" }),
-  email: z.string().email({ message: "Email inválido" }),
-  password: z.string().nonempty({ message: "Campo obrigatório" }),
-  cpf: z
-    .string()
-    .transform(removeNonDigits)
-    .refine((value) => value.length === 11, {
-      message: "CPF inválido",
-    }),
-  telephone: z.string().nonempty({ message: "Campo obrigatório" }),
-  description: z.string().optional(),
-  birthdate: z.string().nonempty({ message: "Campo obrigatório" }),
-  address: addressSchemaRegister.optional(),
-});
-
-export const userSchemaRegisterRequest = userSchemaRegister.extend({
-  isAdmin: z.boolean(),
-});
+export const userSchemaRegister = z
+  .object({
+    name: z.string().nonempty({ message: "Campo obrigatório" }),
+    email: z.string().email({ message: "Email inválido" }),
+    password: z.string().nonempty({ message: "Campo obrigatório" }),
+    cpf: z
+      .string()
+      .transform(removeNonDigits)
+      .refine((value) => value.length === 11, {
+        message: "CPF inválido",
+      }),
+    telephone: z.string().nonempty({ message: "Campo obrigatório" }),
+    description: z.string().optional(),
+    birthdate: z.string().nonempty({ message: "Campo obrigatório" }),
+    address: addressSchemaRegister.optional(),
+    password_confirmation: z.string(),
+  })
+  .extend({
+    isAdmin: z.boolean().optional(),
+  })
+  .refine((data) => data.password === data.password_confirmation, {
+    message: "Senhas não são iguais!",
+    path: ["password_confirmation"],
+  });
 
 export const userSchemaLogin = z.object({
   email: z.string(),
