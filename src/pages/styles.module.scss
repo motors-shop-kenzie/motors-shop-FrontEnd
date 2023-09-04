@@ -1,0 +1,272 @@
+@use "../sass/abstracts/variables" as *;
+@use "../sass/abstracts/mixins" as *;
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@500;600&display=swap");
+
+.body {
+  margin-top: 80px;
+}
+
+.loading {
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.bg_img {
+  display: flex;
+  justify-content: center;
+  //   background-image: url("../assets/Photo.svg");
+  background-color: black;
+  background-size: cover;
+  width: 100%;
+  height: 400px;
+}
+
+.car_shop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  aside {
+    width: 30%;
+  }
+  main {
+    width: 60%;
+  }
+}
+
+.car_container {
+  background-image: url("../assets/Photo.png"), linear-gradient(rgba(0, 0, 0, 0.29), rgba(0, 0, 0, 1));
+  background-repeat: no-repeat;
+  background-blend-mode: darken;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-grey-scale-grey-10;
+  height: 400px;
+  background-position: bottom;
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    h2 {
+      font-size: 30px;
+      font-weight: 600;
+    }
+    h4 {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+}
+
+.show_filter {
+  margin: 80px 0;
+  button {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    gap: 10px;
+    align-self: center;
+    padding: 12px 28px;
+    align-items: center;
+    justify-content: center;
+
+    height: 48px;
+    width: 60%;
+    background-color: $color-brand-brand-2;
+
+    border: 2px;
+    border-radius: 4px;
+
+    color: $color-grey-scale-grey-10;
+    font-family: "Inter";
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 auto;
+
+    @media (min-width: $layout-medium) {
+      display: none;
+    }
+  }
+}
+
+.container_close_fitler {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  p {
+    color: $color-grey-scale-grey-1;
+    font-family: "Lexend";
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+  }
+  button {
+    all: unset;
+    color: $color-grey-scale-grey-3;
+    font-size: 20px;
+  }
+  @media (min-width: $layout-medium) {
+    display: none;
+  }
+}
+
+.container_filter {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  padding-bottom: 80px;
+  position: absolute;
+  top: 120px;
+  min-width: 100%;
+
+  overflow: auto;
+  background-color: $color-grey-scale-grey-10;
+  z-index: 1;
+  gap: 20px;
+  div {
+    width: 90%;
+    padding: 20px;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    button {
+      all: unset;
+      padding-left: 20px;
+      cursor: pointer;
+    }
+  }
+}
+.container_filter__show {
+  display: none;
+  flex-direction: column;
+  padding: 0;
+  padding-top: 20px;
+  position: absolute;
+  width: 100%;
+  background-color: $color-grey-scale-grey-10;
+  z-index: 1;
+  gap: 20px;
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    button {
+      all: unset;
+      padding-left: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+.container_input {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  input {
+    align-self: center;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80%;
+    height: 2px;
+    background: rgb(151, 71, 255);
+    outline: none;
+    border-radius: 8px;
+  }
+
+  input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgb(151, 71, 255);
+    cursor: pointer;
+  }
+}
+
+.header_filter {
+  font-family: "Lexend";
+  color: $color-grey-scale-grey-0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding: 20px 0;
+}
+
+.options_filter {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Lexend";
+  color: $color-grey-scale-grey-3;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 25px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.button_filter {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+  padding: 12px 28px;
+  align-items: center;
+  justify-content: center;
+
+  height: 48px;
+  width: 80%;
+  background-color: $color-brand-brand-2;
+
+  border: 2px;
+  border-radius: 4px;
+
+  color: rgba(255, 255, 255, 1);
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.containerLoginPage {
+  padding-top: 6rem;
+  width: 100vw;
+  min-height: 85vh;
+
+  background-color: $color-grey-scale-grey-8;
+}
+.containerRegisterPage {
+  padding: 20px 0 40px 0;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  background-color: $color-grey-scale-grey-8;
+}
+
+@media (min-width: $layout-medium) {
+  .car_container {
+    background-size: contain;
+  }
+  .container_filter__show {
+    display: flex;
+    position: relative;
+    z-index: 0;
+    width: 30%;
+    padding-left: 15px;
+    padding: 0px 0px 30px 20p;
+  }
+  .container_filter {
+    display: none;
+  }
+}

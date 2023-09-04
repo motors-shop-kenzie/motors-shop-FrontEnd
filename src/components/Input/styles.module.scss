@@ -1,0 +1,16 @@
+@use "../../sass/abstracts/variables" as *;
+
+.basicInputWithBorder {
+  width: 95%;
+  max-width: 396px;
+
+  border: 2px solid $color-grey-scale-grey-7;
+  height: 48px;
+  border-radius: 4px;
+
+  padding-left: 5px;
+}
+.basicInputWithBorder::placeholder {
+  color: $color-grey-scale-grey-3;
+  font-size: $body-1-600;
+}

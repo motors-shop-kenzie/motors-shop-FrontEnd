@@ -1,0 +1,106 @@
+@use "../../../sass/abstracts/variables" as *;
+
+.container__sellerSection {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 60%;
+  max-width: 100%;
+  padding: 2rem;
+  border-radius: 4px;
+  background-color: $color-grey-scale-grey-8;
+
+  > p {
+    max-height: 70px;
+    max-width: 100%;
+    overflow-y: scroll;
+
+    @media (min-width: 769px) {
+      max-height: 100px;
+    }
+  }
+}
+
+.container__sellerDivName {
+  background-color: $color-brand-brand-1;
+  color: $color-colors-fixed-white-fixed;
+  width: 25px;
+  height: 23px;
+
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+}
+
+.container__sellerDivName > h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.container__sellerSection > p {
+  font-size: 1rem;
+  color: $color-grey-scale-grey-2;
+  font-family: $font-family-1;
+}
+
+.container__divSellerType {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.container__divSellerType > h2 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.container__divSellerType > span {
+  font-size: 0.7rem;
+
+  background: $color-grey-scale-grey-5;
+  color: $color-brand-brand-1;
+  // height: 15px;
+  padding: 0.3rem;
+  border-radius: 3px;
+}
+
+.container__sellerSection > button {
+  max-width: 160px;
+
+  border: 1.5px solid $color-brand-brand-1;
+}
+
+@media (min-width: 1023px) {
+  .container__divSellerType {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1439px) {
+  .container__sellerDivName > h3 {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .container__divSellerType {
+    gap: 2rem;
+  }
+
+  .container__divSellerType > h2 {
+    font-size: 2rem;
+  }
+
+  .container__divSellerType > span {
+    font-size: 1rem;
+  }
+
+  .container__sellerSection > p {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,27 @@
+@use "../../../sass/abstracts/variables" as *;
+
+.divInputSection {
+  &:has(input:focus) {
+    border: 2px solid $color-brand-brand-2;
+    border-radius: 4px;
+
+    input {
+      outline: 0;
+      border: 0;
+    }
+  }
+  &:has(textarea:focus) {
+    border: 2px solid $color-brand-brand-2;
+    border-radius: 4px;
+    textarea {
+      border: 0;
+    }
+  }
+  &:has(select:focus) {
+    border: 2px solid $color-brand-brand-2;
+    border-radius: 4px;
+    select {
+      border: 0;
+    }
+  }
+}

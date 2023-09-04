@@ -1,0 +1,108 @@
+@use "../../sass/abstracts/variables" as *;
+
+.container__sellerMain {
+  margin-top: 5rem;
+  height: 125vh;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  background-color: $color-grey-scale-grey-8;
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 45px;
+  }
+}
+.purpleBg {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  // min-height: 410px;
+  // max-height: 575px;
+  height: 50%;
+
+  background-color: $color-brand-brand-1;
+  @media (min-width: 769px) {
+    height: 70%;
+  }
+}
+
+.carInfoSection {
+  position: relative;
+  z-index: 5;
+
+  margin-top: 125px;
+
+  width: 90%;
+  max-width: 750px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  @media (min-width: 769px) {
+    width: 100%;
+  }
+}
+
+.asideContainer {
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 20px;
+
+  width: 90%;
+  max-width: 440px;
+
+  padding: 40px 0;
+
+  // background-color: $color-grey-scale-grey-8;
+
+  @media (min-width: 769px) {
+    margin-top: 85px;
+
+    width: 100%;
+  }
+}
+.imgsDiv {
+  width: 100%;
+}
+.secondSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  background-color: $color-grey-scale-grey-8;
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: 45px;
+  }
+}
+.commentsSection {
+  margin: 16px 0 70px 0;
+
+  width: 90%;
+  max-width: 750px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 33px;
+
+  @media (min-width: 769px) {
+    width: 100%;
+  }
+}

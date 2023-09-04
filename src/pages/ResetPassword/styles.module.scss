@@ -1,0 +1,25 @@
+@use "../../sass/abstracts/variables" as *;
+@use "../../sass/abstracts/mixins" as *;
+
+.body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-brand-brand-3;
+}
+
+
+
+.grey10BorderGrey0Button {
+  @include buttonBasic(
+    1.5px solid $color-grey-scale-grey-0,
+    $button-radius,
+    12px 20px,
+    $button-medium-text,
+    12px 28px,
+    $button-big-text
+  );
+  @include buttonColors($color-grey-scale-grey-10, $color-grey-scale-grey-0);
+}
