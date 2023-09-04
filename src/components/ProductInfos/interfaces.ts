@@ -1,4 +1,4 @@
-import { Car } from "@/interfaces/CarFilter";
+import { TCarProduct } from "@/interfaces/CarProduc";
 
 export interface IVehicleInfo {
   brand: string;
@@ -8,7 +8,7 @@ export interface IVehicleInfo {
 }
 
 export interface IOpenWhatsApp {
-  singleCar: Car | undefined;
+  singleCar: TCarProduct | undefined;
   message: string;
 }
 
