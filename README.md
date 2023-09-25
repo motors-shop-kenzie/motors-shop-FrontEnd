@@ -120,7 +120,7 @@ No Front End utilizamos:
     </td>
     <td align="center">
       <a href="https://github.com/mk-nascimento">
-        <img src="https://avatars.githubusercontent.com/u/114680477?v=4" width="100px;" alt="Foto de Gabriel Montenegro no GitHub"/><br>
+        <img src="https://avatars.githubusercontent.com/u/114680477?v=4" width="100px;" alt="Foto de perfil Maksuel"/><br>
         <sub>
           <b>Maksuel Nascimento</b>
         </sub>
@@ -128,7 +128,7 @@ No Front End utilizamos:
     </td>
     <td align="center">
       <a href="https://github.com/RafaelFreitas-cloud">
-        <img src="https://avatars.githubusercontent.com/u/110198859?v=4" width="100px;" alt="Foto de Gabriel Montenegro no GitHub"/><br>
+        <img src="https://avatars.githubusercontent.com/u/110198859?v=4" width="100px;" alt="Foto de perfil Rafel Freitas"/><br>
         <sub>
           <b>Rafael ALmeida Freitas</b>
         </sub>
@@ -136,15 +136,23 @@ No Front End utilizamos:
     </td>
     <td align="center">
       <a href="https://github.com/Rafhaelcristian">
-        <img src="https://avatars.githubusercontent.com/u/114514318?v=4" width="100px;" alt="Foto de Gabriel Montenegro no GitHub"/><br>
+        <img src="https://avatars.githubusercontent.com/u/114514318?v=4" width="100px;" alt="Foto de perfil Rafhael Cristian"/><br>
         <sub>
           <b>Rafhael Cristian</b>
         </sub>
       </a>
     </td>
     <td align="center">
+      <a href="https://github.com/PatrickEN-dev">
+        <img src="https://avatars.githubusercontent.com/u/111611020?v=4" width="100px;" alt="Foto de perfil Patrick"/><br>
+        <sub>
+          <b>Patrick Almeida</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
       <a href="https://github.com/RichardLimaDxD">
-        <img src="https://avatars.githubusercontent.com/u/110191030?v=4" width="100px;" alt="Foto de Gabriel Montenegro no GitHub"/><br>
+        <img src="https://avatars.githubusercontent.com/u/110191030?v=4" width="100px;" alt="Foto de perfil Richard"/><br>
         <sub>
           <b>Richard Lima</b>
         </sub>
